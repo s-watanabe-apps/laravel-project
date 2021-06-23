@@ -13,7 +13,7 @@
     <body>
         <div class="container text-center">
             <p>Login</p>
-            <form action="/login/authenticate" method="post">
+            <form action="/login" method="post">
                 @csrf
                 <input type="text" name="email" /><br>
                 <input type="password" name="password" /><br>

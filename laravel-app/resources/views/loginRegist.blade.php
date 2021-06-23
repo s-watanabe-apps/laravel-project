@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Login</title>
+        <title>登録</title>
 
         <!-- Styles -->
         <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -12,8 +12,13 @@
     </head>
     <body>
         <div class="container text-center">
-            <p>HOME</p>
-            <p>{{$user->name}}</p>
+            <p>登録</p>
+            <form action="/register" method="post">
+                @csrf
+                <input type="text" name="email" /><br>
+                <input type="password" name="password" /><br>
+                <input type="submit" value="submit" />
+            </form>
         </div>
     </body>
 </html>

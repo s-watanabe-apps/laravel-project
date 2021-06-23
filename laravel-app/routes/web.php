@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/login', 'LoginController@index')->name('login');
-Route::post('/login/authenticate', 'LoginController@authenticate');
+Route::get('/login', 'AppLoginController@index')->name('login');
+Route::post('/login', 'AppLoginController@index');
 Route::get('/', 'IndexController@index');
+Route::get('/register', 'AppRegisterController@index');
+Route::post('/register', 'AppRegisterController@index');
+Route::get('/logout', 'LogoutController@index');

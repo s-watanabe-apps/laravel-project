@@ -15,6 +15,9 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-        return view('index');
+        echo "<pre>";
+        var_dump(Auth::user()->name);
+        var_dump(Auth::user()->email);
+        return view('index', array('user' => Auth::user(),));
     }
 }
