@@ -2,9 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Users;
+use App\Http\Requests\LoginLoginPostRequest;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Libs\Token;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -19,7 +28,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    //use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -35,6 +44,55 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Perform login processing.
+     *
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\View\View
+     */
+    public function loginPost(LoginLoginPostRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        $remember = $request->validated()['remember'] ?? 'off';
+
+        if (Auth::attempt($credentials,  $remember === 'on')) {
+            //$apiToken = Token::generate();
+            //Users::updateApiToken(Auth::user()->id, $apiToken);
+
+            //$apiToken = hash('sha256', Str::random(80));
+            $apiToken = Str::random(80);
+            Auth::user()->forceFill([
+                'api_token' => $apiToken,
+            ])->save();
+
+            $encryptToken = Crypt::encrypt($apiToken);
+            Cookie::queue(Cookie::forget('api_token'));
+            Cookie::queue('api_token', $encryptToken, '10000000');
+
+            return redirect()->intended($this->redirectTo);
+        } else {
+            $faild = __('auth.failed');
+            return view('login', compact('faild'));
+        }
+    }
+
+    /**
+     * login Get.
+     * 
+     * @return Illuminate\View\View
+     */
+    public function loginGet(Request $request)
+    {
+        $validator = Validator::make([
+                'redirect' => $request->session()->get('redirect'),
+            ], [
+                'redirect' => 'url',
+            ]
+        );
+
+        return view('login');
     }
 }

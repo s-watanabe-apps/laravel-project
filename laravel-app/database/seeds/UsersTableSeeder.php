@@ -1,4 +1,7 @@
 <?php
+use App\Models\Users;
+use App\Models\Roles;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -12,15 +15,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
-        $users = [
-            [
-                'name'     => 'テスト',
-                'email'    => 'test@test.com',
-                'password' => Hash::make('password'),
-            ],
-        ];
-        foreach($users as $user) {
-            App\User::query()->create($user);
+        if (config('app.debug')) {
+            for ($i = 1; $i <= 15; $i++) {
+                Users::query()->create([
+                    'role_id' => Roles::MEMBER,
+                    'name' => sprintf('ユーザー名_%02d', $i),
+                    'name_kana' => sprintf('ユーザーメイ_%02d', $i),
+                    'email' => sprintf('member%02d@example.com', $i),
+                    'password' => Hash::make('password'),
+                    'birthyear' => 1990,
+                    'birthmonth' => (new Carbon())->addDays($i)->copy()->format('n'),
+                    'birthday' => (new Carbon())->addDays($i)->copy()->format('j'),
+                ]);
+            }
         }
     }
 }

@@ -1,0 +1,2 @@
+■SP非表示
+d-none d-sm-inline-block 

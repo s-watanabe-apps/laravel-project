@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Favorites;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class FavoritesController extends Controller
+{
+    /**
+     * index Get.
+     * 
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $favorites = Favorites::getFavoritesByUserId($request->user->id);
+
+        $dataTablesLanguage = json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+
+        return view('favorites.index', compact(
+            'favorites', 'dataTablesLanguage'
+        ));
+    }
+
+    public function remove(Request $request)
+    {
+        $validator = Validator::make([
+            'uri' => $request->uri,
+        ], [
+            'uri' => ['required', 'regex:/^\/[a-z]*\/[0-9]*$/'],
+        ]);
+        if ($validator->fails()) {
+            abort(400);
+        }
+
+        $validated = $validator->validated();
+
+        Favorites::removeFavorites($request->user->id, $validated['uri']);
+
+        return redirect()->route('favorites');
+    }
+}

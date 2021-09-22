@@ -1,24 +1,74 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Login</title>
+<head>
+    <!-- Header -->
+    @include('shared.header')
+</head>
 
-        <!-- Styles -->
-        <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <script src="/js/jquery.min.1.11.3.js"></script>
-        <script src="/js/bootstrap/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div class="container text-center">
-            <p>Login</p>
-            <form action="/login/authenticate" method="post">
-                @csrf
-                <input type="text" name="email" /><br>
-                <input type="password" name="password" /><br>
-                <input type="submit" value="submit" />
-            </form>
+<body class="bg-gradient-primary">
+
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">{{$settings->name}}</h1>
+                                    </div>
+                                    <form class="user" action="/login" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="inputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address..." />
+                                            <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control form-control-user"
+                                                id="inputPassword" placeholder="Password" />
+                                            <div class="text-danger">{{$errors->first('password') ?? ''}}</div>
+                                        </div>
+                                        <div class="form-group text-danger">{{$faild ?? ''}}</div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input name="remember" type="checkbox" class="custom-control-input" id="customCheck" />
+                                                <label class="custom-control-label" for="customCheck">@lang('auth.password_remember')</label>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="redirect" value="{{session('redirect')}}" />
+                                        <input type="submit" value="@lang('auth.login')" class="btn btn-primary btn-user btn-block" />
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="/password/email">@lang('auth.forgot_password_link')</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-    </body>
+
+    </div>
+
+    <!-- Script Files -->
+    @include('shared.scripts')
+
+</body>
+
 </html>

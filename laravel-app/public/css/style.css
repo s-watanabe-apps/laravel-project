@@ -1,0 +1,51 @@
+.btn-edit-cancel-save {
+    width: 9rem;
+    height: 2.4rem;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+p {
+    line-height: 1.0rem;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+.blink {
+    animation: flash 1s linear infinite;
+    background:#0091EA;
+}
+
+@keyframes flash {
+    0%,100% {
+        opacity: 1;
+    }
+    
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.sub-menu:hover {
+    background-color: #ddd;
+}
+
+@media only screen and (max-width:768px) {
+	.responsive-table th, .responsive-table td {
+		display: block;
+        width: 100% !important;
+	}
+    .pc-only {
+        display: none;
+    }
+}
+
+@media only screen and (min-width:768px) {
+    .sp-only {
+        display: none;
+    }
+}

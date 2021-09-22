@@ -148,4 +148,6 @@ return [
 
     'attributes' => [],
 
+    'invalid_input' => 'Input value is invalid.',
+    'too_long_input' => 'input value is too long.'
 ];
