@@ -14,7 +14,8 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->string('name');
+            $table->increments('id');
+            $table->string('site_name');
             $table->boolean('basic_auth');
             $table->string('basic_user')->nullable();
             $table->string('basic_password')->nullable();

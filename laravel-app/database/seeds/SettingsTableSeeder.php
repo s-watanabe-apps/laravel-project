@@ -13,7 +13,7 @@ class SettingsTableSeeder extends Seeder
     {
         DB::table('settings')->truncate();
         $settings = [
-            'name' => 'SNS WebApp',
+            'site_name' => 'SNS WebApp',
             'basic_auth' => true,
             'basic_user' => 'user',
             'basic_password' => 'password',

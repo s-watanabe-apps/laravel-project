@@ -4,7 +4,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>{{$settings->name ?? 'SNS WebApp'}}</title>
+<title>{{$settings->site_name ?? 'SNS WebApp'}}</title>
 
 <!-- Custom fonts for this template-->
 <link href="/css/style.css" rel="stylesheet" type="text/css">

@@ -14,7 +14,7 @@ class Settings extends Eloquent\Model
     public $timestamps = false;
 
     /**
-     * get
+     * get setting.
      * 
      * @return App\Models\Settings
      */

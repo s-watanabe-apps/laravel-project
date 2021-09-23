@@ -49,9 +49,10 @@
                                         <span class="h6 text-nowrap">サイト名</span>
                                     </div>
                                     <div class="col-md-8 col-12">
-                                        {{Form::input('text', 'site_name', $settings->name, [
+                                        {{Form::input('text', 'site_name', old('site_name') ?? $settings->site_name, [
                                             'style' => 'width: 100%;'
                                         ])}}
+                                        <div class="text-danger">{{$errors->first('site_name') ?? ''}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -82,11 +83,11 @@
                                     <div class="row">
                                         <div class="col-md-12 col-12 pb-2">
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="basic_auth1" name="basic_auth" class="custom-control-input" {{$settings->basic_auth == 1 ? 'checked' : ''}} />
+                                                <input type="radio" id="basic_auth1" value="1" name="basic_auth" class="custom-control-input" {{$settings->basic_auth == 1 ? 'checked' : ''}} />
                                                 <label class="custom-control-label" for="basic_auth1">有効</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="basic_auth2" name="basic_auth" class="custom-control-input" {{$settings->basic_auth == 0 ? 'checked' : ''}} />
+                                                <input type="radio" id="basic_auth2" value="0" name="basic_auth" class="custom-control-input" {{$settings->basic_auth == 0 ? 'checked' : ''}} />
                                                 <label class="custom-control-label" for="basic_auth2">無効</label>
                                             </div>
                                         </div>
@@ -98,6 +99,7 @@
                                             {{Form::input('text', 'basic_user', $settings->basic_user, [
                                                 'style' => 'width: 100%;'
                                             ])}}
+                                            <div class="text-danger">{{$errors->first('basic_user') ?? ''}}</div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <span class="h6 text-nowrap">パスワード</span>
@@ -106,6 +108,7 @@
                                             {{Form::input('text', 'basic_password', $settings->basic_password, [
                                                 'style' => 'width: 100%;'
                                             ])}}
+                                            <div class="text-danger">{{$errors->first('basic_password') ?? ''}}</div>
                                         </div>
                                     </div>
                                 </div>

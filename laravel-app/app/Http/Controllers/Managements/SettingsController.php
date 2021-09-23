@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Settings;
+use App\Http\Requests\ManagementsSettingsPostRequest;
 use Illuminate\Http\Request;
 
 class SettingsController extends ManagementsController
@@ -12,9 +13,9 @@ class SettingsController extends ManagementsController
         return view('managements.settings.index');
     }
 
-    public function post(Request $request)
+    public function post(ManagementsSettingsPostRequest $request)
     {
-        var_dump(1);
+        var_dump($request->basic_user);
         exit;
     }
 }

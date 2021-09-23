@@ -37,7 +37,7 @@ class IndexController extends Controller
         //echo "<pre>";
         //var_dump(Auth::user()->name);
         //var_dump(Auth::user()->email);
-        //var_dump($request->settings->name);
+        //var_dump($request->settings->site_name);
         //Mail::to("swata82@gmail.com")->send(new ContactMail("送信テスト", "test"));
         //var_dump(\Config::get('mail'));
 
