@@ -15,7 +15,17 @@ class SettingsController extends ManagementsController
 
     public function post(ManagementsSettingsPostRequest $request)
     {
-        var_dump($request->basic_user);
-        exit;
+        \DB::transaction(function() use ($request) {
+            $settings = $request->settings;
+            $settings->site_name = $request->site_name;
+            $settings->user_create_any = $request->user_create_any ?? 0;
+            $settings->user_create_member = $request->user_create_member ?? 0;
+            $settings->basic_auth = $request->basic_auth;
+            $settings->basic_user = $request->basic_user ?? null;
+            $settings->basic_password = $request->basic_password ?? null;
+            $settings->save();
+        });
+
+        return redirect()->route('managementsSettings')->with('result', 1);
     }
 }

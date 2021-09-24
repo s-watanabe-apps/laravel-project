@@ -25,6 +25,9 @@ class ManagementsSettingsPostRequest extends FormRequest
     {
         $rules = [
             'site_name' => 'required|max:255',
+            'user_create_any' => 'in:1',
+            'user_create_member' => 'in:1',
+            //'user_create_admin' => 'in:1',
             'basic_auth' => 'required|in:0,1',
             'basic_user' => 'required|max:255',
             'basic_password' => 'required|max:255',

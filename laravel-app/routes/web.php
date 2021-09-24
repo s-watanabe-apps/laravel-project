@@ -54,7 +54,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/show/image', 'ShowController@image');
 
         // Management settings
-        Route::get('managements/settings', 'Managements\SettingsController@index');
+        Route::get('managements/settings', 'Managements\SettingsController@index')->name('managementsSettings');
         Route::post('managements/settings/post', 'Managements\SettingsController@post');
     });
 });

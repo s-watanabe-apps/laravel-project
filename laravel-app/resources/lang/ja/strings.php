@@ -40,6 +40,10 @@ return [
     'latest_articles' => '直近の記事',
     'pictures' => 'アルバム',
     'show_more' => 'もっと見る',
+    'user_name' => 'ユーザー名',
+    'password' => 'パスワード',
+    'enable' => '有効',
+    'disable' => '無効',
 
     // Side menus
     'write_articles' => '記事を書く',
@@ -76,6 +80,7 @@ return [
         'profile_update' => 'プロフィールを更新しました。',
         'add_favorites' => 'お気に入りに追加しました。',
         'remove_favorites' => 'お気に入りから削除しました。',
+        'saved_site_settings' => 'サイト設定を保存しました。',
     ],
 
     // Error messages.
@@ -120,5 +125,14 @@ return [
             "sSortDescending" => ": 列を降順に並べ替えるにはアクティブにする"
         ]
     ],
+
+    // Managements Settings
+    'basic_settings' => '基本設定',
+    'site_name' => 'サイト名',
+    'user_create' => 'ユーザー登録',
+    'user_create_any' => '誰でも登録できる',
+    'user_create_member' => 'メンバーの招待で登録できる',
+    'user_create_admin' => '管理者の招待で登録できる',
+    'basic_auth' => 'ベーシック認証',
 
 ];

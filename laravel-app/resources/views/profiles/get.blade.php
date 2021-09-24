@@ -169,7 +169,7 @@
 @if (Session::get('result') == 1)
 <script>
     jQuery(document).ready(function($) {
-        $('#toastMessage').text('@lang('strings.operation_messages.profile_update')')
+        $('#toastMessage').text('@lang('strings.operation_messages.profile_update')');
         $('#toast').toast('show');
     });
 </script>

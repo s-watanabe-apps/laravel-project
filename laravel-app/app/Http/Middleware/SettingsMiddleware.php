@@ -26,6 +26,10 @@ class SettingsMiddleware
     {
         $settings = Settings::get();
 
+        if ($settings == null) {
+            $settings = new Settings(true);
+        }
+
         $request->merge(['settings' => $settings,]);
         $this->viewFactory->share('settings', $request->settings);
 

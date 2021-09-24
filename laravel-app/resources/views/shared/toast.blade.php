@@ -18,7 +18,7 @@
         role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <img src="..." class="mr-2" alt="">
-            <strong class="mr-auto">{{$settings["name"]}}</strong>
+            <strong class="mr-auto">{{$settings->site_name}}</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>

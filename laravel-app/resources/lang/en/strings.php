@@ -41,6 +41,10 @@ return [
     'latest_articles' => 'Latest articles.',
     'pictures' => 'Pictures',
     'show_more' => 'Show more',
+    'user_name' => 'User name',
+    'password' => 'Password',
+    'enable' => 'Enable',
+    'disable' => 'Disable',
 
     // Side menus
     'write_articles' => 'Write articles',
@@ -77,6 +81,7 @@ return [
         'profile_update' => 'Updated my profile.',
         'add_favorites' => 'Added it to my favorites.',
         'remove_favorites' => 'Removed from favorites.',
+        'saved_site_settings' => 'Saved the site settings.',
     ],
     
     // Errors
@@ -97,4 +102,14 @@ return [
         'choice' => 'Choice',
         'select' => 'Select',
     ],
+
+    // Managements Settings
+    'basic_settings' => 'Basic configuration',
+    'site_name' => 'Site name',
+    'user_create' => 'User registration',
+    'user_create_any' => 'Anyone can register',
+    'user_create_member' => 'Can register by invitation from a member',
+    'user_create_admin' => 'Can register by invitation from a administrator',
+    'basic_auth' => 'Basic authentication',
+
 ];
