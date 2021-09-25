@@ -9,16 +9,6 @@ use Illuminate\Http\Request;
 class ArticlesController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('authcheck');
-    }
-
-    /**
      * Write an article.
      * 
      * @param  \Illuminate\Http\Request
@@ -50,19 +40,12 @@ class ArticlesController extends Controller
      */
     public function post(ArticlePostRequest $request)
     {
-        \DB::beginTransaction();
-        try {
+        \DB::transaction(function() use ($request) {
             Articles::saveArticles(
                 $request->user->id,
                 Articles::TYPE_MEMBER_ARTICLE,
                 $request->validated());
-
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollback();
-            \Log::error($e->getMessage());
-            abort(500);
-        }
+        });
 
         exit;
     }

@@ -17,11 +17,11 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->integer('type');
-            $table->integer('enabled');
+            $table->boolean('enable');
             $table->string('subject');
             $table->text('body');
             $table->timestamps();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->index(['user_id']);
             $table->index(['created_at']);
         });

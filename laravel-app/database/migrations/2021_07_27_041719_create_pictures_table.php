@@ -20,7 +20,7 @@ class CreatePicturesTable extends Migration
             $table->string('title')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
-            $table->datetime('deleted_at')->nullable();
+            $table->softDeletes();
         });
     }
 

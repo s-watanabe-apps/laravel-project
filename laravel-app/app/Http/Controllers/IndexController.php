@@ -47,6 +47,9 @@ class IndexController extends Controller
         // Weekly calendar
         $calendar = Calendar::getWeeklyCalendar();
 
+        // Latest Articles
+        
+
         return view('index', compact(
             'informations', 'calendar'
         ));

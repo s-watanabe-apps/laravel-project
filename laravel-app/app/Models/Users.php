@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Users extends Authenticatable
 {
+    use SoftDeletes;
+
     protected $table = 'users';
 
     const PAGENATE = 12;
@@ -23,15 +26,9 @@ class Users extends Authenticatable
         return $this->file;
     }
 
-    /**
-     * Get enabled users.
-     * 
-     * @var int users.id
-     * @return Illuminate\Pagination\LengthAwarePaginator or App\Models\Users
-     */
-    public static function getUsers($id = null)
+    public static function getBaseQuery()
     {
-        $query = self::query()
+        return self::query()
             ->select([
                 'users.id',
                 'users.name',
@@ -45,21 +42,41 @@ class Users extends Authenticatable
                 'users.birthmonth',
                 'users.birthday',
                 'users.api_token',
-                'users.enabled',
+                'users.enable',
                 'users.remember_token',
                 'users.created_at',
                 'users.updated_at',
                 \DB::raw('ifnull(profile_images.file, "profiles%2Fno_image.png") as file'),
             ])
-            ->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id')
-            ->where('users.enabled', 1);
-
-        if (is_null($id)) {
-            return $query->paginate(self::PAGENATE);
-        } else {
-            return $query->where('users.id', $id)->get();
-        }
+            ->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id');
     }
+
+    /**
+     * Get enabled users.
+     * 
+     * @var int users.id
+     * @return Illuminate\Pagination\LengthAwarePaginator
+     */
+    public static function getUsers()
+    {
+        return self::getBaseQuery()
+            ->where('users.enable', 1)
+            ->paginate(self::PAGENATE);
+    }
+
+    /**
+     * Get user.
+     * 
+     * 
+     * @var int users.id
+     * @return App\Models\Users
+     */
+    public static function getUser($id)
+    {
+        return self::getBaseQuery()
+            ->where('users.id', $id)->first();
+    }
+
 
     /**
      * Get birthday users.
@@ -68,7 +85,7 @@ class Users extends Authenticatable
      * @return array
      */
     public static function getBirthdayUsers($birthdays) {
-        $builder = self::query();
+        $builder = self::getBaseQuery();
         
         $dateStrings = [];
         foreach ($birthdays as $birthday) {
@@ -82,17 +99,6 @@ class Users extends Authenticatable
     }
 
     /**
-     * Get by id.
-     * 
-     * @var int users.id
-     * @return App\Models\Users
-     */
-    public static function getById($id)
-    {
-        return self::getUsers($id)->first();
-    }
-
-    /**
      * Get by E-mail
      * 
      * @var string email
@@ -100,7 +106,8 @@ class Users extends Authenticatable
      */
     public static function getByEmail($email)
     {
-        return self::query()->where('email', $email)->get()->first();
+        return self::getBaseQuery()
+            ->where('email', $email)->get()->first();
     }
 
     /**
@@ -114,19 +121,6 @@ class Users extends Authenticatable
     {
         return self::where('id', $id)
             ->update(['api_token' => $apiToken]);
-    }
-
-    /**
-     * Get by api token.
-     * 
-     * @var string apiToken
-     * @return App\Models\Users
-     */
-    public static function getByApiToken($apiToken)
-    {
-        return self::query()
-            ->where('api_token', $apiToken)
-            ->get()->first();
     }
 
     /**

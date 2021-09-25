@@ -26,9 +26,9 @@ class Messages extends Model
                 'messages.created_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('messages.from_user_id', '=', 'users.id')
-                    ->where('users.enabled', 1);
+                    ->where('users.enable', 1);
             })->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id')
-            ->whereNull('deleted_at');
+            ->whereNull('messages.deleted_at');
     }
 
     public static function getUnreadMessages($userId)

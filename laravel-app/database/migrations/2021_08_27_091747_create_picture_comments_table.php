@@ -19,7 +19,7 @@ class CreatePictureCommentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('comment');
             $table->timestamps();
-            $table->datetime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->index(['picture_id', 'created_at']);
         });
     }

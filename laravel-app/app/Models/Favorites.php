@@ -42,7 +42,7 @@ class Favorites extends Model
             ])->join('users', function ($join) {
                 $join->on('users.id', '=', 'favorites.favorite_id')
                     ->where('favorites.favorite_code', self::FAVORITE_CODE_PROFILES)
-                    ->where('users.enabled', 1);
+                    ->where('users.enable', 1);
             })->where('favorites.user_id', $userId)
             ->unionAll(
                 self::query()
@@ -60,7 +60,7 @@ class Favorites extends Model
                             ->whereNull('pictures.deleted_at');
                     })->leftJoin('users', function ($join) {
                         $join->on('users.id', '=', 'pictures.user_id')
-                            ->where('users.enabled', 1);
+                            ->where('users.enable', 1);
                     })->where('favorites.user_id', $userId)
             )
             ->get();

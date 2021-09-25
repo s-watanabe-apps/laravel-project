@@ -4,13 +4,15 @@ namespace App\Models;
 
 use App\Models\Images;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Articles extends Model
 {
-    const TYPE_MEMBER_ARTICLE = 1;
-
+    use SoftDeletes;
     use Notifiable;
+
+    const TYPE_MEMBER_ARTICLE = 1;
 
     protected $table = 'articles';
 
@@ -27,7 +29,7 @@ class Articles extends Model
         $articles = new Articles();
         $articles->user_id = $userId;
         $articles->type = $type;
-        $articles->enabled = true;
+        $articles->enable = true;
         $articles->subject = $values['subject'];
         $articles->body = $values['body'];
         $articles->save();
@@ -51,6 +53,26 @@ class Articles extends Model
             Images::saveImages(null, $value, Images::TYPE_ARTICLE_IMAGE, $articles->id, $key);
         }
 */
+    }
+
+    public static function getBaseQuery()
+    {
+        return self::query()
+            ->select([
+                'articles.id',
+                'articles.user_id',
+                'users.name',
+                'articles.type',
+                'articles.subject',
+                'articles.body',
+                'articles.created_at',
+                'articles.updated_at',
+                'articles.deleted_at',
+            ])
+            ->leftJoin('users', function ($join) {
+                $join->on('users.id', '=', 'articles.user_id')
+                    ->whereNull('users.deleted_at');
+            });
     }
 
     public static function getArticleHeadlines($userId, $limit)

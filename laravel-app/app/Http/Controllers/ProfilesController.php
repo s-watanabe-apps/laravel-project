@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfilesController extends Controller
 {
     /**
-     * Member list.
+     * Get user list.
      * 
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
@@ -47,7 +47,7 @@ class ProfilesController extends Controller
             return view('404');
         }
 
-        $profileUser = Users::getById($request->id);
+        $profileUser = Users::getUser($request->id);
         if ($profileUser == null) {
             abort(404);
         }
@@ -100,7 +100,7 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Save profile.
+     * Save profile values.
      * 
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
@@ -110,8 +110,7 @@ class ProfilesController extends Controller
         $profileValues = ProfileValues::getProfileValuesHashByUserId($request->user->id);
         $inputValues = $request->validated();
 
-        \DB::beginTransaction();
-        try {
+        \DB::transaction(function() use ($request, $profileValues, $inputValues) {
             if (isset($inputValues['choose_profile_image'])) {
                 $file = $inputValues['choose_profile_image'];
                 $extension = Images::getExtensions()[$file->getMimetype()];
@@ -122,21 +121,13 @@ class ProfilesController extends Controller
                     'user_id' => $request->user->id,
                     'file' => urlencode($fileName),
                 ]);
-
-                unset($inputValues['choose_profile_image']);
             }
 
             $request->user->saveUsers($inputValues);
 
             ProfileValues::saveProfileValues(
                 $request->user->id, $inputValues['dynamic_values']);
-
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollback();
-            \Log::error($e->getMessage());
-            abort(500);
-        }
+        });
 
         return redirect()->route('profiles.get', ['id' => $request->user->id])->with('result', 1);
     }

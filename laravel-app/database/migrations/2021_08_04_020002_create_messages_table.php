@@ -25,7 +25,7 @@ class CreateMessagesTable extends Migration
             $table->boolean('enable')->default(true);
             $table->datetime('disabled_time')->nullable()->default(null);
             $table->timestamps();
-            $table->datetime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->index(['from_user_id']);
             $table->index(['to_user_id']);
             $table->unique(['to_user_id', 'message_id']);

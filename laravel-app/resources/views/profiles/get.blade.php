@@ -166,14 +166,14 @@
     <!-- Script Files -->
     @include('shared.scripts')
 
-@if (Session::get('result') == 1)
-<script>
-    jQuery(document).ready(function($) {
-        $('#toastMessage').text('@lang('strings.operation_messages.profile_update')');
-        $('#toast').toast('show');
-    });
-</script>
-@endif
+    @if (Session::get('result') == 1)
+    <script>
+        jQuery(document).ready(function($) {
+            $('#toastMessage').text('@lang('strings.operation_messages.profile_update')');
+            $('#toast').toast('show');
+        });
+    </script>
+    @endif
 
 </body>
 

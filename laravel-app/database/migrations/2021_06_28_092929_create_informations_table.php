@@ -20,9 +20,8 @@ class CreateInformationsTable extends Migration
             $table->boolean('enabled')->default(false);
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
             $table->index(['start_time']);
         });
     }

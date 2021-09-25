@@ -25,12 +25,13 @@ class CreateUsersTable extends Migration
             $table->integer('birthmonth')->nullable();
             $table->integer('birthday')->nullable();
             $table->string('api_token')->nullable()->default(null);
-            $table->boolean('enabled')->default(true);
+            $table->boolean('enable')->default(true);
             $table->rememberToken();
-            $table->timestamps();
             $table->index(['birthmonth', 'birthday']);
             $table->index(['api_token']);
             $table->index(['remember_token']);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
