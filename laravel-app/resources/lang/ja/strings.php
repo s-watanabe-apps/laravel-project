@@ -44,6 +44,7 @@ return [
     'password' => 'パスワード',
     'enable' => '有効',
     'disable' => '無効',
+    'none' => 'なし',
 
     // Side menus
     'write_articles' => '記事を書く',
@@ -52,7 +53,9 @@ return [
     'admin_menus' => '管理者メニュー',
     'common_settings' => '共通設定',
     'site_settings' => 'サイト設定',
+    'contents_management' => 'コンテンツ管理',
     'informations_management' => 'お知らせ管理',
+    'user_management' => 'ユーザー管理',
 
     // Messages
     'message' => 'メッセージ',
@@ -134,5 +137,7 @@ return [
     'user_create_member' => 'メンバーの招待で登録できる',
     'user_create_admin' => '管理者の招待で登録できる',
     'basic_auth' => 'ベーシック認証',
+    'user_list' => 'ユーザー一覧',
+    'add_user' => 'ユーザー作成',
 
 ];

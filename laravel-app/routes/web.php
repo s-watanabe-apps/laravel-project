@@ -56,6 +56,10 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // Management settings
         Route::get('managements/settings', 'Managements\SettingsController@index')->name('managementsSettings');
         Route::post('managements/settings/post', 'Managements\SettingsController@post');
+
+        // Management users
+        Route::get('managements/users', 'Managements\UsersController@index')->name('managementsUsers');
+        
     });
 });
 

@@ -20,7 +20,7 @@ class CreateImagesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->timestamps();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->index(['type', 'target_id']);
             $table->index(['created_at']);
         });

@@ -47,8 +47,10 @@ class Users extends Authenticatable
                 'users.created_at',
                 'users.updated_at',
                 \DB::raw('ifnull(profile_images.file, "profiles%2Fno_image.png") as file'),
+                \DB::raw('groups.name as group_name'),
             ])
-            ->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id');
+            ->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id')
+            ->leftJoin('groups', 'users.group_id', '=', 'groups.id');
     }
 
     /**
@@ -62,6 +64,17 @@ class Users extends Authenticatable
         return self::getBaseQuery()
             ->where('users.enable', 1)
             ->paginate(self::PAGENATE);
+    }
+
+    /**
+     * Get enabled users.
+     * 
+     * @var int users.id
+     * @return Illuminate\Pagination\LengthAwarePaginator
+     */
+    public static function getAllUsers()
+    {
+        return self::getBaseQuery()->get();
     }
 
     /**

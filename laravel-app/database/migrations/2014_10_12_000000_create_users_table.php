@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('birthyear')->nullable();
             $table->integer('birthmonth')->nullable();
             $table->integer('birthday')->nullable();
+            $table->integer('group_id')->nullable();
             $table->string('api_token')->nullable()->default(null);
             $table->boolean('enable')->default(true);
             $table->rememberToken();

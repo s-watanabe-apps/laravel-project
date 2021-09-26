@@ -101,12 +101,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">@lang('strings.common_settings')</h6>
                 <a class="collapse-item" href="/managements/settings">@lang('strings.site_settings')</a>
-                <a class="collapse-item" href="/managements/informations">@lang('strings.informations_management')</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                 <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
+                <h6 class="collapse-header">@lang('strings.contents_management')</h6>
+                <a class="collapse-item" href="/managements/informations">@lang('strings.informations_management')</a>
+                <a class="collapse-item" href="/managements/users">@lang('strings.user_management')</a>
             </div>
         </div>
     </li>

@@ -45,6 +45,7 @@ return [
     'password' => 'Password',
     'enable' => 'Enable',
     'disable' => 'Disable',
+    'none' => 'None',
 
     // Side menus
     'write_articles' => 'Write articles',
@@ -53,7 +54,9 @@ return [
     'admin_menus' => 'Administrator menus',
     'common_settings' => 'Common',
     'site_settings' => 'Site Settings',
+    'contents_management' => 'Contents Management',
     'informations_management' => 'Informations',
+    'user_management' => 'User management',
 
     // Messages
     'message' => 'Message',
@@ -111,5 +114,7 @@ return [
     'user_create_member' => 'Can register by invitation from a member',
     'user_create_admin' => 'Can register by invitation from a administrator',
     'basic_auth' => 'Basic authentication',
+    'user_list' => 'User list',
+    'add_user' => 'Add user',
 
 ];
