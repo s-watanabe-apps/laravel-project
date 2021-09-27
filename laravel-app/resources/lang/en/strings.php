@@ -46,6 +46,10 @@ return [
     'enable' => 'Enable',
     'disable' => 'Disable',
     'none' => 'None',
+    'group' => 'Group',
+    'created_at' => 'Created time',
+    'updated_at' => 'Updated time',
+    'last_login' => 'Last activity',
 
     // Side menus
     'write_articles' => 'Write articles',

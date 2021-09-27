@@ -51,9 +51,10 @@
                                 <thead>
                                     <tr class="text-nowrap">
                                         <th class="dt-center">ID</th>
-                                        <th class="dt-center">名前</th>
-                                        <th class="dt-center">カナ</th>
-                                        <th class="dt-center">グループ</th>
+                                        <th class="dt-center">@lang('strings.name')</th>
+                                        <th class="dt-center">@lang('strings.group')</th>
+                                        <th class="dt-center">@lang('strings.created_at')</th>
+                                        <th class="dt-center">@lang('strings.last_login')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,10 +67,13 @@
                                             {{$value->name}}
                                         </td>
                                         <td class="dt-center">
-                                            {{$value->name_kana}}
+                                            {{$value->group_name ?? __('strings.none')}}
                                         </td>
                                         <td class="dt-center">
-                                            {{$value->group_name ?? __('strings.none')}}
+                                            {{$value->created_at->format($dateFormat->getDateTimeFormat())}}
+                                        </td>
+                                        <td class="dt-center">
+                                            {{!$value->last_activity ? '' : \Carbon\Carbon::createFromTimestamp($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -105,7 +109,7 @@
             aLengthMenu:[50, 100, 200],
             language: {!!$dataTablesLanguage!!},
             stateSave:true,
-            order:[[1, "desc"]],
+            order:[[0, "desc"]],
             columnDefs:[
                 {
                     //"targets": [1],

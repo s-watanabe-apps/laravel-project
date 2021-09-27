@@ -74,7 +74,13 @@ class Users extends Authenticatable
      */
     public static function getAllUsers()
     {
-        return self::getBaseQuery()->get();
+        $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
+
+        return self::getBaseQuery()
+            ->addSelect(['sessions.last_activity'])
+            ->leftJoin(\DB::raw('(select user_id, max(last_activity) as last_activity from sessions group by user_id) sessions'),
+                'users.id', '=', 'sessions.user_id')
+            ->get();
     }
 
     /**

@@ -109,7 +109,7 @@
                                         </div>
 
                                         <div class="col-md-4 col-12">
-                                            <span class="h6 text-nowrap">@lang('user_name')</span>
+                                            <span class="h6 text-nowrap">@lang('strings.user_name')</span>
                                         </div>
                                         <div class="col-md-8 col-12 pb-2">
                                             {{Form::input('text', 'basic_user', $settings->basic_user, [
