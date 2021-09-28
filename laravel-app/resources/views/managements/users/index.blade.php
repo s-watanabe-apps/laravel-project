@@ -55,11 +55,12 @@
                                         <th class="dt-center">@lang('strings.group')</th>
                                         <th class="dt-center">@lang('strings.created_at')</th>
                                         <th class="dt-center">@lang('strings.last_login')</th>
+                                        <th class="dt-center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $value)
-                                    <tr class="text-nowrap">
+                                    <tr class="text-nowrap{{$value->enable == 0 ? ' bg-secondary text-white' : ''}}">
                                         <td class="dt-center">
                                             {{$value->id}}
                                         </td>
@@ -74,6 +75,20 @@
                                         </td>
                                         <td class="dt-center">
                                             {{!$value->last_activity ? '' : \Carbon\Carbon::createFromTimestamp($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
+                                        </td>
+                                        <td class="dt-center">
+                                            @if ($value->enable == 0)
+                                            <a href="/managements/users/deleted/{{$value->id}}" class="py-0 btn btn-danger shadow-sm">
+                                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.deleted')
+                                            </a>
+                                            <a href="/managements/users/enabled/{{$value->id}}" class="py-0 btn btn-success shadow-sm">
+                                                <i class="fas fa-bullseye fa-sm text-white-50"></i> @lang('strings.enabled')
+                                            </a>
+                                            @else
+                                            <a href="/managements/users/disabled/{{$value->id}}" class="py-0 btn btn-secondary shadow-sm">
+                                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.disabled')
+                                            </a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -112,8 +127,8 @@
             order:[[0, "desc"]],
             columnDefs:[
                 {
-                    //"targets": [1],
-                    //"bSortable": false
+                    "targets": [5],
+                    "bSortable": false
                 },
             ],
             scrollX: true,
