@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Managements;
 
 use App\Models\Users;
 use App\Models\PasswordResets;
+use App\Models\Roles;
 use App\Http\Requests\ManagementsUsersPostRequest;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,13 @@ class UsersController extends ManagementsController
         var_dump($request->email);
         var_dump($request->name);
         \DB::transaction(function() use ($request) {
-            //PasswordResets::issue($request->email);
+            $users = new Users();
+            $users->role_id = Roles::MEMBER;
+            $users->email = $request->email;
+            $users->name = $request->name;
+            $users->save();
+
+            (new PasswordResets)->issue($users);
         });
         exit;
     }

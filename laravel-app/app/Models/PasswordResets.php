@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Libs\Token;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
@@ -27,7 +26,7 @@ class PasswordResets extends Eloquent\Model
     {
         self::deleteByEmail($user->email);
 
-        $token = Token::generate();
+        $token = Str::random(32);
 
         $this->forceFill([
             'email' => $user->email,
