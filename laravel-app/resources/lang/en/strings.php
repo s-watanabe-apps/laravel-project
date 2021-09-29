@@ -53,6 +53,7 @@ return [
     'created_at' => 'Created time',
     'updated_at' => 'Updated time',
     'last_login' => 'Last activity',
+    'status' => 'Status',
 
     // Side menus
     'write_articles' => 'Write articles',

@@ -18,4 +18,9 @@ class UsersController extends ManagementsController
         ));
     }
 
+    public function create(Request $request)
+    {
+        return view('managements.users.create');
+    }
+
 }

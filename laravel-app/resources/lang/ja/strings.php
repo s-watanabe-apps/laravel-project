@@ -51,7 +51,8 @@ return [
     'group' => 'グループ',
     'created_at' => '作成日時',
     'updated_at' => '更新日時',
-    'last_login' => '最終ログイン日時',
+    'last_login' => '最終ログイン',
+    'status' => 'ステータス',
 
     // Side menus
     'write_articles' => '記事を書く',
