@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Users;
+use App\Models\PasswordResets;
+use App\Http\Requests\ManagementsUsersPostRequest;
 use Illuminate\Http\Request;
 
 class UsersController extends ManagementsController
@@ -21,6 +23,16 @@ class UsersController extends ManagementsController
     public function create(Request $request)
     {
         return view('managements.users.create');
+    }
+
+    public function post(ManagementsUsersPostRequest $request)
+    {
+        var_dump($request->email);
+        var_dump($request->name);
+        \DB::transaction(function() use ($request) {
+            //PasswordResets::issue($request->email);
+        });
+        exit;
     }
 
 }
