@@ -54,6 +54,7 @@ return [
     'updated_at' => 'Updated time',
     'last_login' => 'Last activity',
     'status' => 'Status',
+    'invitation' => 'Invitation',
 
     // Side menus
     'write_articles' => 'Write articles',

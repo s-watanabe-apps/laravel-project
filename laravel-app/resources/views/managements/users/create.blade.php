@@ -52,15 +52,17 @@
 
                         {{Form::text(
                             'email',
-                            old('name'),
-                            ['id' => 'name', 'class' => 'form-control',]
+                            old('email'),
+                            ['id' => 'email', 'class' => 'form-control',]
                         )}}
+                        <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
 
                         {{Form::text(
                             'name',
                             old('name'),
                             ['id' => 'name', 'class' => 'form-control',]
                         )}}
+                        <div class="text-danger">{{$errors->first('name') ?? ''}}</div>
 
                         <a href="javascript:managementsUsers.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
                             <i class="fas fa-check fa-sm"></i> TEST

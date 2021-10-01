@@ -53,6 +53,7 @@ return [
     'updated_at' => '更新日時',
     'last_login' => '最終ログイン',
     'status' => 'ステータス',
+    'invitation' => '招待状',
 
     // Side menus
     'write_articles' => '記事を書く',

@@ -24,8 +24,22 @@ class ManagementsUsersPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|max:255',
+            'email' => 'required|email|max:255',
             'name' => 'required|max:255',
         ];
     }
+
+    /**
+     * Column names.
+     * 
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'email' => __('strings.email'),
+            'name' => __('strings.name'),
+        ];
+    }
+
 }

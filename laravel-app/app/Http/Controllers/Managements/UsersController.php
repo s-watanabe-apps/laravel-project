@@ -44,10 +44,14 @@ class UsersController extends ManagementsController
             $token = (new PasswordResets)->issue($users);
             $encryptToken = Crypt::encryptString($request->email . ',' . $token);
             $data = [
+                'name' => $request->name,
                 'token' => $encryptToken,
             ];
 
-            //Mail::to($request->email)->send(new ContactMail('送信テスト', $data, 'emails.ja.user_invitation'));
+            $title = sprintf("[%s] %s", $request->settings->site_name, __('strings.invitation'));
+            $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
+
+            Mail::to($request->email)->send(new ContactMail($title, $data, $template));
     
         });
 
