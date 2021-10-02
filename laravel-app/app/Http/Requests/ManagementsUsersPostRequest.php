@@ -24,7 +24,7 @@ class ManagementsUsersPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
             'name' => 'required|max:255',
         ];
     }
@@ -41,5 +41,4 @@ class ManagementsUsersPostRequest extends FormRequest
             'name' => __('strings.name'),
         ];
     }
-
 }

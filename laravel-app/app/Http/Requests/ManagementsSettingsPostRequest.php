@@ -49,8 +49,8 @@ class ManagementsSettingsPostRequest extends FormRequest
     public function attributes()
     {
         return [
-            'site_name' => 'サイト名',
-            'basic_auth' => 'ベーシック認証',
+            'site_name' => __('strings.site_name'),
+            'basic_auth' => __('strings.basic_auth'),
         ];
     }
 }
