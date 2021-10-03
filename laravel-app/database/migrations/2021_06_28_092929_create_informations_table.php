@@ -17,9 +17,9 @@ class CreateInformationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('subject');
             $table->text('body');
-            $table->boolean('enabled')->default(false);
-            $table->dateTime('start_time');
-            $table->dateTime('end_time')->nullable();
+            $table->boolean('enable')->default(false);
+            $table->timestamp('start_time');
+            $table->timestamp('end_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index(['start_time']);

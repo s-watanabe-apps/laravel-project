@@ -47,28 +47,45 @@
                         @include('managements.users.tabControl')
 
                         <div class="col-lg-10 px-0 px-lg-2">
-                        {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/post', 'method' => 'post', 'files' => true])}}
-                        @csrf
+                            {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/post', 'method' => 'post', 'files' => true])}}
+                            @csrf
 
-                        {{Form::text(
-                            'email',
-                            old('email'),
-                            ['id' => 'email', 'class' => 'form-control',]
-                        )}}
-                        <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
+                            <table class="table table-bordered responsive-table">
+                                <tbody>
+                                    <tr>
+                                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                                            @lang('strings.email')
+                                        </th>
+                                        <td class="bg-light">
+                                            {{Form::text(
+                                                'email',
+                                                old('email'),
+                                                ['id' => 'email', 'class' => 'form-control',]
+                                            )}}
+                                            <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                                            @lang('strings.name')
+                                        </th>
+                                        <td class="bg-light">
+                                            {{Form::text(
+                                                'name',
+                                                old('name'),
+                                                ['id' => 'name', 'class' => 'form-control',]
+                                            )}}
+                                            <div class="text-danger">{{$errors->first('name') ?? ''}}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                        {{Form::text(
-                            'name',
-                            old('name'),
-                            ['id' => 'name', 'class' => 'form-control',]
-                        )}}
-                        <div class="text-danger">{{$errors->first('name') ?? ''}}</div>
+                            <a href="javascript:managementsUsers.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
+                                <i class="fas fa-check fa-sm"></i> TEST
+                            </a>
 
-                        <a href="javascript:managementsUsers.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-                            <i class="fas fa-check fa-sm"></i> TEST
-                        </a>
-
-                        {{Form::close()}}
+                            {{Form::close()}}
 
                         </div>
 

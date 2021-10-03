@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         if (config('app.debug')) {
             for ($i = 1; $i <= 15; $i++) {
                 Users::query()->create([
-                    'role_id' => Roles::MEMBER,
+                    'role_id' => $i == 1 ? Roles::ADMIN : Roles::MEMBER,
                     'name' => sprintf('ユーザー名_%02d', $i),
                     'name_kana' => sprintf('ユーザーメイ_%02d', $i),
                     'email' => sprintf('member%02d@example.com', $i),

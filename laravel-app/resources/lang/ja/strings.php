@@ -148,5 +148,9 @@ return [
     'basic_auth' => 'ベーシック認証',
     'user_list' => 'ユーザー一覧',
     'add_user' => 'ユーザー作成',
+    'information_list' => 'お知らせ一覧',
+    'add_information' => 'お知らせ作成',
+    'start_time' => '表示開始日時',
+    'end_time' => '表示終了日時',
 
 ];

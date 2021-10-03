@@ -17,7 +17,7 @@ class InformationsTableSeeder extends Seeder
         $informations = [
             'subject' => 'メンテナンスのお知らせ',
             'body' => '<p>システムメンテナンスのため、下記日程にてサービス停止を予定しております。</p><p>■システム停止期間：0000年00月00日（○曜日）00:00～00:00</p>',
-            'enabled' => true,
+            'enable' => true,
             'start_time' => $now,
             'end_time' => null,
             'created_at' => $now,

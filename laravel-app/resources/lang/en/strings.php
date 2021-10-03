@@ -125,5 +125,9 @@ return [
     'basic_auth' => 'Basic authentication',
     'user_list' => 'User list',
     'add_user' => 'Add user',
+    'information_list' => 'Notice list',
+    'add_information' => 'Add a notice',
+    'start_time' => 'Display start',
+    'end_time' => 'End of display',
 
 ];
