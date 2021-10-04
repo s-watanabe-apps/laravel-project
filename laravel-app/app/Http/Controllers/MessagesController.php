@@ -20,10 +20,8 @@ class MessagesController extends Controller
     {
         $messages = Messages::getByUserId($request->user->id);
 
-        $dataTablesLanguage = json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-
         return view('messages.inbox', compact(
-            'messages', 'dataTablesLanguage'
+            'messages'
         ) + [
             'index' => 1,
             'sizes' => self::getSizes($request->user->id),

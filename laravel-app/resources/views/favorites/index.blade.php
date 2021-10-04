@@ -110,7 +110,7 @@
     jQuery(document).ready(function($) {
         var table = $('#dataTable').DataTable({
             aLengthMenu:[50, 100, 200],
-            language: {!!$dataTablesLanguage!!},
+            language: {!!json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)!!},
             stateSave:true,
             order:[[3, "desc"]],
             columnDefs:[

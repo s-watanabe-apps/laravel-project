@@ -17,10 +17,8 @@ class UsersController extends ManagementsController
     {
         $users = Users::getAllUsers();
         
-        $dataTablesLanguage = json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-
         return view('managements.users.index', compact(
-            'users', 'dataTablesLanguage'
+            'users'
         ));
     }
 
@@ -43,6 +41,7 @@ class UsersController extends ManagementsController
 
             $token = (new PasswordResets)->issue($users);
             $encryptToken = Crypt::encryptString($request->email . ',' . $token);
+/*
             $data = [
                 'name' => $request->name,
                 'token' => $encryptToken,
@@ -50,8 +49,9 @@ class UsersController extends ManagementsController
 
             $title = sprintf("[%s] %s", $request->settings->site_name, __('strings.invitation'));
             $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
+*/
 
-            Mail::to($request->email)->send(new ContactMail($title, $data, $template));
+            Mail::to($request->email)->send(new ContactMail('件名', '本文テスト'));
     
         });
 

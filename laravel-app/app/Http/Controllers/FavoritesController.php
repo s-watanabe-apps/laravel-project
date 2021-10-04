@@ -18,10 +18,8 @@ class FavoritesController extends Controller
     {
         $favorites = Favorites::getFavoritesByUserId($request->user->id);
 
-        $dataTablesLanguage = json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-
         return view('favorites.index', compact(
-            'favorites', 'dataTablesLanguage'
+            'favorites'
         ));
     }
 

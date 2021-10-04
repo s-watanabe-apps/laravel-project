@@ -11,10 +11,8 @@ class InformationsController extends ManagementsController
     {
         $informations = Informations::getAllInformations();
         
-        $dataTablesLanguage = json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-
         return view('managements.informations.index', compact(
-            'informations', 'dataTablesLanguage'
+            'informations'
         ));
     }
 
