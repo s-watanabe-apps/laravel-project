@@ -30,7 +30,7 @@ class Articles extends Model
         $articles->user_id = $userId;
         $articles->type = $type;
         $articles->enable = true;
-        $articles->subject = $values['subject'];
+        $articles->title = $values['title'];
         $articles->body = $values['body'];
         $articles->save();
 
@@ -63,7 +63,7 @@ class Articles extends Model
                 'articles.user_id',
                 'users.name',
                 'articles.type',
-                'articles.subject',
+                'articles.title',
                 'articles.body',
                 'articles.created_at',
                 'articles.updated_at',
@@ -80,7 +80,7 @@ class Articles extends Model
         return self::query()
             ->select([
                 'articles.id',
-                'articles.subject',
+                'articles.title',
                 'articles.created_at',
             ])
             ->where('articles.user_id', $userId)

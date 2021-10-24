@@ -50,8 +50,8 @@
                                     <tr>
                                         <th class="bg-gradient-light text-secondary text-nowrap">@lang('strings.title')</th>
                                         <td>
-                                            <input type="text" name="subject" class="form-control" id="subject" placeholder="">
-                                            <div class="text-danger">{{$errors->first('subject') ?? ''}}</div>
+                                            <input type="text" name="title" class="form-control" id="title" placeholder="">
+                                            <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
                                         </td>
                                     </tr>
                                     <tr>

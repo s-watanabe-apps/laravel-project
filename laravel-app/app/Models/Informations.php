@@ -20,7 +20,7 @@ class Informations extends Eloquent\Model
         return self::query()
             ->select([
                 'informations.id',
-                'informations.subject',
+                'informations.title',
                 'informations.body',
                 'informations.enable',
                 'informations.start_time',

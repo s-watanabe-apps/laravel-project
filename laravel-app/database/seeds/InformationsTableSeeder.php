@@ -15,7 +15,7 @@ class InformationsTableSeeder extends Seeder
         $now = new Carbon();
         DB::table('informations')->truncate();
         $informations = [
-            'subject' => 'メンテナンスのお知らせ',
+            'title' => 'メンテナンスのお知らせ',
             'body' => '<p>システムメンテナンスのため、下記日程にてサービス停止を予定しております。</p><p>■システム停止期間：0000年00月00日（○曜日）00:00～00:00</p>',
             'enable' => true,
             'start_time' => $now,

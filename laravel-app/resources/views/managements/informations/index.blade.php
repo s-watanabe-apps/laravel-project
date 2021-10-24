@@ -34,7 +34,7 @@
                     <div class="row">
                         <nav aria-label="breadcrumb" class="col-md-12 h5">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.user_management')</li>
+                                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.informations_management')</li>
                             </ol>
                         </nav>
                     </div>
@@ -65,7 +65,7 @@
                                             {{$value->id}}
                                         </td>
                                         <td class="dt-center">
-                                            {{$value->subject}}
+                                            {{$value->title}}
                                         </td>
                                         <td class="dt-center">
                                             {{$value->start_time == null ? '' : (new Carbon\Carbon($value->start_time))->format($dateFormat->getDateTimeFormat())}}

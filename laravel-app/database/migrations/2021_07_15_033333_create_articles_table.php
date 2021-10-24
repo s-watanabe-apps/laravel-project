@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('type');
             $table->boolean('enable');
-            $table->string('subject');
+            $table->string('title');
             $table->text('body');
             $table->timestamps();
             $table->softDeletes();

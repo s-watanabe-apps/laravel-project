@@ -44,8 +44,8 @@
                                     <tr>
                                         <th class="bg-gradient-light text-secondary text-nowrap">@lang('strings.title')</th>
                                         <td>
-                                            {{$validated['subject']}}
-                                            {{Form::hidden('subject', $validated['subject'])}}
+                                            {{$validated['title']}}
+                                            {{Form::hidden('title', $validated['title'])}}
                                         </td>
                                     </tr>
                                     <tr>

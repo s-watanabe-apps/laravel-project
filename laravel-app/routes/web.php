@@ -64,6 +64,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         
         // Management informations
         Route::get('managements/informations', 'Managements\InformationsController@index')->name('managementsInformations');
+        Route::get('managements/informations/create', 'Managements\InformationsController@create')->name('managementsInformations');
     });
 });
 

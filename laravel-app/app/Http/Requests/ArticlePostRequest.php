@@ -24,7 +24,7 @@ class ArticlePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject' => 'required|max:255',
+            'title' => 'required|max:255',
             'body' => 'string',
         ];
     }
@@ -37,7 +37,7 @@ class ArticlePostRequest extends FormRequest
     public function attributes()
     {
         return [
-            'subject' => __('strings.title'),
+            'title' => __('strings.title'),
             'body' => __('strings.article_body'),
         ];
     }

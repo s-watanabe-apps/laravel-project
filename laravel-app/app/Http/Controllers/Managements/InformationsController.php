@@ -16,4 +16,9 @@ class InformationsController extends ManagementsController
         ));
     }
 
+    public function create(Request $request)
+    {
+        return view('managements.informations.create');
+    }
+
 }

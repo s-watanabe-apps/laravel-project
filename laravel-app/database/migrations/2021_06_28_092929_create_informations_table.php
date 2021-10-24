@@ -15,7 +15,7 @@ class CreateInformationsTable extends Migration
     {
         Schema::create('informations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('subject');
+            $table->string('title');
             $table->text('body');
             $table->boolean('enable')->default(false);
             $table->timestamp('start_time');

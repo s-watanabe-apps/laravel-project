@@ -127,7 +127,7 @@
                                             <small>{{date('Y-m-d', strtotime($article['created_at']))}}</small>
                                         </td>
                                         <td class="w-75">
-                                            <a href="/articles/{{$article['id']}}">{{$article['subject']}}</a>
+                                            <a href="/articles/{{$article['id']}}">{{$article['title']}}</a>
                                         </td>
                                     </tr>
                                     @endforeach
