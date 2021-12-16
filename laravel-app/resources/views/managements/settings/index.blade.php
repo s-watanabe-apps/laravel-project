@@ -16,14 +16,14 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Side Bar -->
-        @include('shared.sidebar')
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
+
+                <!-- Nav Bar -->
+                @include('shared.navbar')
 
                 <!-- Top Bar -->
                 @include('shared.topbar')

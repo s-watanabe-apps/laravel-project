@@ -18,3 +18,15 @@
 
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+<style type="text/css">
+<!--
+body {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 992px;
+    border: 1px solid;
+    border-color: #ededed;
+}
+-->
+</style>
