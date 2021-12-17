@@ -60,6 +60,7 @@ return [
     'write_articles' => 'Write articles',
     'pictures' => 'Pictures',
     'members' => 'Member list',
+    'member_search' => 'Member search',
     'admin_menus' => 'Administrator menus',
     'common_settings' => 'Common',
     'site_settings' => 'Site Settings',

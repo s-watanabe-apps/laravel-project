@@ -59,6 +59,7 @@ return [
     'write_articles' => '記事を書く',
     'pictures' => 'アルバム',
     'members' => 'メンバーリスト',
+    'member_search' => 'メンバー検索',
     'admin_menus' => '管理者メニュー',
     'common_settings' => '共通設定',
     'site_settings' => 'サイト設定',

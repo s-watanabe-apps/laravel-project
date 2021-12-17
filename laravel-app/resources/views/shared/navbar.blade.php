@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center text-decoration-none" href="/">
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
@@ -14,7 +14,7 @@
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item nav-hover active">
+      <li class="nav-item nav-hover">
         <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
         <a class="nav-link" href="/articles/write">
             <i class="fas fa-fw fa-edit"></i><span>@lang('strings.write_articles')</span>
@@ -29,7 +29,7 @@
 
       <li class="nav-item nav-hover">
         <a class="nav-link" href="/members">
-            <i class="fas fa-fw fa-users"></i><span>@lang('strings.members')</span>
+            <i class="fas fa-fw fa-users"></i><span>@lang('strings.member_search')</span>
         </a>
       </li>
 

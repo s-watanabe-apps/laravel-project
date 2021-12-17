@@ -32,7 +32,7 @@
                     <div class="row">
                         <nav aria-label="breadcrumb" class="col-md-12 h5">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-images"></i>@lang('strings.members')</li>
+                                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-users"></i>@lang('strings.member_search')</li>
                             </ol>
                         </nav>
                     </div>
