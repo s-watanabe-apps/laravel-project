@@ -14,27 +14,27 @@
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item active">
+      <li class="nav-item nav-hover active">
         <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
         <a class="nav-link" href="/articles/write">
             <i class="fas fa-fw fa-edit"></i><span>@lang('strings.write_articles')</span>
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item nav-hover">
         <a class="nav-link" href="/pictures">
             <i class="fas fa-fw fa-images"></i><span>@lang('strings.pictures')</span>
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item nav-hover">
         <a class="nav-link" href="/members">
             <i class="fas fa-fw fa-users"></i><span>@lang('strings.members')</span>
         </a>
       </li>
 
       @if ($user->role_id == \App\Models\Roles::ADMIN)
-      <li class="nav-item dropdown">
+      <li class="nav-item nav-hover dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           @lang('strings.admin_menus')
         </a>

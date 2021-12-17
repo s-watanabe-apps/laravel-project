@@ -21,12 +21,16 @@
 
 <style type="text/css">
 <!--
-body {
+body#page-top {
     margin-right: auto;
     margin-left: auto;
     max-width: 992px;
     border: 1px solid;
     border-color: #ededed;
+}
+
+.nav-hover:hover {
+  background-color: #ededed;
 }
 -->
 </style>
