@@ -16,18 +16,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="/images/header01.jpg" class="d-block w-100" alt="...">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Nav Bar -->
                 @include('shared.navbar')
 

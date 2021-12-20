@@ -25,6 +25,7 @@ class ManagementsSettingsPostRequest extends FormRequest
     {
         $rules = [
             'site_name' => 'required|max:255',
+            'site_description' => 'max:255',
             'user_create_any' => 'in:1',
             'user_create_member' => 'in:1',
             //'user_create_admin' => 'in:1',
@@ -50,6 +51,7 @@ class ManagementsSettingsPostRequest extends FormRequest
     {
         return [
             'site_name' => __('strings.site_name'),
+            'site_description' => __('strings.site_description'),
             'basic_auth' => __('strings.basic_auth'),
         ];
     }

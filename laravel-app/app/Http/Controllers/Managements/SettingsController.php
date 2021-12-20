@@ -18,6 +18,7 @@ class SettingsController extends ManagementsController
         \DB::transaction(function() use ($request) {
             $settings = $request->settings;
             $settings->site_name = $request->site_name;
+            $settings->site_description = $request->site_description;
             $settings->user_create_any = $request->user_create_any ?? 0;
             $settings->user_create_member = $request->user_create_member ?? 0;
             $settings->basic_auth = $request->basic_auth;

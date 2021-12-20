@@ -1,3 +1,15 @@
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/images/header01.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption">
+                <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
+                <p>{{$settings->site_description}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="sidebar-brand d-flex align-items-center justify-content-center text-decoration-none" href="/">
     <div class="sidebar-brand-icon rotate-n-15">
@@ -30,6 +42,12 @@
       <li class="nav-item nav-hover">
         <a class="nav-link" href="/members">
             <i class="fas fa-fw fa-users"></i><span>@lang('strings.member_search')</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-hover">
+        <a class="nav-link" href="/communities">
+            <i class="fas fa-fw fa-object-group"></i><span>@lang('strings.community_search')</span>
         </a>
       </li>
 

@@ -60,6 +60,7 @@ return [
     'pictures' => 'アルバム',
     'members' => 'メンバーリスト',
     'member_search' => 'メンバー検索',
+    'community_search' => 'コミュニティ検索',
     'admin_menus' => '管理者メニュー',
     'common_settings' => '共通設定',
     'site_settings' => 'サイト設定',
@@ -142,6 +143,7 @@ return [
     // Managements Settings
     'basic_settings' => '基本設定',
     'site_name' => 'サイト名',
+    'site_description' => 'サイト説明',
     'user_create' => 'ユーザー登録',
     'user_create_any' => '誰でも登録できる',
     'user_create_member' => 'メンバーの招待で登録できる',

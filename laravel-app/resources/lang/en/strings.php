@@ -61,6 +61,7 @@ return [
     'pictures' => 'Pictures',
     'members' => 'Member list',
     'member_search' => 'Member search',
+    'community_search' => 'Community search',
     'admin_menus' => 'Administrator menus',
     'common_settings' => 'Common',
     'site_settings' => 'Site Settings',
@@ -119,6 +120,7 @@ return [
     // Managements Settings
     'basic_settings' => 'Basic configuration',
     'site_name' => 'Site name',
+    'site_description' => 'Site description',
     'user_create' => 'User registration',
     'user_create_any' => 'Anyone can register',
     'user_create_member' => 'Can register by invitation from a member',

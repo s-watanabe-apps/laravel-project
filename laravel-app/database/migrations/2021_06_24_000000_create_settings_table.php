@@ -16,6 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('site_name');
+            $table->string('site_description')->nullable();
             $table->tinyInteger('user_create_any')->default(0);
             $table->tinyInteger('user_create_member')->default(0);
             $table->tinyInteger('user_create_admin')->default(1);

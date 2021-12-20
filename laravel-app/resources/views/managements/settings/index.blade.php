@@ -51,11 +51,20 @@
                                     <div class="col-md-4 col-12">
                                         <span class="h6 text-nowrap">@lang('strings.site_name')</span>
                                     </div>
-                                    <div class="col-md-8 col-12">
+                                    <div class="col-md-8 col-12 pb-2">
                                         {{Form::input('text', 'site_name', old('site_name') ?? $settings->site_name, [
                                             'style' => 'width: 100%;'
                                         ])}}
                                         <div class="text-danger">{{$errors->first('site_name') ?? ''}}</div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <span class="h6 text-nowrap">@lang('strings.site_description')</span>
+                                    </div>
+                                    <div class="col-md-8 col-12">
+                                        {{Form::input('text', 'site_description', old('site_description') ?? $settings->site_description, [
+                                            'style' => 'width: 100%;'
+                                        ])}}
+                                        <div class="text-danger">{{$errors->first('site_description') ?? ''}}</div>
                                     </div>
                                 </div>
                             </div>
