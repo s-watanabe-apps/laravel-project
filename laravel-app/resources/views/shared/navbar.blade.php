@@ -1,4 +1,4 @@
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+<div class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="/images/header01.jpg" class="d-block w-100" alt="...">
@@ -47,7 +47,7 @@
 
       <li class="nav-item nav-hover">
         <a class="nav-link" href="/communities">
-            <i class="fas fa-fw fa-object-group"></i><span>@lang('strings.community_search')</span>
+            <i class="fas fa-fw fa-handshake"></i><span>@lang('strings.community_search')</span>
         </a>
       </li>
 
@@ -71,6 +71,10 @@
           <a class="dropdown-item text-black-50" href="/managements/users">
             <i class="fas fa-fw fa-users"></i>
             @lang('strings.user_management')
+          </a>
+          <a class="dropdown-item text-black-50" href="/managements/groups">
+            <i class="fas fa-fw fa-object-group"></i>
+            @lang('strings.group_management')
           </a>
         </div>
       </li>

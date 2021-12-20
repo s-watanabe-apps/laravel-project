@@ -67,6 +67,7 @@ return [
     'contents_management' => 'コンテンツ管理',
     'informations_management' => 'お知らせ管理',
     'user_management' => 'ユーザー管理',
+    'group_management' => 'グループ管理',
 
     // Messages
     'message' => 'メッセージ',

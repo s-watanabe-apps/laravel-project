@@ -68,6 +68,7 @@ return [
     'contents_management' => 'Contents Management',
     'informations_management' => 'Informations',
     'user_management' => 'User management',
+    'group_management' => 'Group management',
 
     // Messages
     'message' => 'Message',

@@ -25,12 +25,40 @@ body#page-top {
     margin-right: auto;
     margin-left: auto;
     max-width: 992px;
-    border: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
     border-color: #ededed;
 }
 
 .nav-hover:hover {
   background-color: #ededed;
+}
+
+.container-fluid {
+  padding: 0 12px 0 12px;
+}
+
+.navbar {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media only screen and (max-width:768px) {
+  .carousel-caption {
+    top: 30%;
+  }
+  .carousel-caption > h3 {
+    font-size: 18px;
+  }
+  .carousel-caption > p {
+    font-size: 12px;
+  }
 }
 -->
 </style>
