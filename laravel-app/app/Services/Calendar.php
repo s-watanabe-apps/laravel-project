@@ -37,9 +37,7 @@ class Calendar extends Model
         $usersMap = [];
         foreach ($users as $user) {
             $carbon = new Carbon(
-                $user->birthyear . '-' .
-                $user->birthmonth . '-' .
-                $user->birthday                
+                $user->birthdate
             );
             $usersMap[$carbon->format('md')][] = $user;
         }

@@ -38,9 +38,7 @@ class Users extends Authenticatable
                 'users.email',
                 'users.email_verified_at',
                 'users.password',
-                'users.birthyear',
-                'users.birthmonth',
-                'users.birthday',
+                'users.birthdate',
                 'users.api_token',
                 'users.enable',
                 'users.remember_token',
@@ -109,8 +107,8 @@ class Users extends Authenticatable
         $dateStrings = [];
         foreach ($birthdays as $birthday) {
             $builder->orWhere(function($query) use($birthday) {
-                $query->where('birthmonth', $birthday->format('n'))
-                      ->where('birthday', $birthday->format('j'));
+                $query->where(\DB::raw('date_format(birthdate, "%m")'), $birthday->format('m'))
+                      ->where(\DB::raw('date_format(birthdate, "%d")'), $birthday->format('d'));
             });
         }
 
@@ -149,10 +147,7 @@ class Users extends Authenticatable
      */
     public function getBirthDate()
     {
-        return (new Carbon(
-            $this->birthyear . '-' .
-            $this->birthmonth . '-' .
-            $this->birthday))->format('Y-m-d');
+        return (new Carbon($this->birthdate))->format('Y-m-d');
     }
 
     /**
@@ -163,13 +158,9 @@ class Users extends Authenticatable
      */
     public function saveUsers($values)
     {
-        $birthDate = new Carbon($values['birth_date']);
-
         $this->name = $values['name'];
         $this->name_kana = $values['name_kana'];
-        $this->birthyear = $birthDate->format('Y');
-        $this->birthmonth = $birthDate->format('n');
-        $this->birthday = $birthDate->format('j');
+        $this->birthdate = new Carbon($values['birth_date']);
 
         $this->save();
         return $this;

@@ -21,14 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('name_kana')->nullable();
             $table->string('password')->nullable();
-            $table->integer('birthyear')->nullable();
-            $table->integer('birthmonth')->nullable();
-            $table->integer('birthday')->nullable();
+            $table->date('birthdate')->nullable();
             $table->integer('group_id')->nullable();
             $table->string('api_token')->nullable();
             $table->boolean('enable')->default(true);
             $table->rememberToken();
-            $table->index(['birthmonth', 'birthday']);
+            $table->index(['birthdate']);
             $table->index(['api_token']);
             $table->index(['remember_token']);
             $table->timestamps();

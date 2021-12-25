@@ -23,9 +23,7 @@ class UsersTableSeeder extends Seeder
                     'name_kana' => sprintf('ユーザーメイ_%02d', $i),
                     'email' => sprintf('member%02d@example.com', $i),
                     'password' => Hash::make('password'),
-                    'birthyear' => 1990,
-                    'birthmonth' => (new Carbon())->addDays($i)->copy()->format('n'),
-                    'birthday' => (new Carbon())->addDays($i)->copy()->format('j'),
+                    'birthdate' => (new Carbon())->addYear(-30)->addDays($i)->copy(),
                 ]);
             }
         }
