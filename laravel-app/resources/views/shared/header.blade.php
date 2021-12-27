@@ -60,5 +60,21 @@ body#page-top {
     font-size: 12px;
   }
 }
+
+a.tab-active {
+  background: #dfdfdf;
+  background-image: url("/img/arrow-right150.png");
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: 3% 50%;
+}
+
+a.tab-item:hover {
+  background-image: url("/img/arrow-right75.png");
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: 3% 50%;
+}
+
 -->
 </style>

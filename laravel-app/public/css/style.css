@@ -30,10 +30,6 @@ pre {
     }
 }
 
-.sub-menu:hover {
-    background-color: #ddd;
-}
-
 @media only screen and (max-width:768px) {
 	.responsive-table th, .responsive-table td {
 		display: block;
