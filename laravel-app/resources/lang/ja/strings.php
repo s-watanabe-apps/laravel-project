@@ -27,6 +27,7 @@ return [
     'datetime' => '日時',
     'category' => 'カテゴリ',
     'title' => 'タイトル',
+    'body' => '本文',
     'contributor' => '投稿者',
     'contribute_date' => '投稿日',
     'weekly_calendar' => '週間カレンダー',

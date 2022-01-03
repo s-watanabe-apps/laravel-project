@@ -28,6 +28,7 @@ return [
     'email' => 'E-Mail',
     'category' => 'Category',
     'title' => 'Title',
+    'body' => 'Body',
     'contributor' => 'Contributor',
     'contribute_date' => 'Contribute date',
     'weekly_calendar' => 'Weekly calendar',

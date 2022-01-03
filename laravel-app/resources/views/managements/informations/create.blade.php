@@ -40,7 +40,7 @@
                     <div class="row mx-1">
 
                         <!-- Tab Control -->
-                        @include('managements.informations.tabControl')
+                        @include('managements.informations.tabControl', ['index' => 2])
 
                         <div class="col-lg-6 px-0 px-lg-2">
 

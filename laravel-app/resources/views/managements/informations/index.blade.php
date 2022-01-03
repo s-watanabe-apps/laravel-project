@@ -43,7 +43,7 @@
                     <div class="row mx-1">
 
                         <!-- Tab Control -->
-                        @include('managements.informations.tabControl')
+                        @include('managements.informations.tabControl', ['index' => 1])
 
                         <div class="col-lg-10 px-0 px-lg-2">
 
@@ -65,7 +65,7 @@
                                             {{$value->id}}
                                         </td>
                                         <td class="dt-center">
-                                            {{$value->title}}
+                                            <a href="/managements/informations/{{$value->id}}">{{$value->title}}</a>
                                         </td>
                                         <td class="dt-center">
                                             {{$value->start_time == null ? '' : (new Carbon\Carbon($value->start_time))->format($dateFormat->getDateTimeFormat())}}

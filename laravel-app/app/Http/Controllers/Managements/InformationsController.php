@@ -16,6 +16,15 @@ class InformationsController extends ManagementsController
         ));
     }
 
+    public function get(Request $request)
+    {
+        $information = Informations::where(['id' => $request->id])->get()->first();
+
+        return view('managements.informations.get', compact(
+            'information'
+        ));
+    }
+
     public function create(Request $request)
     {
         return view('managements.informations.create');

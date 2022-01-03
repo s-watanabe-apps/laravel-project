@@ -44,7 +44,7 @@
 
                         <!-- Tab Control -->
                         <?php $tabIndex = 2;?>
-                        @include('managements.users.tabControl')
+                        @include('managements.users.tabControl', ['index' => 2])
 
                         <div class="col-lg-10 px-0 px-lg-2">
                             {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/post', 'method' => 'post', 'files' => true])}}
