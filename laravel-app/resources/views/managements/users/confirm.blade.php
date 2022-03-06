@@ -43,7 +43,7 @@
                         @include('managements.users.tabControl', ['index' => 2])
 
                         <div class="col-lg-10 px-0 px-lg-2">
-                            {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/confirm', 'method' => 'post', 'files' => true])}}
+                            {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/post', 'method' => 'post', 'files' => true])}}
                             @csrf
 
                             <table class="table table-bordered responsive-table">
@@ -53,12 +53,9 @@
                                             @lang('strings.email')
                                         </th>
                                         <td class="bg-light">
-                                            {{Form::text(
-                                                'email',
-                                                old('email'),
-                                                ['id' => 'email', 'class' => 'form-control',]
-                                            )}}
-                                            <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
+                                            {{$request->email}}
+                                            {{Form::hidden('email', $request->email)}}
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -66,12 +63,8 @@
                                             @lang('strings.name')
                                         </th>
                                         <td class="bg-light">
-                                            {{Form::text(
-                                                'name',
-                                                old('name'),
-                                                ['id' => 'name', 'class' => 'form-control',]
-                                            )}}
-                                            <div class="text-danger">{{$errors->first('name') ?? ''}}</div>
+                                            {{$request->name}}
+                                            {{Form::hidden('name', $request->name)}}
                                         </td>
                                     </tr>
                                 </tbody>
