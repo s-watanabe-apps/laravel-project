@@ -22,7 +22,7 @@ class UsersController extends ManagementsController
     public function index(Request $request)
     {
         $users = Users::getAllUsers();
-        
+
         return view('managements.users.index', compact(
             'users'
         ));
