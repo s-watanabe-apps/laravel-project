@@ -47,6 +47,20 @@ class DateFormat
     }
 
     /**
+     * DateTime full format corresponding to the locale.
+     * 
+     * @return array
+     */
+    public function getDateTimeFullFormat()
+    {
+        if (strcmp($this->locale, 'ja') == 0) {
+            return 'Y/m/d h:i';
+        } else {
+            return 'n/j/Y g:i a';
+        }
+    }
+
+    /**
      * Date(short) format corresponding to the locale.
      * 
      * @return array

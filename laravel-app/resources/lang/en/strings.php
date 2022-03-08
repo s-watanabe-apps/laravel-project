@@ -20,7 +20,7 @@ return [
     'save' => 'Save',
     'edit' => 'Edit',
     'cancel' => 'Cancel',
-    'confirm' => 'Confirm',
+    'do_confirm' => 'Confirm',
     'delete' => 'Delete',
     'deleted' => 'Deleted',
     'choose_file' => 'Choose file',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
+use App\Http\Requests\ManagementsInformationsPostRequest;
 use Illuminate\Http\Request;
 
 class InformationsController extends ManagementsController
@@ -30,4 +31,8 @@ class InformationsController extends ManagementsController
         return view('managements.informations.create');
     }
 
+    public function confirm(ManagementsInformationsPostRequest $request)
+    {
+        return view('managements.informations.confirm', compact('request'));
+    }
 }

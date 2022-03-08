@@ -47,6 +47,8 @@
                         @include('managements.informations.tabControl', ['index' => 2])
 
                         <div class="col-lg-10 px-0 px-lg-2">
+                            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/confirm', 'method' => 'post', 'files' => true])}}
+                            @csrf
 
                             <table class="table table-bordered responsive-table">
                                 <tbody>
@@ -79,7 +81,7 @@
                                         <td class="bg-light text-dark">
                                             {{Form::text(
                                                 'start_time',
-                                                old('start_time') ?? (new \Carbon\Carbon())->format($dateFormat->getDateTimeFormat()),
+                                                old('start_time') ?? (new \Carbon\Carbon())->format($dateFormat->getDateTimeFullFormat()),
                                                 ['id' => 'start_time', 'class' => 'form-control',]
                                             )}}
                                             <div class="text-danger">{{$errors->first('start_time') ?? ''}}</div>
@@ -98,9 +100,38 @@
                                             <div class="text-danger">{{$errors->first('end_time') ?? ''}}</div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                                            @lang('strings.status')
+                                        </th>
+                                        <td class="bg-light">
+                                        <label class="radio-button">
+                                            {{Form::radio(
+                                                'status',
+                                                \App\Models\Informations::STATUS_ENABLE,
+                                                old('status') == \App\Models\Informations::STATUS_ENABLE ? true : old('status') == '' ? true : false,
+                                                ['class' => 'radio-button__input']
+                                            )}}
+                                            <span class="radio-button__icon">@lang('strings.enable')</span>
+                                        </label>
+                                        <label class="radio-button">
+                                            {{Form::radio(
+                                                'status',
+                                                \App\Models\Informations::STATUS_DISABLE,
+                                                old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false,
+                                                ['class' => 'radio-button__input']
+                                            )}}
+                                            <span class="radio-button__icon">@lang('strings.disable')</span>
+                                        </label>
+                                            <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
-
+                            <a href="javascript:informations.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
+                                <i class="fas fa-check fa-sm"></i> @lang('strings.do_confirm')
+                            </a>
+                            {{Form::close()}}
                         </div>
 
                     </div>
@@ -136,14 +167,14 @@
 
     window.addEventListener("load", function() {
         $('#start_time').datetimepicker({
-            format: 'Y/m/d H:i:s',
+            format: 'Y/m/d H:i',
         });
         $.datetimepicker.setLocale('ja');
     });
 
     window.addEventListener("load", function() {
         $('#end_time').datetimepicker({
-            format: 'Y/m/d H:i:s',
+            format: 'Y/m/d H:i',
         });
         $.datetimepicker.setLocale('ja');
     });

@@ -18,7 +18,7 @@ return [
     'save' => '保存',
     'edit' => '編集',
     'cancel' => 'キャンセル',
-    'confirm' => '確認',
+    'do_confirm' => '確認する',
     'delete' => '削除',
     'deleted' => '削除する',
     'choose_file' => 'ファイル選択',

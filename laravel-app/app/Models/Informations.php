@@ -11,6 +11,16 @@ class Informations extends Eloquent\Model
 
     public $timestamps = false;
 
+    const STATUS_ENABLE = 1;
+    const STATUS_DISABLE = 2;
+
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_ENABLE => __('strings.enable'),
+            self::STATUS_DISABLE => __('strings.disable'),
+        ];
+    }
     /**
      * Get base query.
      * 
@@ -22,7 +32,7 @@ class Informations extends Eloquent\Model
                 'informations.id',
                 'informations.title',
                 'informations.body',
-                'informations.enable',
+                'informations.status',
                 'informations.start_time',
                 'informations.end_time',
             ]);
@@ -37,7 +47,7 @@ class Informations extends Eloquent\Model
         $now = new Carbon();
         return self::getBaseQuery()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
-            ->where('enable', 1)
+            ->where('status', self::STATUS_ENABLE)
             ->where('start_time', '<=', $now)
             ->where(function($query) use($now) {
                 $query->where('end_time', '>=', $now)
