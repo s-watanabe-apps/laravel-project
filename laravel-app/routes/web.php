@@ -67,6 +67,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('managements/informations', 'Managements\InformationsController@index')->name('managementsInformations');
         Route::get('managements/informations/create', 'Managements\InformationsController@create');
         Route::post('managements/informations/confirm', 'Managements\InformationsController@confirm');
+        Route::post('managements/informations/post', 'Managements\InformationsController@post');
         Route::get('managements/informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
     });
 });

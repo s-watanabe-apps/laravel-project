@@ -30,6 +30,14 @@ body#page-top {
     border-color: #ededed;
 }
 
+table.responsive-table > tbody > tr > th {
+  padding: 5px 0px 0px 8px;
+}
+
+table.responsive-table > tbody > tr > td {
+  padding: 4px;
+}
+
 .nav-hover:hover {
   background-color: #ededed;
 }

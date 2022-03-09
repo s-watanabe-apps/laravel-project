@@ -25,7 +25,7 @@ class ManagementsInformationsPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|title|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
             'start_time' => 'required|date_format:Y/m/d H:i',
             'end_time' => 'nullable|date_format:Y/m/d H:i',

@@ -55,7 +55,6 @@
                                         <td class="bg-light">
                                             {{$request->email}}
                                             {{Form::hidden('email', $request->email)}}
-
                                         </td>
                                     </tr>
                                     <tr>

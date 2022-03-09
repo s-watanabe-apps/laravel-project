@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Managements;
 use App\Models\Informations;
 use App\Http\Requests\ManagementsInformationsPostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InformationsController extends ManagementsController
 {
+    /**
+     * Get information list.
+     * 
+     * @param Illuminate\Http\Request $request
+     * @return \Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $informations = Informations::getAllInformations();
@@ -34,5 +41,21 @@ class InformationsController extends ManagementsController
     public function confirm(ManagementsInformationsPostRequest $request)
     {
         return view('managements.informations.confirm', compact('request'));
+    }
+
+    public function post(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            (new ManagementsInformationsPostRequest)->rules()
+        );
+
+        if ($validator->fails()) {
+            abort(422);
+        }
+
+        $validated = $validator->validated();
+        var_dump($validated);
+        exit;
     }
 }

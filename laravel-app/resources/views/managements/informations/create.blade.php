@@ -70,7 +70,7 @@
                                             @lang('strings.body')
                                         </th>
                                         <td class="bg-light text-dark">
-                                            <textarea class="form-control" name="body" id="summernote"></textarea>
+                                            <textarea class="form-control" name="body" id="summernote">{{old('body')}}</textarea>
                                             <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
                                         </td>
                                     </tr>
@@ -105,24 +105,24 @@
                                             @lang('strings.status')
                                         </th>
                                         <td class="bg-light">
-                                        <label class="radio-button">
-                                            {{Form::radio(
-                                                'status',
-                                                \App\Models\Informations::STATUS_ENABLE,
-                                                old('status') == \App\Models\Informations::STATUS_ENABLE ? true : old('status') == '' ? true : false,
-                                                ['class' => 'radio-button__input']
-                                            )}}
-                                            <span class="radio-button__icon">@lang('strings.enable')</span>
-                                        </label>
-                                        <label class="radio-button">
-                                            {{Form::radio(
-                                                'status',
-                                                \App\Models\Informations::STATUS_DISABLE,
-                                                old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false,
-                                                ['class' => 'radio-button__input']
-                                            )}}
-                                            <span class="radio-button__icon">@lang('strings.disable')</span>
-                                        </label>
+                                            <label class="radio-button">
+                                                {{Form::radio(
+                                                    'status',
+                                                    \App\Models\Informations::STATUS_ENABLE,
+                                                    old('status') == \App\Models\Informations::STATUS_ENABLE ? true : old('status') == '' ? true : false,
+                                                    ['class' => 'radio-button__input']
+                                                )}}
+                                                <span class="radio-button__icon">@lang('strings.enable')</span>
+                                            </label>
+                                            <label class="radio-button">
+                                                {{Form::radio(
+                                                    'status',
+                                                    \App\Models\Informations::STATUS_DISABLE,
+                                                    old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false,
+                                                    ['class' => 'radio-button__input']
+                                                )}}
+                                                <span class="radio-button__icon">@lang('strings.disable')</span>
+                                            </label>
                                             <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
                                         </td>
                                     </tr>
