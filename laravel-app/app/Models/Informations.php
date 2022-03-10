@@ -9,7 +9,7 @@ class Informations extends Eloquent\Model
 {
     protected $table = 'informations';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     const STATUS_ENABLE = 1;
     const STATUS_DISABLE = 2;

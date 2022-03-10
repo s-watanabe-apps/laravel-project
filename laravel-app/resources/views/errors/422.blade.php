@@ -25,11 +25,11 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- 500 Error Text -->
+                    <!-- 422 Error Text -->
                     <div class="text-center">
-                        <div class="error mx-auto" data-text="500">500</div>
-                        <p class="lead text-gray-800 mb-5">Fatal Error</p>
-                        <p class="text-gray-500 mb-0">@lang('strings.errors.fatal')</p>
+                        <div class="error mx-auto" data-text="422">422</div>
+                        <p class="lead text-gray-800 mb-5">Parameter Invalid</p>
+                        <p class="text-gray-500 mb-0">@lang('strings.errors.validation')</p>
                         <a href="index.html">&larr; Back to Dashboard</a>
                     </div>
 

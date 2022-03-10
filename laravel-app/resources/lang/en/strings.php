@@ -103,6 +103,7 @@ return [
     // Errors
     'errors' => [
         'fatal' => 'An unexpected error has occurred. Please start over.<br>If it does not improve, contact your system administrator.',
+        'validation' => 'Input value is invalid.<br>If it does not improve, please contact your system administrator.',
     ],
 
     // Roles

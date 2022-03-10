@@ -64,7 +64,7 @@
                                         <td class="dt-center">
                                             {{$value->id}}
                                         </td>
-                                        <td class="dt-center">
+                                        <td class="dt-left">
                                             <a href="/managements/informations/{{$value->id}}">{{$value->title}}</a>
                                         </td>
                                         <td class="dt-center">

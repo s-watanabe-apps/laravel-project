@@ -55,7 +55,17 @@ class InformationsController extends ManagementsController
         }
 
         $validated = $validator->validated();
-        var_dump($validated);
-        exit;
+
+        \DB::transaction(function() use ($validated) {
+            $informations = new Informations();
+            $informations->title = $validated['title'];
+            $informations->body = $validated['body'];
+            $informations->status = $validated['status'];
+            $informations->start_time = $validated['start_time'];
+            $informations->end_time = $validated['end_time'];
+            $informations->save();
+        });
+
+        return redirect()->route('managementsInformations');
     }
 }
