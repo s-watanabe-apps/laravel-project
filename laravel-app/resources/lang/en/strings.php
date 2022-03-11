@@ -135,5 +135,6 @@ return [
     'add_information' => 'Add a notice',
     'start_time' => 'Display start',
     'end_time' => 'End of display',
+    'end_time_invalid' => 'End date and time should be after the start date and time.',
 
 ];

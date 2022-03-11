@@ -8,6 +8,9 @@
 <link href="http://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 <script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js" defer></script>
 
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -55,7 +58,6 @@
                                         <th class="dt-center">@lang('strings.start_time')</th>
                                         <th class="dt-center">@lang('strings.end_time')</th>
                                         <th class="dt-center">@lang('strings.status')</th>
-                                        <th class="dt-center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -73,26 +75,16 @@
                                         <td class="dt-center">
                                             {{$value->end_time == null ? '' : (new Carbon\Carbon($value->end_time))->format($dateFormat->getDateTimeFormat())}}
                                         </td>
-                                        <td class="dt-center">
-                                            @if ($value->enable == 1)
-                                                @lang('strings.enable')
-                                            @else
-                                                @lang('strings.disable')
-                                            @endif
-                                        </td>
                                         <td class="dt-center text-nowrap">
-                                            @if ($value->enable == 0)
-                                            <a href="/managements/users/deleted/{{$value->id}}" class="py-0 btn btn-danger shadow-sm mb-2">
-                                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.delete')
-                                            </a><br>
-                                            <a href="/managements/users/enabled/{{$value->id}}" class="py-0 btn btn-success shadow-sm">
-                                                <i class="fas fa-bullseye fa-sm text-white-50"></i> @lang('strings.enable')
-                                            </a>
-                                            @else
-                                            <a href="/managements/users/disabled/{{$value->id}}" class="py-0 btn btn-secondary shadow-sm">
-                                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.disable')
-                                            </a>
-                                            @endif
+                                            <input type="checkbox"
+                                                @if ($value->status == \App\Models\Informations::STATUS_ENABLE)
+                                                    checked                                                
+                                                @endif
+                                                data-onstyle="success" data-offstyle="secondary"
+                                                data-toggle="toggle"
+                                                data-size="sm"
+                                                data-on="@lang('strings.enable')"
+                                                data-off="@lang('strings.disable')" />
                                         </td>
                                     </tr>
                                     @endforeach

@@ -158,5 +158,6 @@ return [
     'add_information' => 'お知らせ作成',
     'start_time' => '表示開始日時',
     'end_time' => '表示終了日時',
+    'end_time_invalid' => '終了日時は開始日時より後にしてください。',
 
 ];
