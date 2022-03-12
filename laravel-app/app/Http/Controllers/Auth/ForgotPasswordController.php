@@ -5,7 +5,11 @@ use App\Models\Users;
 use App\Models\PasswordResets;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgetPasswordSendResetMailRequest;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
+
 
 class ForgotPasswordController extends Controller
 {
@@ -28,14 +32,24 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetMail(ForgetPasswordSendResetMailRequest $request)
     {
-        $inputValues = $request->validated();
-        $user = Users::getByEmail($inputValues['email']);
+        $user = Users::getByEmail($request->email);
         if ($user != null) {
-            $token = (new PasswordResets())->issue($user);
-            var_dump($token);
+            $token = (new PasswordResets())->issue($user, 30);
+
+            $encryptToken = Crypt::encryptString($request->email . ',' . $token);
+
+            $data = [
+                'name' => $user->name,
+                'token' => $encryptToken,
+            ];
+
+            $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.reset_password'));
+            $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
+
+            Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
         }
 
-        $resultMessage = str_replace(':email', $inputValues['email'], __('auth.send_reset_mail_result_message'));
+        $resultMessage = str_replace(':email', $request->email, __('auth.send_reset_mail_result_message'));
 
         return view('forgotPassword', compact('resultMessage'));
     }

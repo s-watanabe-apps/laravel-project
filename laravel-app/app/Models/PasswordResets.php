@@ -20,9 +20,10 @@ class PasswordResets extends Eloquent\Model
      * Issue a token and insert a new record.
      *
      * @param App\Models\Users
+     * @param int
      * @return string
      */
-    public function issue($user)
+    public function issue($user, $expireMinutes)
     {
         self::deleteByEmail($user->email);
 
@@ -31,6 +32,7 @@ class PasswordResets extends Eloquent\Model
         $this->forceFill([
             'email' => $user->email,
             'token' => $token,
+            'expire_in' => (new Carbon())->addMinutes($expireMinutes),
             'created_at' => new Carbon(),
         ])->save();
 

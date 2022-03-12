@@ -44,6 +44,7 @@ return [
     'show_more' => 'もっと見る',
     'user_name' => 'ユーザー名',
     'password' => 'パスワード',
+    'reset_password' => 'パスワードリセット',
     'enable' => '有効',
     'disable' => '無効',
     'enabled' => '有効にする',

@@ -65,7 +65,7 @@ class UsersController extends ManagementsController
             $users->name = $request->name;
             $users->save();
 
-            $token = (new PasswordResets)->issue($users);
+            $token = (new PasswordResets)->issue($users, 60 * 24);
             $encryptToken = Crypt::encryptString($request->email . ',' . $token);
 
             $data = [

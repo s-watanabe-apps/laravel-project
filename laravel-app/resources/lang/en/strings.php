@@ -45,6 +45,7 @@ return [
     'show_more' => 'Show more',
     'user_name' => 'User name',
     'password' => 'Password',
+    'reset_password' => 'Reset password',
     'enable' => 'Enable',
     'disable' => 'Disable',
     'enabled' => 'Enabled',
