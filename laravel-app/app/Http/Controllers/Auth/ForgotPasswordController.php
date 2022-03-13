@@ -34,13 +34,15 @@ class ForgotPasswordController extends Controller
     {
         $user = Users::getByEmail($request->email);
         if ($user != null) {
-            $token = (new PasswordResets())->issue($user, 30);
+            $expire_in_minutes = 30;
+            $token = (new PasswordResets())->issue($user, $expire_in_minutes);
 
             $encryptToken = Crypt::encryptString($request->email . ',' . $token);
 
             $data = [
                 'name' => $user->name,
                 'token' => $encryptToken,
+                'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
             ];
 
             $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.reset_password'));

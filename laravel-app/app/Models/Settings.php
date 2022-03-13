@@ -32,6 +32,13 @@ class Settings extends Eloquent\Model
         parent::__construct();
     }
 
+    public function bind($values)
+    {
+        foreach ($values as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+
     /**
      * get setting.
      * 

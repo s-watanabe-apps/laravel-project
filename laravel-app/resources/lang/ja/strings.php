@@ -56,6 +56,8 @@ return [
     'last_login' => '最終ログイン',
     'status' => 'ステータス',
     'invitation' => '招待状',
+    'expire_in_hours' => '時間',
+    'expire_in_minutes' => '分間',
 
     // Side menus
     'write_articles' => '記事を書く',

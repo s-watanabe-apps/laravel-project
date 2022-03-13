@@ -6,6 +6,7 @@ use App\Models\Settings;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
+use Illuminate\Support\Facades\Redis;
 
 class SettingsMiddleware
 {
@@ -24,10 +25,24 @@ class SettingsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $settings = Settings::get();
+        $cache = null;
+        try {
+            $cache = Redis::get('settings');
+        } catch (Exception $e) {
+            //
+        }
 
-        if ($settings == null) {
-            $settings = new Settings(true);
+        if ($cache == null) {
+            $settings = Settings::get();
+
+            if ($settings == null) {
+                $settings = new Settings(true);
+            }
+
+            Redis::set('settings', json_encode($settings));
+        } else {
+            $settings = new Settings();
+            $settings->bind(json_decode($cache));
         }
 
         $request->merge(['settings' => $settings,]);

@@ -57,6 +57,8 @@ return [
     'last_login' => 'Last activity',
     'status' => 'Status',
     'invitation' => 'Invitation',
+    'expire_in_hours' => ' hours',
+    'expire_in_minutes' => ' minutes',
 
     // Side menus
     'write_articles' => 'Write articles',

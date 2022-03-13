@@ -65,12 +65,14 @@ class UsersController extends ManagementsController
             $users->name = $request->name;
             $users->save();
 
-            $token = (new PasswordResets)->issue($users, 60 * 24);
+            $expire_in_hours = 24;
+            $token = (new PasswordResets)->issue($users, 60 * $expire_in_hours);
             $encryptToken = Crypt::encryptString($request->email . ',' . $token);
 
             $data = [
                 'name' => $request->name,
                 'token' => $encryptToken,
+                'expire_in' => $expire_in_hours . __('strings.expire_in_hours'),
             ];
 
             $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.invitation'));
