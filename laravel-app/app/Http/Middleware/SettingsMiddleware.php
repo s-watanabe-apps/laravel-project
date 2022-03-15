@@ -27,7 +27,9 @@ class SettingsMiddleware
     {
         $cache = null;
         try {
-            $cache = Redis::get('settings');
+            if (redis()) {
+                $cache = Redis::get('settings');
+            }
         } catch (Exception $e) {
             //
         }
