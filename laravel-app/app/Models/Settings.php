@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Redis;
 
 class Settings extends Eloquent\Model
 {
@@ -21,6 +22,7 @@ class Settings extends Eloquent\Model
     public function __construct($initialize = false)
     {
         if ($initialize) {
+            $this->id = 1;
             $this->site_name = 'SNS WebApp';
             $this->user_create_any = 0;
             $this->user_create_member = 0;
@@ -39,12 +41,34 @@ class Settings extends Eloquent\Model
         }
     }
 
+    public function save($options = [])
+    {
+        $settings = $this->get();
+
+        if ($settings == null) {
+            return parent::save($options);
+        }
+
+        $filterd = [];
+        foreach ($settings->attributes as $key => $value) {
+            if ($settings->$key != $this->$key) {
+                $filterd[$key] = $this->$key;
+            }
+        }
+
+        if (redis()) {
+            Redis::del('settings');
+        }
+
+        return $this->where('id', $this->id)->update($filterd);
+    }
+
     /**
      * get setting.
      * 
      * @return App\Models\Settings
      */
-    public static function get() {
-        return self::query()->first();
+    public function get() {
+        return $this->query()->first();
     }
 }

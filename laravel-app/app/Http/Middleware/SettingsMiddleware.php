@@ -35,7 +35,7 @@ class SettingsMiddleware
         }
 
         if ($cache == null) {
-            $settings = Settings::get();
+            $settings = (new Settings())->get();
 
             if ($settings == null) {
                 $settings = new Settings(true);
