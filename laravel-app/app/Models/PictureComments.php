@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class PictureComments extends Model
 {
     public static function getByPictureId($pictureId)

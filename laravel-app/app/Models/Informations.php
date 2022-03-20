@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent;
 
-class Informations extends Eloquent\Model
+class Informations extends Model
 {
     protected $table = 'informations';
 

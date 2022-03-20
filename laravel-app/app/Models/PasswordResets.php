@@ -2,11 +2,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
-class PasswordResets extends Eloquent\Model
+class PasswordResets extends Model
 {
     use Notifiable;
 

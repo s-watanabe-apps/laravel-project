@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 
-class Roles extends Eloquent\Model
+class Roles extends Model
 {
     const ADMIN = 1;
     const MEMBER = 2;

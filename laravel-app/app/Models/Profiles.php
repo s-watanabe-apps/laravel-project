@@ -4,10 +4,9 @@ namespace App\Models;
 
 use App\Libs\InputType;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 
-class Profiles extends Eloquent\Model
+class Profiles extends Model
 {
     use Notifiable;
 

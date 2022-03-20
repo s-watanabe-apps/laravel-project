@@ -3,10 +3,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 
-class Images extends Eloquent\Model
+class Images extends Model
 {
     const TYPE_PROFILE_IMAGE = 1;
     const TYPE_ARTICLE_IMAGE = 2;

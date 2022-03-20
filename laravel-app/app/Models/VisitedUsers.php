@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 
 class VisitedUsers extends Model
 {
@@ -55,6 +54,6 @@ class VisitedUsers extends Model
             ->join('users', 'visited_users.visited_id', '=', 'users.id')
             ->where('visited_users.user_id', $userId)
             ->orderBy('visited_users.created_at', 'desc')
-            ->get()->toArray();
+            ->get();
     }
 }

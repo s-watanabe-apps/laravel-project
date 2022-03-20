@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Images;
-use Illuminate\Database\Eloquent\Model;
 
 class Pictures extends Model
 {

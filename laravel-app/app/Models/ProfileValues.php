@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 
-class ProfileValues extends Eloquent\Model
+class ProfileValues extends Model
 {
     use Notifiable;
 

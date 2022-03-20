@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent;
-
-class MessageTemplates extends Eloquent\Model
+class MessageTemplates extends Model
 {
     protected $table = 'message_templates';
 

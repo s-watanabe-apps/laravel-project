@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Redis;
 
-class Settings extends Eloquent\Model
+class Settings extends Model
 {
     use Notifiable;
 
@@ -32,13 +31,6 @@ class Settings extends Eloquent\Model
             $this->basic_password = null;
         }
         parent::__construct();
-    }
-
-    public function bind($values)
-    {
-        foreach ($values as $key => $value) {
-            $this->$key = $value;
-        }
     }
 
     public function save($options = [])

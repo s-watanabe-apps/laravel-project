@@ -56,9 +56,9 @@ class ProfilesController extends Controller
 
         $isFavorite = $this->isFavorite($request);
 
-        $isMine = $request->id == $request->user->id;
+        $isSelf = $request->id == $request->user->id;
 /*
-        if ($isMine) {
+        if ($isSelf) {
             $visitedUsers = VisitedUsers::getVisitedUsers($request->user->id);
         } else {
             VisitedUsers::visit($request->id, $request->user->id);
