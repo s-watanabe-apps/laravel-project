@@ -29,7 +29,8 @@
                     <div class="text-center">
                         <div class="error mx-auto" data-text="500">500</div>
                         <p class="lead text-gray-800 mb-5">Fatal Error</p>
-                        <p class="text-gray-500 mb-0">@lang('strings.errors.fatal')</p>
+                        <p class="text-gray-500 mb-2">@lang('strings.errors.fatal')</p>
+                        <p class="text-gray-500 mb-4">@lang('strings.errors.to_admin_message')</p>
                         <a href="index.html">&larr; Back to Dashboard</a>
                     </div>
 

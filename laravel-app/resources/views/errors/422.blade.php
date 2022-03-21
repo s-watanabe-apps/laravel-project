@@ -29,7 +29,8 @@
                     <div class="text-center">
                         <div class="error mx-auto" data-text="422">422</div>
                         <p class="lead text-gray-800 mb-5">Parameter Invalid</p>
-                        <p class="text-gray-500 mb-0">@lang('strings.errors.validation')</p>
+                        <p class="text-gray-500 mb-2">@lang('strings.errors.validation')</p>
+                        <p class="text-gray-500 mb-4">@lang('strings.errors.to_admin_message')</p>
                         <a href="index.html">&larr; Back to Dashboard</a>
                     </div>
 

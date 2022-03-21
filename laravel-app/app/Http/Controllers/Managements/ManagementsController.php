@@ -14,6 +14,6 @@ class ManagementsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admincheck');
+        //$this->middleware('admincheck');
     }
 }

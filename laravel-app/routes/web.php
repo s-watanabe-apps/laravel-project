@@ -54,22 +54,25 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // Show storage
         Route::get('/show/image', 'ShowController@image');
 
-        // Management settings
-        Route::get('managements/settings', 'Managements\SettingsController@index')->name('managementsSettings');
-        Route::post('managements/settings/post', 'Managements\SettingsController@post');
+        // Managements
+        Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
+            // Settings
+            Route::get('settings', 'Managements\SettingsController@index')->name('managementsSettings');
+            Route::post('settings/post', 'Managements\SettingsController@post');
 
-        // Management users
-        Route::get('managements/users', 'Managements\UsersController@index')->name('managementsUsers');
-        Route::get('managements/users/create', 'Managements\UsersController@create');
-        Route::post('managements/users/confirm', 'Managements\UsersController@confirm');
-        Route::post('managements/users/post', 'Managements\UsersController@post');
+            // Users
+            Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
+            Route::get('users/create', 'Managements\UsersController@create');
+            Route::post('users/confirm', 'Managements\UsersController@confirm');
+            Route::post('users/post', 'Managements\UsersController@post');
 
-        // Management informations
-        Route::get('managements/informations', 'Managements\InformationsController@index')->name('managementsInformations');
-        Route::get('managements/informations/create', 'Managements\InformationsController@create');
-        Route::post('managements/informations/confirm', 'Managements\InformationsController@confirm');
-        Route::post('managements/informations/post', 'Managements\InformationsController@post');
-        Route::get('managements/informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
+            // Informations
+            Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
+            Route::get('informations/create', 'Managements\InformationsController@create');
+            Route::post('informations/confirm', 'Managements\InformationsController@confirm');
+            Route::post('informations/post', 'Managements\InformationsController@post');
+            Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
+        });
     });
 });
 

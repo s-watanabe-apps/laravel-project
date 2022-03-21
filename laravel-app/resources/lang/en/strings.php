@@ -105,8 +105,10 @@ return [
     
     // Errors
     'errors' => [
-        'fatal' => 'An unexpected error has occurred. Please start over.<br>If it does not improve, contact your system administrator.',
-        'validation' => 'Input value is invalid.<br>If it does not improve, please contact your system administrator.',
+        'fatal' => 'An unexpected error has occurred. Please start over.',
+        'not_found' => 'Page Not Found. Please try again from the beginning.',
+        'validation' => 'Input value is invalid. Please try again from the beginning.',
+        'to_admin_message' => 'If it does not improve, contact your system administrator.',
     ],
 
     // Roles
