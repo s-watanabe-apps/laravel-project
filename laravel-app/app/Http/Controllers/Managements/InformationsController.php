@@ -18,8 +18,8 @@ class InformationsController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $informations = Informations::getAllInformations();
-        
+        $informations = Informations::all();
+
         return view('managements.informations.index', compact(
             'informations'
         ));
@@ -27,7 +27,7 @@ class InformationsController extends ManagementsController
 
     public function get(Request $request)
     {
-        $information = Informations::where(['id' => $request->id])->get()->first();
+        $information = Informations::get($request->id);
 
         return view('managements.informations.get', compact(
             'information'

@@ -67,7 +67,10 @@
                                             {{$value->id}}
                                         </td>
                                         <td class="dt-left">
-                                            <a href="/managements/informations/{{$value->id}}">{{$value->title}}</a>
+                                            <a href="/managements/informations/{{$value->id}}">
+                                                <i class="fas {{$value->mark}} text-primary-50"></i>
+                                                {{$value->title}}
+                                            </a>
                                         </td>
                                         <td class="dt-center">
                                             {{$value->start_time == null ? '' : (new Carbon\Carbon($value->start_time))->format($dateFormat->getDateTimeFormat())}}

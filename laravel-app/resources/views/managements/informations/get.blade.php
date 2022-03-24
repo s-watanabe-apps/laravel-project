@@ -51,6 +51,7 @@
                                             @lang('strings.title')
                                         </th>
                                         <td class="bg-light text-dark">
+                                            <i class="fas {{$information->mark}} text-primary-50"></i>
                                             {{$information->title}}
                                         </td>
                                     </tr>

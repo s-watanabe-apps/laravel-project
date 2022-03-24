@@ -25,7 +25,7 @@ class Informations extends Model
      * 
      * @return array
      */
-    public static function getBaseQuery() {
+    private static function getBaseQuery() {
         return self::query()
             ->select([
                 'informations.id',
@@ -57,8 +57,13 @@ class Informations extends Model
             ->get();
     }
 
-    public static function getAllInformations()
+    public static function all($columns = [])
     {
         return self::getBaseQuery()->get();
+    }
+
+    public static function get($id)
+    {
+        return self::getBaseQuery()->where(['informations.id' => $id])->get()->first();
     }
 }
