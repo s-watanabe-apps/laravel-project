@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js" defer></script>
 
 <script>
-    jQuery(document).ready(function($) {
+    $(window).on('load', function() {
         $('#summernote').summernote({
             lang: "ja-JP",
             placeholder: '',

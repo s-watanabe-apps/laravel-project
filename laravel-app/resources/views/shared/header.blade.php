@@ -84,5 +84,16 @@ a.tab-item:hover {
   background-position: 3% 50%;
 }
 
+.toast-area {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 50%;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
 -->
 </style>
