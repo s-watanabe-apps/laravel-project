@@ -124,6 +124,7 @@
 </div>
 <!-- /.container-fluid -->
 
+<!-- Toast -->
 @include('shared.toast')
 @if (Session::get('result') == 1)
 <script>

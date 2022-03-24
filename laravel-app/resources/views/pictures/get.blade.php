@@ -65,6 +65,7 @@
 </div>
 <!-- /.container-fluid -->
 
+<!-- Lazyload -->
 @include('shared.lazyload')
 
 @endsection

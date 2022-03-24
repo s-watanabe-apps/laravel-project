@@ -63,49 +63,7 @@
 </div>
 <!-- /.container-fluid -->
 
-<link href="http://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-<script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js" defer></script>
-
-<script>
-$(window).on('load', function() {
-    var table = $('#dataTable').DataTable({
-        aLengthMenu:[50, 100, 200],
-        language: {!!json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)!!},
-        stateSave:true,
-        order:[[3, "desc"]],
-        columnDefs:[
-            {
-                "targets": [4],
-                "bSortable": false
-            },
-        ],
-        scrollX: true,
-    });
-
-    table.columns.adjust();
-
-    $(window).on('resize', function(){
-        table.columns.adjust();
-    });
-/*
-    var clickEventType = ((window.ontouchstart !== null) ? 'click' : 'touchend');
-    $(document).on(clickEventType, '#removeFavorites\\[\\]', function(){
-        $('#row-' + $(this).attr('index')).remove();
-        $.ajax({
-            type: "POST",
-            url: "/api/favorites",
-            data: {
-                "isFavorite":"1",
-                "uri":$(this).attr('data'),
-            },
-        }).done(function(data) {
-            //
-        }).fail(function(){
-            console.log('fail');
-        });
-    });
-*/
-});
-</script>
+<!-- DataTables -->
+@include('shared.datatables')
 
 @endsection

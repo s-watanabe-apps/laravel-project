@@ -22,7 +22,7 @@
         <!-- Content Column -->
         <div class="col-lg-2 mb-2 text-center">
             <div class="col-auto text-center">
-                <img id="preview" class="img-fluid" src="/show/image?file={{$user->getFile()}}" />
+                <img id="preview" class="img-fluid" src="/show/image?file={{$user->image_file}}" />
             </div>
 
             <div class="col-lg-12 mt-2 text-center">

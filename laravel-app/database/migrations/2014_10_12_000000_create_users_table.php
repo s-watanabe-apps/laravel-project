@@ -23,9 +23,11 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->date('birthdate')->nullable();
             $table->integer('group_id')->nullable();
+            $table->string('image_file')->nullable();
             $table->string('api_token')->nullable();
             $table->boolean('enable')->default(true);
             $table->rememberToken();
+            $table->index(['email']);
             $table->index(['birthdate']);
             $table->index(['api_token']);
             $table->index(['remember_token']);

@@ -21,7 +21,7 @@
                     <a href="/profiles/{{$profileUser->id}}" class="text-decoration-none">
                         <img
                             src="/img/loading.gif"
-                            data-src="/show/image/?file={{$profileUser->file}}"
+                            data-src="/show/image/?file={{$profileUser->image_file}}"
                             alt="{{$profileUser->name}}"
                             style="width:100%; height: 10rem; object-fit: cover;"
                             class="lazyload rounded"
@@ -43,6 +43,7 @@
 </div>
 <!-- /.container-fluid -->
 
+<!-- Lazyload -->
 @include('shared.lazyload')
 
 @endsection

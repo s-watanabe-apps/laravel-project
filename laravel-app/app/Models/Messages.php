@@ -20,13 +20,12 @@ class Messages extends Model
                 'messages.from_user_id',
                 'messages.message_id',
                 'users.name',
-                'profile_images.file',
+                'users.image_file',
                 'messages.created_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('messages.from_user_id', '=', 'users.id')
                     ->where('users.enable', 1);
-            })->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id')
-            ->whereNull('messages.deleted_at');
+            })->whereNull('messages.deleted_at');
     }
 
     public static function getUnreadMessages($userId)

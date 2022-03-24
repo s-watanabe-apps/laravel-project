@@ -66,31 +66,7 @@
 </div>
 <!-- /.container-fluid -->
 
-<link href="http://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-<script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js" defer></script>
-
-<script>
-$(window).on('load', function() {
-    var table = $('#dataTable').DataTable({
-        aLengthMenu:[50, 100, 200],
-        language: {!!json_encode(__('strings.datatables'), JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)!!},
-        stateSave:true,
-        order:[[3, "desc"]],
-        columnDefs:[
-            {
-                "targets": [4],
-                "bSortable": false
-            },
-        ],
-        scrollX: true,
-    });
-
-    table.columns.adjust();
-
-    $(window).on('resize', function(){
-        table.columns.adjust();
-    });
-});
-</script>
+<!-- DataTables -->
+@include('shared.datatables')
 
 @endsection

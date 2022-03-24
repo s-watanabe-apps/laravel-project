@@ -62,5 +62,4 @@
 
 <!-- Summernote -->
 @include('shared.summernote')
-
 @endsection

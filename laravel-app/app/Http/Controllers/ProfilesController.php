@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Models\Users;
-use App\Models\ProfileImages;
 use App\Models\Favorites;
 use App\Models\Profiles;
 use App\Models\ProfileValues;
@@ -116,11 +115,7 @@ class ProfilesController extends Controller
                 $extension = Images::getExtensions()[$file->getMimetype()];
                 $fileName = "profiles/" . $request->user->id . '.' . $extension;
                 $file->storeAs('contents/images/', $fileName);
-        
-                ProfileImages::insert([
-                    'user_id' => $request->user->id,
-                    'file' => urlencode($fileName),
-                ]);
+                $inputValues['image_file'] = urlencode($fileName);
             }
 
             $request->user->saveUsers($inputValues);

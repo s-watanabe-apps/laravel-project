@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\ProfileImages;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
@@ -31,8 +30,7 @@ class AuthcheckMiddleware
         }
 
         $user = Authenticate::user();
-        $user->setFile(ProfileImages::getByUserId($user->id)->file ?? null);
-
+        
         $request->merge([
             'user' => $user,
         ]);

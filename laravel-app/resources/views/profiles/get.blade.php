@@ -28,7 +28,7 @@
 
         <!-- Content Column -->
         <div class="col-lg-2 mb-4 text-center">
-            <img class="img-fluid rounded" src="/show/image?file={{$profileUser->file}}" />
+            <img class="img-fluid rounded" src="/show/image?file={{$profileUser->image_file}}" />
         </div>
 
         <div class="col-lg-6 mb-4">
@@ -124,6 +124,7 @@
 </div>
 <!-- /.container-fluid -->
 
+<!-- Toast -->
 @include('shared.toast')
 @if (Session::get('result') == 1)
 <script>

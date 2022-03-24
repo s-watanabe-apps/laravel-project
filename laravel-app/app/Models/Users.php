@@ -39,15 +39,14 @@ class Users extends Authenticatable
                 'users.email_verified_at',
                 'users.password',
                 'users.birthdate',
+                \DB::raw('ifnull(users.image_file, "profiles%2Fno_image.png") as image_file'),
                 'users.api_token',
                 'users.enable',
                 'users.remember_token',
                 'users.created_at',
                 'users.updated_at',
-                \DB::raw('ifnull(profile_images.file, "profiles%2Fno_image.png") as file'),
                 \DB::raw('groups.name as group_name'),
             ])
-            ->leftJoin('profile_images', 'users.id', '=', 'profile_images.user_id')
             ->leftJoin('groups', 'users.group_id', '=', 'groups.id');
     }
 
@@ -161,6 +160,7 @@ class Users extends Authenticatable
         $this->name = $values['name'];
         $this->name_kana = $values['name_kana'];
         $this->birthdate = new Carbon($values['birth_date']);
+        $this->image_file = $values['image_file'];
 
         $this->save();
         return $this;
