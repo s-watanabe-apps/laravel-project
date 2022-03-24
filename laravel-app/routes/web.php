@@ -51,6 +51,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/favorites', 'FavoritesController@index')->name('favorites');
         Route::get('/favorites/remove/{uri}', 'FavoritesController@remove')->where('uri', '.*');
 
+        // Schedule
+        Route::get('/schedule', 'ScheduleController@index');
+
         // Show storage
         Route::get('/show/image', 'ShowController@image');
 

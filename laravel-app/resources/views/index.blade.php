@@ -131,7 +131,7 @@
                 </tbody>
             </table>
             <div class="pb-3 pr-3 text-right">
-                <a href="/calendar">@lang('strings.show_more')</a>
+                <a href="/schedule">@lang('strings.show_more')</a>
             </div>
         </div>
 
