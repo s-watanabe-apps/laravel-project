@@ -58,6 +58,7 @@ return [
     'invitation' => '招待状',
     'expire_in_hours' => '時間',
     'expire_in_minutes' => '分間',
+    'mark' => 'マーク',
 
     // Side menus
     'write_articles' => '記事を書く',

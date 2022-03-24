@@ -59,6 +59,7 @@ return [
     'invitation' => 'Invitation',
     'expire_in_hours' => ' hours',
     'expire_in_minutes' => ' minutes',
+    'mark' => 'Mark',
 
     // Side menus
     'write_articles' => 'Write articles',

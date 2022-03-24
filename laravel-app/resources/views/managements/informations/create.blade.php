@@ -54,6 +54,22 @@
                                 <tbody>
                                     <tr>
                                         <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                                            @lang('strings.mark')
+                                        </th>
+                                        <td class="bg-light">
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                @foreach ($informationMarks as $informationMark)
+                                                <label class="btn btn-light active">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off" @if($informationMark->id == 1) checked @endif>
+                                                    <i class="fas {{$informationMark->mark}} text-primary-50"></i>
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                            <div class="text-danger">{{$errors->first('mark') ?? ''}}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
                                             @lang('strings.title')
                                         </th>
                                         <td class="bg-light text-dark">

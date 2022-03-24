@@ -29,12 +29,14 @@ class Informations extends Model
         return self::query()
             ->select([
                 'informations.id',
+                'informations.mark_id',
+                'information_marks.mark',
                 'informations.title',
                 'informations.body',
                 'informations.status',
                 'informations.start_time',
                 'informations.end_time',
-            ]);
+            ])->join('information_marks', 'informations.mark_id', '=', 'information_marks.id');
     }
 
     /**

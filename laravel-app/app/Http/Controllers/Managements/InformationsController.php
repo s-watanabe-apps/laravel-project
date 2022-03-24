@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
+use App\Models\InformationMarks;
 use App\Http\Requests\ManagementsInformationsPostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,11 @@ class InformationsController extends ManagementsController
 
     public function create(Request $request)
     {
-        return view('managements.informations.create');
+        $informationMarks = InformationMarks::get();
+
+        return view('managements.informations.create', compact(
+            'informationMarks'
+        ));
     }
 
     public function confirm(ManagementsInformationsPostRequest $request)

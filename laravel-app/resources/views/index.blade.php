@@ -37,7 +37,7 @@
                                 <!-- Card Header - Accordion -->
                                 <a href="#collapseCard-information-{{$information->id}}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                                     <h6 class="m-0 font-weight-bold text-primary">
-                                        <i class="fas fa-info-circle text-primary-50"></i>
+                                        <i class="fas {{$information->mark}} text-primary-50"></i>
                                         {{$information->title}}
                                         @if ($information->is_new)
                                         <span class="badge badge-pill badge-success blink">new !</span>
