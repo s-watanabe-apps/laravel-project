@@ -54,6 +54,39 @@ class Calendar extends Model
     }
 
     /**
+     * Get events for the month.
+     * 
+     * @var Carbon
+     * @return array
+     */
+    public static function getMonthlyCalendar($date = null)
+    {
+        $events = [];
+
+        if ($date == null) {
+            $now = new Carbon();
+        } else {
+            $now = $date;
+        }
+
+        $dates = Calendar::getCalendarDates($now->year, $now->month);
+
+        $users = Users::getBirthdayUsers($dates);
+
+        foreach ($users as $user) {
+            $carbon = new Carbon($user->birthdate);
+            $events[] = [
+                'title' => $user->name,
+                'url' => '/profiles/' . $user->id,
+                'start' => sprintf("%d-%02d-%02d", $now->year, $carbon->month, $carbon->day),
+                'fix' => true,
+            ];
+        } 
+
+        return $events;
+    }
+
+    /**
      * getCalendarDates
      * 
      * @var string
@@ -70,7 +103,7 @@ class Calendar extends Model
         $count = ceil($count / 7) * 7;
         $dates = [];
 
-        for ($i = 0; $i < $count; $i++, $date->addDay()) {
+        for ($i = 0; $i < $count + 7; $i++, $date->addDay()) {
             $dates[] = $date->copy();
         }
 

@@ -26,6 +26,7 @@
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+      themeSystem: 'bootstrap',
       timeZone: 'UTC',
       initialView: 'dayGridMonth',
       businessHours: true,
@@ -69,8 +70,18 @@
 
     calendar.render();
 
+    calendar.on('dateClick', function(info) {
+      console.log('clicked on ' + info.dateStr);
+    });
+
     $('.fc-next-button').on('click', function(){
       console.log('next');
+      calendar.addEventSource([{
+        title: 'TEST',
+        start: '2022-04-15',
+        constraint: 'availableForMeeting', // defined below
+        color: '#257e4a'
+      }]);
     });
 
     $('.fc-prev-button').on('click', function(){
