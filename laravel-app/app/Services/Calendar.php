@@ -60,7 +60,7 @@ class Calendar extends Model
      * @var string
      * @return array
      */
-    public function getCalendarDates($year, $month)
+    public static function getCalendarDates($year, $month)
     {
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
         $date = new Carbon($dateStr);
