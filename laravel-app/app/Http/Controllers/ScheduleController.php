@@ -32,6 +32,7 @@ class ScheduleController extends Controller
                 'title' => $user->name,
                 'url' => '/profiles/' . $user->id,
                 'start' => sprintf("%d-%02d-%02d", $now->year, $carbon->month, $carbon->day),
+                'fix' => true,
             ];
         } 
 

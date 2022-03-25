@@ -149,6 +149,13 @@ return [
         ]
     ],
 
+    // FullCalendar
+    'fullcalendar' => [
+        'today' => '今月',
+        'month' => '月',
+        'list' => 'リスト',    
+    ],
+
     // Managements Settings
     'basic_settings' => '基本設定',
     'site_name' => 'サイト名',

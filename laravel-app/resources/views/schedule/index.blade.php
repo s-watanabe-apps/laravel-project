@@ -18,7 +18,6 @@
 <!-- /.container-fluid -->
 
 <!-- Full Calendar -->
-<script src="../packages/core/locales-all.js"></script>
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js'></script>
 
@@ -36,11 +35,11 @@
         right: "today prev,next"
       },
       buttonText: {
-        today: '今月',
-        month: '月',
-        list: 'リスト'
+        today: '@lang('strings.fullcalendar.today')',
+        month: '@lang('strings.fullcalendar.month')',
+        list: '@lang('strings.fullcalendar.list')'
       },
-      locale: 'ja',
+      locale: '{{\App::getLocale()}}',
       events: {!!$events!!},
 /**
       [
@@ -69,6 +68,14 @@
     });
 
     calendar.render();
+
+    $('.fc-next-button').on('click', function(){
+      console.log('next');
+    });
+
+    $('.fc-prev-button').on('click', function(){
+      console.log('prev');
+    });
   });
 </script>
 @endsection

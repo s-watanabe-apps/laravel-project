@@ -126,6 +126,13 @@ return [
         'select' => 'Select',
     ],
 
+    // FullCalendar
+    'fullcalendar' => [
+        'today' => 'Today',
+        'month' => 'Month',
+        'list' => 'List',    
+    ],
+
     // Managements Settings
     'basic_settings' => 'Basic configuration',
     'site_name' => 'Site name',
