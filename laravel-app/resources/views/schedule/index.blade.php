@@ -41,7 +41,7 @@
         list: '@lang('strings.fullcalendar.list')'
       },
       locale: '{{\App::getLocale()}}',
-      events: {!!$events!!},
+      //events: {!!$events!!},
 /**
       [
         {
@@ -64,6 +64,7 @@
       ],
  */
       //events: 'https://fullcalendar.io/api/demo-feeds/events.json',
+      events: '/api/events',
       editable: true,
       selectable: true
     });
@@ -76,12 +77,12 @@
 
     $('.fc-next-button').on('click', function(){
       console.log('next');
-      calendar.addEventSource([{
-        title: 'TEST',
-        start: '2022-04-15',
-        constraint: 'availableForMeeting', // defined below
-        color: '#257e4a'
-      }]);
+      //calendar.addEventSource([{
+      //  title: 'TEST',
+      //  start: '2022-04-15',
+      //  constraint: 'availableForMeeting', // defined below
+      //  color: '#257e4a'
+      //}]);
     });
 
     $('.fc-prev-button').on('click', function(){

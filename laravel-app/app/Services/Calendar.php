@@ -79,7 +79,7 @@ class Calendar extends Model
                 'title' => $user->name,
                 'url' => '/profiles/' . $user->id,
                 'start' => sprintf("%d-%02d-%02d", $now->year, $carbon->month, $carbon->day),
-                'fix' => true,
+                'overlap' => false,
             ];
         } 
 
@@ -108,5 +108,48 @@ class Calendar extends Model
         }
 
         return $dates;
+    }
+
+    /**
+     * Get events for range.
+     * 
+     * @var string
+     * @var string
+     * @return array
+     */
+    public static function getEvents($start, $end)
+    {
+        $events = [];
+
+        //\Log::info($start);
+        //\Log::info($end);
+
+        $dates = [];
+        $startDatetime = Carbon::parse($start);
+        $endDatetime = Carbon::parse($end);
+        $dates[] = $startDatetime->copy();
+        while ($endDatetime > $startDatetime) {
+            $dates[] = $startDatetime;
+            $startDatetime = $startDatetime->addDays(1)->copy();
+        }
+
+        //foreach ($range as $value) {
+        //    \Log::info($value->toString());
+        //}
+
+        $users = Users::getBirthdayUsers($dates);
+        $year = (new Carbon())->year;
+        foreach ($users as $user) {
+            $carbon = new Carbon($user->birthdate);
+            $events[] = [
+                'title' => $user->name,
+                'url' => '/profiles/' . $user->id,
+                'start' => sprintf("%d-%02d-%02d", $year, $carbon->month, $carbon->day),
+            ];
+        } 
+
+        //\Log::info(json_encode($events));
+
+        return $events;
     }
 }

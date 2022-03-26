@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/test/{apiToken?}', 'Api\TestController@index');
 Route::post('/favorites', 'Api\FavoritesController@post');
 Route::get('/show/image', 'Api\ShowController@image');
+Route::get('/events', 'Api\EventsController@get');
 

@@ -21,7 +21,7 @@ class ApiController extends Controller
             $client = new Client(['base_uri' => env('APP_URL')]);
 
             $apiToken = Crypt::decrypt(Cookie::get('api_token'), true);
-            \Log::info("api_token:" . $apiToken);
+            //\Log::info("api_token:" . $apiToken);
             
             $response = $client->request('GET', '/api/user', [
                 'headers' => [
