@@ -102,6 +102,7 @@ return [
         'add_favorites' => 'Added it to my favorites.',
         'remove_favorites' => 'Removed from favorites.',
         'saved_site_settings' => 'Saved the site settings.',
+        'saved_site_settings' => 'Saved the profile items.',
     ],
     
     // Errors
@@ -149,5 +150,6 @@ return [
     'start_time' => 'Display start',
     'end_time' => 'End of display',
     'end_time_invalid' => 'End date and time should be after the start date and time.',
+    'profile_settings' => 'Profile item management',
 
 ];

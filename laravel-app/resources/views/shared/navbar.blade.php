@@ -76,6 +76,10 @@
             <i class="fas fa-fw fa-object-group"></i>
             @lang('strings.group_management')
           </a>
+          <a class="dropdown-item text-black-50" href="/managements/profile/settings">
+            <i class="fas fa-fw fa-user-edit"></i>
+            @lang('strings.profile_settings')
+          </a>
         </div>
       </li>
       @endif

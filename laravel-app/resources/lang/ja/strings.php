@@ -101,6 +101,7 @@ return [
         'add_favorites' => 'お気に入りに追加しました。',
         'remove_favorites' => 'お気に入りから削除しました。',
         'saved_site_settings' => 'サイト設定を保存しました。',
+        'saved_profile_settings' => 'プロフィール設定項目を保存しました。',
     ],
 
     // Error messages.
@@ -172,5 +173,6 @@ return [
     'start_time' => '表示開始日時',
     'end_time' => '表示終了日時',
     'end_time_invalid' => '終了日時は開始日時より後にしてください。',
+    'profile_settings' => 'プロフィール項目管理',
 
 ];

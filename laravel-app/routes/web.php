@@ -75,6 +75,10 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::post('informations/confirm', 'Managements\InformationsController@confirm');
             Route::post('informations/post', 'Managements\InformationsController@post');
             Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
+
+            // Profile Settings
+            Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');
+            Route::post('profile/settings/post', 'Managements\ProfileSettingsController@post');
         });
     });
 });
