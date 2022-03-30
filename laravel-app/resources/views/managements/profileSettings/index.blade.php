@@ -3,7 +3,32 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <div id="formSet" hidden><input type="text" name="test[]"></input></div>
+    <div id="formSet" class="card bg-light text-black shadow mb-3">
+        <div class="row card-body">
+            <div class="col-md-2 col-4 pt-2">
+                <span class="h6 text-nowrap">@lang('strings.input_type')</span>
+            </div>
+            <div class="col-md-4 col-8 pb-2">
+                <select name="types[]" class="btn btn-secondary dropdown-toggle">
+                    @foreach ($types as $key => $value)
+                    <option value="{{$key}}">{{$value}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="row col-md-6 col-12">
+                <div class="col-md-2 col-4 pt-2">
+                    <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
+                </div>
+                <div class="col-md-10 col-8 pt-1 pb-2">
+                    {{Form::input('text', 'input_type_column_names[]', '', [
+                        'style' => 'width: 100%;',
+                        'class' => 'ml-2'
+                    ])}}
+                </div>
+            </div>
+        </div>
+    </div>
 
     {{Form::open(['name' => 'profileSettings', 'url' => '/managements/profile/settings/post', 'method' => 'post', 'files' => true])}}
     @csrf
@@ -17,8 +42,13 @@
         </nav>
     </div>
 
+    <!-- Button trigger modal -->
+    <div class="col-md-12 col-12 text-right">
+        <a href="#" data-toggle="modal" data-target="#exampleModal">@lang('strings.input_type_description_link')</a>
+    </div>
+
     <div id="items"></div>
-    <button class="btn-add" type="button">+</button>
+    <button class="btn-add" type="button">@lang('strings.add')</button>
 
     <div class="row">
         <div class="col-12 mb-5 text-center">
@@ -28,8 +58,29 @@
         </div>
     </div>
     {{Form::close()}}
+
 </div>
 <!-- /.container-fluid -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">@lang('strings.input_type_description_link')</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Toast -->
 @include('shared.toast')

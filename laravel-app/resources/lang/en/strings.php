@@ -120,12 +120,15 @@ return [
     ],
 
     // Input types
+    'input_type' => 'Input type',
+    'input_type_description_link' => 'About input type',
     'input_types' => [
-        'fillin' => 'Fill in',
-        'description' => 'Description',
-        'choice' => 'Choice',
-        'select' => 'Select',
+        'fillin' => 'Single-line text',
+        'description' => 'Multi-line text',
+        'choice' => 'Single choice',
+        'select' => 'Multiple selection',
     ],
+    'input_type_column_name' => 'Item name',
 
     // FullCalendar
     'fullcalendar' => [

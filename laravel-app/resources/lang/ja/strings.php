@@ -59,6 +59,7 @@ return [
     'expire_in_hours' => '時間',
     'expire_in_minutes' => '分間',
     'mark' => 'マーク',
+    'add' => '追加',
 
     // Side menus
     'write_articles' => '記事を書く',
@@ -119,12 +120,15 @@ return [
     ],
 
     // Input types
+    'input_type' => '入力タイプ',
+    'input_type_description_link' => '入力タイプについて',
     'input_types' => [
-        'fillin' => 'Fill in',
-        'description' => 'Description',
-        'choice' => 'Choice',
-        'select' => 'Select',
+        'fillin' => 'シングルテキスト',
+        'description' => 'マルチテキスト',
+        'choice' => '単一選択',
+        'select' => '複数選択',
     ],
+    'input_type_column_name' => '項目名',
 
     // DataTables (ja only)
     'datatables' => [

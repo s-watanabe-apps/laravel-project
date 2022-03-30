@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Managements;
 
+use App\Libs\InputType;
 use Illuminate\Http\Request;
 
 class ProfileSettingsController extends ManagementsController
 {
     public function index(Request $request)
     {
-        return view('managements.profileSettings.index');
+        $types = InputType::getTypes();
+
+        return view('managements.profileSettings.index', compact(
+            'types'
+        ));
     }
 
     public function post(Request $request)

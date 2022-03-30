@@ -17,10 +17,10 @@ class InputType
     public static function getTypes()
     {
         return [
-            self::FILLIN => __('string.input_types.fillin'),
-            self::DESCRIPTION => __('string.input_types.description'),
-            self::CHOICE => __('string.input_types.choice'),
-            //self::SELECT => __('string.input_types.select'),
+            self::FILLIN => __('strings.input_types.fillin'),
+            self::DESCRIPTION => __('strings.input_types.description'),
+            self::CHOICE => __('strings.input_types.choice'),
+            //self::SELECT => __('strings.input_types.select'),
         ];
     }
 }
