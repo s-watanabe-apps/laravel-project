@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\ProfileChoices;
 use App\Libs\InputType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
@@ -97,5 +98,18 @@ class Profiles extends Model
         }
 
         return $hash;
+    }
+
+    public static function getProfiles()
+    {
+        $profiles = self::query()->orderBy('order')->get();
+
+        foreach ($profiles as &$profile) {
+            if ($profile->type == InputType::CHOICE) {
+                $profile->choices = ProfileChoices::where('profile_id', $profile->id)->get();
+            }
+        }
+
+        return $profiles;
     }
 }

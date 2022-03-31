@@ -60,6 +60,7 @@ return [
     'expire_in_minutes' => '分間',
     'mark' => 'マーク',
     'add' => '追加',
+    'sort_order' => '並び順',
 
     // Side menus
     'write_articles' => '記事を書く',

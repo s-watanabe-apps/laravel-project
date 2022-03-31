@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <div id="formSet" class="card bg-light text-black shadow mb-3">
+    <div id="formSet" class="card bg-light text-black shadow mb-3" hidden>
         <div class="row card-body">
             <div class="col-md-2 col-4 pt-2">
                 <span class="h6 text-nowrap">@lang('strings.input_type')</span>
@@ -24,6 +24,15 @@
                     {{Form::input('text', 'input_type_column_names[]', '', [
                         'style' => 'width: 100%;',
                         'class' => 'ml-2'
+                    ])}}
+                </div>
+                <div class="col-md-2 col-4 pt-2">
+                    <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
+                </div>
+                <div class="col-md-10 col-8 pt-1 pb-2">
+                    {{Form::input('number', 'input_type_column_orders[]', '', [
+                        'style' => 'width: 100%;',
+                        'class' => 'ml-2',
                     ])}}
                 </div>
             </div>
@@ -47,7 +56,49 @@
         <a href="#" data-toggle="modal" data-target="#exampleModal">@lang('strings.input_type_description_link')</a>
     </div>
 
-    <div id="items"></div>
+    <div id="items">
+        @foreach ($profiles as $profile)
+        <div id="formSet" class="card bg-light text-black shadow mb-3">
+            <div class="row card-body">
+                <div class="col-md-2 col-4 pt-2">
+                    <span class="h6 text-nowrap">@lang('strings.input_type')</span>
+                </div>
+                <div class="col-md-4 col-8 pb-2">
+                    <select name="types[]" class="btn btn-secondary dropdown-toggle">
+                        @foreach ($types as $key => $value)
+                        <option value="{{$key}}"
+                        @if ($key == $profile->type)
+                            selected
+                        @endif
+                        >{{$value}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="row col-md-6 col-12">
+                    <div class="col-md-2 col-4 pt-2">
+                        <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
+                    </div>
+                    <div class="col-md-10 col-8 pt-1 pb-2">
+                        {{Form::input('text', 'input_type_column_names[]', $profile->name, [
+                            'style' => 'width: 100%;',
+                            'class' => 'ml-2'
+                        ])}}
+                    </div>
+                    <div class="col-md-2 col-4 pt-2">
+                        <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
+                    </div>
+                    <div class="col-md-10 col-8 pt-1 pb-2">
+                        {{Form::input('number', 'input_type_column_orders[]', $profile->order, [
+                            'style' => 'width: 100%;',
+                            'class' => 'ml-2',
+                        ])}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
     <button class="btn-add" type="button">@lang('strings.add')</button>
 
     <div class="row">

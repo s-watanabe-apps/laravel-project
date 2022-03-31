@@ -60,6 +60,7 @@ return [
     'expire_in_hours' => ' hours',
     'expire_in_minutes' => ' minutes',
     'mark' => 'Mark',
+    'sort_order' => 'Sort order',
 
     // Side menus
     'write_articles' => 'Write articles',
