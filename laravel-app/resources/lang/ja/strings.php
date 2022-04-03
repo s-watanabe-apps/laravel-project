@@ -39,7 +39,7 @@ return [
     'birth_date' => '生年月日',
     'profile_result_message' => 'プロフィールを更新しました。',
     'article_body' =>'投稿本文',
-    'latest_articles' => '直近の記事',
+    'latest_articles' => '最近の記事',
     'pictures' => 'アルバム',
     'show_more' => 'もっと見る',
     'user_name' => 'ユーザー名',
