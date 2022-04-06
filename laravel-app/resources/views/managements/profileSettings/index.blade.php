@@ -85,6 +85,19 @@ $(".btn-add").click(function () {
     //console.log($("#formSet"));
     $("#items").append($("#formset").children().clone());
 });
+
+$("select").change(function () {
+    var index = $("select#type").index(this);
+    if ($(this).val() == {{App\Libs\InputType::CHOICE}}) {
+        console.log(index);
+        $('div#select_list_name').eq(index).css('display', 'inline');
+        $('div#select_list_value').eq(index).css('display', 'inline');
+    } else {
+        $('div#select_list_name').eq(index).css('display', 'none');
+        $('div#select_list_value').eq(index).css('display', 'none');
+    }
+});
+
 </script>
 
 @endsection
