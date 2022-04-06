@@ -61,6 +61,7 @@ return [
     'expire_in_minutes' => ' minutes',
     'mark' => 'Mark',
     'sort_order' => 'Sort order',
+    'select_list' => 'Selection list',
 
     // Side menus
     'write_articles' => 'Write articles',

@@ -34,6 +34,12 @@
                     'class' => 'ml-2',
                 ])}}
             </div>
+            <div class="col-md-2 col-4 pt-2">
+                <span class="h6 text-nowrap">@lang('strings.select_list')</span>
+            </div>
+            <div class="col-md-10 col-8 pt-1 pb-2">
+                <textarea class="form-control ml-2" name="input_type_column_choices[]">{{!is_null($profile) && $profile->type == 3 ? implode(array_column($profile->choices->toArray(), 'name'), "\n") : ''}}</textarea>
+            </div>
         </div>
     </div>
 </div>
