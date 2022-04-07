@@ -4,7 +4,7 @@
             <span class="h6 text-nowrap">@lang('strings.input_type')</span>
         </div>
         <div class="col-md-4 col-8 pb-2">
-            <select id="type" name="dynamic_values.types[]" class="btn btn-secondary dropdown-toggle pr-1">
+            <select id="type" name="types[]" class="btn btn-secondary dropdown-toggle pr-1">
                 @foreach ($types as $key => $value)
                 <option value="{{$key}}"
                 @if (!is_null($profile) && $key == $profile->type)
@@ -20,16 +20,17 @@
                 <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
             </div>
             <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('text', 'dynamic_values.names[]', is_null($profile) ? '' : $profile->name, [
+                {{Form::input('text', 'names[]', is_null($profile) ? '' : $profile->name, [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2'
                 ])}}
+                <div class="text-danger">{{$errors->first('names.' . $index) ?? ''}}</div>
             </div>
             <div class="col-md-3 col-4 pt-2">
                 <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
             </div>
             <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('number', 'dynamic_values.orders[]', is_null($profile) ? '' : $profile->order, [
+                {{Form::input('number', 'orders[]', is_null($profile) ? '' : $profile->order, [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2',
                 ])}}
@@ -55,7 +56,7 @@
                         $choices = implode(array_column($profile->choices->toArray(), 'name'), "\n");
                     }
                 ?>
-                <textarea class="form-control ml-2" name="dynamic_values.choices[]">{{$choices}}</textarea>
+                <textarea class="form-control ml-2" name="choices[]">{{$choices}}</textarea>
             </div>
         </div>
 

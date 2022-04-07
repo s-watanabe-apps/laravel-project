@@ -3,6 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
+    {{var_dump($errors)}}
     <div id="formset" hidden>
         @include('managements.profileSettings.formset', [
             'types' => $types,
@@ -28,10 +29,11 @@
     </div>
 
     <div id="items">
-        @foreach ($profiles as $profile)
+        @foreach ($profiles as $index => $profile)
             @include('managements.profileSettings.formset', [
-                'types' => $types,
+                'index' => $index,
                 'profile' => $profile,
+                'types' => $types,
             ])
         @endforeach
     </div>
