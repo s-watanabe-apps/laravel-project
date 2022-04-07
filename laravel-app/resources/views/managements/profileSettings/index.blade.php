@@ -95,7 +95,7 @@ $(document).on('click', 'button#btn-delete', function(){
 $(document).on('change', 'select#type', function(){
     //console.log("select#type.change");
     var index = $("select#type").index(this);
-    if ($(this).val() == {{App\Libs\InputType::CHOICE}}) {
+    if ($(this).val() == {{App\Libs\ProfileInputType::CHOICE}}) {
         console.log(index);
         $('div#select_list_name').eq(index).css('display', 'inline');
         $('div#select_list_value').eq(index).css('display', 'inline');

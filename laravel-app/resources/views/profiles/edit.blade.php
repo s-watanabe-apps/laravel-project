@@ -100,16 +100,16 @@
                             {{$userProfile->name}}
                         </th>
                         <td class="bg-light text-dark">
-                            @if($userProfile->type == App\Libs\InputType::FILLIN)
+                            @if($userProfile->type == App\Libs\ProfileInputType::FILLIN)
                                 {{Form::text('dynamic_values[$userProfile->id]', $userProfile->value, [
                                     'class' => 'form-control',
                                 ])}}
-                            @elseif($userProfile->type == App\Libs\InputType::DESCRIPTION)
+                            @elseif($userProfile->type == App\Libs\ProfileInputType::DESCRIPTION)
                                 <textarea
                                     name="dynamic_values[{{$userProfile->id}}]"
                                     rows="8"
                                     class="form-control">{{old('dynamic_values.' . $userProfile->id) ?? $userProfile->value}}</textarea>
-                            @elseif($userProfile->type == App\Libs\InputType::CHOICE)
+                            @elseif($userProfile->type == App\Libs\ProfileInputType::CHOICE)
                                 <select class="form-control" name="dynamic_values[{{$userProfile->id}}]">
                                     <optgroup label="{{$userProfile->name}}">
                                         @foreach($choices[$userProfile->id] as $key => $value)

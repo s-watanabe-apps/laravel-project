@@ -7,6 +7,7 @@ use App\Models\Profiles;
 use App\Libs\ProfileInputType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class ProfilePostRequest extends FormRequest
@@ -23,13 +24,13 @@ class ProfilePostRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     * TODO
      * @return array
      */
     public function rules()
     {
-        $profiles = Profiles::getProfilesHash();
-        $choices = Profiles::getProfileChoicesHash();
+        //$profiles = Profiles::getProfilesHash();
+        //$choices = Profiles::getProfileChoicesHash();
 
         $dynamicRules = function($attribute, $value, $fail) use($profiles, $choices) {
             $index = (int) str_replace('dynamic_values.', '', $attribute);
@@ -69,11 +70,14 @@ class ProfilePostRequest extends FormRequest
         };
 
         return [
-            'name' => 'required|max:255',
-            'name_kana' => 'required|max:255',
-            'birth_date' => 'required|date',
-            'choose_profile_image' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
-            'dynamic_values.*' => $dynamicRules,
+            'types' => [
+                'array',
+                Rule::in(array_keys(ProfileInputType::getTypes())),
+            ],
+            'names' => 'array',
+            'orders' => 'array',
+            'choices' => 'array',
+            //'dynamic_values.*' => $dynamicRules,
         ];
     }
 

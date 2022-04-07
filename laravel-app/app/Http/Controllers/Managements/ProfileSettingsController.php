@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Managements;
 
-use App\Libs\InputType;
+use App\Libs\ProfileInputType;
 use App\Models\Profiles;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ class ProfileSettingsController extends ManagementsController
 {
     public function index(Request $request)
     {
-        $types = InputType::getTypes();
+        $types = ProfileInputType::getTypes();
 
         $profiles = Profiles::getProfiles();
 

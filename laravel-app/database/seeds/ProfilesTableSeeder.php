@@ -1,6 +1,6 @@
 <?php
 use App\Models\Profiles;
-use App\Libs\InputType;
+use App\Libs\ProfileInputType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,13 +16,13 @@ class ProfilesTableSeeder extends Seeder
         DB::table('profiles')->truncate();
         $profiles = [
             [
-                'type' => InputType::CHOICE,
+                'type' => ProfileInputType::CHOICE,
                 'order' => 1,
                 'name' => '性別',
                 'required' => true,
             ],
             [
-                'type' => InputType::DESCRIPTION,
+                'type' => ProfileInputType::DESCRIPTION,
                 'order' => 2,
                 'name' => '自己紹介',
                 'required' => true,

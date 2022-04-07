@@ -20,7 +20,7 @@
                 <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
             </div>
             <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('text', 'input_type_column_names[]', is_null($profile) ? '' : $profile->name, [
+                {{Form::input('text', 'names[]', is_null($profile) ? '' : $profile->name, [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2'
                 ])}}
@@ -29,14 +29,14 @@
                 <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
             </div>
             <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('number', 'input_type_column_orders[]', is_null($profile) ? '' : $profile->order, [
+                {{Form::input('number', 'orders[]', is_null($profile) ? '' : $profile->order, [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2',
                 ])}}
             </div>
             
             <div id="select_list_name" class="col-md-3 col-4 pt-2"
-            @if (is_null($profile) || $profile->type != App\Libs\InputType::CHOICE)
+            @if (is_null($profile) || $profile->type != App\Libs\ProfileInputType::CHOICE)
                 style="display:none;"
             @else
                 style="display:inline;"
@@ -44,18 +44,18 @@
                 <span class="h6 text-nowrap">@lang('strings.select_list')</span>
             </div>
             <div id="select_list_value" class="col-md-9 col-8 pt-1 pb-2"
-            @if (is_null($profile) || $profile->type != App\Libs\InputType::CHOICE)
+            @if (is_null($profile) || $profile->type != App\Libs\ProfileInputType::CHOICE)
                 style="display:none;"
             @else
                 style="display:inline;"
             @endif>
                 <?php
                     $choices = '';
-                    if (!is_null($profile) && $profile->type == App\Libs\InputType::CHOICE) {
+                    if (!is_null($profile) && $profile->type == App\Libs\ProfileInputType::CHOICE) {
                         $choices = implode(array_column($profile->choices->toArray(), 'name'), "\n");
                     }
                 ?>
-                <textarea class="form-control ml-2" name="input_type_column_choices[]">{{$choices}}</textarea>
+                <textarea class="form-control ml-2" name="choices[]">{{$choices}}</textarea>
             </div>
         </div>
 

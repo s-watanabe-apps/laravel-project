@@ -2,7 +2,7 @@
 
 namespace App\Libs;
 
-class InputType
+class ProfileInputType
 {
     public const FILLIN = 1;
     public const DESCRIPTION = 2;

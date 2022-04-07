@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\ProfileChoices;
-use App\Libs\InputType;
+use App\Libs\ProfileInputType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 
@@ -37,7 +37,7 @@ class Profiles extends Model
                     ->where('profile_values.user_id', $userId);
             })
             ->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
-            ->where('profiles.type', InputType::CHOICE);
+            ->where('profiles.type', ProfileInputType::CHOICE);
 
         $query = self::query()->select([
                 'profiles.id',
@@ -52,7 +52,7 @@ class Profiles extends Model
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
                     ->where('profile_values.user_id', $userId);
             })
-            ->whereIn('profiles.type', [InputType::FILLIN, InputType::DESCRIPTION,])
+            ->whereIn('profiles.type', [ProfileInputType::FILLIN, ProfileInputType::DESCRIPTION,])
             ->union($subQuery);
 
         return DB::table($query)->select([
@@ -105,7 +105,7 @@ class Profiles extends Model
         $profiles = self::query()->orderBy('order')->get();
 
         foreach ($profiles as &$profile) {
-            if ($profile->type == InputType::CHOICE) {
+            if ($profile->type == ProfileInputType::CHOICE) {
                 $profile->choices = ProfileChoices::where('profile_id', $profile->id)->get();
             }
         }
