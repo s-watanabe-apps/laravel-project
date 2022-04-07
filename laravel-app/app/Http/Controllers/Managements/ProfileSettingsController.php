@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Managements;
 
 use App\Libs\ProfileInputType;
 use App\Models\Profiles;
+use App\Http\Requests\ManagementsProfilePostRequest;
 use Illuminate\Http\Request;
 
 class ProfileSettingsController extends ManagementsController
@@ -19,7 +20,7 @@ class ProfileSettingsController extends ManagementsController
         ));
     }
 
-    public function post(Request $request)
+    public function post(ManagementsProfilePostRequest $request)
     {
         echo "<pre>";
         var_dump($request->input());

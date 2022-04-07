@@ -10,7 +10,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
-class ProfilePostRequest extends FormRequest
+class ManagementsProfilePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,7 @@ class ProfilePostRequest extends FormRequest
     {
         //$profiles = Profiles::getProfilesHash();
         //$choices = Profiles::getProfileChoicesHash();
-
+/*
         $dynamicRules = function($attribute, $value, $fail) use($profiles, $choices) {
             $index = (int) str_replace('dynamic_values.', '', $attribute);
             if (!array_key_exists($index, $profiles)) {
@@ -68,15 +68,15 @@ class ProfilePostRequest extends FormRequest
                     return;
             }
         };
-
+*/
         return [
-            'types' => [
+            'dynamic_values_types' => [
                 'array',
                 Rule::in(array_keys(ProfileInputType::getTypes())),
             ],
-            'names' => 'array',
-            'orders' => 'array',
-            'choices' => 'array',
+            'dynamic_values_names' => 'array',
+            'dynamic_values_orders' => 'array',
+            'dynamic_values_choices' => 'array',
             //'dynamic_values.*' => $dynamicRules,
         ];
     }
