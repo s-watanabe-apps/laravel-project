@@ -35,7 +35,7 @@
             ])
         @endforeach
     </div>
-    <button class="btn-add" type="button">@lang('strings.add')</button>
+    <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
 
     <div class="row">
         <div class="col-12 mb-5 text-center">
@@ -81,12 +81,19 @@
 @endif
 
 <script>
-$(".btn-add").click(function () {
-    //console.log($("#formSet"));
-    $("#items").append($("#formset").children().clone());
+$(document).on('click', 'button#btn-add', function(){
+    //console.log("button#btn-add.click");
+    $("#items").append($("#formset").children().clone(true));
 });
 
-$("select").change(function () {
+$(document).on('click', 'button#btn-delete', function(){
+    //console.log("button#btn-delete.click");
+    var index = $("button#btn-delete").index(this);
+    $('div#formset-contents').eq(index).remove();
+});
+
+$(document).on('change', 'select#type', function(){
+    //console.log("select#type.change");
     var index = $("select#type").index(this);
     if ($(this).val() == {{App\Libs\InputType::CHOICE}}) {
         console.log(index);
