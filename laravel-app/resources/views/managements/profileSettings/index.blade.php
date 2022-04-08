@@ -3,13 +3,22 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    {{var_dump($errors)}}
     <div id="formset" hidden>
         @include('managements.profileSettings.formset', [
             'types' => $types,
             'profile' => null,
         ])
     </div>
+
+    @if ($errors->any())
+    <div class="text-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
     {{Form::open(['name' => 'profileSettings', 'url' => '/managements/profile/settings/post', 'method' => 'post', 'files' => true])}}
     @csrf
@@ -30,11 +39,7 @@
 
     <div id="items">
         @foreach ($profiles as $index => $profile)
-            @include('managements.profileSettings.formset', [
-                'index' => $index,
-                'profile' => $profile,
-                'types' => $types,
-            ])
+            @include('managements.profileSettings.formset')
         @endforeach
     </div>
     <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>

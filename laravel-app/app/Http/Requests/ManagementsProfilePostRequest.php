@@ -37,7 +37,7 @@ class ManagementsProfilePostRequest extends FormRequest
             'names' => 'array',
             'names.*' => 'required|max:255',
             'orders' => 'array',
-            'orders.*' => 'numeric',
+            'orders.*' => 'nullable|numeric',
             'choices' => 'array',
             'choices.*' => 'nullable|string'
         ];

@@ -24,7 +24,6 @@
                     'style' => 'width: 100%;',
                     'class' => 'ml-2'
                 ])}}
-                <div class="text-danger">{{$errors->first('names.' . $index) ?? ''}}</div>
             </div>
             <div class="col-md-3 col-4 pt-2">
                 <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
