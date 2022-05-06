@@ -60,7 +60,6 @@ class MessagesController extends Controller
         $fromUserMessages = Messages::getByUserIdAndFromUserId($request->user->id, $message->from_user_id);
 
         return view('messages.get', compact(
-            'messages',
             'message',
             'backlink',
             'fromUserMessages'

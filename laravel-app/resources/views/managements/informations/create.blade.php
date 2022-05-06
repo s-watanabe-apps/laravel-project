@@ -97,7 +97,7 @@
                                 {{Form::radio(
                                     'status',
                                     \App\Models\Informations::STATUS_ENABLE,
-                                    old('status') == \App\Models\Informations::STATUS_ENABLE ? true : old('status') == '' ? true : false,
+                                    old('status') == \App\Models\Informations::STATUS_ENABLE ? true : (old('status') == '' ? true : false),
                                     ['class' => 'radio-button__input']
                                 )}}
                                 <span class="radio-button__icon">@lang('strings.enable')</span>
