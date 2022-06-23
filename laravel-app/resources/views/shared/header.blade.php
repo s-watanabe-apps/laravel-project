@@ -61,6 +61,10 @@ table.responsive-table > tbody > tr > td {
   transform: translateY(-50%);
 }
 
+.card-body > p {
+  line-height: 125%;
+}
+
 @media only screen and (max-width:768px) {
   .carousel-caption {
     top: 30%;

@@ -15,18 +15,18 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-8 mb-4">
+        <div class="col-lg-12 mb-12">
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">@lang('strings.title')</th>
+                        <th class="text-secondary text-nowrap">@lang('strings.title')</th>
                         <td>
                             {{$validated['title']}}
                             {{Form::hidden('title', $validated['title'])}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">@lang('strings.article_body')</th>
+                        <th class="text-secondary text-nowrap">@lang('strings.article_body')</th>
                         <td>
                             {!!$validated['body']!!}
                             {{Form::hidden('body', $validated['body'])}}
@@ -46,18 +46,6 @@
 
         </div>
 
-        <div class="col-lg-4 mb-4 d-none d-sm-inline-block">
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                            src="/img/undraw_add_document_re_mbjx.svg" alt="..."
-                            onselectstart="return false;" onmousedown="return false;">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>        
     {{Form::close()}}
 </div>
