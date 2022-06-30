@@ -41,6 +41,21 @@
                 </div>
             </div>
 
+            <div class="h6 font-weight-bold">@lang('strings.anonymous_user')</div>
+            <div class="card bg-light text-black shadow mb-3">
+                <div class="card-body">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="anonymous_permission0" value="0" name="anonymous_permission" class="custom-control-input" {{$settings->anonymous_permission == 0 ? 'checked' : ''}} />
+                        <label class="custom-control-label" for="anonymous_permission0">@lang('strings.anonymous_permisshon_not_allowed')</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="anonymous_permission1" value="1" name="anonymous_permission" class="custom-control-input" {{$settings->anonymous_permission == 1 ? 'checked' : ''}} />
+                        <label class="custom-control-label" for="anonymous_permission1">@lang('strings.anonymous_permisshon_allowed')</label>
+                    </div>
+                    <div class="text-danger">{{$errors->first('anonymous_permisshon') ?? ''}}</div>
+                </div>
+            </div>
+
             <div class="h6 font-weight-bold">@lang('strings.user_create')</div>
             <div class="card bg-light text-black shadow mb-3">
                 <div class="card-body">

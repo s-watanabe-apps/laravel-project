@@ -23,6 +23,7 @@ class CreateSettingsTable extends Migration
             $table->boolean('basic_auth');
             $table->string('basic_user')->nullable();
             $table->string('basic_password')->nullable();
+            $table->boolean('anonymous_permission')->default(0);
         });
     }
 

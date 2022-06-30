@@ -29,6 +29,7 @@ class Settings extends Model
             $this->basic_auth = 0;
             $this->basic_user = null;
             $this->basic_password = null;
+            $this->anonymous_permission = 0;
         }
         parent::__construct();
     }

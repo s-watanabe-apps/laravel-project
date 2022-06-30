@@ -32,6 +32,7 @@ class ManagementsSettingsPostRequest extends FormRequest
             'basic_auth' => 'required|in:0,1',
             'basic_user' => 'required|max:255',
             'basic_password' => 'required|max:255',
+            'anonymous_permission' => 'required|in:0,1',
         ];
 
         if ($this->basic_auth == '0') {
@@ -53,6 +54,7 @@ class ManagementsSettingsPostRequest extends FormRequest
             'site_name' => __('strings.site_name'),
             'site_description' => __('strings.site_description'),
             'basic_auth' => __('strings.basic_auth'),
+            'anonymous_permission' => __('strings.anonymous_user'),
         ];
     }
 }

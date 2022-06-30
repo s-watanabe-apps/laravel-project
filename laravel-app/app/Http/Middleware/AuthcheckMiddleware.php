@@ -26,10 +26,15 @@ class AuthcheckMiddleware
     public function handle($request, Closure $next)
     {
         if (!Authenticate::check()) {
-            return redirect('/login')->with('redirect', $request->url());
+            if ($request->settings->anonymous_permission) {
+                // Anonymous User
+                $user = null;
+            } else {
+                return redirect('/login')->with('redirect', $request->url());
+            }
+        } else {
+            $user = Authenticate::user();
         }
-
-        $user = Authenticate::user();
         
         $request->merge([
             'user' => $user,

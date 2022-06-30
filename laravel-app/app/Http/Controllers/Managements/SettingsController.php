@@ -24,6 +24,7 @@ class SettingsController extends ManagementsController
             $settings->basic_auth = $request->basic_auth;
             $settings->basic_user = $request->basic_user ?? null;
             $settings->basic_password = $request->basic_password ?? null;
+            $settings->anonymous_permisshon = $request->anonymous_permisshon;
             $settings->save();
         });
 
