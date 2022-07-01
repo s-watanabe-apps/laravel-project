@@ -156,7 +156,8 @@ return [
     'end_time' => 'End of display',
     'end_time_invalid' => 'End date and time should be after the start date and time.',
     'profile_settings' => 'Profile item management',
-    'anonymous_user' => 'Anonymous',
+    'anonymous_user' => 'Anonymous user',
+    'anonymous_user_name' => 'Anonymous',
     'anonymous_permisshon_allowed' => 'Allow unauthenticated users to view.',
     'anonymous_permisshon_not_allowed' => 'Not allow unauthorized users to view.',
 

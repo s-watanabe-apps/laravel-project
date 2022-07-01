@@ -54,9 +54,9 @@ class Articles extends Model
 */
     }
 
-    public static function getBaseQuery()
+    public static function query()
     {
-        return self::query()
+        return parent::query()
             ->select([
                 'articles.id',
                 'articles.user_id',
@@ -77,11 +77,6 @@ class Articles extends Model
     public static function getArticleHeadlines($userId, $limit)
     {
         return self::query()
-            ->select([
-                'articles.id',
-                'articles.title',
-                'articles.created_at',
-            ])
             ->where('articles.user_id', $userId)
             ->orderBy('articles.created_at', 'desc')
             ->limit($limit)

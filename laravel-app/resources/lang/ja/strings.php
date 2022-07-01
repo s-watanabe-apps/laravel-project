@@ -181,6 +181,7 @@ return [
     'end_time_invalid' => '終了日時は開始日時より後にしてください。',
     'profile_settings' => 'プロフィール項目管理',
     'anonymous_user' => '未認証ユーザー',
+    'anonymous_user_name' => '匿名希望',
     'anonymous_permisshon_allowed' => '未認証ユーザーの閲覧を許可する',
     'anonymous_permisshon_not_allowed' => '未認証ユーザーの閲覧を許可しない',
 

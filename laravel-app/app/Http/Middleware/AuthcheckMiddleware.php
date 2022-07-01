@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Providers\RouteServiceProvider;
+use App\Models\Users;
+use App\Models\Roles;
+use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
 use Illuminate\Support\Facades\Auth as Authenticate;
@@ -28,14 +30,18 @@ class AuthcheckMiddleware
         if (!Authenticate::check()) {
             if ($request->settings->anonymous_permission) {
                 // Anonymous User
-                $user = null;
+                $user = new Users();
+                $user->id = 0;
+                $user->role_id = Roles::ANONYMOUS;
+                $user->email = null;
+                $user->name = __('strings.anonymous_user_name');
             } else {
                 return redirect('/login')->with('redirect', $request->url());
             }
         } else {
             $user = Authenticate::user();
         }
-        
+        \Log::info(json_encode($user));
         $request->merge([
             'user' => $user,
         ]);

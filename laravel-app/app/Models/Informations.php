@@ -25,8 +25,8 @@ class Informations extends Model
      * 
      * @return array
      */
-    private static function getBaseQuery() {
-        return self::query()
+    public static function query() {
+        return parent::query()
             ->select([
                 'informations.id',
                 'informations.mark_id',
@@ -46,7 +46,7 @@ class Informations extends Model
      */
     public static function getEnabled() {
         $now = new Carbon();
-        return self::getBaseQuery()
+        return self::query()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
             ->where('status', self::STATUS_ENABLE)
             ->where('start_time', '<=', $now)
@@ -59,11 +59,11 @@ class Informations extends Model
 
     public static function all($columns = [])
     {
-        return self::getBaseQuery()->get();
+        return self::query()->get();
     }
 
     public static function get($id)
     {
-        return self::getBaseQuery()->where(['informations.id' => $id])->get()->first();
+        return self::query()->where(['informations.id' => $id])->get()->first();
     }
 }

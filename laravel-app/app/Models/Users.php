@@ -26,9 +26,12 @@ class Users extends Authenticatable
         return $this->file;
     }
 
-    public static function getBaseQuery()
+    /**
+     * Get base query.
+     */
+    public static function query()
     {
-        return self::query()
+        return parent::query()
             ->select([
                 'users.id',
                 'users.name',
@@ -58,9 +61,7 @@ class Users extends Authenticatable
      */
     public static function getUsers()
     {
-        return self::getBaseQuery()
-            ->where('users.enable', 1)
-            ->paginate(self::PAGENATE);
+        return self::query()->where('users.enable', 1)->paginate(self::PAGENATE);
     }
 
     /**
@@ -73,7 +74,7 @@ class Users extends Authenticatable
     {
         $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
 
-        return self::getBaseQuery()
+        return self::query()
             ->addSelect(['sessions.last_activity'])
             ->leftJoin(\DB::raw('(select user_id, max(last_activity) as last_activity from sessions group by user_id) sessions'),
                 'users.id', '=', 'sessions.user_id')
@@ -89,8 +90,7 @@ class Users extends Authenticatable
      */
     public static function getUser($id)
     {
-        return self::getBaseQuery()
-            ->where('users.id', $id)->first();
+        return self::query()->where('users.id', $id)->first();
     }
 
 
@@ -101,7 +101,7 @@ class Users extends Authenticatable
      * @return array
      */
     public static function getBirthdayUsers($birthdays) {
-        $builder = self::getBaseQuery();
+        $builder = self::query();
         
         $dateStrings = [];
         foreach ($birthdays as $birthday) {
@@ -122,8 +122,7 @@ class Users extends Authenticatable
      */
     public static function getByEmail($email)
     {
-        return self::getBaseQuery()
-            ->where('email', $email)->get()->first();
+        return self::query()->where('email', $email)->get()->first();
     }
 
     /**
@@ -135,8 +134,7 @@ class Users extends Authenticatable
      */
     public static function updateApiToken($id, $apiToken)
     {
-        return self::where('id', $id)
-            ->update(['api_token' => $apiToken]);
+        return self::where('id', $id)->update(['api_token' => $apiToken]);
     }
 
     /**

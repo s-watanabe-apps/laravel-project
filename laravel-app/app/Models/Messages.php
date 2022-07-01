@@ -9,9 +9,9 @@ class Messages extends Model
     /**
      * Base query of messages.
      */
-    public static function getBaseMessages()
+    public static function query()
     {
-        return self::query()->select([
+        return parent::query()->select([
                 'messages.id',
                 'messages.subject',
                 'messages.body',
@@ -30,7 +30,7 @@ class Messages extends Model
 
     public static function getUnreadMessages($userId)
     {
-        return self::getBaseMessages()
+        return self::query()
             ->where('messages.to_user_id', $userId)
             ->where('messages.readed', 0)
             ->orderBy('messages.created_at', 'desc')
@@ -47,7 +47,7 @@ class Messages extends Model
      */
     public static function getByUserIdAndMessageId($userId, $messageId)
     {
-        return self::getBaseMessages()
+        return self::query()
             ->where('messages.to_user_id', $userId)
             ->where('messages.message_id', $messageId)->get()->first();
     }
@@ -61,7 +61,7 @@ class Messages extends Model
      */
     public static function getByUserId($userId)
     {
-        return self::getBaseMessages()
+        return self::query()
             ->where('messages.to_user_id', $userId)
             ->orderBy('messages.created_at', 'desc')->get();
     }
@@ -74,7 +74,7 @@ class Messages extends Model
      */
     public static function getByFromUserId($userId)
     {
-        return self::getBaseMessages()
+        return self::query()
             ->where('from_user_id', $userId)->get();
     }
 
@@ -87,7 +87,7 @@ class Messages extends Model
      */
     public static function getByUserIdAndFromUserId($userId, $fromUserId)
     {
-        return self::getBaseMessages()
+        return self::query()
             ->where('messages.to_user_id', $userId)
             ->where('messages.from_user_id', $fromUserId)
             ->orderBy('messages.created_at', 'desc')->get();
