@@ -22,22 +22,26 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
     Route::get('/register', 'AppRegisterController@index');
     Route::post('/register', 'AppRegisterController@index');
 
-    Route::group(['middleware' => ['authcheck']], function () {
+    Route::group(['middleware' => ['authcheck.readpermission']], function () {
         // Index
         Route::get('/', 'IndexController@index');
 
         // Articles
         Route::get('/articles', 'ArticlesController@index');
         Route::get('/articles/{id}', 'ArticlesController@get')->where('id', '[0-9]+');
-        Route::get('/articles/write', 'ArticlesController@write');
-        Route::post('/articles/confirm', 'ArticlesController@confirm');
-        Route::post('/articles/post', 'ArticlesController@post');
+        Route::group(['middleware' => ['authcheck.writepermission']], function () {
+            Route::get('/articles/write', 'ArticlesController@write');
+            Route::post('/articles/confirm', 'ArticlesController@confirm');
+            Route::post('/articles/post', 'ArticlesController@post');
+        });
 
         // Profiles
-        Route::get('/members', 'ProfilesController@index');
-        Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
-        Route::get('/profiles/edit', 'ProfilesController@edit');
-        Route::post('/profiles/post', 'ProfilesController@post');
+        Route::group(['middleware' => ['authcheck.writepermission']], function () {
+            Route::get('/members', 'ProfilesController@index');
+            Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
+            Route::get('/profiles/edit', 'ProfilesController@edit');
+            Route::post('/profiles/post', 'ProfilesController@post');
+        });
 
         // Pictures
         Route::get('/pictures', 'PicturesController@index');

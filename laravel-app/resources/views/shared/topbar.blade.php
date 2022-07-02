@@ -99,7 +99,9 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
+                @if (isset($receiveMessages))
                 <span class="badge badge-danger badge-counter">{{count($receiveMessages) > 0 ? count($receiveMessages) : ''}}</span>
+                @endif
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -107,6 +109,7 @@
                 <h6 class="dropdown-header">
                     @lang('strings.message_center')
                 </h6>
+                @if (isset($receiveMessages))
                 @foreach ($receiveMessages as $receiveMessage)
                 <a class="dropdown-item d-flex align-items-center" href="/messages/{{$receiveMessage->message_id}}">
                     <div class="dropdown-list-image mr-3">
@@ -121,6 +124,7 @@
                     </div>
                 </a>
                 @endforeach
+                @endif
 <!--
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">

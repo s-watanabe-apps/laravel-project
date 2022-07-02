@@ -53,7 +53,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'authcheck' => \App\Http\Middleware\AuthcheckMiddleware::class,
+        'authcheck.readpermission' => \App\Http\Middleware\AuthCheckReadPermissionMiddleware::class,
+        'authcheck.writepermission' => \App\Http\Middleware\AuthCheckWritePermissionMiddleware::class,
         //'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.basic' => \App\Http\Middleware\CustomBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -85,7 +86,8 @@ class Kernel extends HttpKernel
         \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\SettingsMiddleware::class,
         \App\Http\Middleware\CustomBasicAuth::class,
-        \App\Http\Middleware\AuthcheckMiddleware::class,
+        \App\Http\Middleware\AuthCheckReadPermissionMiddleware::class,
+        \App\Http\Middleware\AuthCheckWritePermissionMiddleware::class,
         \App\Http\Middleware\BeforeActionMiddleware::class,
     ];
 }

@@ -10,7 +10,7 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
 use Illuminate\Support\Facades\Auth as Authenticate;
 
-class AuthcheckMiddleware
+class AuthCheckReadPermissionMiddleware
 {
     public function __construct(Factory $viewFactory, AuthManager $authManager)
     {

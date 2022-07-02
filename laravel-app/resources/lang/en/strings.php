@@ -112,6 +112,7 @@ return [
         'fatal' => 'An unexpected error has occurred. Please start over.',
         'not_found' => 'Page Not Found. Please try again from the beginning.',
         'validation' => 'Input value is invalid. Please try again from the beginning.',
+        'unauthorized' => 'Authentication is required to use this feature.',
         'to_admin_message' => 'If it does not improve, contact your system administrator.',
     ],
 
