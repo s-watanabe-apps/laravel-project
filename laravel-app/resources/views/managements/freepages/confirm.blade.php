@@ -23,6 +23,16 @@
             @csrf
 
 
+            {{$validated['title']}}
+            {{Form::hidden('title', $validated['title'])}}
+
+            {{$validated['free_page_code']}}
+            {{Form::hidden('free_page_code', $validated['free_page_code'])}}
+
+            {{$validated['body']}}
+            {{Form::hidden('body', $validated['body'])}}
+
+
             <a href="javascript:freepages.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
                 <i class="fas fa-check fa-sm"></i> @lang('strings.save')
             </a>

@@ -5,11 +5,10 @@ namespace App\Http\Requests;
 use App\Models\Images;
 use App\Models\Profiles;
 use App\Libs\ProfileInputType;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Session;
 
-class ProfilePostRequest extends FormRequest
+class ProfilePostRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

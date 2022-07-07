@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Http\FormRequest;
 
-class ApiEventsGetRequest extends FormRequest
+class ApiEventsGetRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

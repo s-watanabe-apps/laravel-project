@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Favorites;
-use Illuminate\Foundation\Http\FormRequest;
 
-class ApiFavoritesPostRequest extends FormRequest
+class ApiFavoritesPostRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

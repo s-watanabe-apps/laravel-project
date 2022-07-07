@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\Informations;
 use Carbon\Carbon;
-use Illuminate\Foundation\Http\FormRequest;
 
-class ManagementsInformationsPostRequest extends FormRequest
+class ManagementsInformationsPostRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

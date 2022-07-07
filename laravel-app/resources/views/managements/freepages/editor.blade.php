@@ -36,7 +36,7 @@
                 <div class="h6 font-weight-bold">@lang('strings.free_page_code')</div>
                 {{Form::text(
                     'free_page_code',
-                    $free_page_code ?? old('free_page_code'),
+                    $freePageCode ?? old('free_page_code'),
                     ['id' => 'free_page_code', 'class' => 'form-control']
                 )}}
                 <div class="text-danger">{{$errors->first('free_page_code') ?? ''}}</div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Managements;
 
-//use App\Models\Informations;
+use App\Models\FreePages;
 //use App\Models\InformationMarks;
 use App\Http\Requests\ManagementsFreepagesPostRequest;
 use Illuminate\Http\Request;
@@ -28,27 +28,40 @@ class FreepagesController extends ManagementsController
 
     public function create(Request $request)
     {
-        $free_page_code = Str::random(32);
+        $freePageCode = Str::random(32);
 
         return view('managements.freepages.editor', compact(
-            'free_page_code'
-        ));
-    }
-
-
-    public function get(Request $request)
-    {
-        $information = Informations::get($request->id);
-
-        return view('managements.freepages.get', compact(
-            'information'
+            'freePageCode'
         ));
     }
 
     public function confirm(ManagementsFreepagesPostRequest $request)
     {
-        
-        return view('managements.freepages.confirm', compact('request'));
+        if ($request->method() == 'post') {
+            
+        } else {
+
+        }
+
+        $validated = $request->validated();
+
+        return view('managements.freepages.confirm', compact(
+            'validated',
+        ));
+    }
+
+    public function register(ManagementsFreepagesPostRequest $request)
+    {
+
+        \DB::transaction(function() use ($request) {
+            if ($request->isPost()) {
+                FreePages::add($request->validated());
+            } else {
+
+            }
+        });
+
+        return redirect()->route('managementsFreepages');
     }
 
 /*
