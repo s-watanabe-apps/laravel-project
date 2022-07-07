@@ -36,9 +36,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         });
 
         // Profiles
+        Route::get('/members', 'ProfilesController@index');
+        Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
-            Route::get('/members', 'ProfilesController@index');
-            Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
             Route::get('/profiles/edit', 'ProfilesController@edit');
             Route::post('/profiles/post', 'ProfilesController@post');
         });
@@ -83,6 +83,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             // Profile Settings
             Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');
             Route::post('profile/settings/post', 'Managements\ProfileSettingsController@post');
+
+            // Free Pages
+            Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');
+            Route::get('freepages/create', 'Managements\FreepagesController@create');
+            Route::post('freepages/confirm', 'Managements\FreepagesController@confirm');
+            Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
+
         });
     });
 });

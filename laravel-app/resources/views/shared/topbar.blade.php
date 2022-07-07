@@ -209,10 +209,17 @@
                     Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
+                @if ($user->id != 0)
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     @lang('auth.logout')
                 </a>
+                @else
+                <a class="dropdown-item" href="/login">
+                    <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    @lang('auth.login')
+                </a>
+                @endif
             </div>
         </li>
 

@@ -80,6 +80,10 @@
             <i class="fas fa-fw fa-user-edit"></i>
             @lang('strings.profile_settings')
           </a>
+          <a class="dropdown-item text-black-50" href="/managements/freepages">
+            <i class="fas fa-fw fa-file-text-o"></i>
+            @lang('strings.freepage_management')
+          </a>
         </div>
       </li>
       @endif

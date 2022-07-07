@@ -59,6 +59,7 @@ return [
     'expire_in_hours' => '時間',
     'expire_in_minutes' => '分間',
     'mark' => 'マーク',
+    'list' => 'リスト',
     'add' => '追加',
     'sort_order' => '並び順',
     'select_list' => '選択リスト',
@@ -76,6 +77,7 @@ return [
     'informations_management' => 'お知らせ管理',
     'user_management' => 'ユーザー管理',
     'group_management' => 'グループ管理',
+    'freepage_management' => 'フリーページ管理',
 
     // Messages
     'message' => 'メッセージ',
@@ -177,6 +179,7 @@ return [
     'add_user' => 'ユーザー作成',
     'information_list' => 'お知らせ一覧',
     'add_information' => 'お知らせ作成',
+    'free_page_code' => 'フリーページコード',
     'start_time' => '表示開始日時',
     'end_time' => '表示終了日時',
     'end_time_invalid' => '終了日時は開始日時より後にしてください。',

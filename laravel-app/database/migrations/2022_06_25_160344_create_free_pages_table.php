@@ -15,7 +15,7 @@ class CreateFreePagesTable extends Migration
     {
         Schema::create('free_pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
+            $table->string('code', 32);
             $table->string('title');
             $table->timestamps();
             $table->index('code');

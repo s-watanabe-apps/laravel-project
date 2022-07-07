@@ -60,6 +60,8 @@ return [
     'expire_in_hours' => ' hours',
     'expire_in_minutes' => ' minutes',
     'mark' => 'Mark',
+    'list' => 'List',
+    'add' => 'Add',
     'sort_order' => 'Sort order',
     'select_list' => 'Selection list',
 
@@ -76,6 +78,7 @@ return [
     'informations_management' => 'Informations',
     'user_management' => 'User management',
     'group_management' => 'Group management',
+    'freepage_management' => 'Free page management',
 
     // Messages
     'message' => 'Message',
@@ -153,6 +156,7 @@ return [
     'add_user' => 'Add user',
     'information_list' => 'Notice list',
     'add_information' => 'Add a notice',
+    'free_page_code' => 'Free page code',
     'start_time' => 'Display start',
     'end_time' => 'End of display',
     'end_time_invalid' => 'End date and time should be after the start date and time.',
