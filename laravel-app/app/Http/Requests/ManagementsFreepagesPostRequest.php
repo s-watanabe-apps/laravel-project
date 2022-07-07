@@ -23,7 +23,7 @@ class ManagementsFreepagesPostRequest extends AppFormRequest
     {
         return [
             'title' => 'required|max:255',
-            'free_page_code' => 'required|max:32',
+            'code' => 'required|max:32',
             'body' => 'required',
         ];
     }
@@ -37,7 +37,7 @@ class ManagementsFreepagesPostRequest extends AppFormRequest
     {
         return [
             'title' => __('strings.title'),
-            'free_page_code' => __('strings.free_page_code'),
+            'code' => __('strings.free_page_code'),
             'body' => __('strings.body'),
         ];
     }

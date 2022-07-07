@@ -25,10 +25,12 @@
                     <tr class="text-nowrap">
                         <th class="dt-center">ID</th>
                         <th class="dt-center">@lang('strings.title')</th>
+                        <th class="dt-center">@lang('strings.created_at')</th>
+                        <th class="dt-center">@lang('strings.updated_at')</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($freepages as $value)
+                    @foreach ($freePages as $value)
                     <tr>
                         <td class="dt-center">
                             {{$value->id}}
@@ -38,6 +40,12 @@
                                 <i class="fas {{$value->mark}} text-primary-50"></i>
                                 {{$value->title}}
                             </a>
+                        </td>
+                        <td class="dt-center">
+                            {{$value->created_at}}
+                        </td>
+                        <td class="dt-center">
+                            {{$value->updated_at}}
                         </td>
                     </tr>
                     @endforeach

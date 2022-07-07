@@ -19,34 +19,30 @@ class FreepagesController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $freepages = [];
+        $freePages = FreePages::all();
 
         return view('managements.freepages.index', compact(
-            'freepages'
+            'freePages'
         ));
     }
 
     public function create(Request $request)
     {
-        $freePageCode = Str::random(32);
+        $code = Str::random(32);
+
+        $index = 2;
 
         return view('managements.freepages.editor', compact(
-            'freePageCode'
+            'code', 'index'
         ));
     }
 
     public function confirm(ManagementsFreepagesPostRequest $request)
     {
-        if ($request->method() == 'post') {
-            
-        } else {
+        $values = $request->validated();
 
-        }
-
-        $validated = $request->validated();
-
-        return view('managements.freepages.confirm', compact(
-            'validated',
+        return view('managements.freepages.viewer', compact(
+            'values',
         ));
     }
 
@@ -62,6 +58,19 @@ class FreepagesController extends ManagementsController
         });
 
         return redirect()->route('managementsFreepages');
+    }
+
+    public function get(Request $request)
+    {
+        $freePage = FreePages::find($request->id);
+
+        $values = $freePage->getAttributes();
+
+        $index = 1;
+
+        return view('managements.freepages.editor', compact(
+            'values', 'index'
+        ));
     }
 
 /*

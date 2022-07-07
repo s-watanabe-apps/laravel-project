@@ -58,6 +58,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // Schedule
         Route::get('/schedule', 'ScheduleController@index');
 
+        // Free Page
+        Route::get('/page/{code}', 'PageController@get')->where('code', '[a-zA-Z0-9]{32}');
+
         // Show storage
         Route::get('/show/image', 'ShowController@image');
 
@@ -89,6 +92,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('freepages/create', 'Managements\FreepagesController@create');
             Route::post('freepages/confirm', 'Managements\FreepagesController@confirm');
             Route::post('freepages/register', 'Managements\FreepagesController@register');
+            Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
 
         });

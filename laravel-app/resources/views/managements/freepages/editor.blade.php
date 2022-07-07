@@ -16,7 +16,7 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.freepages.tabControl', ['index' => 2])
+        @include('managements.freepages.tabControl', ['index' => $index])
 
         <div class="col-lg-10 px-0 px-lg-2">
             {{Form::open(['name' => 'informations', 'url' => '/managements/freepages/confirm', 'method' => 'post', 'files' => true])}}
@@ -26,7 +26,7 @@
                 <div class="h6 font-weight-bold">@lang('strings.title')</div>
                 {{Form::text(
                     'title',
-                    old('title'),
+                    $values['title'] ?? old('title'),
                     ['id' => 'title', 'class' => 'form-control',]
                 )}}
                 <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
@@ -35,16 +35,16 @@
             <div class="mb-3">
                 <div class="h6 font-weight-bold">@lang('strings.free_page_code')</div>
                 {{Form::text(
-                    'free_page_code',
-                    $freePageCode ?? old('free_page_code'),
-                    ['id' => 'free_page_code', 'class' => 'form-control']
+                    'code',
+                    $values['code'] ?? ($code ?? old('code')),
+                    ['id' => 'code', 'class' => 'form-control']
                 )}}
-                <div class="text-danger">{{$errors->first('free_page_code') ?? ''}}</div>
+                <div class="text-danger">{{$errors->first('code') ?? ''}}</div>
             </div>
 
             <div class="mb-4">
                 <div class="h6 font-weight-bold">@lang('strings.body')</div>
-                <textarea class="form-control" name="body" id="summernote" id="summernote">{{old('body')}}</textarea>
+                <textarea class="form-control" name="body" id="summernote" id="summernote">{!! $values['body'] ?? old('body') !!}</textarea>
                 <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
             </div>
 

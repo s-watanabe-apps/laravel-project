@@ -23,14 +23,14 @@
             @csrf
 
 
-            {{$validated['title']}}
-            {{Form::hidden('title', $validated['title'])}}
+            {{$values['title']}}
+            {{Form::hidden('title', $values['title'])}}
 
-            {{$validated['free_page_code']}}
-            {{Form::hidden('free_page_code', $validated['free_page_code'])}}
+            {{$values['code']}}
+            {{Form::hidden('code', $values['code'])}}
 
-            {{$validated['body']}}
-            {{Form::hidden('body', $validated['body'])}}
+            {{$values['body']}}
+            {{Form::hidden('body', $values['body'])}}
 
 
             <a href="javascript:freepages.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
