@@ -52,7 +52,7 @@
                 <?php
                     $choices = '';
                     if (!is_null($profile) && $profile->type == App\Libs\ProfileInputType::CHOICE) {
-                        $choices = implode(array_column($profile->choices->toArray(), 'name'), "\n");
+                        $choices = implode("\n", array_column($profile->choices->toArray(), 'name'));
                     }
                 ?>
                 <textarea class="form-control ml-2" name="choices[]">{{$choices}}</textarea>

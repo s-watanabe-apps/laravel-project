@@ -63,11 +63,7 @@
             @lang('strings.site_settings')
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item disabled" href="#">@lang('strings.contents_management')</a>
-          <a class="dropdown-item text-black-50" href="/managements/informations">
-            <i class="fas fa-info-circle"></i>
-            @lang('strings.informations_management')
-          </a>
+          <a class="dropdown-item disabled" href="#">@lang('strings.user_management')</a>
           <a class="dropdown-item text-black-50" href="/managements/users">
             <i class="fas fa-fw fa-users"></i>
             @lang('strings.user_management')
@@ -79,6 +75,12 @@
           <a class="dropdown-item text-black-50" href="/managements/profile/settings">
             <i class="fas fa-fw fa-user-edit"></i>
             @lang('strings.profile_settings')
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item disabled" href="#">@lang('strings.contents_management')</a>
+          <a class="dropdown-item text-black-50" href="/managements/informations">
+            <i class="fas fa-info-circle"></i>
+            @lang('strings.informations_management')
           </a>
           <a class="dropdown-item text-black-50" href="/managements/freepages">
             <i class="fas fa-fw fa-edit"></i>
