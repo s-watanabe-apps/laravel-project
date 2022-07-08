@@ -7,7 +7,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-users"></i>{{$values->title}}</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i>{{$values->title}}</li>
             </ol>
         </nav>
     </div>

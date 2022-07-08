@@ -7,7 +7,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.freepage_management')</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i>@lang('strings.freepage_management')</li>
             </ol>
         </nav>
     </div>

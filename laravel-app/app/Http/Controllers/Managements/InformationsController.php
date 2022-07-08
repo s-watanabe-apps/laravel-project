@@ -29,7 +29,7 @@ class InformationsController extends ManagementsController
     {
         $information = Informations::get($request->id);
 
-        return view('managements.informations.get', compact(
+        return view('managements.informations.viewer', compact(
             'information'
         ));
     }
@@ -38,7 +38,7 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = InformationMarks::get();
 
-        return view('managements.informations.create', compact(
+        return view('managements.informations.editor', compact(
             'informationMarks'
         ));
     }

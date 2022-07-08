@@ -81,7 +81,7 @@
             @lang('strings.profile_settings')
           </a>
           <a class="dropdown-item text-black-50" href="/managements/freepages">
-            <i class="fas fa-fw fa-file-text-o"></i>
+            <i class="fas fa-fw fa-edit"></i>
             @lang('strings.freepage_management')
           </a>
         </div>
