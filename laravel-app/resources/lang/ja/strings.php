@@ -188,5 +188,6 @@ return [
     'anonymous_user_name' => '匿名希望',
     'anonymous_permisshon_allowed' => '未認証ユーザーの閲覧を許可する',
     'anonymous_permisshon_not_allowed' => '未認証ユーザーの閲覧を許可しない',
+    'upload_files' => 'ファイルアップロード',
 
 ];

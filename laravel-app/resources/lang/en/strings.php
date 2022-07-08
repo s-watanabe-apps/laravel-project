@@ -165,5 +165,6 @@ return [
     'anonymous_user_name' => 'Anonymous',
     'anonymous_permisshon_allowed' => 'Allow unauthenticated users to view.',
     'anonymous_permisshon_not_allowed' => 'Not allow unauthorized users to view.',
+    'upload_files' => 'Upload files',
 
 ];

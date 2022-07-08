@@ -95,6 +95,8 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
 
+            // Upload files
+            Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');
         });
     });
 });

@@ -86,6 +86,10 @@
             <i class="fas fa-fw fa-edit"></i>
             @lang('strings.freepage_management')
           </a>
+          <a class="dropdown-item text-black-50" href="/managements/uploadfiles">
+            <i class="fas fa-fw fa-upload"></i>
+            @lang('strings.upload_files')
+          </a>
         </div>
       </li>
       @endif
