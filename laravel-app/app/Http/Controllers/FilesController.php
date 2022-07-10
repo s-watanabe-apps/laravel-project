@@ -12,8 +12,13 @@ class FilesController extends Controller
      */
     public function get(Request $request)
     {
-        var_dump('test');
-        exit;
+        $path = storage_path('app/contents/files/');
+
+        $filePath = $path . $request->fileName;
+
+        if (is_readable($filePath)) {
+            return response()->file($filePath);
+        }
     }
 
 }

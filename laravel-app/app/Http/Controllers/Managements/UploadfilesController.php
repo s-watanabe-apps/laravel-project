@@ -28,9 +28,4 @@ class UploadfilesController extends ManagementsController
         return view('managements.uploadfiles.index');
     }
 
-    public function get(Request $request)
-    {
-        
-    }
-
 }
