@@ -84,7 +84,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
             Route::get('informations/create', 'Managements\InformationsController@create');
             Route::post('informations/confirm', 'Managements\InformationsController@confirm');
-            Route::post('informations/post', 'Managements\InformationsController@post');
+            Route::put('informations/confirm', 'Managements\InformationsController@confirm');
+            Route::post('informations/register', 'Managements\InformationsController@register');
+            Route::put('informations/register', 'Managements\InformationsController@register');
             Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
 
             // Profile Settings

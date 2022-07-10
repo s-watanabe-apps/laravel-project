@@ -40,6 +40,7 @@ class ManagementsInformationsPostRequest extends AppFormRequest
                 },
             ],
             'status' => 'required|in:' . implode(',', array_keys(Informations::getStatuses())),
+            'mark_id' => 'required|exists:information_marks,id',
         ];
     }
 

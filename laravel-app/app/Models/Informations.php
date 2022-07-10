@@ -20,6 +20,21 @@ class Informations extends Model
             self::STATUS_DISABLE => __('strings.disable'),
         ];
     }
+
+    /**
+     * Multiple assignable attributes.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'mark_id',
+        'title',
+        'body',
+        'status',
+        'start_time',
+        'end_time',
+    ];
+
     /**
      * Get base query.
      * 
@@ -65,5 +80,18 @@ class Informations extends Model
     public static function get($id)
     {
         return self::query()->where(['informations.id' => $id])->get()->first();
+    }
+
+
+    /**
+     * Add as an array.
+     * 
+     * @var array
+     * @return App\Models\FreePages
+     */
+    public static function add($values) {
+        $informations = new Informations();
+        $informations->fill($values)->save();
+        return $informations;
     }
 }

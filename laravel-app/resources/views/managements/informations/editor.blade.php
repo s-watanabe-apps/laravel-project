@@ -19,7 +19,7 @@
         @include('managements.informations.tabControl', ['index' => 2])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/confirm', 'method' => 'post', 'files' => true])}}
+            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/confirm', 'method' => $method, 'files' => true])}}
             @csrf
 
             <table class="table table-bordered responsive-table">
@@ -32,7 +32,13 @@
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 @foreach ($informationMarks as $informationMark)
                                 <label class="btn btn-light active">
-                                    <input type="radio" name="options" id="option1" autocomplete="off" @if($informationMark->id == 1) checked @endif>
+                                    <input type="radio" value="{{$informationMark->id}}" name="mark_id" id="mark_id" autocomplete="off"
+                                        @if(isset($information))
+                                            @if($information->mark_id == $informationMark->id) checked @endif
+                                        @else
+                                            @if($informationMark->id == 1) checked @endif
+                                        @endif
+                                    >
                                     <i class="fas {{$informationMark->mark}} text-primary-50"></i>
                                 </label>
                                 @endforeach
@@ -47,7 +53,7 @@
                         <td class="bg-light text-dark">
                             {{Form::text(
                                 'title',
-                                old('title'),
+                                $information->title ?? old('title'),
                                 ['id' => 'title', 'class' => 'form-control',]
                             )}}
                             <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
@@ -58,7 +64,7 @@
                             @lang('strings.body')
                         </th>
                         <td class="bg-light text-dark">
-                            <textarea class="form-control" name="body" id="summernote">{{old('body')}}</textarea>
+                            <textarea class="form-control" name="body" id="summernote">{{$information->body ?? old('body')}}</textarea>
                             <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
                         </td>
                     </tr>
@@ -69,7 +75,7 @@
                         <td class="bg-light text-dark">
                             {{Form::text(
                                 'start_time',
-                                old('start_time') ?? (new \Carbon\Carbon())->format($dateFormat->getDateTimeFullFormat()),
+                                $information->start_time ?? (old('start_time') ?? (new \Carbon\Carbon())->format($dateFormat->getDateTimeFullFormat())),
                                 ['id' => 'start_time', 'class' => 'form-control',]
                             )}}
                             <div class="text-danger">{{$errors->first('start_time') ?? ''}}</div>
@@ -82,7 +88,7 @@
                         <td class="bg-light text-dark">
                             {{Form::text(
                                 'end_time',
-                                old('end_time') ?? '',
+                                $information->end_time ?? (old('end_time') ?? ''),
                                 ['id' => 'end_time', 'class' => 'form-control',]
                             )}}
                             <div class="text-danger">{{$errors->first('end_time') ?? ''}}</div>
@@ -97,7 +103,9 @@
                                 {{Form::radio(
                                     'status',
                                     \App\Models\Informations::STATUS_ENABLE,
-                                    old('status') == \App\Models\Informations::STATUS_ENABLE ? true : (old('status') == '' ? true : false),
+                                    isset($information) ?
+                                        ($information->status == \App\Models\Informations::STATUS_ENABLE ? true : false) :
+                                        (old('status') == \App\Models\Informations::STATUS_ENABLE ? true : false),
                                     ['class' => 'radio-button__input']
                                 )}}
                                 <span class="radio-button__icon">@lang('strings.enable')</span>
@@ -106,7 +114,9 @@
                                 {{Form::radio(
                                     'status',
                                     \App\Models\Informations::STATUS_DISABLE,
-                                    old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false,
+                                    isset($information) ?
+                                        ($information->status == \App\Models\Informations::STATUS_DISABLE ? true : false) :
+                                        (old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false),
                                     ['class' => 'radio-button__input']
                                 )}}
                                 <span class="radio-button__icon">@lang('strings.disable')</span>

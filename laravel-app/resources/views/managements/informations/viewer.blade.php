@@ -16,9 +16,11 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.informations.tabControl', ['index' => 1])
+        @include('managements.informations.tabControl', ['index' => 2])
 
-        <div class="col-lg-8 px-0 px-lg-2">
+        <div class="col-lg-10 px-0 px-lg-2">
+            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/register', 'method' => 'post', 'files' => true])}}
+            @csrf
 
             <table class="table table-bordered responsive-table">
                 <tbody>
@@ -27,8 +29,10 @@
                             @lang('strings.title')
                         </th>
                         <td class="bg-light text-dark">
-                            <i class="fas {{$information->mark}} text-primary-50"></i>
-                            {{$information->title}}
+                            <i class="fas {{\App\Models\InformationMarks::getMark($request->mark_id)}} text-primary-50"></i>
+                            {{$request->title}}
+                            {{Form::hidden('mark_id', $request->mark_id)}}
+                            {{Form::hidden('title', $request->title)}}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +40,8 @@
                             @lang('strings.body')
                         </th>
                         <td class="bg-light text-dark">
-                            {!!$information->body!!}
+                            {!!$request->body!!}
+                            {{Form::hidden('body', $request->body)}}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +49,8 @@
                             @lang('strings.start_time')
                         </th>
                         <td class="bg-light text-dark">
-                            {{$information->start_time == null ? '' : (new Carbon\Carbon($information->end_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$request->start_time}}
+                            {{Form::hidden('start_time', $request->start_time)}}
                         </td>
                     </tr>
                     <tr>
@@ -52,23 +58,25 @@
                             @lang('strings.end_time')
                         </th>
                         <td class="bg-light text-dark">
-                            {{$information->end_time == null ? '' : (new Carbon\Carbon($information->end_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$request->end_time}}
+                            {{Form::hidden('end_time', $request->end_time)}}
                         </td>
                     </tr>
                     <tr>
                         <th class="bg-gradient-light text-secondary text-nowrap w-25">
                             @lang('strings.status')
                         </th>
-                        <td class="bg-light text-dark">
-                            @if($information->status == 1)
-                                <p class="py-0 my-0 btn btn-success shadow-sm">@lang('strings.enable')</p>
-                            @else
-                                <p class="py-0 my-0 btn btn-secondary shadow-sm">@lang('strings.disable')</p>
-                            @endif
+                        <td class="bg-light">
+                            {{\App\Models\Informations::getStatuses()[$request->status]}}
+                            {{Form::hidden('status', $request->status)}}
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <a href="javascript:informations.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
+                <i class="fas fa-check fa-sm"></i> @lang('strings.save')
+            </a>
+            {{Form::close()}}
         </div>
     </div>
 </div>

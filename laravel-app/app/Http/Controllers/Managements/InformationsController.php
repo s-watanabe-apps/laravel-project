@@ -29,8 +29,12 @@ class InformationsController extends ManagementsController
     {
         $information = Informations::get($request->id);
 
-        return view('managements.informations.viewer', compact(
-            'information'
+        $informationMarks = InformationMarks::get();
+
+        $method = 'put';
+
+        return view('managements.informations.editor', compact(
+            'information', 'informationMarks', 'method'
         ));
     }
 
@@ -38,37 +42,30 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = InformationMarks::get();
 
+        $method = 'post';
+
         return view('managements.informations.editor', compact(
-            'informationMarks'
+            'informationMarks', 'method'
         ));
     }
 
     public function confirm(ManagementsInformationsPostRequest $request)
     {
-        return view('managements.informations.confirm', compact('request'));
+        $method = $request->method();
+
+        return view('managements.informations.viewer', compact(
+            'request'
+        ));
     }
 
-    public function post(Request $request)
+    public function register(ManagementsInformationsPostRequest $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            (new ManagementsInformationsPostRequest)->rules()
-        );
+        \DB::transaction(function() use ($request) {
+            if ($request->isPost()) {
+                Informations::add($request->validated());
+            } else {
 
-        if ($validator->fails()) {
-            abort(422);
-        }
-
-        $validated = $validator->validated();
-
-        \DB::transaction(function() use ($validated) {
-            $informations = new Informations();
-            $informations->title = $validated['title'];
-            $informations->body = $validated['body'];
-            $informations->status = $validated['status'];
-            $informations->start_time = $validated['start_time'];
-            $informations->end_time = $validated['end_time'];
-            $informations->save();
+            }
         });
 
         return redirect()->route('managementsInformations');
