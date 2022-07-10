@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AppRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -15,7 +15,7 @@ class AppRegisterController extends RegisterController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         if ($request->isMethod('post')) {
             var_dump('test');

@@ -3,8 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Models\Images;
+use App\Http\Requests\AppRequest;
 use App\Http\Requests\ArticlePostRequest;
-use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
@@ -14,7 +14,7 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function write(Request $request)
+    public function write(AppRequest $request)
     {
         return view('articles.write');
     }

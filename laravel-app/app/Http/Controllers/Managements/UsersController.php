@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Managements;
 use App\Models\Users;
 use App\Models\PasswordResets;
 use App\Models\Roles;
+use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsUsersPostRequest;
 use App\Mail\ContactMail;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,7 +19,7 @@ class UsersController extends ManagementsController
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         $users = Users::getAllUsers();
 
@@ -34,7 +34,7 @@ class UsersController extends ManagementsController
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function create(Request $request)
+    public function create(AppRequest $request)
     {
         return view('managements.users.create');
     }

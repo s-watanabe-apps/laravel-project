@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Favorites;
 use App\Http\Requests\ApiFavoritesPostRequest;
-use Illuminate\Http\Request;
 
 class FavoritesController extends ApiController
 {

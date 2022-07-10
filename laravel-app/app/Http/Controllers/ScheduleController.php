@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Calendar;
-use Illuminate\Http\Request;
+use App\Http\Requests\AppRequest;
 
 class ScheduleController extends Controller
 {
@@ -13,7 +13,7 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         $events = Calendar::getMonthlyCalendar();
 

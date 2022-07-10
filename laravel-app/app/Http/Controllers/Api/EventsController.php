@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Services\Calendar;
 use App\Http\Requests\ApiEventsGetRequest;
-use Illuminate\Http\Request;
 
 class EventsController extends ApiController
 {

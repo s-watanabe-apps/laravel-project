@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Managements;
 
-Use \App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+Use App\Http\Controllers\Controller;
 
 class ManagementsController extends Controller
 {

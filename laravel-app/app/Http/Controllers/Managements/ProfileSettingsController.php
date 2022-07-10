@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Managements;
 
 use App\Libs\ProfileInputType;
 use App\Models\Profiles;
+use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsProfilePostRequest;
-use Illuminate\Http\Request;
 
 class ProfileSettingsController extends ManagementsController
 {
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         $types = ProfileInputType::getTypes();
 

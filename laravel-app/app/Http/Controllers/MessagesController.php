@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Messages;
-use Illuminate\Http\Request;
+use App\Http\Requests\AppRequest;
 
 class MessagesController extends Controller
 {
@@ -16,7 +16,7 @@ class MessagesController extends Controller
         return compact('inbox', 'outbox', 'garbage');
     }
 
-    public static function inbox(Request $request)
+    public static function inbox(AppRequest $request)
     {
         $messages = Messages::getByUserId($request->user->id);
 
@@ -28,7 +28,7 @@ class MessagesController extends Controller
         ]);
     }
 
-    public static function get(Request $request)
+    public static function get(AppRequest $request)
     {
         $message = Messages::getByUserIdAndMessageId($request->user->id, $request->id);
         if (is_null($message)) {

@@ -7,8 +7,8 @@ use App\Models\Informations;
 use App\Models\Users;
 use App\Models\Settings;
 use App\Services\Calendar;
+use App\Http\Requests\AppRequest;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -31,7 +31,7 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         
         //echo "<pre>";

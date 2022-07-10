@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PictureComments;
 use App\Models\Pictures;
-use Illuminate\Http\Request;
+use App\Http\Requests\AppRequest;
 
 class PicturesController extends Controller
 {
@@ -13,7 +13,7 @@ class PicturesController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         $images = Pictures::getPictureImages();
 
@@ -22,7 +22,7 @@ class PicturesController extends Controller
         ));
     }
 
-    public function get(Request $request)
+    public function get(AppRequest $request)
     {
         $image = Pictures::getPictureImages($request->id);
 

@@ -9,9 +9,9 @@ use App\Models\Profiles;
 use App\Models\ProfileValues;
 use App\Models\Images;
 use App\Models\VisitedUsers;
+use App\Http\Requests\AppRequest;
 use App\Http\Requests\ProfilePostRequest;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +25,7 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index(AppRequest $request)
     {
         $profileUsers = Users::getUsers();
 
@@ -40,7 +40,7 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function get(Request $request)
+    public function get(AppRequest $request)
     {
         if ($request->filled('id') || !is_numeric($request->id)) {
             return view('404');
@@ -80,7 +80,7 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit(AppRequest $request)
     {
         $birthDate = $request->user->getBirthDate();
 

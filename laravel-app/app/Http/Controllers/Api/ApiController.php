@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-Use \App\Http\Controllers\Controller;
-use \Illuminate\Http\Request;
+Use App\Http\Controllers\Controller;
+use App\Http\Requests\AppRequest;
 use \Illuminate\Support\Facades\Cookie;
 use \Illuminate\Support\Facades\Crypt;
 use \GuzzleHttp\Client;
@@ -38,7 +38,7 @@ class ApiController extends Controller
         return parent::callAction($method, $parameters);
     }
 
-    private function authenticate(Request $request)
+    private function authenticate(AppRequest $request)
     {
 
     }
