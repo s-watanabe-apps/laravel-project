@@ -18,7 +18,19 @@ class UploadfilesController extends ManagementsController
      */
     public function index(Request $request)
     {
+        $path = storage_path('app/contents/files/');
+        $files = \File::files($path);
+
+        foreach ($files as $v) {
+            var_dump($v->getfileName());
+        }
+
         return view('managements.uploadfiles.index');
+    }
+
+    public function get(Request $request)
+    {
+        
     }
 
 }

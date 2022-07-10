@@ -64,6 +64,10 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // Show storage
         Route::get('/show/image', 'ShowController@image');
 
+        // Files
+        Route::get('files/{fileName}', 'FilesController@get')->where('fileName', '.*[\.txt,\.pdf]');
+
+
         // Managements
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
             // Settings
