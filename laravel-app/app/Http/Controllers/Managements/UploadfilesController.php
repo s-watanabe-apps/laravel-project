@@ -21,11 +21,15 @@ class UploadfilesController extends ManagementsController
         $path = storage_path('app/contents/files/');
         $files = \File::files($path);
 
+        
+
         foreach ($files as $v) {
             var_dump($v->getfileName());
         }
 
-        return view('managements.uploadfiles.index');
+        return view('managements.uploadfiles.index', compact(
+            'files'
+        ));
     }
 
 }
