@@ -20,7 +20,7 @@
         @include('managements.users.tabControl', ['index' => 2])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/post', 'method' => 'post', 'files' => true])}}
+            {{Form::open(['name' => 'managementsUsers', 'url' => '/managements/users/register', 'method' => 'post', 'files' => true])}}
             @csrf
 
             <table class="table table-bordered responsive-table">

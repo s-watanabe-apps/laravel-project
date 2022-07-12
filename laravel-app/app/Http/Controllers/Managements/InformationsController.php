@@ -13,8 +13,8 @@ class InformationsController extends ManagementsController
     /**
      * Get information list.
      * 
-     * @param Illuminate\Http\Request $request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -25,30 +25,49 @@ class InformationsController extends ManagementsController
         ));
     }
 
+    /**
+     * Get information.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
     public function get(AppRequest $request)
     {
         $information = Informations::get($request->id);
 
         $informationMarks = InformationMarks::get();
 
-        $method = $request::PUT;
+        $method = AppRequest::PUT;
 
         return view('managements.informations.editor', compact(
             'information', 'informationMarks', 'method'
         ));
     }
 
+    /**
+     * Get create information form.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
     public function create(AppRequest $request)
     {
         $informationMarks = InformationMarks::get();
 
-        $method = $request::POST;
+        $method = AppRequest::POST;
 
         return view('managements.informations.editor', compact(
             'informationMarks', 'method'
         ));
     }
 
+
+    /**
+     * Confirmation of input contents.
+     * 
+     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @return Illuminate\View\View
+     */
     public function confirm(ManagementsInformationsPostRequest $request)
     {
         $method = $request->method();
@@ -58,6 +77,12 @@ class InformationsController extends ManagementsController
         ));
     }
 
+    /**
+     * Register input information.
+     * 
+     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @return void
+     */
     public function register(ManagementsInformationsPostRequest $request)
     {
         \DB::transaction(function() use ($request) {

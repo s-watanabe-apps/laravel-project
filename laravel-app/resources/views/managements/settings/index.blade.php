@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    {{Form::open(['name' => 'settings', 'url' => '/managements/settings/post', 'method' => 'post', 'files' => true])}}
+    {{Form::open(['name' => 'settings', 'url' => '/managements/settings/register', 'method' => 'post', 'files' => true])}}
     @csrf
 
     <!-- Page Heading -->

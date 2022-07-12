@@ -8,12 +8,24 @@ use App\Http\Requests\ManagementsSettingsPostRequest;
 
 class SettingsController extends ManagementsController
 {
+    /**
+     * Get setting list.
+     * 
+     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @return Illuminate\View\View
+     */
     public function index(AppRequest $request)
     {
         return view('managements.settings.index');
     }
 
-    public function post(ManagementsSettingsPostRequest $request)
+    /**
+     * Register input information.
+     * 
+     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @return Illuminate\View\View
+     */
+    public function register(ManagementsSettingsPostRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $request->settings->saveSettings($request);

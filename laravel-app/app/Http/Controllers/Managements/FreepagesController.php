@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
-//use App\Models\InformationMarks;
 use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsFreepagesPostRequest;
 use Illuminate\Support\Facades\Validator;
@@ -12,10 +11,10 @@ use Illuminate\Support\Str;
 class FreepagesController extends ManagementsController
 {
     /**
-     * Get information list.
+     * Get free page list.
      * 
-     * @param Illuminate\Http\Request $request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -26,6 +25,31 @@ class FreepagesController extends ManagementsController
         ));
     }
 
+    /**
+     * Get free page.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
+    public function get(AppRequest $request)
+    {
+        $freePage = FreePages::find($request->id);
+
+        $values = $freePage->getAttributes();
+
+        $index = 1;
+
+        return view('managements.freepages.editor', compact(
+            'values', 'index'
+        ));
+    }
+
+    /**
+     * Get create free page form.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
     public function create(AppRequest $request)
     {
         $code = Str::random(32);
@@ -37,6 +61,12 @@ class FreepagesController extends ManagementsController
         ));
     }
 
+    /**
+     * Confirmation of input contents.
+     * 
+     * @param App\Http\Requests\ManagementsFreepagesPostRequest
+     * @return Illuminate\View\View
+     */
     public function confirm(ManagementsFreepagesPostRequest $request)
     {
         $values = $request->validated();
@@ -46,6 +76,12 @@ class FreepagesController extends ManagementsController
         ));
     }
 
+    /**
+     * Register input information.
+     * 
+     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @return void
+     */
     public function register(ManagementsFreepagesPostRequest $request)
     {
 
@@ -58,19 +94,6 @@ class FreepagesController extends ManagementsController
         });
 
         return redirect()->route('managementsFreepages');
-    }
-
-    public function get(AppRequest $request)
-    {
-        $freePage = FreePages::find($request->id);
-
-        $values = $freePage->getAttributes();
-
-        $index = 1;
-
-        return view('managements.freepages.editor', compact(
-            'values', 'index'
-        ));
     }
 
 /*

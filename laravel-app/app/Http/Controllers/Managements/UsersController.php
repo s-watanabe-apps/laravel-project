@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Mail;
 class UsersController extends ManagementsController
 {
     /**
-     * List of registered users.
+     * Get user List.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\ManagementsUsersPostRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -29,34 +29,34 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * User registration.
+     * Get create user form.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\ManagementsUsersPostRequest
+     * @return Illuminate\View\View
      */
     public function create(AppRequest $request)
     {
-        return view('managements.users.create');
+        return view('managements.users.editor');
     }
 
     /**
      * Confirmation of input contents.
      * 
-     * @param  App\Http\Requests\ManagementsUsersPostRequest
+     * @param App\Http\Requests\ManagementsUsersPostRequest
      * @return \Illuminate\View\View
      */
     public function confirm(ManagementsUsersPostRequest $request)
     {
-        return view('managements.users.confirm', compact('request'));
+        return view('managements.users.viewer', compact('request'));
     }
 
     /**
-     * Add user information.
+     * Register input information.
      * 
-     * @param  App\Http\Requests\ManagementsUsersPostRequest
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\ManagementsUsersPostRequest
+     * @return Illuminate\View\View
      */
-    public function post(ManagementsUsersPostRequest $request)
+    public function register(ManagementsUsersPostRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $users = new Users();

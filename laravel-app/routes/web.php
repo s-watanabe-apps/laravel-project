@@ -72,34 +72,35 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
             // Settings
             Route::get('settings', 'Managements\SettingsController@index')->name('managementsSettings');
-            Route::post('settings/post', 'Managements\SettingsController@post');
+            Route::post('settings/register', 'Managements\SettingsController@register');
 
             // Users
             Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
             Route::get('users/create', 'Managements\UsersController@create');
             Route::post('users/confirm', 'Managements\UsersController@confirm');
-            Route::post('users/post', 'Managements\UsersController@post');
+            Route::post('users/register', 'Managements\UsersController@register');
 
             // Informations
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
+            Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
             Route::get('informations/create', 'Managements\InformationsController@create');
             Route::post('informations/confirm', 'Managements\InformationsController@confirm');
-            Route::put('informations/confirm', 'Managements\InformationsController@confirm');
             Route::post('informations/register', 'Managements\InformationsController@register');
+            Route::put('informations/confirm', 'Managements\InformationsController@confirm');
             Route::put('informations/register', 'Managements\InformationsController@register');
-            Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
 
             // Profile Settings
             Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');
-            Route::post('profile/settings/post', 'Managements\ProfileSettingsController@post');
+            Route::post('profile/settings/register', 'Managements\ProfileSettingsController@register');
 
             // Free Pages
             Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');
+            Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::get('freepages/create', 'Managements\FreepagesController@create');
             Route::post('freepages/confirm', 'Managements\FreepagesController@confirm');
             Route::post('freepages/register', 'Managements\FreepagesController@register');
-            Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
+            Route::put('freepages/register', 'Managements\FreepagesController@register');
 
             // Upload files
             Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');
