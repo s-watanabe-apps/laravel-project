@@ -12,10 +12,10 @@ use Illuminate\Contracts\Encryption\DecryptException;
 class ShowController extends Controller
 {
     /**
-     * image
+     * Get image file.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return void
+     * @param App\Http\Requests\AppRequest
+     * @return 
      */
     public function image(AppRequest $request)
     {

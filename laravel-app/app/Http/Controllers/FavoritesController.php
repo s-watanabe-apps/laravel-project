@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Validator;
 class FavoritesController extends Controller
 {
     /**
-     * index Get.
+     * Get favorite list.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -23,6 +23,12 @@ class FavoritesController extends Controller
         ));
     }
 
+    /**
+     * Remove favorites from the list.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
     public function remove(AppRequest $request)
     {
         $validator = Validator::make([

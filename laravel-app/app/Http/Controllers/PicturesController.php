@@ -10,8 +10,8 @@ class PicturesController extends Controller
     /**
      * Get pictures images.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -22,6 +22,12 @@ class PicturesController extends Controller
         ));
     }
 
+    /**
+     * Get picture.
+     * 
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
+     */
     public function get(AppRequest $request)
     {
         $image = Pictures::getPictureImages($request->id);

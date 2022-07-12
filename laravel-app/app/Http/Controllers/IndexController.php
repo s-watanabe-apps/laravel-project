@@ -15,21 +15,12 @@ use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('authcheck');
-    }
 
     /**
-     * index Get.
+     * Get top page of site.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {

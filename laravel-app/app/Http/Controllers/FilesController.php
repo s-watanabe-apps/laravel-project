@@ -8,7 +8,8 @@ class FilesController extends Controller
     /**
      * Get files.
      * 
-     * @param  \Illuminate\Http\Request
+     * @param App\Http\Requests\AppRequest
+     * @return
      */
     public function get(AppRequest $request)
     {

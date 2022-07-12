@@ -22,8 +22,8 @@ class ProfilesController extends Controller
     /**
      * Get user list.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function index(AppRequest $request)
     {
@@ -37,8 +37,8 @@ class ProfilesController extends Controller
     /**
      * Get profile.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function get(AppRequest $request)
     {
@@ -77,8 +77,8 @@ class ProfilesController extends Controller
     /**
      * Edit profile.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function edit(AppRequest $request)
     {
@@ -101,8 +101,8 @@ class ProfilesController extends Controller
     /**
      * Save profile values.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function post(ProfilePostRequest $request)
     {

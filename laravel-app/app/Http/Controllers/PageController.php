@@ -8,10 +8,10 @@ use App\Http\Requests\AppRequest;
 class PageController extends Controller
 {
     /**
-     * index Get.
+     * Get free page.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\AppRequest
+     * @return Illuminate\View\View
      */
     public function get(AppRequest $request)
     {
