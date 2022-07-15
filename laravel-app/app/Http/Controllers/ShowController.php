@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Users;
-use App\Http\Requests\AppRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
@@ -14,10 +14,10 @@ class ShowController extends Controller
     /**
      * Get image file.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return 
      */
-    public function image(AppRequest $request)
+    public function image(Request $request)
     {
         try {
             $validator = Validator::make([

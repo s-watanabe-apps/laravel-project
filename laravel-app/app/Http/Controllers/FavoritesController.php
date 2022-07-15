@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorites;
-use App\Http\Requests\AppRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class FavoritesController extends Controller
@@ -11,10 +11,10 @@ class FavoritesController extends Controller
     /**
      * Get favorite list.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         $favorites = Favorites::getFavoritesByUserId($request->user->id);
 
@@ -26,10 +26,10 @@ class FavoritesController extends Controller
     /**
      * Remove favorites from the list.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function remove(AppRequest $request)
+    public function remove(Request $request)
     {
         $validator = Validator::make([
             'uri' => $request->uri,

@@ -9,9 +9,9 @@ use App\Models\Profiles;
 use App\Models\ProfileValues;
 use App\Models\Images;
 use App\Models\VisitedUsers;
-use App\Http\Requests\AppRequest;
 use App\Http\Requests\ProfilePostRequest;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -22,10 +22,10 @@ class ProfilesController extends Controller
     /**
      * Get user list.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         $profileUsers = Users::getUsers();
 
@@ -37,10 +37,10 @@ class ProfilesController extends Controller
     /**
      * Get profile.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function get(AppRequest $request)
+    public function get(Request $request)
     {
         if ($request->filled('id') || !is_numeric($request->id)) {
             return view('404');
@@ -77,10 +77,10 @@ class ProfilesController extends Controller
     /**
      * Edit profile.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function edit(AppRequest $request)
+    public function edit(Request $request)
     {
         $birthDate = $request->user->getBirthDate();
 
@@ -101,7 +101,7 @@ class ProfilesController extends Controller
     /**
      * Save profile values.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param App\Http\Requests\ProfilePostRequest
      * @return Illuminate\View\View
      */
     public function post(ProfilePostRequest $request)

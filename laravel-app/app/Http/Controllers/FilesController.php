@@ -1,17 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AppRequest;
+use Illuminate\Http\Request;
 
 class FilesController extends Controller
 {
     /**
      * Get files.
      * 
-     * @param App\Http\Requests\AppRequest
-     * @return
+     * @param Illuminate\Http\Request
+     * @return Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function get(AppRequest $request)
+    public function get(Request $request)
     {
         $path = storage_path('app/contents/files/');
 

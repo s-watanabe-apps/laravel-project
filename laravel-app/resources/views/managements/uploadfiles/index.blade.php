@@ -18,14 +18,22 @@
         <table id="dataTable" class="display cell-border compact" style="margin: unset; width: 100%;">
             <thead>
                 <tr class="text-nowrap">
-                    <th class="dt-center">ID</th>
+                    <th class="dt-center">@lang('strings.file_name')</th>
+                    <th class="dt-center">@lang('strings.created_at')</th>
+                    <th class="dt-center">@lang('strings.updated_at')</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($files as $value)
                 <tr>
+                    <td class="dt-left">
+                        <a href="/files/{{$value->getfileName()}}">{{$value->getfileName()}}</a>
+                    </td>
                     <td class="dt-center">
-                        {{$value->getfileName()}}
+                        {{$value->createdAt->format($dateFormat->getDateTimeFormat())}}
+                    </td>
+                    <td class="dt-center">
+                        {{$value->updatedAt->format($dateFormat->getDateTimeFormat())}}
                     </td>
                 </tr>
                 @endforeach

@@ -64,6 +64,7 @@ return [
     'add' => 'Add',
     'sort_order' => 'Sort order',
     'select_list' => 'Selection list',
+    'file_name' => 'File name',
 
     // Side menus
     'write_articles' => 'Write articles',

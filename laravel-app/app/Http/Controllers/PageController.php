@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\FreePages;
-use App\Http\Requests\AppRequest;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     /**
      * Get free page.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function get(AppRequest $request)
+    public function get(Request $request)
     {
         $values = FreePages::getByCode($request->code);
 

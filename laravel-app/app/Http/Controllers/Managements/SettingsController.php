@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Settings;
-use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsSettingsPostRequest;
+use Illuminate\Http\Request;
 
 class SettingsController extends ManagementsController
 {
     /**
      * Get setting list.
      * 
-     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         return view('managements.settings.index');
     }

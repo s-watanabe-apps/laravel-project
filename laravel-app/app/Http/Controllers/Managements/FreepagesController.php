@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
-use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsFreepagesPostRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -13,10 +13,10 @@ class FreepagesController extends ManagementsController
     /**
      * Get free page list.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         $freePages = FreePages::all();
 
@@ -28,10 +28,10 @@ class FreepagesController extends ManagementsController
     /**
      * Get free page.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function get(AppRequest $request)
+    public function get(Request $request)
     {
         $freePage = FreePages::find($request->id);
 
@@ -47,10 +47,10 @@ class FreepagesController extends ManagementsController
     /**
      * Get create free page form.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function create(AppRequest $request)
+    public function create(Request $request)
     {
         $code = Str::random(32);
 

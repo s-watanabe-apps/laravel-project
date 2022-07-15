@@ -18,6 +18,7 @@ $(window).on('load', function() {
             },
         ],
         scrollX: true,
+        fixedHeader:true,
     });
 
     table.columns.adjust();

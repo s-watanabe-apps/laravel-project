@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
 use App\Models\InformationMarks;
-use App\Http\Requests\AppRequest;
 use App\Http\Requests\ManagementsInformationsPostRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class InformationsController extends ManagementsController
@@ -13,10 +13,10 @@ class InformationsController extends ManagementsController
     /**
      * Get information list.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         $informations = Informations::all();
 
@@ -28,16 +28,16 @@ class InformationsController extends ManagementsController
     /**
      * Get information.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function get(AppRequest $request)
+    public function get(Request $request)
     {
         $information = Informations::get($request->id);
 
         $informationMarks = InformationMarks::get();
 
-        $method = AppRequest::PUT;
+        $method = 'put';
 
         return view('managements.informations.editor', compact(
             'information', 'informationMarks', 'method'
@@ -47,14 +47,14 @@ class InformationsController extends ManagementsController
     /**
      * Get create information form.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function create(AppRequest $request)
+    public function create(Request $request)
     {
         $informationMarks = InformationMarks::get();
 
-        $method = AppRequest::POST;
+        $method = 'post';
 
         return view('managements.informations.editor', compact(
             'informationMarks', 'method'

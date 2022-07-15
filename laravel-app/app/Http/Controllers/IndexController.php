@@ -7,8 +7,8 @@ use App\Models\Informations;
 use App\Models\Users;
 use App\Models\Settings;
 use App\Services\Calendar;
-use App\Http\Requests\AppRequest;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -19,12 +19,14 @@ class IndexController extends Controller
     /**
      * Get top page of site.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
         
+        //var_dump(\App\Services\Files::getRegex());
+
         //echo "<pre>";
         //var_dump(Auth::user()->name);
         //var_dump(Auth::user()->email);

@@ -63,6 +63,7 @@ return [
     'add' => '追加',
     'sort_order' => '並び順',
     'select_list' => '選択リスト',
+    'file_name' => 'ファイル名',
 
     // Side menus
     'write_articles' => '記事を書く',

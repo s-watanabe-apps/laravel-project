@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
-use App\Http\Requests\AppRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -12,19 +13,19 @@ class UploadfilesController extends ManagementsController
     /**
      * Get upload files.
      * 
-     * @param App\Http\Requests\AppRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(AppRequest $request)
+    public function index(Request $request)
     {
-        $path = storage_path('app/contents/files/');
-        $files = \File::files($path);
-
-        
-
-        foreach ($files as $v) {
-            var_dump($v->getfileName());
-        }
+        $files = array_map(
+            function($file) {
+                $file->createdAt = Carbon::createFromTimestamp(filectime($file->getPathName()));
+                $file->updatedAt = Carbon::createFromTimestamp(filemtime($file->getPathName()));
+                return $file;
+            },
+            \File::files(storage_path('app/contents/files/'))
+        );
 
         return view('managements.uploadfiles.index', compact(
             'files'

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\AppRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ShowController extends ApiController
@@ -20,10 +20,10 @@ class ShowController extends ApiController
     /**
      * image Get.
      * 
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
      */
-    public function image(AppRequest $request)
+    public function image(Request $request)
     {
         try {
             $validator = Validator::make([
