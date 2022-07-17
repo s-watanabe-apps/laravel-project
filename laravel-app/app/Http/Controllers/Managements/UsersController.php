@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Managements;
 
-use App\Models\Users;
 use App\Models\PasswordResets;
 use App\Models\Roles;
+use App\Services\UsersService;
 use App\Http\Requests\ManagementsUsersPostRequest;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Mail;
 
 class UsersController extends ManagementsController
 {
+    // Instance variables.
+    private $usersService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param App\Services\UsersService
+     * @return void
+     */
+    public function __construct(
+        UsersService $usersService
+    ) {
+        $this->usersService = $usersService;
+    }
+
     /**
      * Get user List.
      * 
@@ -21,7 +36,7 @@ class UsersController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $users = Users::getAllUsers();
+        $users = $this->usersService->getAllUsers();
 
         return view('managements.users.index', compact(
             'users'

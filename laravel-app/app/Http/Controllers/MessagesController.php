@@ -11,7 +11,7 @@ class MessagesController extends Controller
     private $articlesService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\MessagesService
      * @return void

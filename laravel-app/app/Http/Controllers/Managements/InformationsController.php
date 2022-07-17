@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class InformationsController extends ManagementsController
 {
+    // Instance variables.
     private $informationsService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\InformationsService
      * @return void

@@ -7,7 +7,7 @@ Use App\Http\Controllers\Controller;
 class ManagementsController extends Controller
 {
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @return void
      */

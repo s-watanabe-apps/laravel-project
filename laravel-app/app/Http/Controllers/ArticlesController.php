@@ -12,7 +12,7 @@ class ArticlesController extends Controller
     private $articlesService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\ArticlesService
      * @return void

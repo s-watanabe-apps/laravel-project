@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\ClientException;
 
 class ApiController extends Controller
 {
+    // Instance variables.
     protected $user;
 
     public function callAction($method, $parameters)

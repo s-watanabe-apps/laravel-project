@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Users;
 use App\Http\Requests\LoginLoginPostRequest;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Libs\Token;
+use App\Services\UsersService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +37,19 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    // Instance variables.
+    private $usersService;
+
     /**
      * Create a new controller instance.
      *
+     * @param App\Services\UsersService
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        UsersService $usersService
+    ) {
+        $this->usersService = $usersService;
     }
 
     /**
@@ -60,7 +66,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials,  $remember === 'on')) {
             //$apiToken = Token::generate();
-            //Users::updateApiToken(Auth::user()->id, $apiToken);
+            //$this->usersService->updateApiToken(Auth::user()->id, $apiToken);
 
             //$apiToken = hash('sha256', Str::random(80));
             $apiToken = Str::random(80);

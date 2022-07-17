@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use App\Models\Favorites;
-use App\Models\Profiles;
 use App\Models\ProfileValues;
 use App\Models\Images;
 use App\Models\VisitedUsers;
 use App\Services\ArticlesService;
 use App\Services\FavoritesService;
+use App\Services\ProfilesService;
 use App\Http\Requests\ProfilePostRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,19 +22,25 @@ class ProfilesController extends Controller
 {
     // Instance variables.
     private $articlesService;
+    private $favoritesService;
+    private $profilesService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\ArticlesService
+     * @param App\Services\FavoritesService
+     * @param App\Services\ProfilesService
      * @return void
      */
     public function __construct(
         ArticlesService $articlesService,
-        FavoritesService $favoritesService
+        FavoritesService $favoritesService,
+        ProfilesService $profilesService
     ) {
         $this->articlesService = $articlesService;
         $this->favoritesService = $favoritesService;
+        $this->profilesService = $profilesService;
     }
 
     /**
@@ -82,7 +88,7 @@ class ProfilesController extends Controller
         }
 */
 
-        $userProfiles = Profiles::getUserProfiles($request->id);
+        $userProfiles = $this->profilesService->getUserProfiles($request->id);
 
         return view('profiles.get', compact(
             'profileUser',
@@ -104,9 +110,9 @@ class ProfilesController extends Controller
 
         $profileUser = $request->user;
 
-        $userProfiles = Profiles::getUserProfiles($request->user->id);
+        $userProfiles = $this->profilesService->getUserProfiles($request->user->id);
 
-        $choices = Profiles::getProfileChoicesHash();
+        $choices = $this->profilesService->getProfileChoicesHash();
 
         return view('profiles.edit', compact(
             'profileUser',

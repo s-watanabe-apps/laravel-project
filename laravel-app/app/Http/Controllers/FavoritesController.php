@@ -8,6 +8,21 @@ use Illuminate\Support\Facades\Validator;
 
 class FavoritesController extends Controller
 {
+    // Instance variables.
+    private $favoritesService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param App\Services\FavoritesService
+     * @return void
+     */
+    public function __construct(
+        FavoritesService $favoritesService
+    ) {
+        $this->favoritesService = $favoritesService;
+    }
+    
     /**
      * Get favorite list.
      * 

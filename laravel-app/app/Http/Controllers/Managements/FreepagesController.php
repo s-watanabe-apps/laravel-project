@@ -14,7 +14,7 @@ class FreepagesController extends ManagementsController
     private $freePagesService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\FreePagesService
      * @return void

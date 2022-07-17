@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Users;
 use Carbon\Carbon;
 
 class CalendarService
@@ -31,7 +30,7 @@ class CalendarService
             ];
         }
         
-        $users = Users::getBirthdayUsers(array_column($dates, 'date'));
+        $users = (new UsersService())->getBirthdayUsers(array_column($dates, 'date'));
 
         $usersMap = [];
         foreach ($users as $user) {
@@ -70,7 +69,7 @@ class CalendarService
 
         $dates = $this->getCalendarDates($now->year, $now->month);
 
-        $users = Users::getBirthdayUsers($dates);
+        $users = (new UsersService())->getBirthdayUsers($dates);
 
         foreach ($users as $user) {
             $carbon = new Carbon($user->birthdate);
@@ -136,7 +135,7 @@ class CalendarService
         //    \Log::info($value->toString());
         //}
 
-        $users = Users::getBirthdayUsers($dates);
+        $users = (new UsersService())->getBirthdayUsers($dates);
         $year = (new Carbon())->year;
         foreach ($users as $user) {
             $carbon = new Carbon($user->birthdate);

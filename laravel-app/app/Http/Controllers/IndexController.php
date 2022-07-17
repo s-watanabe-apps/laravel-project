@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
-use App\Models\Users;
 use App\Models\Settings;
 use App\Services\CalendarService;
 use App\Services\InformationsService;
@@ -20,7 +19,7 @@ class IndexController extends Controller
     private $calendarService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\InformationsService
      * @param App\Services\CalendarService

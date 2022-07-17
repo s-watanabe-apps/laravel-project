@@ -11,7 +11,7 @@ class FavoritesController extends ApiController
     private $favoritesService;
 
     /**
-     * Constructor.
+     * Create a new controller instance.
      *
      * @param App\Services\FavoritesService
      * @return void
