@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Favorites;
 use App\Http\Requests\ApiFavoritesPostRequest;
+use App\Services\FavoritesService;
 
 class FavoritesController extends ApiController
 {
+    // Instance variables.
+    private $favoritesService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\FavoritesService
+     * @return void
+     */
+    public function __construct(
+        FavoritesService $favoritesService
+    ) {
+        $this->favoritesService = $favoritesService;
+    }
+
     /**
      * Switch favorites.
      * 
@@ -18,13 +33,13 @@ class FavoritesController extends ApiController
         \Log::info("test");
 
         if (!$request->isFavorite) {
-            Favorites::addFavorites($this->user->id, $request->uri);
+            $this->favoritesService->add($this->user->id, $request->uri);
 
             $result = [
                 'message' => __('strings.operation_messages.add_favorites'),
             ];
         } else {
-            Favorites::removeFavorites($this->user->id, $request->uri);
+            $this->favoritesService->remove($this->user->id, $request->uri);
 
             $result = [
                 'message' => __('strings.operation_messages.remove_favorites'),

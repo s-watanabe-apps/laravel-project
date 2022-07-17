@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favorites;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,8 +30,4 @@ class Controller extends BaseController
         return parent::callAction($method, $parameters);
     }
 
-    public function isFavorite($request)
-    {
-        return Favorites::getFaivoritesByUserIdAndRequest($request->user->id, $request) != null ? 1 : 0;
-    }
 }

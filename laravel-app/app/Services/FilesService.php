@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class Files
+class FilesService
 {
     static $extensions = [
         'txt', 'pdf', 'zip',

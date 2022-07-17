@@ -4,12 +4,26 @@ namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
 use App\Models\InformationMarks;
+use App\Services\InformationsService;
 use App\Http\Requests\ManagementsInformationsPostRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class InformationsController extends ManagementsController
 {
+    private $informationsService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\InformationsService
+     * @return void
+     */
+    public function __construct(InformationsService $informationsService)
+    {
+        $this->informationsService = $informationsService;
+    }
+
     /**
      * Get information list.
      * 
@@ -18,7 +32,7 @@ class InformationsController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $informations = Informations::all();
+        $informations = $this->informationsService->all();
 
         return view('managements.informations.index', compact(
             'informations'
@@ -33,7 +47,7 @@ class InformationsController extends ManagementsController
      */
     public function get(Request $request)
     {
-        $information = Informations::get($request->id);
+        $information = $this->informationsService->get($request->id);
 
         $informationMarks = InformationMarks::get();
 
@@ -52,7 +66,7 @@ class InformationsController extends ManagementsController
      */
     public function create(Request $request)
     {
-        $informationMarks = InformationMarks::get();
+        $informationMarks = $this->informationsService->get();
 
         $method = 'post';
 
@@ -87,7 +101,7 @@ class InformationsController extends ManagementsController
     {
         \DB::transaction(function() use ($request) {
             if ($request->isPost()) {
-                Informations::add($request->validated());
+                $this->informationsService->add($request->validated());
             } else {
 
             }

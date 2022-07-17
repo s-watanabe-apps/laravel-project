@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
-use App\Models\Informations;
 use App\Models\Users;
 use App\Models\Settings;
-use App\Services\Calendar;
+use App\Services\CalendarService;
+use App\Services\InformationsService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +15,24 @@ use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
+    // Instance variables.
+    private $informationsService;
+    private $calendarService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\InformationsService
+     * @param App\Services\CalendarService
+     * @return void
+     */
+    public function __construct(
+        InformationsService $informationsService,
+        CalendarService $calendarService
+    ) {
+        $this->informationsService = $informationsService;
+        $this->calendarService = $calendarService;
+    }
 
     /**
      * Get top page of site.
@@ -35,10 +53,10 @@ class IndexController extends Controller
         //var_dump(\Config::get('mail'));
 
         // Informations
-        $informations = Informations::getEnabled();
+        $informations = $this->informationsService->getEnabled();
 
         // Weekly calendar
-        $calendar = Calendar::getWeeklyCalendar();
+        $calendar = $this->calendarService->getWeeklyCalendar();
 
         // Latest Articles
         

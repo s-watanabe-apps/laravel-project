@@ -65,7 +65,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/show/image', 'ShowController@image');
 
         // Files
-        Route::get('/files/{fileName}', 'FilesController@get')->where('fileName', \App\Services\Files::getRegex());
+        Route::get('/files/{fileName}', 'FilesController@get')->where('fileName', \App\Services\FilesService::getRegex());
 
 
         // Managements

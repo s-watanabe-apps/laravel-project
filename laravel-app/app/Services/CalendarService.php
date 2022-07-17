@@ -4,17 +4,16 @@ namespace App\Services;
 
 use App\Models\Users;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 
-class Calendar extends Model
+class CalendarService
 {
     /**
-     * getWeeklyCalendar
+     * Get weekly calendar.
      * 
      * @var string
      * @return array
      */
-    public static function getWeeklyCalendar($startDate = null)
+    public function getWeeklyCalendar($startDate = null)
     {
         $dates = [];
         $now = new Carbon();
@@ -59,7 +58,7 @@ class Calendar extends Model
      * @var Carbon
      * @return array
      */
-    public static function getMonthlyCalendar($date = null)
+    public function getMonthlyCalendar($date = null)
     {
         $events = [];
 
@@ -69,7 +68,7 @@ class Calendar extends Model
             $now = $date;
         }
 
-        $dates = Calendar::getCalendarDates($now->year, $now->month);
+        $dates = $this->getCalendarDates($now->year, $now->month);
 
         $users = Users::getBirthdayUsers($dates);
 
@@ -87,13 +86,13 @@ class Calendar extends Model
     }
 
     /**
-     * getCalendarDates
+     * Get calendar dates.
      * 
      * @var string
      * @var string
      * @return array
      */
-    public static function getCalendarDates($year, $month)
+    public function getCalendarDates($year, $month)
     {
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
         $date = new Carbon($dateStr);
@@ -111,13 +110,13 @@ class Calendar extends Model
     }
 
     /**
-     * Get events for range.
+     * Get events by range.
      * 
      * @var string
      * @var string
      * @return array
      */
-    public static function getEvents($start, $end)
+    public function getEvents($start, $end)
     {
         $events = [];
 

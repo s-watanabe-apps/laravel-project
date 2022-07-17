@@ -2,12 +2,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
-use App\Models\Images;
+use App\Services\ArticlesService;
 use App\Http\Requests\ArticlePostRequest;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+    // Instance variables.
+    private $articlesService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\ArticlesService
+     * @return void
+     */
+    public function __construct(
+        ArticlesService $articlesService
+    ) {
+        $this->articlesService = $articlesService;
+    }
+
     /**
      * Write an article.
      * 
@@ -41,7 +56,7 @@ class ArticlesController extends Controller
     public function post(ArticlePostRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            Articles::saveArticles(
+            $this->articlesService->save(
                 $request->user->id,
                 Articles::TYPE_MEMBER_ARTICLE,
                 $request->validated());

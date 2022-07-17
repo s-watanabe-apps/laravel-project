@@ -53,45 +53,4 @@ class Informations extends Model
                 'informations.end_time',
             ])->join('information_marks', 'informations.mark_id', '=', 'information_marks.id');
     }
-
-    /**
-     * Get enabled informations.
-     * 
-     * @return array
-     */
-    public static function getEnabled() {
-        $now = new Carbon();
-        return self::query()
-            ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
-            ->where('status', self::STATUS_ENABLE)
-            ->where('start_time', '<=', $now)
-            ->where(function($query) use($now) {
-                $query->where('end_time', '>=', $now)
-                      ->orWhereNull('end_time');
-            })->orderBy('start_time')
-            ->get();
-    }
-
-    public static function all($columns = [])
-    {
-        return self::query()->get();
-    }
-
-    public static function get($id)
-    {
-        return self::query()->where(['informations.id' => $id])->get()->first();
-    }
-
-
-    /**
-     * Add as an array.
-     * 
-     * @var array
-     * @return App\Models\FreePages
-     */
-    public static function add($values) {
-        $informations = new Informations();
-        $informations->fill($values)->save();
-        return $informations;
-    }
 }

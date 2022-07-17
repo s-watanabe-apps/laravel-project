@@ -40,7 +40,7 @@
                             </a>
                         </td>
                         <td>
-                            {{\App\Models\Favorites::getFavoriteName($favorite->favorite_code)}}
+                            {{$favorite->favorite_name}}
                         </td>
                         <td>
                             {{$favorite->name}}

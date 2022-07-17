@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Articles;
 use App\Models\Users;
 use App\Models\Favorites;
 use App\Models\Profiles;
 use App\Models\ProfileValues;
 use App\Models\Images;
 use App\Models\VisitedUsers;
+use App\Services\ArticlesService;
+use App\Services\FavoritesService;
 use App\Http\Requests\ProfilePostRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,6 +20,23 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfilesController extends Controller
 {
+    // Instance variables.
+    private $articlesService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\ArticlesService
+     * @return void
+     */
+    public function __construct(
+        ArticlesService $articlesService,
+        FavoritesService $favoritesService
+    ) {
+        $this->articlesService = $articlesService;
+        $this->favoritesService = $favoritesService;
+    }
+
     /**
      * Get user list.
      * 
@@ -51,9 +69,9 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $articles = Articles::getArticleHeadlines($request->id, 20);
+        $articles = $this->articlesService->getArticleHeadlines($request->id, 20);
 
-        $isFavorite = $this->isFavorite($request);
+        $isFavorite = $this->favoritesService->isFavorite($request);
 
         $isSelf = $request->id == $request->user->id;
 /*

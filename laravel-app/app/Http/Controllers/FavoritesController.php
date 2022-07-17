@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Favorites;
+use App\Services\FavoritesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +16,7 @@ class FavoritesController extends Controller
      */
     public function index(Request $request)
     {
-        $favorites = Favorites::getFavoritesByUserId($request->user->id);
+        $favorites = $this->favoritesService->getFavoritesByUserId($request->user->id);
 
         return view('favorites.index', compact(
             'favorites'
@@ -42,7 +42,7 @@ class FavoritesController extends Controller
 
         $validated = $validator->validated();
 
-        Favorites::removeFavorites($request->user->id, $validated['uri']);
+        $this->favoritesServices->remove($request->user->id, $validated['uri']);
 
         return redirect()->route('favorites');
     }

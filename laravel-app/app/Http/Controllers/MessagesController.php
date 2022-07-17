@@ -2,35 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Messages;
+use App\Services\MessagesService;
 use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
-    private static function getSizes($userId)
+    // Instance variables.
+    private $articlesService;
+
+    /**
+     * Constructor.
+     *
+     * @param App\Services\MessagesService
+     * @return void
+     */
+    public function __construct(
+        MessagesService $messagesService
+    ) {
+        $this->messagesService = $messagesService;
+    }
+
+    private function getSizes($userId)
     {
-        $inbox = Messages::getByUserId($userId)->count();
-        $outbox = Messages::getByFromUserId($userId)->count();
+        $inbox = $this->messagesService->getByUserId($userId)->count();
+        $outbox = $this->messagesService->getByFromUserId($userId)->count();
         $garbage = 0;
 
         return compact('inbox', 'outbox', 'garbage');
     }
 
-    public static function inbox(Request $request)
+    public function inbox(Request $request)
     {
-        $messages = Messages::getByUserId($request->user->id);
+        $messages = $this->messagesService->getByUserId($request->user->id);
 
         return view('messages.inbox', compact(
             'messages'
         ) + [
             'index' => 1,
-            'sizes' => self::getSizes($request->user->id),
+            'sizes' => $this->getSizes($request->user->id),
         ]);
     }
 
-    public static function get(Request $request)
+    public function get(Request $request)
     {
-        $message = Messages::getByUserIdAndMessageId($request->user->id, $request->id);
+        $message = $this->messagesService->getByUserIdAndMessageId($request->user->id, $request->id);
         if (is_null($message)) {
             abort(404);
         }
@@ -57,7 +72,7 @@ class MessagesController extends Controller
             $message->save();
         }
 
-        $fromUserMessages = Messages::getByUserIdAndFromUserId($request->user->id, $message->from_user_id);
+        $fromUserMessages = $this->messagesService->getByUserIdAndFromUserId($request->user->id, $message->from_user_id);
 
         return view('messages.get', compact(
             'message',
@@ -65,7 +80,7 @@ class MessagesController extends Controller
             'fromUserMessages'
         ) + [
             'index' => 1,
-            'sizes' => self::getSizes($request->user->id),
+            'sizes' => $this->getSizes($request->user->id),
         ]);
     }
 }
