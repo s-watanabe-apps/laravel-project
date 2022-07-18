@@ -65,6 +65,7 @@ return [
     'sort_order' => 'Sort order',
     'select_list' => 'Selection list',
     'file_name' => 'File name',
+    'operation' => 'Operation',
 
     // Side menus
     'write_articles' => 'Write articles',

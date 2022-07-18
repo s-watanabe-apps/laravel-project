@@ -64,6 +64,7 @@ return [
     'sort_order' => '並び順',
     'select_list' => '選択リスト',
     'file_name' => 'ファイル名',
+    'operation' => '操作',
 
     // Side menus
     'write_articles' => '記事を書く',
