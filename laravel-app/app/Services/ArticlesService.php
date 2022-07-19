@@ -9,10 +9,10 @@ class ArticlesService
     /**
      * Save articles.
      * 
-     * @var int
-     * @var int
-     * @var array
-     * @return void
+     * @var int $userId
+     * @var int $type
+     * @var array $values
+     * @return App\Models\Articles
      */
     public function save($userId, $type, $values)
     {
@@ -23,14 +23,15 @@ class ArticlesService
         $articles->title = $values['title'];
         $articles->body = $values['body'];
         $articles->save();
+        return $articles;
     }
 
     /**
      * Get article headlines.
      * 
-     * @var int
-     * @var int
-     * @return void
+     * @var int $userId
+     * @var int $limit
+     * @return
      */
     public function getArticleHeadlines($userId, $limit)
     {
@@ -38,6 +39,6 @@ class ArticlesService
             ->where('articles.user_id', $userId)
             ->orderBy('articles.created_at', 'desc')
             ->limit($limit)
-            ->get()->toArray();
+            ->get();
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Managements;
 
-use App\Models\PasswordResets;
 use App\Models\Roles;
+use App\Services\MailService;
 use App\Services\UsersService;
 use App\Http\Requests\ManagementsUsersPostRequest;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail;
 
 class UsersController extends ManagementsController
 {
@@ -19,12 +17,15 @@ class UsersController extends ManagementsController
     /**
      * Create a new controller instance.
      *
+     * @param App\Services\MailService
      * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
+        MailService $mailService,
         UsersService $usersService
     ) {
+        $this->mailService = $mailService;
         $this->usersService = $usersService;
     }
 
@@ -74,27 +75,13 @@ class UsersController extends ManagementsController
     public function register(ManagementsUsersPostRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $users = new Users();
-            $users->role_id = Roles::MEMBER;
-            $users->email = $request->email;
-            $users->name = $request->name;
-            $users->save();
-
-            $expire_in_hours = 24;
-            $token = (new PasswordResets)->issue($users, 60 * $expire_in_hours);
-            $encryptToken = Crypt::encryptString($request->email . ',' . $token);
-
-            $data = [
+            $users = $this->usersService->save([
+                'role_id' => Roles::MEMBER,
+                'email' => $request->email,
                 'name' => $request->name,
-                'token' => $encryptToken,
-                'expire_in' => $expire_in_hours . __('strings.expire_in_hours'),
-            ];
+            ]);
 
-            $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.invitation'));
-            $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
-
-            Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
-    
+            $this->mailService->sendInvitationMail($users);
         });
 
         exit;

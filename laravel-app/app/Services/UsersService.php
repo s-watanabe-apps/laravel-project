@@ -11,18 +11,16 @@ class UsersService
     /**
      * Get enabled users.
      * 
-     * @var int users.id
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
     public function getUsers()
     {
-        return Users::query()->where('users.enable', 1)->paginate(self::PAGENATE);
+        return Users::query()->where('users.enable', 1)->paginate(Users::PAGENATE);
     }
 
     /**
      * Get enabled users.
      * 
-     * @var int users.id
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
     public function getAllUsers()
@@ -39,15 +37,13 @@ class UsersService
     /**
      * Get user.
      * 
-     * 
-     * @var int users.id
+     * @var int id
      * @return App\Models\Users
      */
     public function getUser($id)
     {
         return Users::query()->where('users.id', $id)->first();
     }
-
 
     /**
      * Get birthday users.
@@ -83,7 +79,7 @@ class UsersService
     /**
      * Update api token.
      * 
-     * @var int users.id
+     * @var int id
      * @var string apiToken
      * @return bool
      */
@@ -108,15 +104,19 @@ class UsersService
      * @var array
      * @return App\Models\Users
      */
-    public function saveUsers($values)
+    public function save($values)
     {
-        $user = new Users();
-        $user->name = $values['name'];
-        $user->name_kana = $values['name_kana'];
-        $user->birthdate = new Carbon($values['birth_date']);
-        $user->image_file = $values['image_file'];
-
-        $user->save();
-        return $user;
+        $users = new Users();
+        foreach ($values as $key => $value) {
+            $users->$key = $value;
+        }
+/*
+        $users->name = $values['name'];
+        $users->name_kana = $values['name_kana'];
+        $users->birthdate = new Carbon($values['birth_date']);
+        $users->image_file = $values['image_file'];
+*/
+        $users->save();
+        return $users;
     }
 }

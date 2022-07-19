@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
 use App\Models\Favorites;
 use App\Models\ProfileValues;
 use App\Models\Images;
@@ -10,6 +9,7 @@ use App\Models\VisitedUsers;
 use App\Services\ArticlesService;
 use App\Services\FavoritesService;
 use App\Services\ProfilesService;
+use App\Services\UsersService;
 use App\Http\Requests\ProfilePostRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -24,6 +24,7 @@ class ProfilesController extends Controller
     private $articlesService;
     private $favoritesService;
     private $profilesService;
+    private $usersService;
 
     /**
      * Create a new controller instance.
@@ -31,16 +32,19 @@ class ProfilesController extends Controller
      * @param App\Services\ArticlesService
      * @param App\Services\FavoritesService
      * @param App\Services\ProfilesService
+     * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
         ArticlesService $articlesService,
         FavoritesService $favoritesService,
-        ProfilesService $profilesService
+        ProfilesService $profilesService,
+        UsersService $usersService
     ) {
         $this->articlesService = $articlesService;
         $this->favoritesService = $favoritesService;
         $this->profilesService = $profilesService;
+        $this->usersService = $usersService;
     }
 
     /**
@@ -51,8 +55,8 @@ class ProfilesController extends Controller
      */
     public function index(Request $request)
     {
-        $profileUsers = Users::getUsers();
-
+        $profileUsers = $this->usersService->getUsers();
+var_dump($profileUsers);
         return view('profiles.index', compact(
             'profileUsers'
         ));
@@ -70,7 +74,7 @@ class ProfilesController extends Controller
             return view('404');
         }
 
-        $profileUser = Users::getUser($request->id);
+        $profileUser = $this->usersService->getUser($request->id);
         if ($profileUser == null) {
             abort(404);
         }
@@ -142,7 +146,7 @@ class ProfilesController extends Controller
                 $inputValues['image_file'] = urlencode($fileName);
             }
 
-            $request->user->saveUsers($inputValues);
+            $request->user->save($inputValues);
 
             ProfileValues::saveProfileValues(
                 $request->user->id, $inputValues['dynamic_values']);
