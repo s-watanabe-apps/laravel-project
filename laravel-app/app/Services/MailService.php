@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Mail;
 class MailService
 {
     /**
+     * Send mail.
+     * 
+     * @param string
+     * @param App\Mail\ContactMail
+     * @return void
+     */
+    private function sendMail($to, $contactMail)
+    {
+        Mail::to($to)->send($contactMail);
+    }
+
+    /**
      * Send invitation mail.
      * 
      * @param App\Models\Users
@@ -30,6 +42,6 @@ class MailService
         $subject = sprintf("[%s] %s", 'TODO:site_name', __('strings.invitation'));
         $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
 
-        Mail::to($users->email)->send(new ContactMail($subject, $template, $data));
+        $this->sendMail($users->email, new ContactMail($subject, $template, $data));
     }
 }

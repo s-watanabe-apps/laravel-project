@@ -87,7 +87,7 @@
                         <td class="bg-light text-dark">
                             {{Form::text(
                                 'birth_date',
-                                old('birth_date') ?? (new \Carbon\Carbon($profileUser->getBirthDate()))->format($dateFormat->getDateFormat()),
+                                old('birth_date') ?? (new \Carbon\Carbon($profileUser->birthdate))->format($dateFormat->getDateFormat()),
                                 ['id' => 'birth_date', 'class' => 'form-control',]
                             )}}
                             <div class="text-danger">{{$errors->first('birth_date') ?? ''}}</div>

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Images;
-use App\Models\Profiles;
+use App\Services\ProfilesService;
 use App\Libs\ProfileInputType;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Session;
@@ -27,8 +27,9 @@ class ProfilePostRequest extends AppFormRequest
      */
     public function rules()
     {
-        $profiles = Profiles::getProfilesHash();
-        $choices = Profiles::getProfileChoicesHash();
+        $profilesService = new ProfilesService();
+        $profiles = $profilesService->getProfilesHash();
+        $choices = $profilesService->getProfileChoicesHash();
 
         $dynamicRules = function($attribute, $value, $fail) use($profiles, $choices) {
             $index = (int) str_replace('dynamic_values.', '', $attribute);

@@ -93,30 +93,30 @@ class UsersService
      * 
      * @return Carbon\Carbon
      */
-    public function getBirthDate()
+    public function getBirthDate($birthdate)
     {
-        return (new Carbon($this->birthdate))->format('Y-m-d');
+        return (new Carbon($birthdate))->format('Y-m-d');
     }
 
     /**
      * Save users.
      * 
-     * @var array
+     * @param array
+     * @param int
      * @return App\Models\Users
      */
-    public function save($values)
+    public function save($values, $id = null)
     {
-        $users = new Users();
-        foreach ($values as $key => $value) {
-            $users->$key = $value;
+        if ($id == null) {
+            $users = new Users();
+            foreach ($values as $key => $value) {
+                $users->$key = $value;
+            }
+            $users->save();
+            return $users;
+        } else {
+            Users::where('id', $id)->update($values);
+            return $this->getUser($id);
         }
-/*
-        $users->name = $values['name'];
-        $users->name_kana = $values['name_kana'];
-        $users->birthdate = new Carbon($values['birth_date']);
-        $users->image_file = $values['image_file'];
-*/
-        $users->save();
-        return $users;
     }
 }

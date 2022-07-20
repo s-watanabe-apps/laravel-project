@@ -56,7 +56,7 @@ class ProfilesController extends Controller
     public function index(Request $request)
     {
         $profileUsers = $this->usersService->getUsers();
-var_dump($profileUsers);
+
         return view('profiles.index', compact(
             'profileUsers'
         ));
@@ -94,7 +94,7 @@ var_dump($profileUsers);
 
         $userProfiles = $this->profilesService->getUserProfiles($request->id);
 
-        return view('profiles.get', compact(
+        return view('profiles.viewer', compact(
             'profileUser',
             'userProfiles',
             'articles',
@@ -110,7 +110,7 @@ var_dump($profileUsers);
      */
     public function edit(Request $request)
     {
-        $birthDate = $request->user->getBirthDate();
+        $birthDate = $this->usersService->getBirthDate($request->user->birthdate);
 
         $profileUser = $request->user;
 
@@ -118,7 +118,7 @@ var_dump($profileUsers);
 
         $choices = $this->profilesService->getProfileChoicesHash();
 
-        return view('profiles.edit', compact(
+        return view('profiles.editor', compact(
             'profileUser',
             'birthDate',
             'userProfiles',
@@ -146,7 +146,7 @@ var_dump($profileUsers);
                 $inputValues['image_file'] = urlencode($fileName);
             }
 
-            $request->user->save($inputValues);
+            $request->user->save($inputValues, $request->user->id);
 
             ProfileValues::saveProfileValues(
                 $request->user->id, $inputValues['dynamic_values']);
