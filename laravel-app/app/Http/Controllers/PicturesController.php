@@ -2,11 +2,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\PictureComments;
-use App\Models\Pictures;
+use App\Services\FavoritesService;
+use App\Services\PicturesService;
 use Illuminate\Http\Request;
 
 class PicturesController extends Controller
 {
+    // Instance variables.
+    private $picturesService;
+    private $favoritesService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param App\Services\PicturesService
+     * @param App\Services\FavoritesService
+     * @return void
+     */
+    public function __construct(
+        PicturesService $picturesService,
+        FavoritesService $favoritesService
+    ) {
+        $this->picturesService = $picturesService;
+        $this->favoritesService = $favoritesService;
+    }
+
+
     /**
      * Get pictures images.
      * 
@@ -15,7 +36,7 @@ class PicturesController extends Controller
      */
     public function index(Request $request)
     {
-        $images = Pictures::getPictureImages();
+        $images = $this->picturesService->getPictures();
 
         return view('pictures.index', compact(
             'images'
@@ -30,9 +51,10 @@ class PicturesController extends Controller
      */
     public function get(Request $request)
     {
-        $image = Pictures::getPictureImages($request->id);
+        $image = $this->picturesService->getPictureById($request->id);
 
-        $isFavorite = $this->isFavorite($request);
+        $isFavorite = $this->favoritesService->isFavorite($request);
+var_dump($isFavorite);
 
         $pictureComments = PictureComments::getByPictureId($request->id);
 

@@ -83,15 +83,6 @@ class ProfilesController extends Controller
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 
-        $isSelf = $request->id == $request->user->id;
-/*
-        if ($isSelf) {
-            $visitedUsers = VisitedUsers::getVisitedUsers($request->user->id);
-        } else {
-            VisitedUsers::visit($request->id, $request->user->id);
-        }
-*/
-
         $userProfiles = $this->profilesService->getUserProfiles($request->id);
 
         return view('profiles.viewer', compact(

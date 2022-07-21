@@ -8,11 +8,9 @@ class Pictures extends Model
 {
     const PAGENATE = 12;
 
-    protected $table = 'pictures';
-
-    public static function getPictureImages($id = null)
+    public static function query()
     {
-        $results = self::query()->select([
+        return parent::query()->select([
                 'pictures.id',
                 'pictures.title',
                 'pictures.file',
@@ -23,13 +21,5 @@ class Pictures extends Model
             ])
             ->whereNull('pictures.deleted_at')
             ->leftJoin('users', 'pictures.user_id', '=', 'users.id');
-        
-        if (!is_null($id)) {
-            return $results->where('pictures.id', $id)
-                ->get()->first();
-        }
-
-        return $results->orderBy('pictures.created_at', 'desc')
-            ->paginate(self::PAGENATE);
     }
 }

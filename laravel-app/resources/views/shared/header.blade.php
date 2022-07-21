@@ -42,6 +42,14 @@ table.responsive-table > tbody > tr > td {
   padding: 4px;
 }
 
+table.responsive-table > tbody > tr > td.view-box {
+  padding: 10px;
+}
+
+th.bg-th {
+  background-color: #f0f8ff;
+}
+
 .nav-hover:hover {
   background-color: #ededed;
 }

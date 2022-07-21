@@ -20,6 +20,7 @@ class FavoritesService
      */
     public function getFaivoritesByUserIdAndRequest($userId, $request)
     {
+var_dump($request->path());
         return Favorites::query()
             ->where('user_id', $userId)
             ->where('uri', '/' . $request->path())
@@ -42,7 +43,7 @@ class FavoritesService
     }
 
     /**
-     * Get Favorites by user id.
+     * Get favorites by user id.
      * 
      * @param int
      * @return App\Models\Favorites
@@ -124,7 +125,7 @@ class FavoritesService
      */
     private function decomposeUri($uri)
     {
-        $favoriteCodes = implode('|', array_keys(self::getFavoriteNames()));
+        $favoriteCodes = implode('|', array_keys(Favorites::getFavoriteNames()));
         $pattern = sprintf('/^\/(%s)\/([0-9]{1,})$/', $favoriteCodes);
         \Log::info($pattern);
         preg_match($pattern, $uri, $matchs);

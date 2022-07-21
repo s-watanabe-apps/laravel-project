@@ -45,15 +45,15 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{$profileUser->email}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name')
                         </th>
                         <td class="bg-light text-dark">
@@ -67,7 +67,7 @@
                     </tr>
                     @if(__('strings.name_kana') != 'strings.name_kana')
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name_kana')
                         </th>
                         <td class="bg-light text-dark">
@@ -81,7 +81,7 @@
                     </tr>
                     @endif
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.birth_date')
                         </th>
                         <td class="bg-light text-dark">
@@ -96,7 +96,7 @@
 
                     @foreach($userProfiles as $userProfile)
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             {{$userProfile->name}}
                         </th>
                         <td class="bg-light text-dark">

@@ -35,46 +35,46 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{$profileUser->email}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{$profileUser->name}}
                         </td>
                     </tr>
                     @if(__('strings.name_kana') != 'strings.name_kana')
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name_kana')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{$profileUser->name_kana}}
                         </td>
                     </tr>
                     @endif
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.birth_date')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{(new \Carbon\Carbon($profileUser->birthdate))->format($dateFormat->getDateFormat())}}
                         </td>
                     </tr>
 
                     @foreach($userProfiles as $userProfile)
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th class="bg-th text-secondary text-nowrap">
                             {{$userProfile->name}}
                         </th>
-                        <td class="bg-light text-dark">
+                        <td class="bg-light text-dark view-box">
                             {{$userProfile->value}}
                         </td>
                     </tr>
@@ -87,7 +87,7 @@
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <th colspan="2">
+                        <th colspan="2" class="bg-th">
                             <h2 class="h5 mb-0 text-gray-800">
                                 <i class="fas fa-blog"></i>
                                 <small>@lang('strings.latest_articles')
