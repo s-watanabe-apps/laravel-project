@@ -38,7 +38,7 @@
                         <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td class="bg-light text-dark">
                             {{$profileUser->email}}
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name')
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td class="bg-light text-dark">
                             {{$profileUser->name}}
                         </td>
                     </tr>
@@ -55,7 +55,7 @@
                         <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.name_kana')
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td class="bg-light text-dark">
                             {{$profileUser->name_kana}}
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                         <th class="bg-th text-secondary text-nowrap">
                             @lang('strings.birth_date')
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td class="bg-light text-dark">
                             {{(new \Carbon\Carbon($profileUser->birthdate))->format($dateFormat->getDateFormat())}}
                         </td>
                     </tr>
@@ -74,7 +74,7 @@
                         <th class="bg-th text-secondary text-nowrap">
                             {{$userProfile->name}}
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td class="bg-light text-dark">
                             {{$userProfile->value}}
                         </td>
                     </tr>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-lg-4 mb-4">
-            <table class="table table-bordered responsive-table">
+            <table class="table table-bordered">
                 <tbody>
                     <tr>
                         <th colspan="2" class="bg-th">
@@ -96,10 +96,10 @@
                     </tr>
                     @foreach($articles as $value)
                     <tr>
-                        <td class="w-25 text-secondary text-center text-nowrap view-box">
-                            <small>{{date('Y-m-d', strtotime($value->created_at))}}</small>
+                        <td class="w-25 text-secondary text-center text-nowrap">
+                            <small>{{$value->created_at->format($dateFormat->getDateFormat())}}</small>
                         </td>
-                        <td class="w-75 view-box">
+                        <td class="w-75">
                             <a href="/articles/{{$value->id}}">{{$value->title}}</a>
                         </td>
                     </tr>

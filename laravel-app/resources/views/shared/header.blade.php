@@ -34,20 +34,12 @@ body#page-top {
     border-color: #ededed;
 }
 
-table.responsive-table > tbody > tr > th {
-  padding: 5px 0px 0px 8px;
-}
-
-table.responsive-table > tbody > tr > td {
-  padding: 4px;
-}
-
-table.responsive-table > tbody > tr > td.view-box {
-  padding: 10px;
-}
-
 th.bg-th {
   background-color: #f0f8ff;
+}
+
+td.view-box {
+  width: 90%;
 }
 
 .nav-hover:hover {

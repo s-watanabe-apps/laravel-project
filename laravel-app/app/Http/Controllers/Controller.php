@@ -10,6 +10,9 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    const REQUEST_METHOD_POST = 'post';
+    const REQUEST_METHOD_PUT = 'put';
+
     public function callAction($method, $parameters)
     {
         header_register_callback(function(){
@@ -29,4 +32,13 @@ class Controller extends BaseController
         return parent::callAction($method, $parameters);
     }
 
+    public function postView($view, $variables = [])
+    {
+        return view($view, $variables + ['formMethod' => self::REQUEST_METHOD_POST]);
+    }
+
+    public function putView($view, $variables = [])
+    {
+        return view($view, $variables + ['formMethod' => self::REQUEST_METHOD_PUT]);
+    }
 }

@@ -31,7 +31,7 @@ class ArticlesController extends Controller
      */
     public function write(Request $request)
     {
-        return view('articles.write');
+        return $this->postView('articles.editor');
     }
 
     /**
@@ -44,7 +44,11 @@ class ArticlesController extends Controller
     {
         $validated = $request->validated();
 
-        return view('articles.confirm', compact('validated'));
+        $formMethod = $request->method();
+
+        return view('articles.viewer', compact(
+            'validated', 'formMethod'
+        ));
     }
 
     /**

@@ -2,7 +2,7 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    {{Form::open(['name' => 'article', 'url' => '/articles/confirm', 'method' => 'post', 'files' => true, 'enctype' => 'multipart/form-data'])}}
+    {{Form::open(['name' => 'article', 'url' => '/articles/confirm', 'method' => $formMethod, 'files' => true, 'enctype' => 'multipart/form-data'])}}
     @csrf
     <!-- Page Heading -->
     <div class="row">
@@ -18,14 +18,14 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="text-secondary text-nowrap">@lang('strings.title')</th>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.title')</th>
                         <td>
                             <input type="text" name="title" class="form-control" id="title" placeholder="">
                             <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-secondary text-nowrap">@lang('strings.article_body')</th>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.article_body')</th>
                         <td>
                             <textarea class="form-control" name="body" id="summernote"></textarea>
                             <div class="text-danger">{{$errors->first('body') ?? ''}}</div>

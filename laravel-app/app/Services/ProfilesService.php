@@ -42,7 +42,7 @@ class ProfilesService
         return DB::table($query)->select([
                 'id', 'type', 'name', 'required', 'user_id', 'profile_choice_id', 'value', 'order'
             ])->orderBy('order', 'asc')
-            ->get()->toArray();
+            ->get();
     }
 
     /**

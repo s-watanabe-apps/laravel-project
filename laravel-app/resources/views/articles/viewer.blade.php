@@ -2,7 +2,7 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    {{Form::open(['name' => 'articles', 'url' => '/articles/post', 'method' => 'post', 'files' => true, 'enctype' => 'multipart/form-data'])}}
+    {{Form::open(['name' => 'articles', 'url' => '/articles/confirm', 'method' => $formMethod, 'files' => true, 'enctype' => 'multipart/form-data'])}}
     @csrf
     <!-- Page Heading -->
     <div class="row">
@@ -19,15 +19,15 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="text-secondary text-nowrap">@lang('strings.title')</th>
-                        <td>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.title')</th>
+                        <td class="view-box">
                             {{$validated['title']}}
                             {{Form::hidden('title', $validated['title'])}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-secondary text-nowrap">@lang('strings.article_body')</th>
-                        <td>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.article_body')</th>
+                        <td class="view-box">
                             {!!$validated['body']!!}
                             {{Form::hidden('body', $validated['body'])}}
                         </td>
