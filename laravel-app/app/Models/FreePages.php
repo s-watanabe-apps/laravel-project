@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FreePages extends Model
 {
-    /**
-     * Multiple assignable attributes.
-     *
-     * @var array
-     */
+    // Multiple assignable attributes.
     protected $fillable = [
         'code',
         'title',

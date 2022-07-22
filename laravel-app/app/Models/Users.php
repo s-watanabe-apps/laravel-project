@@ -14,6 +14,8 @@ class Users extends Authenticatable
 
     /**
      * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public static function query()
     {

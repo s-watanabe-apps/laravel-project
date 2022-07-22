@@ -8,6 +8,11 @@ class Pictures extends Model
 {
     const PAGENATE = 12;
 
+    /**
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
     public static function query()
     {
         return parent::query()->select([

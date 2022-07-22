@@ -5,7 +5,9 @@ namespace App\Models;
 class Messages extends Model
 {
     /**
-     * Base query of messages.
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public static function query()
     {

@@ -9,28 +9,34 @@ class FavoritesService
 {
     /**
      * Is favorite.
+     * 
+     * @param Illuminate\Http\Request $request
+     * @return boolean
      */
     public function isFavorite($request)
     {
-        return $this->getFaivoritesByUserIdAndRequest($request->user->id, $request) != null ? 1 : 0;
+        return $this->getFaivoritesByUserIdAndRequest($request->user->id, $request->path()) != null ? 1 : 0;
     }
 
     /**
      * Get favorites by user id and request.
+     * 
+     * @param int $userId
+     * @param int $path
+     * @return App\Models\Favorites
      */
-    public function getFaivoritesByUserIdAndRequest($userId, $request)
+    public function getFaivoritesByUserIdAndRequest($userId, $path)
     {
-var_dump($request->path());
         return Favorites::query()
             ->where('user_id', $userId)
-            ->where('uri', '/' . $request->path())
+            ->where('uri', '/' . $path)
             ->get()->first();
     }
 
     /**
      * Get favorite name.
      * 
-     * @param string
+     * @param string $favoriteCode
      * @return string
      */
     public function getFavoriteName($favoriteCode)
@@ -45,45 +51,12 @@ var_dump($request->path());
     /**
      * Get favorites by user id.
      * 
-     * @param int
+     * @param int $userId
      * @return App\Models\Favorites
      */
     public function getFavoritesByUserId($userId)
     {
-        $result = Favorites::query()
-            ->select([
-                'favorites.user_id',
-                'favorites.uri',
-                'favorites.favorite_code',
-                'favorites.favorite_id',
-                'favorites.created_at',
-                'users.name',
-                \DB::raw('null as value'),
-            ])->join('users', function ($join) {
-                $join->on('users.id', '=', 'favorites.favorite_id')
-                    ->where('favorites.favorite_code', Favorites::FAVORITE_CODE_PROFILES)
-                    ->where('users.enable', 1);
-            })->where('favorites.user_id', $userId)
-            ->unionAll(
-                Favorites::query()
-                    ->select([
-                        'favorites.user_id',
-                        'favorites.uri',
-                        'favorites.favorite_code',
-                        'favorites.favorite_id',
-                        'favorites.created_at',
-                        'users.name',
-                        \DB::raw('pictures.title as name'),
-                    ])->join('pictures', function ($join) {
-                        $join->on('pictures.id', '=', 'favorites.favorite_id')
-                            ->where('favorites.favorite_code', Favorites::FAVORITE_CODE_PICTURES)
-                            ->whereNull('pictures.deleted_at');
-                    })->leftJoin('users', function ($join) {
-                        $join->on('users.id', '=', 'pictures.user_id')
-                            ->where('users.enable', 1);
-                    })->where('favorites.user_id', $userId)
-            )
-            ->get();
+        $result = Favorites::query()->get();
 
         foreach ($result as &$value) {
             $value->favorite_name = $this->getFavoriteName($value->favorite_code);
@@ -100,7 +73,7 @@ var_dump($request->path());
      */
     public function add($userId, $uri)
     {
-        list($favoriteCode, $favoriteId) = self::decomposeUri($uri);
+        list($favoriteCode, $favoriteId) = $this->decomposeUri($uri);
 
         $favorites = new Favorites();
         $favorites->user_id = $userId;
@@ -110,9 +83,15 @@ var_dump($request->path());
         return $favorites->save();
     }
 
+    /**
+     * Remove favorites.
+     * 
+     * @param int $userId
+     * @param string $uri
+     */
     public function remove($userId, $uri)
     {
-        return self::query()
+        return Favorites::query()
             ->where('user_id', $userId)
             ->where('uri', $uri)
             ->delete();
@@ -122,6 +101,7 @@ var_dump($request->path());
      * Decompose the URI.
      * 
      * @var string $uri
+     * @return [string, string]
      */
     private function decomposeUri($uri)
     {

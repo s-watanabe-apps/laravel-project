@@ -10,12 +10,13 @@ class Articles extends Model
 {
     use SoftDeletes;
 
+    // Model constants.
     const TYPE_MEMBER_ARTICLE = 1;
 
     /**
      * Get base query.
      * 
-     * @return array
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public static function query()
     {

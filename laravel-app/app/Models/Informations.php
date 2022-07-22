@@ -38,7 +38,7 @@ class Informations extends Model
     /**
      * Get base query.
      * 
-     * @return array
+     * @return Illuminate\Database\Eloquent\Builder
      */
     public static function query() {
         return parent::query()
