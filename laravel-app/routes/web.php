@@ -40,7 +40,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
             Route::get('/profiles/edit', 'ProfilesController@edit');
-            Route::post('/profiles/post', 'ProfilesController@post');
+            Route::put('/profiles/register', 'ProfilesController@register');
         });
 
         // Pictures

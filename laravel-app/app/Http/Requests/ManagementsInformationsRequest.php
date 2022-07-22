@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Models\Informations;
 use Carbon\Carbon;
 
-class ManagementsInformationsPostRequest extends AppFormRequest
+class ManagementsInformationsRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

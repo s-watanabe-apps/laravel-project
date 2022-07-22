@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Requests;
 
-class LoginLoginPostRequest extends AppFormRequest
+class ArticlesRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +21,21 @@ class LoginLoginPostRequest extends AppFormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email',
-            'password' =>  'required|string',
-            'remember' => 'in:on',
+            'title' => 'required|max:255',
+            'body' => 'string',
+        ];
+    }
+
+    /**
+     * Column names.
+     * 
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'title' => __('strings.title'),
+            'body' => __('strings.article_body'),
         ];
     }
 }

@@ -84,7 +84,7 @@
         </div>
 
         <div class="col-lg-4 mb-4">
-            <table class="table table-bordered">
+            <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
                         <th colspan="2" class="bg-th">
@@ -96,10 +96,10 @@
                     </tr>
                     @foreach($articles as $value)
                     <tr>
-                        <td class="w-25 text-secondary text-center text-nowrap">
+                        <td class="w-25 text-secondary text-center text-nowrap view-box">
                             <small>{{date('Y-m-d', strtotime($value->created_at))}}</small>
                         </td>
-                        <td class="w-75">
+                        <td class="w-75 view-box">
                             <a href="/articles/{{$value->id}}">{{$value->title}}</a>
                         </td>
                     </tr>

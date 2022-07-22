@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    {{Form::open(['name' => 'profiles', 'url' => '/profiles/post', 'method' => 'post', 'files' => true])}}
+    {{Form::open(['name' => 'profiles', 'url' => '/profiles/register', 'method' => 'put', 'files' => true])}}
     @csrf
     <!-- Page Heading -->
     <div class="row">
@@ -20,21 +20,19 @@
     <div class="row">
 
         <!-- Content Column -->
-        <div class="col-lg-2 mb-2 text-center">
-            <div class="col-auto text-center">
-                <img id="preview" class="img-fluid" src="/show/image?file={{$user->image_file}}" />
-            </div>
+        <div class="col-lg-2 mb-4 text-center">
+            <img id="preview" class="img-fluid" src="/show/image?file={{$user->image_file}}" />
 
             <div class="col-lg-12 mt-2 text-center">
                 <label>
-                    <span class="d-sm-inline-block btn btn-primary shadow-sm">
-                        <i class="fas fa-upload fa-sm text-white-50"></i>@lang('strings.choose_file')
+                    <span class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap">
+                        <i class="fas fa-upload fa-sm text-white-50"></i><small>@lang('strings.choose_file')</small>
                         <input type="file" name="choose_profile_image" class="form-control" style="display:none" />
                     </span>
                 </label>
                 <label>
-                    <span class="d-sm-inline-block btn btn-secondary shadow-sm">
-                        <i class="fas fa-window-close fa-sm text-white-50"></i>@lang('strings.file_delete')
+                    <span class="d-sm-inline-block btn btn-secondary shadow-sm text-nowrap">
+                        <i class="fas fa-window-close fa-sm text-white-50"></i><small>@lang('strings.file_delete')</small>
                         <input type="file" name="profile_image_delete" class="form-control" style="display:none" />
                     </span>
                 </label>

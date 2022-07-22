@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\ApiFavoritesPostRequest;
+use App\Http\Requests\ApiFavoritesRequest;
 use App\Services\FavoritesService;
 
 class FavoritesController extends ApiController
@@ -25,10 +24,10 @@ class FavoritesController extends ApiController
     /**
      * Switch favorites.
      * 
-     * @param  App\Http\Requests\ApiFavoritesPostRequest
+     * @param  App\Http\Requests\ApiFavoritesRequest
      * @return Illuminate\Http\JsonResponse
      */
-    public function post(ApiFavoritesPostRequest $request)
+    public function post(ApiFavoritesRequest $request)
     {
         \Log::info("test");
 

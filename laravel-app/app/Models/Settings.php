@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
@@ -37,7 +36,7 @@ class Settings extends Model
     /**
      * Save settings.
      * 
-     * @param App\Http\Requests\ManagementsSettingsPostRequest
+     * @param App\Http\Requests\ManagementsSettingsRequest
      * @return App\Models\Settings
      */
     public function saveSettings($request)

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;

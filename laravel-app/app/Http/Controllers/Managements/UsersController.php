@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Roles;
 use App\Services\MailService;
 use App\Services\UsersService;
-use App\Http\Requests\ManagementsUsersPostRequest;
+use App\Http\Requests\ManagementsUsersRequest;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 
@@ -58,10 +57,10 @@ class UsersController extends ManagementsController
     /**
      * Confirmation of input contents.
      * 
-     * @param App\Http\Requests\ManagementsUsersPostRequest
+     * @param App\Http\Requests\ManagementsUsersRequest
      * @return \Illuminate\View\View
      */
-    public function confirm(ManagementsUsersPostRequest $request)
+    public function confirm(ManagementsUsersRequest $request)
     {
         return view('managements.users.viewer', compact('request'));
     }
@@ -69,10 +68,10 @@ class UsersController extends ManagementsController
     /**
      * Register input information.
      * 
-     * @param App\Http\Requests\ManagementsUsersPostRequest
+     * @param App\Http\Requests\ManagementsUsersRequest
      * @return Illuminate\View\View
      */
-    public function register(ManagementsUsersPostRequest $request)
+    public function register(ManagementsUsersRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $users = $this->usersService->save([

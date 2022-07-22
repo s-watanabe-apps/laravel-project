@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Requests;
 
-class ManagementsSettingsPostRequest extends AppFormRequest
+class ManagementsSettingsRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

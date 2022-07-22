@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use App\Models\Profiles;
@@ -17,11 +16,7 @@ class ProfilesService
      */
     public function getUserProfiles($userId)
     {
-        $subQuery = Profiles::query()->select([
-                'profiles.id',
-                'profiles.type',
-                'profiles.name',
-                'profiles.required',
+        $subQuery = Profiles::query()->addSelect([
                 'profile_choices.id as profile_choice_id',
                 'profile_choices.name as value',
                 'profile_values.user_id',
@@ -29,15 +24,10 @@ class ProfilesService
             ])->leftJoin('profile_values', function ($join) use ($userId) {
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
                     ->where('profile_values.user_id', $userId);
-            })
-            ->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
+            })->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
             ->where('profiles.type', ProfileInputType::CHOICE);
 
-        $query = Profiles::query()->select([
-                'profiles.id',
-                'profiles.type',
-                'profiles.name',
-                'profiles.required',
+        $query = Profiles::query()->addSelect([
                 DB::raw('null as profile_choice_id'),
                 'profile_values.value',
                 'profile_values.user_id',

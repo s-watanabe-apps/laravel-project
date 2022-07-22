@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
 
-class ApiEventsGetRequest extends AppFormRequest
+class ApiEventsRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

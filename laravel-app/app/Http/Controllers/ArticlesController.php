@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Services\ArticlesService;
-use App\Http\Requests\ArticlePostRequest;
+use App\Http\Requests\ArticlesRequest;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -37,10 +37,10 @@ class ArticlesController extends Controller
     /**
      * Confirmation of the written article.
      * 
-     * @param App\Http\Requests\ArticlePostRequest
+     * @param App\Http\Requests\ArticlesRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ArticlePostRequest $request)
+    public function confirm(ArticlesRequest $request)
     {
         $validated = $request->validated();
 
@@ -50,10 +50,10 @@ class ArticlesController extends Controller
     /**
      * Posting an article.
      * 
-     * @param  \App\Http\Requests\ArticlePostRequest
+     * @param  \App\Http\Requests\ArticlesRequest
      * @return void
      */
-    public function post(ArticlePostRequest $request)
+    public function post(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $this->articlesService->save(

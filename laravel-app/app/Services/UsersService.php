@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 use App\Models\Users;
@@ -15,7 +14,9 @@ class UsersService
      */
     public function getUsers()
     {
-        return Users::query()->where('users.enable', 1)->paginate(Users::PAGENATE);
+        return Users::query()
+            ->where('users.enable', 1)
+            ->paginate(Users::PAGENATE);
     }
 
     /**
@@ -42,7 +43,9 @@ class UsersService
      */
     public function getUser($id)
     {
-        return Users::query()->where('users.id', $id)->first();
+        return Users::query()
+            ->where('users.id', $id)
+            ->first();
     }
 
     /**
@@ -73,7 +76,9 @@ class UsersService
      */
     public function getByEmail($email)
     {
-        return Users::query()->where('email', $email)->get()->first();
+        return Users::query()
+            ->where('email', $email)
+            ->first();
     }
 
     /**
@@ -85,7 +90,8 @@ class UsersService
      */
     public function updateApiToken($id, $apiToken)
     {
-        return Users::where('id', $id)->update(['api_token' => $apiToken]);
+        return Users::where('id', $id)
+            ->update(['api_token' => $apiToken]);
     }
 
     /**

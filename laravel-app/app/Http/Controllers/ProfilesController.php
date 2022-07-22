@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Favorites;
@@ -10,7 +9,7 @@ use App\Services\ArticlesService;
 use App\Services\FavoritesService;
 use App\Services\ProfilesService;
 use App\Services\UsersService;
-use App\Http\Requests\ProfilePostRequest;
+use App\Http\Requests\ProfilesRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -120,10 +119,10 @@ class ProfilesController extends Controller
     /**
      * Save profile values.
      * 
-     * @param App\Http\Requests\ProfilePostRequest
+     * @param App\Http\Requests\ProfilesRequest
      * @return Illuminate\View\View
      */
-    public function post(ProfilePostRequest $request)
+    public function register(ProfilesRequest $request)
     {
         $profileValues = ProfileValues::getProfileValuesHashByUserId($request->user->id);
         $inputValues = $request->validated();

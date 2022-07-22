@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Services\FreePagesService;
-use App\Http\Requests\ManagementsFreepagesPostRequest;
+use App\Http\Requests\ManagementsFreepagesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -78,10 +77,10 @@ class FreepagesController extends ManagementsController
     /**
      * Confirmation of input contents.
      * 
-     * @param App\Http\Requests\ManagementsFreepagesPostRequest
+     * @param App\Http\Requests\ManagementsFreepagesRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ManagementsFreepagesPostRequest $request)
+    public function confirm(ManagementsFreepagesRequest $request)
     {
         $values = $request->validated();
 
@@ -93,10 +92,10 @@ class FreepagesController extends ManagementsController
     /**
      * Register input information.
      * 
-     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
-    public function register(ManagementsFreepagesPostRequest $request)
+    public function register(ManagementsFreepagesRequest $request)
     {
 
         \DB::transaction(function() use ($request) {

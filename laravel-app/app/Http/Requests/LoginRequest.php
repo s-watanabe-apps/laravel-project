@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests;
 
-class ForgetPasswordSendResetMailRequest extends AppFormRequest
+class LoginRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,8 @@ class ForgetPasswordSendResetMailRequest extends AppFormRequest
     {
         return [
             'email' => 'required|email',
-        ];
-    }
-
-    /**
-     * Column names.
-     * 
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            'email' => __('strings.email'),
+            'password' =>  'required|string',
+            'remember' => 'in:on',
         ];
     }
 }

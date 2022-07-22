@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Models\Images;
@@ -8,7 +7,7 @@ use App\Libs\ProfileInputType;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\Session;
 
-class ProfilePostRequest extends AppFormRequest
+class ProfilesRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

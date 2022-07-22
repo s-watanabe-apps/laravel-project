@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Libs\ProfileInputType;
 use App\Services\ProfilesService;
 use Illuminate\Http\Request;
-use App\Http\Requests\ManagementsProfilePostRequest;
+use App\Http\Requests\ManagementsProfilesRequest;
 
 class ProfileSettingsController extends ManagementsController
 {
@@ -34,7 +33,7 @@ class ProfileSettingsController extends ManagementsController
         ));
     }
 
-    public function post(ManagementsProfilePostRequest $request)
+    public function post(ManagementsProfilesRequest $request)
     {
         echo "<pre>";
         var_dump($request->input());

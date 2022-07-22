@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Requests;
 
-class ArticlePostRequest extends AppFormRequest
+class ManagementsUsersRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +21,8 @@ class ArticlePostRequest extends AppFormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'body' => 'string',
+            'email' => 'required|email|max:255|unique:users,email',
+            'name' => 'required|max:255',
         ];
     }
 
@@ -35,8 +34,8 @@ class ArticlePostRequest extends AppFormRequest
     public function attributes()
     {
         return [
-            'title' => __('strings.title'),
-            'body' => __('strings.article_body'),
+            'email' => __('strings.email'),
+            'name' => __('strings.name'),
         ];
     }
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\LoginLoginPostRequest;
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Libs\Token;
@@ -55,10 +54,10 @@ class LoginController extends Controller
     /**
      * Perform login processing.
      *
-     * @param  \Illuminate\Http\Request
-     * @return \Illuminate\View\View
+     * @param App\Http\Requests\LoginRequest
+     * @return Illuminate\View\View
      */
-    public function loginPost(LoginLoginPostRequest $request)
+    public function loginPost(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 

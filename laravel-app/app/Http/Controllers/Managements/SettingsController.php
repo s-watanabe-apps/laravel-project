@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Settings;
-use App\Http\Requests\ManagementsSettingsPostRequest;
+use App\Http\Requests\ManagementsSettingsRequest;
 use Illuminate\Http\Request;
 
 class SettingsController extends ManagementsController
@@ -22,10 +21,10 @@ class SettingsController extends ManagementsController
     /**
      * Register input information.
      * 
-     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @param App\Http\Requests\ManagementsInformationsRequest
      * @return Illuminate\View\View
      */
-    public function register(ManagementsSettingsPostRequest $request)
+    public function register(ManagementsSettingsRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $request->settings->saveSettings($request);

@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Services\Calendar;
-use App\Http\Requests\ApiEventsGetRequest;
+use App\Http\Requests\ApiEventsRequest;
 
 class EventsController extends ApiController
 {
@@ -20,10 +19,10 @@ class EventsController extends ApiController
     /**
      * index Get.
      * 
-     * @param  App\Http\Requests\ApiEventsGetRequest
+     * @param  App\Http\Requests\ApiEventsRequest
      * @return json
      */
-    public function get(ApiEventsGetRequest $request)
+    public function get(ApiEventsRequest $request)
     {
         $events = Calendar::getEvents($request->start, $request->end);
         return response()->json($events);

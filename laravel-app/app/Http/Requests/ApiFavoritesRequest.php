@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Http\Requests;
 
 use App\Models\Favorites;
 
-class ApiFavoritesPostRequest extends AppFormRequest
+class ApiFavoritesRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

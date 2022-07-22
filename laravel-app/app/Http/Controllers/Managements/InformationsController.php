@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
 use App\Models\InformationMarks;
 use App\Services\InformationsService;
-use App\Http\Requests\ManagementsInformationsPostRequest;
+use App\Http\Requests\ManagementsInformationsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -80,10 +79,10 @@ class InformationsController extends ManagementsController
     /**
      * Confirmation of input contents.
      * 
-     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @param App\Http\Requests\ManagementsInformationsRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ManagementsInformationsPostRequest $request)
+    public function confirm(ManagementsInformationsRequest $request)
     {
         $method = $request->method();
 
@@ -95,10 +94,10 @@ class InformationsController extends ManagementsController
     /**
      * Register input information.
      * 
-     * @param App\Http\Requests\ManagementsInformationsPostRequest
+     * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
-    public function register(ManagementsInformationsPostRequest $request)
+    public function register(ManagementsInformationsRequest $request)
     {
         \DB::transaction(function() use ($request) {
             if ($request->isPost()) {
