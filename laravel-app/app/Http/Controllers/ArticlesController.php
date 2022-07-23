@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Services\ArticlesService;
 use App\Http\Requests\ArticlesRequest;
+use App\Libs\Status;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -24,6 +25,41 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Get my articles.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        return redirect()->route('articles.user', ['id' => $request->user->id]);
+    }
+
+    public function user(Request $request)
+    {
+        $articles = $this->articlesService->getByUserId($request->id);
+
+        return view('articles.user', compact('articles'));
+    }
+
+    /**
+     * Get article.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function get(Request $request)
+    {
+        $articles = $this->articlesService->get($request->id);
+
+        if (!$articles || $articles->status == Status::DISABLED) {
+            abort(404);
+        }
+
+        return view('articles.viewer', compact('articles'));
+    }
+
+    /**
      * Write an article.
      * 
      * @param Illuminate\Http\Request
@@ -35,6 +71,23 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Edit an article.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function edit(Request $request)
+    {
+        $articles = $this->articlesService->get($request->id);
+
+        if (!$articles || $articles->user_id != $request->user->id) {
+            abort(404);
+        }
+
+        return $this->putView('articles.editor', compact('articles'));
+    }
+
+    /**
      * Confirmation of the written article.
      * 
      * @param App\Http\Requests\ArticlesRequest
@@ -42,28 +95,27 @@ class ArticlesController extends Controller
      */
     public function confirm(ArticlesRequest $request)
     {
-        $validated = $request->validated();
+        $articles = (new Articles())->bind($request->validated());
 
-        $formMethod = $request->method();
-
-        return view('articles.viewer', compact(
-            'validated', 'formMethod'
-        ));
+        return $this->customView('articles.viewer', compact('articles'), $request->method());
     }
 
     /**
      * Posting an article.
      * 
-     * @param  \App\Http\Requests\ArticlesRequest
+     * @param \App\Http\Requests\ArticlesRequest
      * @return void
      */
-    public function post(ArticlesRequest $request)
+    public function register(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $this->articlesService->save(
-                $request->user->id,
-                Articles::TYPE_MEMBER_ARTICLE,
-                $request->validated());
+            $this->articlesService->add(
+                $request->validated() + [
+                    'user_id' => $request->user->id,
+                    'type' => Articles::TYPE_MEMBER_ARTICLE,
+                    'status' => Status::ENABLED,
+                ]
+            );
         });
 
         exit;

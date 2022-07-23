@@ -2,8 +2,10 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    {{Form::open(['name' => 'articles', 'url' => '/articles/confirm', 'method' => $formMethod, 'files' => true, 'enctype' => 'multipart/form-data'])}}
+    @if (isset($formMethod))
+    {{Form::open(['name' => 'articles', 'url' => '/articles/register', 'method' => $formMethod, 'files' => true, 'enctype' => 'multipart/form-data'])}}
     @csrf
+    @endif
     <!-- Page Heading -->
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
@@ -21,20 +23,33 @@
                     <tr>
                         <th class="text-secondary text-nowrap bg-th">@lang('strings.title')</th>
                         <td class="view-box">
-                            {{$validated['title']}}
-                            {{Form::hidden('title', $validated['title'])}}
+                            {{$articles->title}}
+                            {{Form::hidden('title', $articles->title)}}
                         </td>
                     </tr>
                     <tr>
                         <th class="text-secondary text-nowrap bg-th">@lang('strings.article_body')</th>
                         <td class="view-box">
-                            {!!$validated['body']!!}
-                            {{Form::hidden('body', $validated['body'])}}
+                            {!!$articles->body!!}
+                            {{Form::hidden('body', $articles->body)}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.contributor')</th>
+                        <td class="view-box">
+                            {{$articles->name ?? ''}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-secondary text-nowrap bg-th">@lang('strings.contribute_date')</th>
+                        <td class="view-box">
+                            {{$articles->created_at ?? $articles->created_at->format($dateFormat->getDateFormat())}}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
+            @if (isset($formMethod))
             <div class="col-auto mb-5 text-center">
                 <a href="javascript:articles.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
                     <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.save')
@@ -43,11 +58,14 @@
                     <i class="fas fa-window-close fa-sm text-white-50"></i>@lang('strings.cancel')
                 </a>
             </div>
+            @endif
 
         </div>
 
-    </div>        
+    </div>
+    @if (isset($formMethod))
     {{Form::close()}}
+    @endif
 </div>
 <!-- /.container-fluid -->
 @endsection

@@ -12,6 +12,15 @@ class Articles extends Model
     // Model constants.
     const TYPE_MEMBER_ARTICLE = 1;
 
+    // Multiple assignable attributes.
+    protected $fillable = [
+        'user_id',
+        'type',
+        'status',
+        'title',
+        'body',
+    ];
+
     /**
      * Get base query.
      * 
@@ -25,6 +34,7 @@ class Articles extends Model
                 'articles.user_id',
                 'users.name',
                 'articles.type',
+                'articles.status',
                 'articles.title',
                 'articles.body',
                 'articles.created_at',

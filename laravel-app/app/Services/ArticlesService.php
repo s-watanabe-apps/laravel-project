@@ -5,23 +5,26 @@ use App\Models\Articles;
 
 class ArticlesService
 {
+
+    public function get($id)
+    {
+        return Articles::query()->where('articles.id', $id)->first();
+    }
+
+    public function getByUserId($userId)
+    {
+        return Articles::query()->where('articles.user_id', $userId)->get();
+    }
+
     /**
-     * Save articles.
+     * Add as an array.
      * 
-     * @var int $userId
-     * @var int $type
-     * @var array $values
+     * @param array
      * @return App\Models\Articles
      */
-    public function save($userId, $type, $values)
-    {
+    public function add($values) {
         $articles = new Articles();
-        $articles->user_id = $userId;
-        $articles->type = $type;
-        $articles->enable = true;
-        $articles->title = $values['title'];
-        $articles->body = $values['body'];
-        $articles->save();
+        $articles->fill($values)->save();
         return $articles;
     }
 

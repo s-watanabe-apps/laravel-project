@@ -41,4 +41,9 @@ class Controller extends BaseController
     {
         return view($view, $variables + ['formMethod' => self::REQUEST_METHOD_PUT]);
     }
+
+    public function customView($view, $variables, $method)
+    {
+        return view($view, $variables + ['formMethod' => $method]);
+    }
 }

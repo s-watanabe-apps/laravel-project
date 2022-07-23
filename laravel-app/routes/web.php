@@ -28,11 +28,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
         // Articles
         Route::get('/articles', 'ArticlesController@index');
+        Route::get('/articles/user/{id}', 'ArticlesController@user')->where('id', '[0-9]+')->name('articles.user');
         Route::get('/articles/{id}', 'ArticlesController@get')->where('id', '[0-9]+');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
             Route::get('/articles/write', 'ArticlesController@write');
+            Route::get('/articles/edit/{id}', 'ArticlesController@edit');
             Route::post('/articles/confirm', 'ArticlesController@confirm');
-            Route::post('/articles/post', 'ArticlesController@post');
+            Route::post('/articles/register', 'ArticlesController@register');
         });
 
         // Profiles

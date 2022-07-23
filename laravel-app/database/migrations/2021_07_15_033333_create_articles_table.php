@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->integer('type');
-            $table->boolean('enable');
+            $table->integer('status');
             $table->string('title');
             $table->text('body');
             $table->timestamps();

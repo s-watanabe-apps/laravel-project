@@ -10,5 +10,6 @@ class Model extends Eloquent\Model
         foreach ($values as $key => $value) {
             $this->$key = $value;
         }
+        return $this;
     }
 }
