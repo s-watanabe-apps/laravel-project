@@ -31,7 +31,7 @@ class Users extends Authenticatable
                 'users.birthdate',
                 \DB::raw('ifnull(users.image_file, "profiles%2Fno_image.png") as image_file'),
                 'users.api_token',
-                'users.enable',
+                'users.status',
                 'users.remember_token',
                 'users.created_at',
                 'users.updated_at',

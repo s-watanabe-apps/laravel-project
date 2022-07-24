@@ -1,5 +1,6 @@
 <?php
 
+use App\Libs\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->integer('group_id')->nullable();
             $table->string('image_file')->nullable();
             $table->string('api_token')->nullable();
-            $table->boolean('enable')->default(true);
+            $table->integer('status')->default(Status::ENABLED);
             $table->rememberToken();
             $table->index(['email']);
             $table->index(['birthdate']);

@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Users;
+use App\Libs\Status;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class UsersService
     public function getUsers()
     {
         return Users::query()
-            ->where('users.enable', 1)
+            ->where('users.status', Status::ENABLED)
             ->paginate(Users::PAGENATE);
     }
 
@@ -36,12 +37,12 @@ class UsersService
     }
 
     /**
-     * Get user.
+     * Get users by id.
      * 
      * @var int id
      * @return App\Models\Users
      */
-    public function getUser($id)
+    public function getUsersById($id)
     {
         return Users::query()
             ->where('users.id', $id)
@@ -122,7 +123,7 @@ class UsersService
             return $users;
         } else {
             Users::where('id', $id)->update($values);
-            return $this->getUser($id);
+            return $this->getUsersById($id);
         }
     }
 }

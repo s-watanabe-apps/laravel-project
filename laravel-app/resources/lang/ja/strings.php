@@ -65,6 +65,7 @@ return [
     'select_list' => '選択リスト',
     'file_name' => 'ファイル名',
     'operation' => '操作',
+    'comment_count' => 'コメント数',
 
     // Side menus
     'write_articles' => '記事を書く',

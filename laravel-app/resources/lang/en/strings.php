@@ -66,6 +66,7 @@ return [
     'select_list' => 'Selection list',
     'file_name' => 'File name',
     'operation' => 'Operation',
+    'comment_count' => 'Comments',
 
     // Side menus
     'write_articles' => 'Write articles',

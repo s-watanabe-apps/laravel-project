@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Libs\Status;
+
 class Favorites extends Model
 {
     // Model constants.
@@ -39,7 +41,7 @@ class Favorites extends Model
             ])->join('users', function ($join) {
                 $join->on('users.id', '=', 'favorites.favorite_id')
                     ->where('favorites.favorite_code', self::FAVORITE_CODE_PROFILES)
-                    ->where('users.enable', 1);
+                    ->where('users.status', Status::ENABLED);
             })->unionAll(
                 parent::query()
                     ->select([
@@ -56,7 +58,7 @@ class Favorites extends Model
                             ->whereNull('pictures.deleted_at');
                     })->leftJoin('users', function ($join) {
                         $join->on('users.id', '=', 'pictures.user_id')
-                            ->where('users.enable', 1);
+                            ->where('users.status', Status::ENABLED);
                     })
             );
     }

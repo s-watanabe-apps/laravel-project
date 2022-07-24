@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use App\Libs\Status;
+
 class Messages extends Model
 {
     /**
@@ -23,7 +25,7 @@ class Messages extends Model
                 'messages.created_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('messages.from_user_id', '=', 'users.id')
-                    ->where('users.enable', 1);
+                    ->where('users.status', Status::ENABLED);
             })->whereNull('messages.deleted_at');
     }
 

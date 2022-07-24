@@ -34,6 +34,7 @@
                             {{Form::hidden('body', $articles->body)}}
                         </td>
                     </tr>
+                    @if (!isset($formMethod))
                     <tr>
                         <th class="text-secondary text-nowrap bg-th">@lang('strings.contributor')</th>
                         <td class="view-box">
@@ -46,6 +47,7 @@
                             {{$articles->created_at ?? $articles->created_at->format($dateFormat->getDateFormat())}}
                         </td>
                     </tr>
+                    @endif
                 </tbody>
             </table>
 

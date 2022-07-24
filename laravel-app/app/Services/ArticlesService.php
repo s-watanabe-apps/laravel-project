@@ -6,7 +6,13 @@ use App\Models\Articles;
 class ArticlesService
 {
 
-    public function get($id)
+    /**
+     * Get articles by id.
+     * 
+     * @param int id
+     * @return App\Models\Articles
+     */
+    public function getById($id)
     {
         return Articles::query()->where('articles.id', $id)->first();
     }
@@ -22,7 +28,7 @@ class ArticlesService
      * @param array
      * @return App\Models\Articles
      */
-    public function add($values) {
+    public function save($values) {
         $articles = new Articles();
         $articles->fill($values)->save();
         return $articles;

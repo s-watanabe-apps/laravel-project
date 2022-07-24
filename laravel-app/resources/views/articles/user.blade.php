@@ -22,7 +22,7 @@
                         <th class="dt-center">@lang('strings.contribute_date')</th>
                         <th class="dt-center">@lang('strings.updated_at')</th>
                         <th class="dt-center">@lang('strings.status')</th>
-                        <th class="dt-center">@lang('strings.status')</th>
+                        <th class="dt-center">@lang('strings.comment_count')</th>
                         <th class="dt-center"></th>
                     </tr>
                 </thead>
