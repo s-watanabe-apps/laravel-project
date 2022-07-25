@@ -10,8 +10,12 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-edit"></i>@lang('strings.write_articles')</a></li>
+                @if(isset($formMethod))
+                <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-edit"></i> @lang('strings.write_articles')</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@lang('strings.confirm')</li>
+                @else
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i> {{$articles->title}}</li>
+                @endif
             </ol>
         </nav>
     </div>

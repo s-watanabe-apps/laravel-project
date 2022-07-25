@@ -6,7 +6,9 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-edit"></i>@lang('strings.write_articles')</a></li>
+                <li class="breadcrumb-item"><i class="fas fa-fw fa-edit"></i>
+                    {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}
+                </li>
             </ol>
         </nav>
     </div>
@@ -21,9 +23,10 @@
                         <th class="dt-center">@lang('strings.title')</th>
                         <th class="dt-center">@lang('strings.contribute_date')</th>
                         <th class="dt-center">@lang('strings.updated_at')</th>
+                        @if ($articlesUser->id == $user->id)
                         <th class="dt-center">@lang('strings.status')</th>
                         <th class="dt-center">@lang('strings.comment_count')</th>
-                        <th class="dt-center"></th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -36,20 +39,27 @@
                             <a href="/articles/{{$value->id}}">{{$value->title}}</a>
                         </td>
                         <td class="dt-center">
-                            {{$value->created_at}}
+                            {{$value->created_at->format($dateFormat->getDateFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{$value->updated_at}}
+                            {{$value->updated_at->format($dateFormat->getDateFormat())}}
+                        </td>
+                        @if ($articlesUser->id == $user->id)
+                        <td class="dt-center">
+                            <input type="checkbox"
+                                @if ($value->status == \App\Libs\Status::ENABLED)
+                                    checked                                                
+                                @endif
+                                data-onstyle="success" data-offstyle="secondary"
+                                data-toggle="toggle"
+                                data-size="sm"
+                                data-on="@lang('strings.enable')"
+                                data-off="@lang('strings.disable')" />
                         </td>
                         <td class="dt-center">
-
+                            10
                         </td>
-                        <td class="dt-center">
-    
-                        </td>
-                        <td class="dt-center text-nowrap">
-        
-                        </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

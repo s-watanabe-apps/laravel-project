@@ -66,6 +66,7 @@ return [
     'file_name' => 'ファイル名',
     'operation' => '操作',
     'comment_count' => 'コメント数',
+    'articles_index_title' => '%sさんの投稿',
 
     // Side menus
     'write_articles' => '記事を書く',

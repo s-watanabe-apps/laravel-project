@@ -104,6 +104,11 @@
                         </td>
                     </tr>
                     @endforeach
+                    <tr>
+                        <td class="text-center text-nowrap" colspan="2">
+                            <a href="/articles/user/{{$profileUser->id}}">@lang('strings.readmore')</a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

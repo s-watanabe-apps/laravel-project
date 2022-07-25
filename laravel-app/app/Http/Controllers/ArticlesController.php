@@ -48,15 +48,15 @@ class ArticlesController extends Controller
      */
     public function user(Request $request)
     {
-        $users = $this->usersService->getUsersById($request->id);
+        $articlesUser = $this->usersService->getUsersById($request->id);
 
-        if (!$users) {
+        if (!$articlesUser) {
             abort(404);
         }
 
         $articles = $this->articlesService->getByUserId($request->id);
 
-        return view('articles.user', compact('articles'));
+        return view('articles.user', compact('articles', 'articlesUser'));
     }
 
     /**
