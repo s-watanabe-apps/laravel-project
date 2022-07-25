@@ -26,30 +26,13 @@
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
+      @foreach($navigationMenus as $menu)
       <li class="nav-item nav-hover">
-        <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
-        <a class="nav-link" href="/articles/write">
-            <i class="fas fa-fw fa-edit"></i><span>@lang('strings.write_articles')</span>
+        <a class="nav-link" href="{{$menu->link}}">
+            <span>{{$menu->name}}</span>
         </a>
       </li>
-
-      <li class="nav-item nav-hover">
-        <a class="nav-link" href="/pictures">
-            <i class="fas fa-fw fa-images"></i><span>@lang('strings.pictures')</span>
-        </a>
-      </li>
-
-      <li class="nav-item nav-hover">
-        <a class="nav-link" href="/members">
-            <i class="fas fa-fw fa-users"></i><span>@lang('strings.member_search')</span>
-        </a>
-      </li>
-
-      <li class="nav-item nav-hover">
-        <a class="nav-link" href="/communities">
-            <i class="fas fa-fw fa-handshake"></i><span>@lang('strings.community_search')</span>
-        </a>
-      </li>
+      @endforeach
 
       @if ($user->role_id == \App\Models\Roles::ADMIN)
       <li class="nav-item nav-hover dropdown">

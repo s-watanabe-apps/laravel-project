@@ -9,14 +9,29 @@ use Illuminate\Support\Facades\DB;
 class ProfilesService
 {
     /**
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query()
+    {
+        return Profiles::query()->select([
+            'profiles.id',
+            'profiles.type',
+            'profiles.name',
+            'profiles.required',
+        ]);
+    }
+
+    /**
      * Get user profiles.
      * 
      * @param int
-     * @return array
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getUserProfiles($userId)
     {
-        $subQuery = Profiles::query()->addSelect([
+        $subQuery = $this->query()->addSelect([
                 'profile_choices.id as profile_choice_id',
                 'profile_choices.name as value',
                 'profile_values.user_id',
@@ -27,7 +42,7 @@ class ProfilesService
             })->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
             ->where('profiles.type', ProfileInputType::CHOICE);
 
-        $query = Profiles::query()->addSelect([
+        $query = $this->query()->addSelect([
                 DB::raw('null as profile_choice_id'),
                 'profile_values.value',
                 'profile_values.user_id',
@@ -52,7 +67,7 @@ class ProfilesService
      */
     public function getProfileChoicesHash()
     {
-        $results = Profiles::query()->select([
+        $results = $this->query()->select([
                 'profiles.id',
                 'profile_choices.id as choice_id',
                 'profile_choices.name',
@@ -74,7 +89,7 @@ class ProfilesService
      */
     public function getProfilesHash()
     {
-        $profiles = Profiles::query()->orderBy('order')->get();
+        $profiles = $this->query()->orderBy('order')->get();
 
         $hash = [];
         foreach ($profiles as $profile) {
@@ -84,9 +99,14 @@ class ProfilesService
         return $hash;
     }
 
+    /**
+     * Get profiles.
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function getProfiles()
     {
-        $profiles = Profiles::query()->orderBy('order')->get();
+        $profiles = $this->query()->orderBy('order')->get();
 
         foreach ($profiles as &$profile) {
             if ($profile->type == ProfileInputType::CHOICE) {

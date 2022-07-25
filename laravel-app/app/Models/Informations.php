@@ -33,23 +33,4 @@ class Informations extends Model
         'start_time',
         'end_time',
     ];
-
-    /**
-     * Get base query.
-     * 
-     * @return Illuminate\Database\Eloquent\Builder
-     */
-    public static function query() {
-        return parent::query()
-            ->select([
-                'informations.id',
-                'informations.mark_id',
-                'information_marks.mark',
-                'informations.title',
-                'informations.body',
-                'informations.status',
-                'informations.start_time',
-                'informations.end_time',
-            ])->join('information_marks', 'informations.mark_id', '=', 'information_marks.id');
-    }
 }

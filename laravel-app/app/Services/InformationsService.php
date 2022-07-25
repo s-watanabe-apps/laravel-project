@@ -7,13 +7,32 @@ use Carbon\Carbon;
 class InformationsService
 {
     /**
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query() {
+        return Informations::query()
+            ->select([
+                'informations.id',
+                'informations.mark_id',
+                'information_marks.mark',
+                'informations.title',
+                'informations.body',
+                'informations.status',
+                'informations.start_time',
+                'informations.end_time',
+            ])->join('information_marks', 'informations.mark_id', '=', 'information_marks.id');
+    }
+
+    /**
      * Get enabled informations.
      * 
-     * @return array
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getEnabled() {
         $now = new Carbon();
-        return Informations::query()
+        return $this->query()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
             ->where('status', Informations::STATUS_ENABLE)
             ->where('start_time', '<=', $now)
@@ -27,11 +46,11 @@ class InformationsService
     /**
      * Get all informations.
      * 
-     * @return array
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function all($columns = [])
     {
-        return Informations::query()->get();
+        return $this->query()->get();
     }
 
     /**
@@ -41,7 +60,7 @@ class InformationsService
      */
     public function get($id)
     {
-        return Informations::query()->where(['informations.id' => $id])->get()->first();
+        return $this->query()->where(['informations.id' => $id])->get()->first();
     }
 
 

@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 
 class Images extends Model
 {
+    protected $table = 'images';
+
     const TYPE_PROFILE_IMAGE = 1;
     const TYPE_ARTICLE_IMAGE = 2;
     const TYPE_PICTURE_IMAGE = 3;

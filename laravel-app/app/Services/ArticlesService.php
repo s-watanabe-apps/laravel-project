@@ -5,6 +5,31 @@ use App\Models\Articles;
 
 class ArticlesService
 {
+    /**
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query()
+    {
+        return Articles::query()
+            ->select([
+                'articles.id',
+                'articles.user_id',
+                'users.name',
+                'articles.type',
+                'articles.status',
+                'articles.title',
+                'articles.body',
+                'articles.created_at',
+                'articles.updated_at',
+                'articles.deleted_at',
+            ])
+            ->leftJoin('users', function ($join) {
+                $join->on('users.id', '=', 'articles.user_id')
+                    ->whereNull('users.deleted_at');
+            });
+    }
 
     /**
      * Get articles by id.
@@ -14,12 +39,18 @@ class ArticlesService
      */
     public function getById($id)
     {
-        return Articles::query()->where('articles.id', $id)->first();
+        return $this->query()->where('articles.id', $id)->first();
     }
 
+    /**
+     * Get articles by user id.
+     * 
+     * @param int
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function getByUserId($userId)
     {
-        return Articles::query()->where('articles.user_id', $userId)->get();
+        return $this->query()->where('articles.user_id', $userId)->get();
     }
 
     /**
@@ -39,11 +70,11 @@ class ArticlesService
      * 
      * @var int $userId
      * @var int $limit
-     * @return
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getArticleHeadlines($userId, $limit)
     {
-        return Articles::query()
+        return $this->query()
             ->where('articles.user_id', $userId)
             ->orderBy('articles.created_at', 'desc')
             ->limit($limit)

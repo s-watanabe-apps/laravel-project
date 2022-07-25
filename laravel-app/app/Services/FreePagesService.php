@@ -8,7 +8,7 @@ class FreePagesService
     /**
      * Get all free pages.
      * 
-     * @return App\Models\FreePages
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function all()
     {

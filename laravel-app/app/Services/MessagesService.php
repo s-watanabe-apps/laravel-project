@@ -35,7 +35,7 @@ class MessagesService
      * 
      * @var int messages.to_user_id
      * @var int messages.message_id
-     * @return [App\Models\Messages]
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getByUserId($userId)
     {
@@ -48,7 +48,7 @@ class MessagesService
      * Get messages by fromUserId
      * 
      * @var int messages.to_user_id
-     * @return array[App\Models\Messages]
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getByFromUserId($userId)
     {
@@ -61,7 +61,7 @@ class MessagesService
      * 
      * @var int messages.to_user_id
      * @var int messages.from_user_id
-     * @return array[App\Models\Massages]
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getByUserIdAndFromUserId($userId, $fromUserId)
     {

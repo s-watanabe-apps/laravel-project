@@ -9,15 +9,32 @@ use Illuminate\Support\Facades\DB;
 class UsersService
 {
     /**
-     * Get enabled users.
+     * Get base query.
      * 
-     * @return Illuminate\Pagination\LengthAwarePaginator
+     * @return Illuminate\Database\Eloquent\Builder
      */
-    public function getUsers()
+    public function query()
     {
         return Users::query()
-            ->where('users.status', Status::ENABLED)
-            ->paginate(Users::PAGENATE);
+            ->select([
+                'users.id',
+                'users.name',
+                'users.role_id',
+                'users.name',
+                'users.name_kana',
+                'users.email',
+                'users.email_verified_at',
+                'users.password',
+                'users.birthdate',
+                \DB::raw('ifnull(users.image_file, "profiles%2Fno_image.png") as image_file'),
+                'users.api_token',
+                'users.status',
+                'users.remember_token',
+                'users.created_at',
+                'users.updated_at',
+                \DB::raw('groups.name as group_name'),
+            ])
+            ->leftJoin('groups', 'users.group_id', '=', 'groups.id');
     }
 
     /**
@@ -25,11 +42,23 @@ class UsersService
      * 
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
+    public function getUsers()
+    {
+        return $this->query()
+            ->where('users.status', Status::ENABLED)
+            ->paginate(Users::PAGENATE);
+    }
+
+    /**
+     * Get enabled users.
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function getAllUsers()
     {
         $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
 
-        return Users::query()
+        return $this->query()
             ->addSelect(['sessions.last_activity'])
             ->leftJoin(\DB::raw('(select user_id, max(last_activity) as last_activity from sessions group by user_id) sessions'),
                 'users.id', '=', 'sessions.user_id')
@@ -44,7 +73,7 @@ class UsersService
      */
     public function getUsersById($id)
     {
-        return Users::query()
+        return $this->query()
             ->where('users.id', $id)
             ->first();
     }
@@ -53,10 +82,10 @@ class UsersService
      * Get birthday users.
      * 
      * @var Carbon[] birthdays
-     * @return array
+     * @return Illuminate\Database\Eloquent\Collection
      */
     public function getBirthdayUsers($birthdays) {
-        $builder = Users::query();
+        $builder = $this->query();
         
         $dateStrings = [];
         foreach ($birthdays as $birthday) {
@@ -77,7 +106,7 @@ class UsersService
      */
     public function getByEmail($email)
     {
-        return Users::query()
+        return $this->query()
             ->where('email', $email)
             ->first();
     }
@@ -91,7 +120,7 @@ class UsersService
      */
     public function updateApiToken($id, $apiToken)
     {
-        return Users::where('id', $id)
+        return $this->where('id', $id)
             ->update(['api_token' => $apiToken]);
     }
 

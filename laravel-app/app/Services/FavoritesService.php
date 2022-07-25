@@ -7,6 +7,47 @@ use Carbon\Carbon;
 class FavoritesService
 {
     /**
+     * Get base query.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function query()
+    {
+        return Favorites::query()
+            ->select([
+                'favorites.user_id',
+                'favorites.uri',
+                'favorites.favorite_code',
+                'favorites.favorite_id',
+                'favorites.created_at',
+                'users.name',
+                \DB::raw('null as value'),
+            ])->join('users', function ($join) {
+                $join->on('users.id', '=', 'favorites.favorite_id')
+                    ->where('favorites.favorite_code', self::FAVORITE_CODE_PROFILES)
+                    ->where('users.status', Status::ENABLED);
+            })->unionAll(
+                Favorites::query()
+                    ->select([
+                        'favorites.user_id',
+                        'favorites.uri',
+                        'favorites.favorite_code',
+                        'favorites.favorite_id',
+                        'favorites.created_at',
+                        'users.name',
+                        \DB::raw('pictures.title as value'),
+                    ])->join('pictures', function ($join) {
+                        $join->on('pictures.id', '=', 'favorites.favorite_id')
+                            ->where('favorites.favorite_code', self::FAVORITE_CODE_PICTURES)
+                            ->whereNull('pictures.deleted_at');
+                    })->leftJoin('users', function ($join) {
+                        $join->on('users.id', '=', 'pictures.user_id')
+                            ->where('users.status', Status::ENABLED);
+                    })
+            );
+    }
+
+    /**
      * Is favorite.
      * 
      * @param Illuminate\Http\Request $request
@@ -26,7 +67,7 @@ class FavoritesService
      */
     public function getFaivoritesByUserIdAndRequest($userId, $path)
     {
-        return Favorites::query()
+        return $this->query()
             ->where('user_id', $userId)
             ->where('uri', '/' . $path)
             ->get()->first();
@@ -55,7 +96,7 @@ class FavoritesService
      */
     public function getFavoritesByUserId($userId)
     {
-        $result = Favorites::query()->get();
+        $result = $this->query()->get();
 
         foreach ($result as &$value) {
             $value->favorite_name = $this->getFavoriteName($value->favorite_code);
@@ -90,7 +131,7 @@ class FavoritesService
      */
     public function remove($userId, $uri)
     {
-        return Favorites::query()
+        return $this->query()
             ->where('user_id', $userId)
             ->where('uri', $uri)
             ->delete();

@@ -3,14 +3,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FreePages extends Model
+class NavigationMenus extends Model
 {
-    protected $table = 'free_pages';
+    protected $table = 'navigation_menus';
 
     // Multiple assignable attributes.
     protected $fillable = [
-        'code',
-        'title',
-        'body',
+        'name',
+        'link',
+        'sort',
     ];
 }
