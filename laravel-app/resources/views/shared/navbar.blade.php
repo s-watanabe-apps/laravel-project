@@ -26,10 +26,10 @@
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
-      @foreach($navigationMenus as $menu)
+      @foreach($navigations as $navigation)
       <li class="nav-item nav-hover">
-        <a class="nav-link" href="{{$menu->link}}">
-            <span>{{$menu->name}}</span>
+        <a class="nav-link" href="{{$navigation->link}}">
+            <span>{{$navigation->name}}</span>
         </a>
       </li>
       @endforeach
@@ -45,6 +45,11 @@
             <i class="fas fa-cogs fa-sm fa-fw"></i>
             @lang('strings.site_settings')
           </a>
+          <a class="dropdown-item text-black-50" href="/managements/navigations">
+            <i class="fas fa-cogs fa-sm fa-fw"></i>
+            @lang('strings.navigation_management')
+          </a>
+
           <div class="dropdown-divider"></div>
           <a class="dropdown-item disabled" href="#">@lang('strings.user_management')</a>
           <a class="dropdown-item text-black-50" href="/managements/users">

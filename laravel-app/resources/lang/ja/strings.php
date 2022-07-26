@@ -82,6 +82,7 @@ return [
     'user_management' => 'ユーザー管理',
     'group_management' => 'グループ管理',
     'freepage_management' => 'フリーページ管理',
+    'navigation_management' => 'ナビゲーション管理',
 
     // Messages
     'message' => 'メッセージ',

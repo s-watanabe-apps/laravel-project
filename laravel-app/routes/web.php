@@ -82,6 +82,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::post('users/confirm', 'Managements\UsersController@confirm');
             Route::post('users/register', 'Managements\UsersController@register');
 
+            // Navigation Menus
+            Route::get('navigations', 'Managements\NavigationMenusController@index')->name('managementsNavigations');
+
             // Informations
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
             Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');

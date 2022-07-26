@@ -25,15 +25,15 @@ class SettingsMiddleware
     public function handle($request, Closure $next)
     {
         $settings = (new Settings())->get();
-        $navigationMenus = (new NavigationMenusService())->all();
+        $navigations = (new NavigationMenusService())->all();
 
         $request->merge([
             'settings' => $settings,
-            'navigationMenus' => $navigationMenus,
+            'navigations' => $navigations,
         ]);
 
         $this->viewFactory->share('settings', $request->settings);
-        $this->viewFactory->share('navigationMenus', $request->navigationMenus);
+        $this->viewFactory->share('navigations', $request->navigations);
 
         return $next($request);
     }

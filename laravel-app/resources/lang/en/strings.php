@@ -83,6 +83,7 @@ return [
     'user_management' => 'User management',
     'group_management' => 'Group management',
     'freepage_management' => 'Free page management',
+    'navigation_management' => 'Navigation management',
 
     // Messages
     'message' => 'Message',
