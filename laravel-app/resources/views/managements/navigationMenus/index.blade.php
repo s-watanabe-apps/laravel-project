@@ -24,7 +24,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-user-edit"></i>@lang('strings.navigation_management')</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.navigation_management')</li>
             </ol>
         </nav>
     </div>
@@ -36,7 +36,7 @@
 
     <div id="items">
         @foreach ($navigationMenus as $index => $navigationMenu)
-            @include('managements.navigationMenus.formset')
+            @include('managements.navigationMenus.formset', compact('navigationMenu'))
         @endforeach
     </div>
     <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>

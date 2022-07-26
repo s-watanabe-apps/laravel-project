@@ -67,6 +67,7 @@ return [
     'operation' => '操作',
     'comment_count' => 'コメント数',
     'articles_index_title' => '%sさんの投稿',
+    'link' => 'リンク',
 
     // Side menus
     'write_articles' => '記事を書く',

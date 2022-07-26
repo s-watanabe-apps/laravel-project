@@ -84,6 +84,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // Navigation Menus
             Route::get('navigations', 'Managements\NavigationMenusController@index')->name('managementsNavigations');
+            Route::post('navigations/register', 'Managements\NavigationMenusController@register');
 
             // Informations
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');

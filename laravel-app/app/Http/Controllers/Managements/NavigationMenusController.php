@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Services\NavigationMenusService;
+use App\Http\Requests\ManagementsNavigationsRequest;
 use Illuminate\Http\Request;
-//use App\Http\Requests\ManagementsProfilesRequest;
 
 class NavigationMenusController extends ManagementsController
 {
@@ -21,6 +21,12 @@ class NavigationMenusController extends ManagementsController
         $this->navigationMenusService = $navigationMenusService;
     }
 
+    /**
+     * Get create navigation menu form.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $navigationMenus = $this->navigationMenusService->all();
@@ -30,7 +36,13 @@ class NavigationMenusController extends ManagementsController
         ));
     }
 
-    public function post(ManagementsProfilesRequest $request)
+    /**
+     * Register input information.
+     * 
+     * @param App\Http\Requests\ManagementsNavigationsRequest
+     * @return void
+     */
+    public function register(ManagementsNavigationsRequest $request)
     {
         echo "<pre>";
         var_dump($request->input());

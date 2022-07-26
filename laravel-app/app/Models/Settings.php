@@ -1,13 +1,10 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Redis;
 
 class Settings extends Model
 {
-    use Notifiable;
-
     protected $table = 'settings';
 
     public $timestamps = false;

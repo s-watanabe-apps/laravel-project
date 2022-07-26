@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class NavigationMenus extends Model
 {
     protected $table = 'navigation_menus';

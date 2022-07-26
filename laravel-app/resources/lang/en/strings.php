@@ -68,6 +68,7 @@ return [
     'operation' => 'Operation',
     'comment_count' => 'Comments',
     'articles_index_title' => 'Posted by Mr./Ms. %s',
+    'link' => 'Link',
 
     // Side menus
     'write_articles' => 'Write articles',

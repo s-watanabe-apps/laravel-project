@@ -17,22 +17,22 @@ class NavigationMenusTableSeeder extends Seeder
             [
                 'name' => __('strings.write_articles'),
                 'link' => '/articles/write',
-                'sort' => 1,
+                'order' => 1,
             ],
             [
                 'name' => __('strings.pictures'),
                 'link' => '/pictures',
-                'sort' => 2,
+                'order' => 2,
             ],
             [
                 'name' => __('strings.member_search'),
                 'link' => '/members',
-                'sort' => 3,
+                'order' => 3,
             ],
             [
                 'name' => __('strings.community_search'),
                 'link' => '/communities',
-                'sort' => 4,
+                'order' => 4,
             ],
         ];
         foreach($navigationMenus as $navigationMenu) {

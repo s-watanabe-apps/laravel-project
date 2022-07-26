@@ -53,7 +53,7 @@
                         </td>
                         <td class="dt-center">
                             <input type="checkbox"
-                                @if ($value->status == \App\Libs\Status::ENABLE)
+                                @if ($value->status == \App\Libs\Status::ENABLED)
                                     checked                                                
                                 @endif
                                 data-onstyle="success" data-offstyle="secondary"

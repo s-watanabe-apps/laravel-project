@@ -51,20 +51,21 @@
                             {{!$value->last_activity ? '' : \Carbon\Carbon::createFromTimestamp($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
-                            @if ($value->enable == 1)
-                                @lang('strings.enable')
-                            @else
-                                @lang('strings.disable')
-                            @endif
+                            <input type="checkbox"
+                                @if ($value->status == \App\Libs\Status::ENABLED)
+                                    checked                                                
+                                @endif
+                                data-onstyle="success" data-offstyle="secondary"
+                                data-toggle="toggle"
+                                data-size="sm"
+                                data-on="@lang('strings.enable')"
+                                data-off="@lang('strings.disable')" />
                         </td>
                         <td class="dt-center text-nowrap">
                             @if ($value->enable == 0)
                             <a href="/managements/users/deleted/{{$value->id}}" class="py-0 btn btn-danger shadow-sm mb-2">
                                 <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.delete')
                             </a><br>
-                            <a href="/managements/users/enabled/{{$value->id}}" class="py-0 btn btn-success shadow-sm">
-                                <i class="fas fa-bullseye fa-sm text-white-50"></i> @lang('strings.enable')
-                            </a>
                             @else
                             <a href="/managements/users/disabled/{{$value->id}}" class="py-0 btn btn-secondary shadow-sm">
                                 <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.disable')

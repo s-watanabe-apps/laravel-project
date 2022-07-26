@@ -15,9 +15,9 @@ class CreateNavigationMenusTable extends Migration
     {
         Schema::create('navigation_menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name', 10);
             $table->string('link');
-            $table->integer('sort');
+            $table->integer('order');
             $table->timestamps();
         });
     }
