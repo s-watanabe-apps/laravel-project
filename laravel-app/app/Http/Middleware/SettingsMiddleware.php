@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Middleware;
 
-use App\Models\Settings;
+use App\Services\SettingsService;
 use App\Services\NavigationMenusService;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
+use Illuminate\Http\Request;
 
 class SettingsMiddleware
 {
@@ -22,15 +23,12 @@ class SettingsMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $settings = (new Settings())->get();
+        $settings = (new SettingsService())->get();
         $navigations = (new NavigationMenusService())->all();
 
-        $request->merge([
-            'settings' => $settings,
-            'navigations' => $navigations,
-        ]);
+        $request->merge(compact('settings', 'navigations'));
 
         $this->viewFactory->share('settings', $request->settings);
         $this->viewFactory->share('navigations', $request->navigations);

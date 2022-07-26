@@ -47,7 +47,7 @@ class NavigationMenusService
             }
         } else {
             $navigationMenus = $this->query()->get();
-            Redis::set('navigation_menus', json_encode($navigationMenus));
+            Redis::set('navigation_menus', json_encode($navigationMenus->toArray()));
         }
 
         return $navigationMenus;
