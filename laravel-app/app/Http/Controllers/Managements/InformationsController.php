@@ -54,12 +54,10 @@ class InformationsController extends ManagementsController
     {
         $information = $this->informationsService->get($request->id);
 
-        $informationMarks = $this->informationMarksService->get();
+        $informationMarks = $this->informationMarksService->all();
 
-        $method = parent::REQUEST_METHOD_PUT;
-
-        return view('managements.informations.editor', compact(
-            'information', 'informationMarks', 'method'
+        return $this->putView('managements.informations.editor', compact(
+            'information', 'informationMarks'
         ));
     }
 
@@ -73,10 +71,8 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = $this->informationMarksService->all();
 
-        $method = parent::REQUEST_METHOD_POST;
-
-        return view('managements.informations.editor', compact(
-            'informationMarks', 'method'
+        return $this->postView('managements.informations.editor', compact(
+            'informationMarks'
         ));
     }
 
@@ -88,13 +84,11 @@ class InformationsController extends ManagementsController
      */
     public function confirm(ManagementsInformationsRequest $request)
     {
-        $method = $request->method();
-
         $informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
 
-        return view('managements.informations.viewer', compact(
-            'request', 'method', 'informationMark'
-        ));
+        return customView('managements.informations.viewer', compact(
+            'request', 'informationMark'
+        ), $request->method());
     }
 
     /**

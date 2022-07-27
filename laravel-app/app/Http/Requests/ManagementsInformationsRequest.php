@@ -2,6 +2,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Informations;
+use App\Libs\Status;
 
 class ManagementsInformationsRequest extends AppFormRequest
 {
@@ -37,7 +38,10 @@ class ManagementsInformationsRequest extends AppFormRequest
                     }
                 },
             ],
-            'status' => 'required|in:' . implode(',', array_keys(Informations::getStatuses())),
+            'status' => 'required|in:' . implode(',', [
+                Status::ENABLED,
+                Status::DISABLED,
+            ]),
             'mark_id' => 'required|exists:information_marks,id',
         ];
     }

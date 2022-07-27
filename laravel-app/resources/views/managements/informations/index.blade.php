@@ -7,7 +7,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.informations_management')</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-info-circle"></i>@lang('strings.informations_management')</li>
             </ol>
         </nav>
     </div>
@@ -51,7 +51,7 @@
                         </td>
                         <td class="dt-center text-nowrap">
                             <input type="checkbox"
-                                @if ($value->status == \App\Models\Informations::STATUS_ENABLE)
+                                @if ($value->status == \App\Libs\Status::ENABLED)
                                     checked                                                
                                 @endif
                                 data-onstyle="success" data-offstyle="secondary"

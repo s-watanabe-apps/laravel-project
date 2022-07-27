@@ -7,7 +7,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.informations_management')</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-info-circle"></i>@lang('strings.informations_management')</li>
             </ol>
         </nav>
     </div>
@@ -19,13 +19,13 @@
         @include('managements.informations.tabControl', ['index' => 2])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/confirm', 'method' => $method, 'files' => true])}}
+            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/confirm', 'method' => $formMethod, 'files' => true])}}
             @csrf
 
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.mark')
                         </th>
                         <td class="bg-light">
@@ -47,7 +47,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.title')
                         </th>
                         <td class="bg-light text-dark">
@@ -60,7 +60,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.body')
                         </th>
                         <td class="bg-light text-dark">
@@ -69,7 +69,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.start_time')
                         </th>
                         <td class="bg-light text-dark">
@@ -82,7 +82,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.end_time')
                         </th>
                         <td class="bg-light text-dark">
@@ -95,32 +95,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.status')
                         </th>
                         <td class="bg-light">
-                            <label class="radio-button">
-                                {{Form::radio(
-                                    'status',
-                                    \App\Models\Informations::STATUS_ENABLE,
-                                    isset($information) ?
-                                        ($information->status == \App\Models\Informations::STATUS_ENABLE ? true : false) :
-                                        (old('status') == \App\Models\Informations::STATUS_ENABLE ? true : false),
-                                    ['class' => 'radio-button__input']
-                                )}}
-                                <span class="radio-button__icon">@lang('strings.enable')</span>
-                            </label>
-                            <label class="radio-button">
-                                {{Form::radio(
-                                    'status',
-                                    \App\Models\Informations::STATUS_DISABLE,
-                                    isset($information) ?
-                                        ($information->status == \App\Models\Informations::STATUS_DISABLE ? true : false) :
-                                        (old('status') == \App\Models\Informations::STATUS_DISABLE ? true : false),
-                                    ['class' => 'radio-button__input']
-                                )}}
-                                <span class="radio-button__icon">@lang('strings.disable')</span>
-                            </label>
+                            <input type="checkbox"
+                                @if (!isset($information) || $information->status == \App\Libs\Status::ENABLED)
+                                    checked                                                
+                                @endif
+                                data-onstyle="success" data-offstyle="secondary"
+                                data-toggle="toggle"
+                                data-size="sm"
+                                data-on="@lang('strings.enable')"
+                                data-off="@lang('strings.disable')" />
                             <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
                         </td>
                     </tr>

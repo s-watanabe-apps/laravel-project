@@ -7,7 +7,7 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.informations_management')</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-info-circle"></i>@lang('strings.informations_management')</li>
             </ol>
         </nav>
     </div>
@@ -19,13 +19,13 @@
         @include('managements.informations.tabControl', ['index' => 2])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/register', 'method' => 'post', 'files' => true])}}
+            {{Form::open(['name' => 'informations', 'url' => '/managements/informations/register', 'method' => $formMethod, 'files' => true])}}
             @csrf
 
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.title')
                         </th>
                         <td class="bg-light text-dark">
@@ -36,7 +36,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.body')
                         </th>
                         <td class="bg-light text-dark">
@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.start_time')
                         </th>
                         <td class="bg-light text-dark">
@@ -54,7 +54,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.end_time')
                         </th>
                         <td class="bg-light text-dark">
@@ -63,12 +63,20 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th class="bg-th text-secondary text-nowrap w-25">
                             @lang('strings.status')
                         </th>
                         <td class="bg-light">
-                            {{\App\Models\Informations::getStatuses()[$request->status]}}
-                            {{Form::hidden('status', $request->status)}}
+                            <input type="checkbox"
+                                @if ($request->status == \App\Libs\Status::ENABLED)
+                                    checked                                                
+                                @endif
+                                name="status"
+                                data-onstyle="success" data-offstyle="secondary"
+                                data-toggle="toggle"
+                                data-size="sm"
+                                data-on="@lang('strings.enable')"
+                                data-off="@lang('strings.disable')" />
                         </td>
                     </tr>
                 </tbody>
