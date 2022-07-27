@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Models\Favorites;
 use App\Libs\Status;
-use Carbon\Carbon;
 
 class FavoritesService
 {

@@ -65,7 +65,7 @@
                             @lang('strings.birth_date')
                         </th>
                         <td class="bg-light text-dark">
-                            {{(new \Carbon\Carbon($profileUser->birthdate))->format($dateFormat->getDateFormat())}}
+                            {{carbon($profileUser->birthdate)->format($dateFormat->getDateFormat())}}
                         </td>
                     </tr>
 

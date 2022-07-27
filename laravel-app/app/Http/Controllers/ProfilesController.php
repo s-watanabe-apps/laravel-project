@@ -10,7 +10,6 @@ use App\Services\FavoritesService;
 use App\Services\ProfilesService;
 use App\Services\UsersService;
 use App\Http\Requests\ProfilesRequest;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;

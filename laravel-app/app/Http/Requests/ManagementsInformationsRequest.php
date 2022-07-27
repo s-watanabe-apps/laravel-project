@@ -2,7 +2,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Informations;
-use Carbon\Carbon;
 
 class ManagementsInformationsRequest extends AppFormRequest
 {
@@ -31,8 +30,8 @@ class ManagementsInformationsRequest extends AppFormRequest
                 'nullable',
                 'date_format:Y/m/d H:i',
                 function($attribute, $value, $fail) {
-                    $start_datetime = Carbon::parse($this->start_time);
-                    $end_datetime = Carbon::parse($this->end_time);
+                    $start_datetime = carbon($this->start_time);
+                    $end_datetime = carbon($this->end_time);
                     if ($end_datetime <= $start_datetime) {
                         $fail(__('strings.end_time_invalid'));
                     }

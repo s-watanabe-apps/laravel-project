@@ -48,7 +48,7 @@
                             {{$value->created_at->format($dateFormat->getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{!$value->last_activity ? '' : \Carbon\Carbon::createFromTimestamp($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
+                            {{!$value->last_activity ? '' : carbon($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
                             <input type="checkbox"

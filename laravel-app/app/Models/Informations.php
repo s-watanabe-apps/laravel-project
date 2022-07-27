@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use Carbon\Carbon;
-
 class Informations extends Model
 {
     protected $table = 'informations';

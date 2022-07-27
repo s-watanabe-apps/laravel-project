@@ -44,7 +44,7 @@
                             @lang('strings.start_time')
                         </th>
                         <td class="bg-light text-dark">
-                            {{$information->start_time == null ? '' : (new Carbon\Carbon($information->end_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$information->start_time == null ? '' : carbon($information->end_time)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                     </tr>
                     <tr>
@@ -52,7 +52,7 @@
                             @lang('strings.end_time')
                         </th>
                         <td class="bg-light text-dark">
-                            {{$information->end_time == null ? '' : (new Carbon\Carbon($information->end_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$information->end_time == null ? '' : carbon($information->end_time)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                     </tr>
                     <tr>

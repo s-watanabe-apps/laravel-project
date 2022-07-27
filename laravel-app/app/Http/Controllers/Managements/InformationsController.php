@@ -56,7 +56,7 @@ class InformationsController extends ManagementsController
 
         $informationMarks = $this->informationMarksService->get();
 
-        $method = 'put';
+        $method = parent::REQUEST_METHOD_PUT;
 
         return view('managements.informations.editor', compact(
             'information', 'informationMarks', 'method'
@@ -73,13 +73,12 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = $this->informationMarksService->all();
 
-        $method = 'post';
+        $method = parent::REQUEST_METHOD_POST;
 
         return view('managements.informations.editor', compact(
             'informationMarks', 'method'
         ));
     }
-
 
     /**
      * Confirmation of input contents.

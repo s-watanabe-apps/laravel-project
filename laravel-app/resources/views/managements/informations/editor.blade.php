@@ -75,7 +75,7 @@
                         <td class="bg-light text-dark">
                             {{Form::text(
                                 'start_time',
-                                $information->start_time ?? (old('start_time') ?? (new \Carbon\Carbon())->format($dateFormat->getDateTimeFullFormat())),
+                                $information->start_time ?? (old('start_time') ?? carbon()->format($dateFormat->getDateTimeFullFormat())),
                                 ['id' => 'start_time', 'class' => 'form-control',]
                             )}}
                             <div class="text-danger">{{$errors->first('start_time') ?? ''}}</div>

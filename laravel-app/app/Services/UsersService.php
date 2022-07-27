@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Models\Users;
 use App\Libs\Status;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UsersService

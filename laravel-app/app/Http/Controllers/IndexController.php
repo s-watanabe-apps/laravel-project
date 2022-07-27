@@ -5,7 +5,6 @@ use App\Mail\ContactMail;
 use App\Models\Settings;
 use App\Services\CalendarService;
 use App\Services\InformationsService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
