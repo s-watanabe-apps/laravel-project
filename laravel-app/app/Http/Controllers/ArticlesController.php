@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
 use App\Http\Requests\ArticlesRequest;
@@ -11,20 +12,24 @@ use Illuminate\Http\Request;
 class ArticlesController extends Controller
 {
     // Instance variables.
+    private $articleCommentsService;
     private $articlesService;
     private $usersService;
 
     /**
      * Create a new controller instance.
      *
+     * @param App\Services\ArticleCommentsService
      * @param App\Services\ArticlesService
      * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
+        ArticleCommentsService $articleCommentsService,
         ArticlesService $articlesService,
         UsersService $usersService
     ) {
+        $this->articleCommentsService = $articleCommentsService;
         $this->articlesService = $articlesService;
         $this->usersService = $usersService;
     }
@@ -72,6 +77,11 @@ class ArticlesController extends Controller
         if (!$articles || $articles->status == Status::DISABLED) {
             abort(404);
         }
+
+        $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
+
+var_dump($articleComments);
+
 
         return view('articles.viewer', compact('articles'));
     }

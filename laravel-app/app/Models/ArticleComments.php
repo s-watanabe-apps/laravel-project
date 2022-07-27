@@ -3,21 +3,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Articles extends Model
+class ArticleComments extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'articles';
-
-    // Model constants.
-    const TYPE_MEMBER_ARTICLE = 1;
+    protected $table = 'article_comments';
 
     // Multiple assignable attributes.
     protected $fillable = [
+        'article_id',
         'user_id',
-        'type',
-        'status',
-        'title',
-        'body',
+        'comment',
     ];
 }

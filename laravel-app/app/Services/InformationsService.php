@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Informations;
 use App\Models\InformationMarks;
+use App\Libs\Status;
 
 class InformationsService
 {
@@ -34,7 +35,7 @@ class InformationsService
         $now = carbon();
         return $this->query()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
-            ->where('status', Informations::STATUS_ENABLE)
+            ->where('status', Status::ENABLED)
             ->where('start_time', '<=', $now)
             ->where(function($query) use($now) {
                 $query->where('end_time', '>=', $now)
