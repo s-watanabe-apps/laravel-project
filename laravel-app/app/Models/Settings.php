@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Support\Facades\Redis;
-
 class Settings extends Model
 {
     protected $table = 'settings';
@@ -10,8 +8,9 @@ class Settings extends Model
     public $timestamps = false;
 
     /**
-     * Constructor.
+     * Create a new model instance.
      *
+     * @param boolean
      * @return void
      */
     public function __construct($initialize = false)
@@ -27,6 +26,7 @@ class Settings extends Model
             $this->basic_password = null;
             $this->anonymous_permission = 0;
         }
+
         parent::__construct();
     }
 }

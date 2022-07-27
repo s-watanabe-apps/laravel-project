@@ -1,8 +1,6 @@
 <?php
 namespace App\Services;
 
-use Carbon\Carbon;
-
 class CalendarService
 {
     /**
@@ -14,7 +12,7 @@ class CalendarService
     public function getWeeklyCalendar($startDate = null)
     {
         $dates = [];
-        $now = new Carbon();
+        $now = carbon();
         $nowDayOfWeek = $now->dayOfWeek;
         for ($i = 0; $i < $nowDayOfWeek; $i++) {
             $dates[] = [
@@ -33,9 +31,7 @@ class CalendarService
 
         $usersMap = [];
         foreach ($users as $user) {
-            $carbon = new Carbon(
-                $user->birthdate
-            );
+            $carbon = carbon($user->birthdate);
             $usersMap[$carbon->format('md')][] = $user;
         }
     
@@ -61,7 +57,7 @@ class CalendarService
         $events = [];
 
         if ($date == null) {
-            $now = new Carbon();
+            $now = carbon();
         } else {
             $now = $date;
         }
@@ -71,7 +67,7 @@ class CalendarService
         $users = (new UsersService())->getBirthdayUsers($dates);
 
         foreach ($users as $user) {
-            $carbon = new Carbon($user->birthdate);
+            $carbon = carbon($user->birthdate);
             $events[] = [
                 'title' => $user->name,
                 'url' => '/profiles/' . $user->id,
@@ -93,7 +89,7 @@ class CalendarService
     public function getCalendarDates($year, $month)
     {
         $dateStr = sprintf('%04d-%02d-01', $year, $month);
-        $date = new Carbon($dateStr);
+        $date = carbon($dateStr);
         
         $date->subDay($date->dayOfWeek);
         $count = 31 + $date->dayOfWeek;
@@ -122,8 +118,8 @@ class CalendarService
         //\Log::info($end);
 
         $dates = [];
-        $startDatetime = Carbon::parse($start);
-        $endDatetime = Carbon::parse($end);
+        $startDatetime = carbon($start);
+        $endDatetime = carbon($end);
         $dates[] = $startDatetime->copy();
         while ($endDatetime > $startDatetime) {
             $dates[] = $startDatetime;
@@ -135,9 +131,9 @@ class CalendarService
         //}
 
         $users = (new UsersService())->getBirthdayUsers($dates);
-        $year = (new Carbon())->year;
+        $year = carbon()->year;
         foreach ($users as $user) {
-            $carbon = new Carbon($user->birthdate);
+            $carbon = carbon($user->birthdate);
             $events[] = [
                 'title' => $user->name,
                 'url' => '/profiles/' . $user->id,

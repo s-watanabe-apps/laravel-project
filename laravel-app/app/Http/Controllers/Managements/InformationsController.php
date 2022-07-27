@@ -33,7 +33,7 @@ class InformationsController extends ManagementsController
     public function index(Request $request)
     {
         $informations = $this->informationsService->all();
-
+var_dump(carbon());
         return view('managements.informations.index', compact(
             'informations'
         ));

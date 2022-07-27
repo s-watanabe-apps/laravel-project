@@ -34,7 +34,7 @@ class SettingsService
     }
 
     /**
-     * Get settings.
+     * Get settings from Redis or Database.
      * 
      * @return App\Models\Settings
      */

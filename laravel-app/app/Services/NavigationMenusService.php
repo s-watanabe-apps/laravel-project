@@ -25,7 +25,7 @@ class NavigationMenusService
     }
 
     /**
-     * Get all navigation menus.
+     * Get all navigation menus from Redis or Database.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */

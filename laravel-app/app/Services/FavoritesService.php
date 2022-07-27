@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Favorites;
+use App\Libs\Status;
 use Carbon\Carbon;
 
 class FavoritesService
@@ -24,7 +25,7 @@ class FavoritesService
                 \DB::raw('null as value'),
             ])->join('users', function ($join) {
                 $join->on('users.id', '=', 'favorites.favorite_id')
-                    ->where('favorites.favorite_code', self::FAVORITE_CODE_PROFILES)
+                    ->where('favorites.favorite_code', Favorites::FAVORITE_CODE_PROFILES)
                     ->where('users.status', Status::ENABLED);
             })->unionAll(
                 Favorites::query()
@@ -38,7 +39,7 @@ class FavoritesService
                         \DB::raw('pictures.title as value'),
                     ])->join('pictures', function ($join) {
                         $join->on('pictures.id', '=', 'favorites.favorite_id')
-                            ->where('favorites.favorite_code', self::FAVORITE_CODE_PICTURES)
+                            ->where('favorites.favorite_code', Favorites::FAVORITE_CODE_PICTURES)
                             ->whereNull('pictures.deleted_at');
                     })->leftJoin('users', function ($join) {
                         $join->on('users.id', '=', 'pictures.user_id')

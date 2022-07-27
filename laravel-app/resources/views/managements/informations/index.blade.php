@@ -20,7 +20,7 @@
 
         <div class="col-lg-10 px-0 px-lg-2">
 
-            <table id="dataTable" class="display cell-border compact" style="margin: unset; width: 100%;">
+            <table id="dataTable" class="display cell-border compact responsive nowrap" style="margin: unset; width: 100%;">
                 <thead>
                     <tr class="text-nowrap">
                         <th class="dt-center">ID</th>
@@ -28,6 +28,7 @@
                         <th class="dt-center">@lang('strings.start_time')</th>
                         <th class="dt-center">@lang('strings.end_time')</th>
                         <th class="dt-center">@lang('strings.status')</th>
+                        <th class="dt-center"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,11 @@
                                 data-size="sm"
                                 data-on="@lang('strings.enable')"
                                 data-off="@lang('strings.disable')" />
+                        </td>
+                        <td>
+                            <a href="/managements/informations/remove/{{$value->id}}" class="py-0 btn btn-danger shadow-sm mb-2">
+                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.delete')
+                            </a><br>
                         </td>
                     </tr>
                     @endforeach

@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Libs\Status;
-
 class Favorites extends Model
 {
     protected $table = 'favorites';

@@ -20,7 +20,7 @@
 
         <div class="col-lg-10 px-0 px-lg-2">
 
-            <table id="dataTable" class="display cell-border compact" style="margin: unset; width: 100%;">
+            <table id="dataTable" class="display cell-border compact responsive nowrap" style="margin: unset; width: 100%;">
                 <thead>
                     <tr class="text-nowrap">
                         <th class="dt-center">ID</th>
