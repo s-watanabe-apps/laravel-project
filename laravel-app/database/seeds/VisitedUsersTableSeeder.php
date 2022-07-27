@@ -1,9 +1,9 @@
 <?php
 use App\Models\VisitedUsers;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
 class VisitedUsersTableSeeder extends Seeder
 {
     /**
@@ -14,8 +14,8 @@ class VisitedUsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('visited_users')->truncate();
-        $now1 = new Carbon();
-        $now2 = (new Carbon())->addDays(-1)->copy();
+        $now1 = carbon();
+        $now2 = carbon()->addDays(-1)->copy();
         $visitedUsers = [
             [
                 'date' => $now1,

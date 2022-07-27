@@ -1,7 +1,5 @@
 <?php
-
 use App\Models\Messages;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,8 +22,8 @@ class MessagesTableSeeder extends Seeder
                     'subject' => 'テストメッセージ①',
                     'body' => "テストメッセージ本文\nテストメッセージ本文\nテストメッセージ本文",
                     'readed' => false,
-                    'created_at' => new Carbon(),
-                    'updated_at' => new Carbon(),
+                    'created_at' => carbon(),
+                    'updated_at' => carbon(),
                 ],
                 [
                     'from_user_id' => 3,
@@ -34,8 +32,8 @@ class MessagesTableSeeder extends Seeder
                     'subject' => 'テストメッセージ②',
                     'body' => "テストメッセージ本文\nテストメッセージ本文\nテストメッセージ本文",
                     'readed' => false,
-                    'created_at' => new Carbon(),
-                    'updated_at' => new Carbon(),
+                    'created_at' => carbon(),
+                    'updated_at' => carbon(),
                 ],
             ];
             foreach($messages as $message) {

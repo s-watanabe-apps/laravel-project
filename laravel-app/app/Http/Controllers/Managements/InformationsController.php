@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Managements;
 use App\Models\Informations;
 use App\Models\InformationMarks;
 use App\Services\InformationsService;
+use App\Services\InformationMarksService;
 use App\Http\Requests\ManagementsInformationsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,7 @@ class InformationsController extends ManagementsController
 {
     // Instance variables.
     private $informationsService;
+    private $informationMarksService;
 
     /**
      * Create a new controller instance.
@@ -19,9 +21,12 @@ class InformationsController extends ManagementsController
      * @param App\Services\InformationsService
      * @return void
      */
-    public function __construct(InformationsService $informationsService)
-    {
+    public function __construct(
+        InformationsService $informationsService,
+        InformationMarksService $informationMarksService
+    ) {
         $this->informationsService = $informationsService;
+        $this->informationMarksService = $informationMarksService;
     }
 
     /**
@@ -33,7 +38,7 @@ class InformationsController extends ManagementsController
     public function index(Request $request)
     {
         $informations = $this->informationsService->all();
-var_dump(carbon());
+
         return view('managements.informations.index', compact(
             'informations'
         ));
@@ -49,7 +54,7 @@ var_dump(carbon());
     {
         $information = $this->informationsService->get($request->id);
 
-        $informationMarks = InformationMarks::get();
+        $informationMarks = $this->informationMarksService->get();
 
         $method = 'put';
 
@@ -66,7 +71,7 @@ var_dump(carbon());
      */
     public function create(Request $request)
     {
-        $informationMarks = $this->informationsService->get();
+        $informationMarks = $this->informationMarksService->all();
 
         $method = 'post';
 
@@ -86,8 +91,10 @@ var_dump(carbon());
     {
         $method = $request->method();
 
+        $informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
+
         return view('managements.informations.viewer', compact(
-            'request', 'method'
+            'request', 'method', 'informationMark'
         ));
     }
 

@@ -44,10 +44,10 @@
                             </a>
                         </td>
                         <td class="dt-center">
-                            {{$value->start_time == null ? '' : (new Carbon\Carbon($value->start_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$value->start_time == null ? '' : carbon($value->start_time)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{$value->end_time == null ? '' : (new Carbon\Carbon($value->end_time))->format($dateFormat->getDateTimeFormat())}}
+                            {{$value->end_time == null ? '' : carbon($value->end_time)->format($dateFormat->getDateTimeFormat())}}
                         </td>
                         <td class="dt-center text-nowrap">
                             <input type="checkbox"

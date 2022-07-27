@@ -2,7 +2,7 @@
 namespace App\Services;
 
 use App\Models\Informations;
-use Carbon\Carbon;
+use App\Models\InformationMarks;
 
 class InformationsService
 {
@@ -31,7 +31,7 @@ class InformationsService
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getEnabled() {
-        $now = new Carbon();
+        $now = carbon();
         return $this->query()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
             ->where('status', Informations::STATUS_ENABLE)
@@ -74,5 +74,11 @@ class InformationsService
         $informations = new Informations();
         $informations->fill($values)->save();
         return $informations;
+    }
+
+    public function getInformationMark($id)
+    {
+        $result = InformationMarks::query(['mark'])->where('id', $id)->first();
+        return $result->mark;
     }
 }

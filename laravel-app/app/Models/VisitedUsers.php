@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use Carbon\Carbon;
-
 class VisitedUsers extends Model
 {
     protected $table = 'visited_users';
@@ -18,7 +16,7 @@ class VisitedUsers extends Model
      */
     public static function visit($userId, $visitedId)
     {
-        $carbon = new Carbon();
+        $carbon = carbon();
         if (self::query()
             ->where('date', $carbon->format('Y-m-d'))
             ->where('user_id', $userId)

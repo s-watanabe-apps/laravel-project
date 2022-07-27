@@ -1,10 +1,10 @@
 <?php
 use App\Models\Users;
 use App\Models\Roles;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
                     'name_kana' => sprintf('ユーザーメイ_%02d', $i),
                     'email' => sprintf('member%02d@example.com', $i),
                     'password' => Hash::make('password'),
-                    'birthdate' => (new Carbon())->addYear(-30)->addDays($i)->copy(),
+                    'birthdate' => carbon()->addYear(-30)->addDays($i)->copy(),
                 ]);
             }
         }

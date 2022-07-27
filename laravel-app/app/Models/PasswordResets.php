@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
@@ -31,8 +30,8 @@ class PasswordResets extends Model
         $this->forceFill([
             'email' => $user->email,
             'token' => $token,
-            'expire_in' => (new Carbon())->addMinutes($expireMinutes),
-            'created_at' => new Carbon(),
+            'expire_in' => carbon()->addMinutes($expireMinutes),
+            'created_at' => carbon(),
         ])->save();
 
         return $this->token;
@@ -63,8 +62,8 @@ class PasswordResets extends Model
             return false;
         }
 
-        $expire = (new Carbon($this->created_at))->addMinutes(config('auth.passwords.users.expire'));
-        if ((new Carbon())->now() > $expire) {
+        $expire = carbon($this->created_at)->addMinutes(config('auth.passwords.users.expire'));
+        if (carbon() > $expire) {
             return false;
         }
 

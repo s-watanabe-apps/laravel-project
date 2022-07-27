@@ -131,7 +131,7 @@ class UsersService
      */
     public function getBirthDate($birthdate)
     {
-        return (new Carbon($birthdate))->format('Y-m-d');
+        return carbon($birthdate)->format('Y-m-d');
     }
 
     /**

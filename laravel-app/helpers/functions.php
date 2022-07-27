@@ -4,6 +4,8 @@ use Carbon\Carbon;
 
 if (!function_exists('redis')) {
     /**
+     * global redis.
+     * 
      * @return string
      */
     function redis(): bool
@@ -14,7 +16,7 @@ if (!function_exists('redis')) {
 
 if (!function_exists('carbon')) {
     /**
-     * global carbon
+     * global carbon.
      *
      * @param null $time time
      * @param null $timezone timezone

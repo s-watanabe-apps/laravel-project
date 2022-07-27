@@ -2,7 +2,7 @@
 use App\Models\Informations;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+
 class InformationsTableSeeder extends Seeder
 {
     /**
@@ -12,7 +12,7 @@ class InformationsTableSeeder extends Seeder
      */
     public function run()
     {
-        $now = new Carbon();
+        $now = carbon();
         DB::table('informations')->truncate();
         $informations = [
             'title' => 'メンテナンスのお知らせ',

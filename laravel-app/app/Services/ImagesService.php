@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Images;
-use Carbon\Carbon;
 
 class ImagesService
 {
@@ -62,7 +61,7 @@ class ImagesService
     public function disableById($id)
     {
         return Images::where('id', $id)
-            ->update(['deleted_at' => new Carbon()]);
+            ->update(['deleted_at' => carbon()]);
     }
 
     /**
@@ -94,7 +93,7 @@ class ImagesService
         $image->type = $type;
         $image->target_id = $targetId;
         $image->name = $fileName;
-        $image->updated_at = new Carbon();
+        $image->updated_at = carbon();
         $image->save();
 
         return $image;

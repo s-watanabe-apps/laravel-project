@@ -29,7 +29,7 @@
                             @lang('strings.title')
                         </th>
                         <td class="bg-light text-dark">
-                            <i class="fas {{\App\Models\InformationMarks::getMark($request->mark_id)}} text-primary-50"></i>
+                            <i class="fas {{$informationMark}} text-primary-50"></i>
                             {{$request->title}}
                             {{Form::hidden('mark_id', $request->mark_id)}}
                             {{Form::hidden('title', $request->title)}}
