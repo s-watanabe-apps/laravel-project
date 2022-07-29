@@ -1,19 +1,23 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-use App\Services\Calendar;
+use App\Services\CalendarService;
 use App\Http\Requests\ApiEventsRequest;
 
 class EventsController extends ApiController
 {
+    // Instance variables.
+    private $calendarService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        //$this->middleware('authcheck');
+    public function __construct(
+        CalendarService $calendarService
+    ) {
+        $this->calendarService = $calendarService;
     }
 
     /**
@@ -24,7 +28,7 @@ class EventsController extends ApiController
      */
     public function get(ApiEventsRequest $request)
     {
-        $events = Calendar::getEvents($request->start, $request->end);
+        $events = $this->calendarService->getEvents($request->start, $request->end);
         return response()->json($events);
     }
 }

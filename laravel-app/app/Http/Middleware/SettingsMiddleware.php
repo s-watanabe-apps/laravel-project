@@ -30,8 +30,8 @@ class SettingsMiddleware
 
         $request->merge(compact('settings', 'navigations'));
 
-        $this->viewFactory->share('settings', $request->settings);
-        $this->viewFactory->share('navigations', $request->navigations);
+        $this->viewFactory->share('settings', $settings);
+        $this->viewFactory->share('navigations', $navigations);
 
         return $next($request);
     }

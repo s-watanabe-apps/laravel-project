@@ -29,11 +29,7 @@ class NavigationMenusController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $navigationMenus = $this->navigationMenusService->all();
-
-        return view('managements.navigationMenus.index', compact(
-            'navigationMenus'
-        ));
+        return view('managements.navigationMenus.index');
     }
 
     /**
@@ -44,8 +40,10 @@ class NavigationMenusController extends ManagementsController
      */
     public function register(ManagementsNavigationsRequest $request)
     {
-        echo "<pre>";
-        var_dump($request->input());
-        exit;
+        \DB::transaction(function() use ($request) {
+            $this->navigationMenusService->save($request->validated());
+        });
+
+        return redirect()->route('managementsNavigations')->with('result', 1);
     }
 }

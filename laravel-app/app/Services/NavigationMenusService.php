@@ -47,9 +47,28 @@ class NavigationMenusService
             }
         } else {
             $navigationMenus = $this->query()->get();
-            Redis::set('navigation_menus', json_encode($navigationMenus->toArray()));
+            if (redis()) {
+                Redis::set('navigation_menus', json_encode($navigationMenus->toArray()));
+            }
         }
 
         return $navigationMenus;
+    }
+
+    public function save($validated)
+    {
+        $this->query()->delete();
+
+        for ($index = 0; $index < count($validated['names']); $index++) {
+            NavigationMenus::create([
+                'name' => $validated['names'][$index],
+                'link' => $validated['links'][$index],
+                'order' => $validated['orders'][$index],
+            ]);
+        }
+
+        if (redis()) {
+            Redis::del('navigation_menus');
+        }
     }
 }

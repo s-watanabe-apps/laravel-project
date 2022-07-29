@@ -113,7 +113,8 @@ return [
         'add_favorites' => 'Added it to my favorites.',
         'remove_favorites' => 'Removed from favorites.',
         'saved_site_settings' => 'Saved the site settings.',
-        'saved_site_settings' => 'Saved the profile items.',
+        'saved_profile_settings' => 'Saved the profile items.',
+        'saved_profile_settings' => 'Saved the navigation menus.',
     ],
     
     // Errors

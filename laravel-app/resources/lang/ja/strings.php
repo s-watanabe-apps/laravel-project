@@ -113,6 +113,7 @@ return [
         'remove_favorites' => 'お気に入りから削除しました。',
         'saved_site_settings' => 'サイト設定を保存しました。',
         'saved_profile_settings' => 'プロフィール設定項目を保存しました。',
+        'saved_navigation_menus' => 'ナビゲーションメニューを保存しました。',
     ],
 
     // Error messages.
