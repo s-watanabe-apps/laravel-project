@@ -15,55 +15,15 @@
 
     <div class="row">
         <div class="col-lg-8 mb-12">
-            <table id="dataTable" class="display cell-border compact responsive nowrap" style="margin: unset; width: 100%;">
-                <thead>
-                    <tr class="text-nowrap">
-                        <th class="dt-center">ID</th>
-                        <th class="dt-center">@lang('strings.title')</th>
-                        <th class="dt-center">@lang('strings.contribute_date')</th>
-                        <th class="dt-center">@lang('strings.updated_at')</th>
-                        @if ($articlesUser->id == $user->id)
-                        <th class="dt-center">@lang('strings.status')</th>
-                        <th class="dt-center">@lang('strings.comment_count')</th>
-                        @endif
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($articles as $value)
-                    <tr>
-                        <td class="dt-center">
-                            {{$value->id}}
-                        </td>
-                        <td class="dt-center">
-                            <a href="/articles/{{$value->id}}">{{$value->title}}</a>
-                        </td>
-                        <td class="dt-center">
-                            {{$value->created_at->format($dateFormat->getDateFormat())}}
-                        </td>
-                        <td class="dt-center">
-                            {{$value->updated_at->format($dateFormat->getDateFormat())}}
-                        </td>
-                        @if ($articlesUser->id == $user->id)
-                        <td class="dt-center">
-                            <input type="checkbox"
-                                @if ($value->status == \App\Libs\Status::ENABLED)
-                                    checked                                                
-                                @endif
-                                data-onstyle="success" data-offstyle="secondary"
-                                data-toggle="toggle"
-                                data-size="sm"
-                                data-on="@lang('strings.enable')"
-                                data-off="@lang('strings.disable')" />
-                        </td>
-                        <td class="dt-center">
-                            10
-                        </td>
-                        @endif
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
+            @foreach ($articles as $value)
+            <div class="card bg-light text-black shadow">
+                <div class="card-body">
+                    <div class="h5">{{$value->title}}</div>
+                    <hr>
+                    <div class="text-black-50 small">#f8f9fc</div>
+                </div>
+            </div>
+            @endforeach
         </div>
         <div class="col-lg-4 mb-12">
             <small><div id='calendar'></div></small>
@@ -71,9 +31,6 @@
     </div>
 </div>
 <!-- /.container-fluid -->
-
-<!-- DataTables -->
-@include('shared.datatables')
 
 <!-- Full Calendar -->
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />
@@ -84,14 +41,17 @@
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+      dayCellContent: function(e) {
+        e.dayNumberText = e.dayNumberText.replace('日', '');
+      },
       themeSystem: 'bootstrap',
       timeZone: 'UTC',
       initialView: 'dayGridMonth',
       businessHours: true,
-      headerToolbar: {
+      footerToolbar: {
         left: "dayGridMonth,listMonth",
-        center: "title",
-        right: "today prev,next"
+        //center: "title",
+        //right: "today prev,next"
       },
       buttonText: {
         today: '@lang('strings.fullcalendar.today')',
@@ -99,6 +59,8 @@
         list: '@lang('strings.fullcalendar.list')'
       },
       locale: '{{\App::getLocale()}}',
+      height: "auto",
+      contentHeight: 10,
 /**
       [
         {
@@ -125,7 +87,6 @@
       editable: true,
       selectable: true
     });
-
     calendar.render();
 
     calendar.on('dateClick', function(info) {
