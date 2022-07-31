@@ -16,14 +16,16 @@
     <div class="row">
         <div class="col-lg-8 mb-12">
             @foreach ($articles as $value)
-            <div class="card bg-light text-black shadow">
+            <div class="card bg-light text-black shadow mb-3">
                 <div class="card-body">
                     <div class="h5">{{$value->title}}</div>
                     <hr>
+                    <div>{{$value->body_text}}</div>
                     <div class="text-black-50 small">#f8f9fc</div>
                 </div>
             </div>
             @endforeach
+            {{$articles->links()}}
         </div>
         <div class="col-lg-4 mb-12">
             <small><div id='calendar'></div></small>

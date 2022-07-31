@@ -34,7 +34,7 @@ class ArticlesService
     /**
      * Get articles by id.
      * 
-     * @param int id
+     * @param int articles.id
      * @return App\Models\Articles
      */
     public function getById($id)
@@ -45,12 +45,21 @@ class ArticlesService
     /**
      * Get articles by user id.
      * 
-     * @param int
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param int users.id
+     * @return Illuminate\Pagination\LengthAwarePaginator
      */
     public function getByUserId($userId)
     {
-        return $this->query()->where('articles.user_id', $userId)->get();
+        $articles = $this->query()
+            ->where('articles.user_id', $userId)
+            ->orderBy('articles.created_at', 'desc')
+            ->paginate(3);
+
+        foreach ($articles as &$article) {
+            $article->body_text = strip_tags($article->body);
+        }
+
+        return $articles;
     }
 
     /**

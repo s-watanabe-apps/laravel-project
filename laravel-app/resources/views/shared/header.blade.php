@@ -76,6 +76,22 @@ pre > code {
   border-color: #9e9e9e;
 }
 
+small > div#calendar .fc-header-toolbar {
+  margin-bottom: 10px;
+}
+
+small > div#calendar .fc-footer-toolbar {
+  margin-top: 10px;
+}
+
+small > div#calendar .fc-toolbar-title {
+  font-size: 1.5em;
+}
+
+small > div#calendar .btn {
+  font-size: 0.9em;
+}
+
 @media only screen and (max-width:768px) {
   .carousel-caption {
     top: 30%;
