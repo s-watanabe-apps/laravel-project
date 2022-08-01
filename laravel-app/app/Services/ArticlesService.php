@@ -24,8 +24,7 @@ class ArticlesService
                 'articles.created_at',
                 'articles.updated_at',
                 'articles.deleted_at',
-            ])
-            ->leftJoin('users', function ($join) {
+            ])->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id')
                     ->whereNull('users.deleted_at');
             });
@@ -39,7 +38,9 @@ class ArticlesService
      */
     public function getById($id)
     {
-        return $this->query()->where('articles.id', $id)->first();
+        return $this->query()
+            ->where('articles.id', $id)
+            ->first();
     }
 
     /**
@@ -56,7 +57,7 @@ class ArticlesService
             ->paginate(3);
 
         foreach ($articles as &$article) {
-            $article->body_text = strip_tags($article->body);
+            $article->body_text = strip_tags($article->body, '<br>');
         }
 
         return $articles;
@@ -75,10 +76,10 @@ class ArticlesService
     }
 
     /**
-     * Get article headlines.
+     * Get article headlines by user id.
      * 
-     * @var int $userId
-     * @var int $limit
+     * @var int users.id
+     * @var int limit
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getArticleHeadlines($userId, $limit)

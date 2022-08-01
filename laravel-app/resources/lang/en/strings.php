@@ -69,6 +69,7 @@ return [
     'comment_count' => 'Comments',
     'articles_index_title' => 'Posted by Mr./Ms. %s',
     'link' => 'Link',
+    'read_article' => 'Read article',
 
     // Side menus
     'write_articles' => 'Write articles',

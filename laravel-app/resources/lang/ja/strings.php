@@ -68,6 +68,7 @@ return [
     'comment_count' => 'コメント数',
     'articles_index_title' => '%sさんの投稿',
     'link' => 'リンク',
+    'read_article' => '記事を読む',
 
     // Side menus
     'write_articles' => '記事を書く',

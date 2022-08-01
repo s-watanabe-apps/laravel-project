@@ -20,8 +20,18 @@
                 <div class="card-body">
                     <div class="h5">{{$value->title}}</div>
                     <hr>
-                    <div>{{$value->body_text}}</div>
-                    <div class="text-black-50 small">#f8f9fc</div>
+                    <div>{!!$value->body_text!!}</div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-6 text-left">
+                          <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
+                        </div>
+                        <div class="col-6 text-right">
+                          <span>{{$value->created_at->format($dateFormat->getDateTimeFormat())}}</span>
+                          <span>(0)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             @endforeach
