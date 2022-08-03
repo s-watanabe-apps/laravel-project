@@ -47,6 +47,13 @@ class AppHttpRequestsArticlesRequestTest extends TestCase
                     'title' => str_repeat('A', 256),
                     'body' => 'Test Body',
                 ],
+            ], [
+                false,
+                [
+                    'id' => 'A',
+                    'title' => 'Test Title',
+                    'body' => 'Test Body',
+                ],
             ]
         ];
     }

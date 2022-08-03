@@ -14,7 +14,7 @@ class ArticlesService
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function query()
     {
         return Articles::query()
             ->select([
@@ -38,26 +38,45 @@ class ArticlesService
      * Get articles by id.
      * 
      * @param int articles.id
+     * @param int articles.user_id
      * @return App\Models\Articles
      */
-    public function getById(int $id)
+    public function getById(int $id, int $userId)
     {
-        return $this->query()
+        $articles = $this->query()
             ->where('articles.id', $id)
             ->first();
+
+        if (!$articles) {
+            throw new NotFoundException();
+        }
+
+        if ($articles->user_id != $userId) {
+            if ($articles->status != Status::ENABLED) {
+                throw new ForbiddenException();
+            }
+        }
+
+        return $articles;
     }
 
     /**
      * Get articles by user id.
      * 
-     * @param int users.id
+     * @param int articleUserId
+     * @param int userId
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getByUserId(int $userId)
+    public function getByUserId(int $articleUserId, int $userId)
     {
-        $articles = $this->query()
-            ->where('articles.user_id', $userId)
-            ->orderBy('articles.created_at', 'desc')
+        $builder = $this->query()
+            ->where('articles.user_id', $userId);
+        
+        if ($articleUserId != $userId) {
+            $builder->where('articles.status', Status::ENABLED);
+        }
+        
+        $articles = $builder->orderBy('articles.created_at', 'desc')
             ->paginate(3);
 
         foreach ($articles as &$article) {
@@ -65,52 +84,6 @@ class ArticlesService
         }
 
         return $articles;
-    }
-
-    /**
-     * Add as an array.
-     * 
-     * @param array
-     * @return App\Models\Articles
-     */
-    public function save(array $values) {
-        $articles = new Articles();
-        $articles->fill($values)->save();
-        return $articles;
-    }
-
-    public function saveMemberArticles(int $userId, ArticlesRequest $request)
-    {
-        return $this->save([
-            'title' => $request->title,
-            'body' => $request->body,
-            'user_id' => $userId,
-            'type' => Articles::TYPE_MEMBER_ARTICLE,
-            'status' => Status::ENABLED,
-        ]);
-    }
-
-    public function edit(int $id, array $values)
-    {
-        return Articles::where('id', $id)
-            ->update($values);
-    }
-
-    public function editMemberArticles(int $userId, ArticlesRequest $request)
-    {
-        $articles = $this->getById($request->id);
-        if (!$articles) {
-            throw new NotFoundException();
-        }
-
-        if ($articles->user_id != $userId) {
-            throw new ForbiddenException();
-        }
-
-        return $this->edit($request->id, [
-            'title' => $request->title,
-            'body' => $request->body,
-        ]);
     }
 
     /**
@@ -127,5 +100,71 @@ class ArticlesService
             ->orderBy('articles.created_at', 'desc')
             ->limit($limit)
             ->get();
+    }
+
+    /**
+     * Add as an array.
+     * 
+     * @param array
+     * @return App\Models\Articles
+     */
+    private function saveArticles(array $values) {
+        $articles = new Articles();
+        $articles->fill($values)->save();
+        return $articles;
+    }
+
+    /**
+     * Register the entered article.
+     * 
+     * @param App\Http\Requests\ArticlesRequest
+     * @return App\Models\Articles
+     */
+    public function saveMemberArticles(int $userId, ArticlesRequest $request)
+    {
+        return $this->saveArticles([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => $userId,
+            'type' => Articles::TYPE_MEMBER_ARTICLE,
+            'status' => Status::ENABLED,
+        ]);
+    }
+
+    /**
+     * Update as an array.
+     * 
+     * @param int articles.id
+     * @param array
+     * @return App\Models\Articles
+     */
+    private function editArticles(int $id, array $values)
+    {
+        return Articles::where('id', $id)
+            ->update($values);
+    }
+
+    /**
+     * Update the entered article.
+     * 
+     * @param int userId
+     * @param App\Models\Articles
+     * @return
+     */
+    public function editMemberArticles(int $userId, ArticlesRequest $request)
+    {
+        $articles = $this->getById($request->id);
+        if (!$articles) {
+            throw new NotFoundException();
+        }
+
+        if ($articles->user_id != $userId) {
+            throw new ForbiddenException();
+        }
+
+        return $this->editArticles($request->id, [
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
     }
 }

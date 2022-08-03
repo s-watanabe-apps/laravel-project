@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Articles;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
@@ -55,13 +54,12 @@ class ArticlesController extends Controller
      */
     public function user(Request $request)
     {
-        $articlesUser = $this->usersService->getUsersById($request->id);
-
+        $articlesUser = $this->usersService->getUsersById($request->user->id);
         if (!$articlesUser) {
             abort(404);
         }
 
-        $articles = $this->articlesService->getByUserId($request->id);
+        $articles = $this->articlesService->getByUserId($request->id, $request->user->id);
 
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
@@ -77,15 +75,17 @@ class ArticlesController extends Controller
      */
     public function get(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id);
+        try {
+            $articles = $this->articlesService->getById($request->id, $request->user->id);
 
-        if (!$articles || $articles->status == Status::DISABLED) {
+            $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
+        } catch(NotFoundException $e) {
             abort(404);
+        } catch(ForbiddenException $e) {
+            abort(403);
         }
 
-        $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
-
-        return view('articles.viewer', compact('articles'));
+        return view('articles.view', compact('articles'));
     }
 
     /**
@@ -96,7 +96,7 @@ class ArticlesController extends Controller
      */
     public function write(Request $request)
     {
-        return view('articles.creator');
+        return view('articles.create');
     }
 
     /**
@@ -107,13 +107,15 @@ class ArticlesController extends Controller
      */
     public function edit(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id);
-
-        if (!$articles || $articles->user_id != $request->user->id) {
+        try {
+            $articles = $this->articlesService->getById($request->id, $request->user->id);
+        } catch(NotFoundException $e) {
             abort(404);
+        } catch(ForbiddenException $e) {
+            abort(403);
         }
 
-        return $this->putView('articles.editor', compact('articles'));
+        return $this->putView('articles.edit', compact('articles'));
     }
 
     /**
