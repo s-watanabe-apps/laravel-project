@@ -53,4 +53,23 @@ class ArticleCommentsService
         $articleComments->fill($values)->save();
         return $articleComments;
     }
+
+    /**
+     * Get articles comment count.
+     * 
+     * @param array
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getArticlesCommentCount(array $articleIds)
+    {
+        if (empty($articleIds)) {
+            return [];
+        }
+
+        return \DB::table('article_comments')
+            ->select('id', \DB::raw('count(id) as count'))
+            ->whereIn('id', $articleIds)
+            ->groupBy('id')
+            ->get();
+    }
 }

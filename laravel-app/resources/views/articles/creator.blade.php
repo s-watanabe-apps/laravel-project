@@ -5,7 +5,7 @@
     {{Form::open([
         'name' => 'article',
         'url' => '/articles/confirm',
-        'method' => 'put',
+        'method' => 'post',
         'files' => true,
         'enctype' => 'multipart/form-data'
     ])}}
@@ -21,10 +21,11 @@
 
     <div class="row">
         <div class="col-lg-12 mb-12">
-            @include('articles.formset.editControl', compact('articles'))
+            @include('articles.formset.editControl')
         </div>
+
     </div>
-    {{Form::hidden('id', $articles->id)}}
+    {{Form::hidden('id', 0)}}
     {{Form::close()}}
 </div>
 <!-- /.container-fluid -->

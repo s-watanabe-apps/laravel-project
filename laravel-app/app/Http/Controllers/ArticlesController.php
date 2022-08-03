@@ -5,6 +5,8 @@ use App\Models\Articles;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
+use App\Http\Exceptions\NotFoundException;
+use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Libs\Status;
 use Illuminate\Http\Request;
@@ -61,7 +63,10 @@ class ArticlesController extends Controller
 
         $articles = $this->articlesService->getByUserId($request->id);
 
-        return view('articles.user', compact('articles', 'articlesUser'));
+        $articleIds = array_column($articles->toArray()['data'], 'id');
+        $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
+
+        return view('articles.user', compact('articles', 'articlesUser', 'commentCount'));
     }
 
     /**
@@ -80,9 +85,6 @@ class ArticlesController extends Controller
 
         $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
-var_dump($articleComments);
-
-
         return view('articles.viewer', compact('articles'));
     }
 
@@ -94,7 +96,7 @@ var_dump($articleComments);
      */
     public function write(Request $request)
     {
-        return $this->postView('articles.editor');
+        return view('articles.creator');
     }
 
     /**
@@ -124,28 +126,35 @@ var_dump($articleComments);
     {
         $articles = (new Articles())->bind($request->validated());
 
-        return $this->customView('articles.viewer', compact('articles'), $request->method());
+        $method = $request->method();
+
+        return view('articles.confirm', compact('articles', 'method'));
     }
 
     /**
      * Posting an article.
      * 
-     * @param \App\Http\Requests\ArticlesRequest
+     * @param App\Http\Requests\ArticlesRequest
      * @return void
      */
     public function register(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $this->articlesService->save(
-                $request->validated() + [
-                    'user_id' => $request->user->id,
-                    'type' => Articles::TYPE_MEMBER_ARTICLE,
-                    'status' => Status::ENABLED,
-                ]
-            );
+            try {
+                if (strcmp(strtolower($request->method()), Parent::REQUEST_METHOD_POST) == 0) {
+                    $this->articlesService->saveMemberArticles($request->user->id, $request);
+                } else if (strcmp(strtolower($request->method()), Parent::REQUEST_METHOD_PUT) == 0) {
+                    $this->articlesService->editMemberArticles($request->user->id, $request);
+                } else {
+                    throw new NotFoundException();
+                }
+            } catch(NotFoundException $e) {
+                abort(404);
+            } catch(ForbiddenException $e) {
+                abort(403);
+            }
         });
 
         return redirect()->route('articles.user', ['id' => $request->user->id]);
     }
-
 }

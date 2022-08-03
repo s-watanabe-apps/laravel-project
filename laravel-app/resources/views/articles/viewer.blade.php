@@ -2,76 +2,31 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    @if (isset($formMethod))
-    {{Form::open(['name' => 'articles', 'url' => '/articles/register', 'method' => $formMethod, 'files' => true, 'enctype' => 'multipart/form-data'])}}
-    @csrf
-    @endif
     <!-- Page Heading -->
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                @if(isset($formMethod))
-                <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-edit"></i> @lang('strings.write_articles')</a></li>
-                <li class="breadcrumb-item active" aria-current="page">@lang('strings.confirm')</li>
-                @else
                 <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i> {{$articles->title}}</li>
-                @endif
             </ol>
         </nav>
     </div>
 
     <div class="row">
-        <div class="col-lg-12 mb-12">
-            <table class="table table-bordered responsive-table">
-                <tbody>
-                    <tr>
-                        <th class="text-secondary text-nowrap bg-th">@lang('strings.title')</th>
-                        <td class="view-box">
-                            {{$articles->title}}
-                            {{Form::hidden('title', $articles->title)}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-secondary text-nowrap bg-th">@lang('strings.article_body')</th>
-                        <td class="view-box">
-                            {!!$articles->body!!}
-                            {{Form::hidden('body', $articles->body)}}
-                        </td>
-                    </tr>
-                    @if (!isset($formMethod))
-                    <tr>
-                        <th class="text-secondary text-nowrap bg-th">@lang('strings.contributor')</th>
-                        <td class="view-box">
-                            {{$articles->name ?? ''}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-secondary text-nowrap bg-th">@lang('strings.contribute_date')</th>
-                        <td class="view-box">
-                            {{$articles->created_at ?? $articles->created_at->format($dateFormat->getDateFormat())}}
-                        </td>
-                    </tr>
-                    @endif
-                </tbody>
-            </table>
+        <div class="col-lg-8 mb-12">
+            @include ('articles.formset.viewControl', compact('articles'))
 
-            @if (isset($formMethod))
-            <div class="col-auto mb-5 text-center">
-                <a href="javascript:articles.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-                    <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.save')
-                </a>
-                <a href="javascript:window.history.back();" class="btn btn-secondary shadow-sm btn-edit-cancel-save">
-                    <i class="fas fa-window-close fa-sm text-white-50"></i>@lang('strings.cancel')
-                </a>
+            @if ($articles->user_id == $user->id)
+            <div class="col-lg-12 mb-12 text-center">
+                <a type="button" class="btn btn-success" href="/articles/edit/{{$articles->id}}"><i class="fas fa-fw fa-edit"></i> @lang('strings.edit')</a>
+                <a type="button" class="btn btn-danger" href="#"><i class="fas fa-fw fa-trash"></i> @lang('strings.delete')</a>
             </div>
             @endif
-
         </div>
-
+        <div class="col-lg-4 mb-12">
+            @include ('articles.formset.sidemenu')
+        </div>
     </div>
-    @if (isset($formMethod))
-    {{Form::close()}}
-    @endif
 </div>
+
 <!-- /.container-fluid -->
 @endsection

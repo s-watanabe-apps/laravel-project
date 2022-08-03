@@ -41,6 +41,7 @@ return [
     'profile_result_message' => 'Updated my profile.',
     'article_body' =>'Post body',
     'latest_articles' => 'Latest articles.',
+    'popular_articles' => 'Popular articles.',
     'pictures' => 'Pictures',
     'show_more' => 'Show more',
     'user_name' => 'User name',
@@ -70,6 +71,7 @@ return [
     'articles_index_title' => 'Posted by Mr./Ms. %s',
     'link' => 'Link',
     'read_article' => 'Read article',
+    'label' => 'Labels',
 
     // Side menus
     'write_articles' => 'Write articles',

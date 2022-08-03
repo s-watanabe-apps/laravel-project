@@ -21,6 +21,7 @@ class ArticlesRequest extends AppFormRequest
     public function rules()
     {
         return [
+            'id' => 'numeric',
             'title' => 'required|max:255',
             'body' => 'string',
         ];

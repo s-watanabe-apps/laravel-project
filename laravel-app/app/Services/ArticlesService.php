@@ -1,7 +1,11 @@
 <?php
 namespace App\Services;
 
+use App\Http\Exceptions\NotFoundException;
+use App\Http\Exceptions\ForbiddenException;
 use App\Models\Articles;
+use App\Http\Requests\ArticlesRequest;
+use App\Libs\Status;
 
 class ArticlesService
 {
@@ -36,7 +40,7 @@ class ArticlesService
      * @param int articles.id
      * @return App\Models\Articles
      */
-    public function getById($id)
+    public function getById(int $id)
     {
         return $this->query()
             ->where('articles.id', $id)
@@ -49,7 +53,7 @@ class ArticlesService
      * @param int users.id
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getByUserId($userId)
+    public function getByUserId(int $userId)
     {
         $articles = $this->query()
             ->where('articles.user_id', $userId)
@@ -69,10 +73,44 @@ class ArticlesService
      * @param array
      * @return App\Models\Articles
      */
-    public function save($values) {
+    public function save(array $values) {
         $articles = new Articles();
         $articles->fill($values)->save();
         return $articles;
+    }
+
+    public function saveMemberArticles(int $userId, ArticlesRequest $request)
+    {
+        return $this->save([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => $userId,
+            'type' => Articles::TYPE_MEMBER_ARTICLE,
+            'status' => Status::ENABLED,
+        ]);
+    }
+
+    public function edit(int $id, array $values)
+    {
+        return Articles::where('id', $id)
+            ->update($values);
+    }
+
+    public function editMemberArticles(int $userId, ArticlesRequest $request)
+    {
+        $articles = $this->getById($request->id);
+        if (!$articles) {
+            throw new NotFoundException();
+        }
+
+        if ($articles->user_id != $userId) {
+            throw new ForbiddenException();
+        }
+
+        return $this->edit($request->id, [
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
     }
 
     /**
@@ -82,7 +120,7 @@ class ArticlesService
      * @var int limit
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getArticleHeadlines($userId, $limit)
+    public function getArticleHeadlines(int $userId, int $limit)
     {
         return $this->query()
             ->where('articles.user_id', $userId)

@@ -40,6 +40,7 @@ return [
     'profile_result_message' => 'プロフィールを更新しました。',
     'article_body' =>'投稿本文',
     'latest_articles' => '最近の記事',
+    'popular_articles' => '人気の記事',
     'pictures' => 'アルバム',
     'show_more' => 'もっと見る',
     'user_name' => 'ユーザー名',
@@ -69,6 +70,7 @@ return [
     'articles_index_title' => '%sさんの投稿',
     'link' => 'リンク',
     'read_article' => '記事を読む',
+    'label' => 'ラベル',
 
     // Side menus
     'write_articles' => '記事を書く',

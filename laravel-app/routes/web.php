@@ -34,7 +34,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('/articles/write', 'ArticlesController@write');
             Route::get('/articles/edit/{id}', 'ArticlesController@edit');
             Route::post('/articles/confirm', 'ArticlesController@confirm');
+            Route::put('/articles/confirm', 'ArticlesController@confirm');
             Route::post('/articles/register', 'ArticlesController@register');
+            Route::put('/articles/register', 'ArticlesController@register');
         });
 
         // Profiles

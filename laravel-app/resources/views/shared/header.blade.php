@@ -28,6 +28,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <style type="text/css">
 <!--
 body#page-top {
@@ -90,6 +92,7 @@ small > div#calendar .fc-toolbar-title {
 
 small > div#calendar .btn {
   font-size: 0.9em;
+  height: 28px;
 }
 
 @media only screen and (max-width:768px) {
