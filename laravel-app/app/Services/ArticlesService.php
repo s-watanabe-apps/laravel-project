@@ -93,11 +93,16 @@ class ArticlesService
      * @var int limit
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getArticleHeadlines(int $userId, int $limit)
+    public function getLatestArticleHeadlines(int $articleUserId, int $userId, int $limit = 5)
     {
-        return $this->query()
-            ->where('articles.user_id', $userId)
-            ->orderBy('articles.created_at', 'desc')
+        $builder = $this->query()
+            ->where('articles.user_id', $articleUserId);
+
+        if ($articleUserId != $userId) {
+            $builder->where('articles.status', Status::ENABLED);
+        }
+
+        return $builder->orderBy('articles.created_at', 'desc')
             ->limit($limit)
             ->get();
     }

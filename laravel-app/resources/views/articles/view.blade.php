@@ -6,14 +6,14 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i> {{$articles->title}}</li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-blog"></i> {{$articles->title}}</li>
             </ol>
         </nav>
     </div>
 
     <div class="row">
         <div class="col-lg-8 mb-12">
-            @include ('articles.formset.viewControl', compact('articles'))
+            @include('articles.formset.viewControl', compact('articles'))
 
             @if ($articles->user_id == $user->id)
             <div class="col-lg-12 mb-12 text-center">
@@ -23,7 +23,7 @@
             @endif
         </div>
         <div class="col-lg-4 mb-12">
-            @include ('articles.formset.sidemenu')
+            @include('articles.formset.sidemenu', compact('latestArticles'))
         </div>
     </div>
 </div>

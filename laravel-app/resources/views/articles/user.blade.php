@@ -6,9 +6,7 @@
   <div class="row">
     <nav aria-label="breadcrumb" class="col-md-12 h5">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><i class="fas fa-fw fa-edit"></i>
-          {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}
-        </li>
+        <li class="breadcrumb-item"><i class="fas fa-blog"></i> {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}</li>
       </ol>
     </nav>
   </div>
@@ -39,7 +37,7 @@
     </div>
 
     <div class="col-lg-4 mb-12">
-      @include ('articles.formset.sidemenu')
+      @include('articles.formset.sidemenu', compact('latestArticles'))
     </div>
   </div>
 </div>
