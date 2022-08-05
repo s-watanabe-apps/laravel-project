@@ -64,7 +64,7 @@ class ArticlesController extends Controller
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
 
-        $latestArticles = $this->articlesService->getLatestArticlesForCache($request->id, $request->user->id);
+        $latestArticles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
 
         return view('articles.user', compact('articles', 'articlesUser', 'commentCount', 'latestArticles'));
     }

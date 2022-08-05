@@ -26,7 +26,7 @@ class SettingsMiddleware
     public function handle(Request $request, Closure $next)
     {
         $settings = (new SettingsService())->get();
-        $navigations = (new NavigationMenusService())->all();
+        $navigations = (new NavigationMenusService())->get();
 
         $request->merge(compact('settings', 'navigations'));
 

@@ -5,7 +5,7 @@ use App\Models\Settings;
 use App\Http\Requests\ManagementsSettingsRequest;
 use Illuminate\Support\Facades\Cache;
 
-class SettingsService
+class SettingsService extends Service
 {
     /**
      * Save settings.
@@ -26,19 +26,19 @@ class SettingsService
             'anonymous_permission' => $request->anonymous_permission,
         ]);
 
-        Cache::forget('settings');
+        cache()->forget('settings');
 
         return $settings;
     }
 
     /**
-     * Get settings from Redis or Database.
+     * Get settings from Cache or Database.
      * 
      * @return App\Models\Settings
      */
     public function get() {
-        $cache = Cache::rememberForever('settings', function () {
-            $data = Settings::query()->first();
+        $cache = Cache::rememberForever(__METHOD__, function() {
+            $data = Settings::query()->select()->first();
             return json_encode($data);
         });
 

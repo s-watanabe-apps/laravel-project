@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Models\NavigationMenus;
 use Illuminate\Support\Facades\Cache;
 
-class NavigationMenusService
+class NavigationMenusService extends Service
 {
     /**
      * Get base query.
@@ -25,25 +25,31 @@ class NavigationMenusService
     }
 
     /**
-     * Get all navigation menus from Redis or Database.
+     * Get all navigation menus for Cache or Database.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function all()
+    public function get()
     {
-        $cache = Cache::rememberForever('navigation_menus', function () {
+        $cache = Cache::rememberForever(__METHOD__, function() {
             $data = $this->query()->get();
             return json_encode($data);
         });
 
-        $navigationMenus = [];
+        $data = [];
         foreach (json_decode($cache) as $value) {
-            $navigationMenus[] = (new NavigationMenus())->bind($value);
+            $data[] = (new NavigationMenus())->bind($value);
         }
 
-        return $navigationMenus;
+        return $data;
     }
 
+    /**
+     * Save navigation menus.
+     * 
+     * @param array
+     * @return void
+     */
     public function save($validated)
     {
         $this->query()->delete();
@@ -56,6 +62,6 @@ class NavigationMenusService
             ]);
         }
 
-        Cache::forget('navigation_menus');
+        cache()->forget('navigation_menus');
     }
 }

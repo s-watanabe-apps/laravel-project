@@ -8,7 +8,7 @@ use App\Models\Articles;
 use App\Libs\Status;
 use Illuminate\Support\Facades\Cache;
 
-class ArticlesService
+class ArticlesService extends Service
 {
     /**
      * Get base query.
@@ -88,40 +88,35 @@ class ArticlesService
     }
 
     /**
-     * Get latest article headlines by user id.
+     * Get latest article headlines by user id for Cache or Database.
      * 
-     * @var int users.id
-     * @var int limit
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param int articles.user_id
+     * @param int users.id
+     * @param int limit
+     * @return array[App\Models\Articles]
      */
     public function getLatestArticles(int $articleUserId, int $userId, int $limit = 5)
     {
-        $builder = $this->query()
-            ->where('articles.user_id', $articleUserId);
+        $key = sprintf('%s-%d-%d', __METHOD__, $articleUserId, $articleUserId == $userId ? 1 : 0);
 
-        if ($articleUserId != $userId) {
-            $builder->where('articles.status', Status::ENABLED);
-        }
-
-        return $builder->orderBy('articles.created_at', 'desc')
-            ->limit($limit)
-            ->get();
-    }
-
-    public function getLatestArticlesForCache(int $articleUserId, int $userId, int $limit = 5)
-    {
-        $key = 'latest_articles-' . $articleUserId;
         $cache = Cache::rememberForever($key, function() use($articleUserId, $userId, $limit) {
-            $data = $this->getLatestArticles($articleUserId, $userId, $limit);
+            $builder = $this->query()->where('articles.user_id', $articleUserId);
+
+            if ($articleUserId != $userId) {
+                $builder->where('articles.status', Status::ENABLED);
+            }
+
+            $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get();
+
             return json_encode($data);
         });
 
-        $latestArticles = [];
+        $data = [];
         foreach (json_decode($cache) as $value) {
-            $latestArticles[] = (new Articles())->bind($value);
+            $data[] = (new Articles())->bind($value);
         }
 
-        return $latestArticles;
+        return $data;
     }
 
     /**
