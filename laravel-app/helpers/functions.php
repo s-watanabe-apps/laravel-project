@@ -2,18 +2,6 @@
 declare(strict_types = 1);
 use Carbon\Carbon;
 
-if (!function_exists('redis')) {
-    /**
-     * global redis.
-     * 
-     * @return string
-     */
-    function redis(): bool
-    {
-        return config('cache.default') == 'redis';
-    }
-}
-
 if (!function_exists('carbon')) {
     /**
      * global carbon.

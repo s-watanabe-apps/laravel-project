@@ -3,9 +3,10 @@ namespace App\Services;
 
 use App\Http\Exceptions\NotFoundException;
 use App\Http\Exceptions\ForbiddenException;
-use App\Models\Articles;
 use App\Http\Requests\ArticlesRequest;
+use App\Models\Articles;
 use App\Libs\Status;
+use Illuminate\Support\Facades\Cache;
 
 class ArticlesService
 {
@@ -87,13 +88,13 @@ class ArticlesService
     }
 
     /**
-     * Get article headlines by user id.
+     * Get latest article headlines by user id.
      * 
      * @var int users.id
      * @var int limit
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getLatestArticleHeadlines(int $articleUserId, int $userId, int $limit = 5)
+    public function getLatestArticles(int $articleUserId, int $userId, int $limit = 5)
     {
         $builder = $this->query()
             ->where('articles.user_id', $articleUserId);
@@ -105,6 +106,22 @@ class ArticlesService
         return $builder->orderBy('articles.created_at', 'desc')
             ->limit($limit)
             ->get();
+    }
+
+    public function getLatestArticlesForCache(int $articleUserId, int $userId, int $limit = 5)
+    {
+        $key = 'latest_articles-' . $articleUserId;
+        $cache = Cache::rememberForever($key, function() use($articleUserId, $userId, $limit) {
+            $data = $this->getLatestArticles($articleUserId, $userId, $limit);
+            return json_encode($data);
+        });
+
+        $latestArticles = [];
+        foreach (json_decode($cache) as $value) {
+            $latestArticles[] = (new Articles())->bind($value);
+        }
+
+        return $latestArticles;
     }
 
     /**

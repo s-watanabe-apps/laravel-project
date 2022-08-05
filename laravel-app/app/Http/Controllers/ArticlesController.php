@@ -64,7 +64,7 @@ class ArticlesController extends Controller
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
 
-        $latestArticles = $this->articlesService->getLatestArticleHeadlines($request->id, $request->user->id);
+        $latestArticles = $this->articlesService->getLatestArticlesForCache($request->id, $request->user->id);
 
         return view('articles.user', compact('articles', 'articlesUser', 'commentCount', 'latestArticles'));
     }
@@ -82,7 +82,7 @@ class ArticlesController extends Controller
 
             $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
-            $latestArticles = $this->articlesService->getLatestArticleHeadlines($articles->user_id, $request->user->id);
+            $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
         } catch(NotFoundException $e) {
             abort(404);
         } catch(ForbiddenException $e) {

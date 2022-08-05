@@ -29,7 +29,7 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th"><i class="fas fa-blog"></i> @lang('strings.latest_articles')</th>
         </tr>
-        @foreach($latestArticles->values() as $value)
+        @foreach($latestArticles as $value)
         <tr>
             <td class="view-box">
                 <a href="/articles/{{$value->id}}">{{$value->title}}</a>

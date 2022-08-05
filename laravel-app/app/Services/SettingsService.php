@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Settings;
 use App\Http\Requests\ManagementsSettingsRequest;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class SettingsService
 {
@@ -26,9 +26,7 @@ class SettingsService
             'anonymous_permission' => $request->anonymous_permission,
         ]);
 
-        if (redis()) {
-            Redis::del('settings');
-        }
+        Cache::forget('settings');
 
         return $settings;
     }
@@ -39,23 +37,11 @@ class SettingsService
      * @return App\Models\Settings
      */
     public function get() {
-        $cache = null;
-        try {
-            if (redis()) {
-                $cache = Redis::get('settings');
-            }
-        } catch (Exception $e) {
-            //
-        }
+        $cache = Cache::rememberForever('settings', function () {
+            $data = Settings::query()->first();
+            return json_encode($data);
+        });
 
-        if ($cache != null) {
-            $settings = new Settings();
-            $settings->bind(json_decode($cache));
-        } else {
-            $settings = Settings::query()->first();
-            Redis::set('settings', json_encode($settings->toArray()));
-        }
-
-        return $settings;
+        return (new Settings())->bind(json_decode($cache));
     }
 }

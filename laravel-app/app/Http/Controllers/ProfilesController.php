@@ -77,7 +77,7 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $articles = $this->articlesService->getLatestArticleHeadlines($request->id, $request->user->id);
+        $articles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 

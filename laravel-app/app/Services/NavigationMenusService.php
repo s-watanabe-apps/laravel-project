@@ -2,7 +2,7 @@
 namespace App\Services;
 
 use App\Models\NavigationMenus;
-use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class NavigationMenusService
 {
@@ -31,25 +31,14 @@ class NavigationMenusService
      */
     public function all()
     {
-        $cache = null;
-        try {
-            if (redis()) {
-                $cache = Redis::get('navigation_menus');
-            }
-        } catch (Exception $e) {
-            //
-        }
-        
-        if ($cache != null) {
-            $navigationMenus = [];
-            foreach (json_decode($cache) as $value) {
-                $navigationMenus[] = (new NavigationMenus())->bind($value);
-            }
-        } else {
-            $navigationMenus = $this->query()->get();
-            if (redis()) {
-                Redis::set('navigation_menus', json_encode($navigationMenus->toArray()));
-            }
+        $cache = Cache::rememberForever('navigation_menus', function () {
+            $data = $this->query()->get();
+            return json_encode($data);
+        });
+
+        $navigationMenus = [];
+        foreach (json_decode($cache) as $value) {
+            $navigationMenus[] = (new NavigationMenus())->bind($value);
         }
 
         return $navigationMenus;
@@ -67,8 +56,6 @@ class NavigationMenusService
             ]);
         }
 
-        if (redis()) {
-            Redis::del('navigation_menus');
-        }
+        Cache::forget('navigation_menus');
     }
 }
