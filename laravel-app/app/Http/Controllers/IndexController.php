@@ -53,7 +53,7 @@ class IndexController extends Controller
         $informations = $this->informationsService->getEnabled();
 
         // Weekly calendar
-        $calendar = $this->calendarService->getWeeklyCalendar();
+        $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
         // Latest Articles
         

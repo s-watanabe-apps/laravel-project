@@ -30,7 +30,7 @@ class ScheduleController extends Controller
      */
     public function index(Request $request)
     {
-        $events = $this->calendarService->getMonthlyCalendar();
+        $events = $this->calendarService->getMonthlyCalendarEvents();
 
         return view('schedule.index', [
             'events' => json_encode($events),

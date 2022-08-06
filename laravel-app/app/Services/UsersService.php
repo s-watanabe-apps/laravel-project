@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Users;
 use App\Libs\Status;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class UsersService
 {
@@ -81,20 +82,37 @@ class UsersService
      * Get birthday users.
      * 
      * @var Carbon[] birthdays
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return array[App\Models\Users]
      */
     public function getBirthdayUsers($birthdays) {
-        $builder = $this->query();
-        
-        $dateStrings = [];
+        $dates = [];
         foreach ($birthdays as $birthday) {
-            $builder->orWhere(function($query) use($birthday) {
-                $query->where(\DB::raw('date_format(birthdate, "%m")'), $birthday->format('m'))
-                      ->where(\DB::raw('date_format(birthdate, "%d")'), $birthday->format('d'));
-            });
+            $dates[] = $birthday->toDateString();
         }
 
-        return $builder->orderBy('id')->get();
+        $key = sprintf('birthday_users-%s-%s', $dates[0], $dates[count($dates) - 1]);
+
+        $cache = Cache::remember($key, (60 * 60 * 24), function() use($birthdays) {
+            $builder = $this->query();
+        
+            $dateStrings = [];
+            foreach ($birthdays as $birthday) {
+                $builder->orWhere(function($query) use($birthday) {
+                    $query->where(\DB::raw('date_format(birthdate, "%m")'), $birthday->format('m'))
+                          ->where(\DB::raw('date_format(birthdate, "%d")'), $birthday->format('d'));
+                });
+            }
+    
+            $data = $builder->orderBy('id')->get();
+            return json_encode($data);
+        });
+
+        $data = [];
+        foreach (json_decode($cache) as $value) {
+            $data[] = (new Users())->bind($value);
+        }
+
+        return $data;
     }
 
     /**

@@ -9,4 +9,19 @@ class Users extends Authenticatable
     use SoftDeletes;
 
     const PAGENATE = 12;
+
+    /**
+     * Bind an array to a Instance variables.
+     * 
+     * @param array
+     * @return App\Models\Model
+     */
+    public function bind($values)
+    {
+        foreach ($values as $key => $value) {
+            $this->$key = $value;
+        }
+
+        return $this;
+    }
 }
