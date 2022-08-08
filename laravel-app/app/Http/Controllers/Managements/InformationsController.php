@@ -39,9 +39,7 @@ class InformationsController extends ManagementsController
     {
         $informations = $this->informationsService->all();
 
-        return view('managements.informations.index', compact(
-            'informations'
-        ));
+        return view('managements.informations.index', compact('informations'));
     }
 
     /**
@@ -52,13 +50,11 @@ class InformationsController extends ManagementsController
      */
     public function get(Request $request)
     {
-        $information = $this->informationsService->get($request->id);
+        $informations = $this->informationsService->get($request->id);
 
         $informationMarks = $this->informationMarksService->all();
 
-        return $this->putView('managements.informations.editor', compact(
-            'information', 'informationMarks'
-        ));
+        return view('managements.informations.edit', compact('informations', 'informationMarks'));
     }
 
     /**
@@ -71,9 +67,7 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = $this->informationMarksService->all();
 
-        return $this->postView('managements.informations.editor', compact(
-            'informationMarks'
-        ));
+        return $this->postView('managements.informations.create', compact('informationMarks'));
     }
 
     /**
@@ -84,11 +78,13 @@ class InformationsController extends ManagementsController
      */
     public function confirm(ManagementsInformationsRequest $request)
     {
+        $informations = (new Informations())->bind($request->validated());
+dump($request->validated());
         $informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
 
-        return customView('managements.informations.viewer', compact(
-            'request', 'informationMark'
-        ), $request->method());
+        $method = $request->method();
+
+        return view('managements.informations.confirm', compact('informations', 'informationMark', 'method'));
     }
 
     /**
@@ -99,12 +95,8 @@ class InformationsController extends ManagementsController
      */
     public function register(ManagementsInformationsRequest $request)
     {
-        \DB::transaction(function() use ($request) {
-            if ($request->isPost()) {
-                $this->informationsService->add($request->validated());
-            } else {
-
-            }
+        \DB::transaction(function() use($request) {
+            $this->informationsService->save($request);
         });
 
         return redirect()->route('managementsInformations');

@@ -6,7 +6,7 @@ use App\Models\ProfileChoices;
 use App\Libs\ProfileInputType;
 use Illuminate\Support\Facades\DB;
 
-class ProfilesService
+class ProfilesService extends Service
 {
     /**
      * Get base query.

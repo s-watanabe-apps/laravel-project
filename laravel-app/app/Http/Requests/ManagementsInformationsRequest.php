@@ -38,9 +38,9 @@ class ManagementsInformationsRequest extends AppFormRequest
                     }
                 },
             ],
-            'status' => 'required|in:' . implode(',', [
+            'status' => 'in:' . implode(',', [
                 Status::ENABLED,
-                Status::DISABLED,
+                //Status::DISABLED,
             ]),
             'mark_id' => 'required|exists:information_marks,id',
         ];

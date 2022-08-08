@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-class FilesService
+class FilesService extends Service
 {
     static $extensions = [
         'txt', 'pdf', 'zip',

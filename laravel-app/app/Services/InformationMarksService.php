@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\InformationMarks;
 
-class InformationMarksService
+class InformationMarksService extends Service
 {
     public function query()
     {

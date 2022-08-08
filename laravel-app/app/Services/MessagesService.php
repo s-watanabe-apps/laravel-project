@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Messages;
 
-class MessagesService
+class MessagesService extends Service
 {
     public function getUnreadMessages($userId)
     {

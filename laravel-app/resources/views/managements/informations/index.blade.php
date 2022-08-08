@@ -16,7 +16,7 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.informations.tabControl', ['index' => 1])
+        @include('managements.informations.formset.tabControl', ['index' => 1])
 
         <div class="col-lg-10 px-0 px-lg-2">
 

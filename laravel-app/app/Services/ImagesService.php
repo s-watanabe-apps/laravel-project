@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Images;
 
-class ImagesService
+class ImagesService extends Service
 {
     /**
      * Get by id.

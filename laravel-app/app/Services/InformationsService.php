@@ -1,11 +1,12 @@
 <?php
 namespace App\Services;
 
+use App\Libs\Status;
 use App\Models\Informations;
 use App\Models\InformationMarks;
-use App\Libs\Status;
+use App\Requests\ManagementsInformationsRequest;
 
-class InformationsService
+class InformationsService extends Service
 {
     /**
      * Get base query.
@@ -68,12 +69,16 @@ class InformationsService
     /**
      * Add as an array.
      * 
-     * @var array
-     * @return App\Models\FreePages
+     * @var App\Requests\ManagementsInformationsRequest
+     * @return App\Models\Informations
      */
-    public function add($values) {
+    //public function save(ManagementsInformationsRequest $request)
+    public function save($request)
+    {
         $informations = new Informations();
-        $informations->fill($values)->save();
+
+        $informations->fill($request->validated())->save();
+
         return $informations;
     }
 

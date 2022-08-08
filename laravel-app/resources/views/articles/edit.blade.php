@@ -2,14 +2,6 @@
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    {{Form::open([
-        'name' => 'article',
-        'url' => '/articles/confirm',
-        'method' => 'put',
-        'files' => true,
-        'enctype' => 'multipart/form-data'
-    ])}}
-    @csrf
     <!-- Page Heading -->
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
@@ -21,11 +13,21 @@
 
     <div class="row">
         <div class="col-lg-12 mb-12">
+            {{Form::open([
+                'name' => 'article',
+                'url' => '/articles/confirm',
+                'method' => 'put',
+                'files' => true,
+                'enctype' => 'multipart/form-data'
+            ])}}
+            @csrf
+
             @include('articles.formset.editControl', compact('articles'))
+
+            {{Form::hidden('id', $articles->id)}}
+            {{Form::close()}}
         </div>
     </div>
-    {{Form::hidden('id', $articles->id)}}
-    {{Form::close()}}
 </div>
 <!-- /.container-fluid -->
 

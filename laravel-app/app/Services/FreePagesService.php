@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\FreePages;
 
-class FreePagesService
+class FreePagesService extends Service
 {
     /**
      * Get all free pages.

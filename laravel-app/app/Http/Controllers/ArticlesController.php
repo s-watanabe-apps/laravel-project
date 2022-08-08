@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
@@ -119,7 +120,7 @@ class ArticlesController extends Controller
             abort(403);
         }
 
-        return $this->putView('articles.edit', compact('articles'));
+        return view('articles.edit', compact('articles'));
     }
 
     /**

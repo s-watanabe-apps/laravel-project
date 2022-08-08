@@ -6,7 +6,7 @@ use App\Models\PasswordResets;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
-class MailService
+class MailService extends Service
 {
     /**
      * Send mail.

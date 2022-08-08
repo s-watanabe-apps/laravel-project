@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Pictures;
 
-class PicturesService
+class PicturesService extends Service
 {
     /**
      * Get base query.

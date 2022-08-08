@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\ArticleComments;
 
-class ArticleCommentsService
+class ArticleCommentsService extends Service
 {
     /**
      * Get base query.

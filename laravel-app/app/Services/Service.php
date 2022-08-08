@@ -14,7 +14,7 @@ class Service
      * @param int $ttl
      * @return array
      */
-    protected function remember($key, Closure $function, $ttl = null)
+    protected function remember(string $key, Closure $function, int $ttl = null)
     {
         if (is_null($ttl)) {
             $cache = $this->rememberForever($key, $function);
@@ -32,7 +32,7 @@ class Service
      * @param object $json
      * @return array
      */
-    private function rememberForever($key, Closure $function)
+    private function rememberForever(string $key, Closure $function)
     {
         return Cache::rememberForever($key, $function);
     }
