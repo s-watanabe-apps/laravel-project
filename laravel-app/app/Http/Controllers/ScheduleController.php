@@ -12,7 +12,6 @@ class ScheduleController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param App\Services\InformationsService
      * @param App\Services\CalendarService
      * @return void
      */

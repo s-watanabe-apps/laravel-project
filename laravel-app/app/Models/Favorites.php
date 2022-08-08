@@ -3,7 +3,7 @@ namespace App\Models;
 
 class Favorites extends Model
 {
-    protected $table = 'favorites';
+    public $table = 'favorites';
 
     // Model constants.
     const FAVORITE_CODE_PROFILES = 'profiles';

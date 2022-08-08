@@ -5,7 +5,7 @@ use App\Models\Images;
 
 class Pictures extends Model
 {
-    protected $table = 'pictures';
+    public $table = 'pictures';
 
     const PAGENATE = 12;
 }

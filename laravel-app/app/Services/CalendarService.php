@@ -47,6 +47,7 @@ class CalendarService extends Service
         }
     
         foreach ($dates as &$date) {
+            $date['users'] = [];
             if (array_key_exists($date['date']->format('md'), $usersMap)) {
                 foreach ($usersMap[$date['date']->format('md')] as $user) {
                     $date['users'][] = $user;

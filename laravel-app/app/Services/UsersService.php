@@ -4,9 +4,8 @@ namespace App\Services;
 use App\Models\Users;
 use App\Libs\Status;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
 
-class UsersService
+class UsersService extends Service
 {
     /**
      * Get base query.
@@ -66,33 +65,58 @@ class UsersService
     }
 
     /**
-     * Get users by id.
+     * Get users by id for Cache or Database.
      * 
      * @var int id
      * @return App\Models\Users
      */
-    public function getUsersById($id)
+    public function getUsersById($id) : Users
     {
-        return $this->query()
-            ->where('users.id', $id)
-            ->first();
+        $key = sprintf('users-%d', $id);
+
+        $cache = $this->remember($key, function() use($id) {
+            $data = $this->query()->where('users.id', $id)->first();
+            return json_encode($data);
+        });
+
+        return (new Users())->bind($cache);
     }
 
     /**
-     * Get birthday users.
+     * Get by E-mail for Cache or Database.
+     * 
+     * @var string email
+     * @return App\Models\Users
+     */
+    public function getByEmail($email) : Users
+    {
+        $key = sprintf('users-%s', $email);
+
+        $cache = $this->remember($key, function() use($email) {
+            $data = $this->query()->where('email', $email)->first();
+            return json_encode($data);
+        });
+
+        return (new Users())->bind($cache);
+    }
+
+    /**
+     * Get birthday users for Cache or Database.
      * 
      * @var Carbon[] birthdays
      * @return array[App\Models\Users]
      */
-    public function getBirthdayUsers($birthdays) {
-        $dates = [];
-        foreach ($birthdays as $birthday) {
-            $dates[] = $birthday->toDateString();
-        }
+    public function getBirthdayUsers($birthdays)
+    {
+        $users = new Users();
 
-        $key = sprintf('birthday_users-%s-%s', $dates[0], $dates[count($dates) - 1]);
+        $dates = array_map(function($value) {
+            return $value->toDateString();
+        }, $birthdays);
 
-        $cache = Cache::remember($key, (60 * 60 * 24), function() use($birthdays) {
+        $key = sprintf('%s-birthday-%s-%s', $users->table, $dates[0], $dates[count($dates) - 1]);
+
+        $cache = $this->remember($key, function() use($birthdays) {
             $builder = $this->query();
         
             $dateStrings = [];
@@ -105,27 +129,11 @@ class UsersService
     
             $data = $builder->orderBy('id')->get();
             return json_encode($data);
-        });
+        }, (60 * 60 * 24));
 
-        $data = [];
-        foreach (json_decode($cache) as $value) {
-            $data[] = (new Users())->bind($value);
-        }
-
-        return $data;
-    }
-
-    /**
-     * Get by E-mail
-     * 
-     * @var string email
-     * @return App\Models\Users
-     */
-    public function getByEmail($email)
-    {
-        return $this->query()
-            ->where('email', $email)
-            ->first();
+        return array_map(function($value) use($users) {
+            return (clone $users)->bind($value);
+        }, $cache);
     }
 
     /**

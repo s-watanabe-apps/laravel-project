@@ -3,7 +3,7 @@ namespace App\Models;
 
 class Settings extends Model
 {
-    protected $table = 'settings';
+    public $table = 'settings';
 
     public $timestamps = false;
 

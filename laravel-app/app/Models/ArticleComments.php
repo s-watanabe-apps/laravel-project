@@ -7,7 +7,7 @@ class ArticleComments extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'article_comments';
+    public $table = 'article_comments';
 
     // Multiple assignable attributes.
     protected $fillable = [

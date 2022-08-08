@@ -7,7 +7,7 @@ class ProfileValues extends Model
 {
     use Notifiable;
 
-    protected $table = 'profile_values';
+    public $table = 'profile_values';
 
     public $timestamps = false;
 

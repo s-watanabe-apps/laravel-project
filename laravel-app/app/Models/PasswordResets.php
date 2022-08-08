@@ -8,7 +8,7 @@ class PasswordResets extends Model
 {
     use Notifiable;
 
-    protected $table = 'password_resets';
+    public $table = 'password_resets';
 
     public $timestamps = false;
 

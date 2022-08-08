@@ -36,12 +36,15 @@ class SettingsService extends Service
      * 
      * @return App\Models\Settings
      */
-    public function get() {
-        $cache = Cache::rememberForever(__METHOD__, function() {
+    public function get()
+    {
+        $settings = new Settings();
+
+        $cache = $this->remember($settings->table, function() {
             $data = Settings::query()->select()->first();
             return json_encode($data);
         });
 
-        return (new Settings())->bind(json_decode($cache));
+        return $settings->bind($cache);
     }
 }

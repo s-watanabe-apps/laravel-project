@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\NavigationMenus;
-use Illuminate\Support\Facades\Cache;
 
 class NavigationMenusService extends Service
 {
@@ -31,15 +30,16 @@ class NavigationMenusService extends Service
      */
     public function get()
     {
-        $cache = Cache::rememberForever(__METHOD__, function() {
+        $navigationMenus = new NavigationMenus();
+
+        $cache = $this->remember($navigationMenus->table, function() {
             $data = $this->query()->get();
             return json_encode($data);
         });
 
-        $data = [];
-        foreach (json_decode($cache) as $value) {
-            $data[] = (new NavigationMenus())->bind($value);
-        }
+        $data = array_map(function($value) use($navigationMenus) {
+            return (clone $navigationMenus)->bind($value);
+        }, $cache);
 
         return $data;
     }

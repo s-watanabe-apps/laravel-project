@@ -7,7 +7,7 @@ class Articles extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'articles';
+    public $table = 'articles';
 
     // Model constants.
     const TYPE_MEMBER_ARTICLE = 1;

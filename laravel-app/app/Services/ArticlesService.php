@@ -77,8 +77,7 @@ class ArticlesService extends Service
             $builder->where('articles.status', Status::ENABLED);
         }
         
-        $articles = $builder->orderBy('articles.created_at', 'desc')
-            ->paginate(3);
+        $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(3);
 
         foreach ($articles as &$article) {
             $article->body_text = strip_tags($article->body, '<br>');
@@ -97,9 +96,11 @@ class ArticlesService extends Service
      */
     public function getLatestArticles(int $articleUserId, int $userId, int $limit = 5)
     {
-        $key = sprintf('%s-%d-%d', __METHOD__, $articleUserId, $articleUserId == $userId ? 1 : 0);
+        $articles = new Articles();
 
-        $cache = Cache::rememberForever($key, function() use($articleUserId, $userId, $limit) {
+        $key = sprintf('%s-latest-%d-%d', $articles->table, $articleUserId, $articleUserId == $userId ? 1 : 0);
+
+        $cache = $this->remember($key, function() use($articleUserId, $userId, $limit) {
             $builder = $this->query()->where('articles.user_id', $articleUserId);
 
             if ($articleUserId != $userId) {
@@ -111,10 +112,9 @@ class ArticlesService extends Service
             return json_encode($data);
         });
 
-        $data = [];
-        foreach (json_decode($cache) as $value) {
-            $data[] = (new Articles())->bind($value);
-        }
+        $data = array_map(function($value) use($articles) {
+            return (clone $articles)->bind($value);
+        }, $cache);
 
         return $data;
     }

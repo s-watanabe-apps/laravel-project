@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Users extends Authenticatable
 {
+    public $table = 'users';
+
     use SoftDeletes;
 
     const PAGENATE = 12;

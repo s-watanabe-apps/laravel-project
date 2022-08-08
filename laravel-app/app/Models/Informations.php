@@ -3,7 +3,7 @@ namespace App\Models;
 
 class Informations extends Model
 {
-    protected $table = 'informations';
+    public $table = 'informations';
 
     public $timestamps = true;
 

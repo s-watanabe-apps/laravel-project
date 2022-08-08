@@ -5,7 +5,7 @@ use App\Libs\Status;
 
 class Messages extends Model
 {
-    protected $table = 'messages';
+    public $table = 'messages';
 
     /**
      * Get base query.

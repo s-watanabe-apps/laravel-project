@@ -9,7 +9,7 @@ class Roles extends Model
     const MEMBER = 2;
     const ANONYMOUS = 3;
 
-    protected $table = 'roles';
+    public $table = 'roles';
 
     public $timestamps = false;
 }

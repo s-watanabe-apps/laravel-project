@@ -3,7 +3,7 @@ namespace App\Models;
 
 class Profiles extends Model
 {
-    protected $table = 'profiles';
+    public $table = 'profiles';
 
     public $timestamps = false;
 }
