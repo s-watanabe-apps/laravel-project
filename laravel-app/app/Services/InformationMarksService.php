@@ -5,7 +5,12 @@ use App\Models\InformationMarks;
 
 class InformationMarksService extends Service
 {
-    public function query()
+    /**
+     * Get base query builder.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    private function base()
     {
         return InformationMarks::query()
             ->select([
@@ -14,13 +19,27 @@ class InformationMarksService extends Service
             ]);
     }
 
+    /**
+     * Get all information marks.
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function all()
     {
-        return $this->query()->get();
+        return $this->base()
+            ->get();
     }
 
+    /**
+     * Get all information marks.
+     * 
+     * @param int information_marks.id
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function getById($id)
     {
-        return $this->query()->where('id', $id)->first();
+        return $this->base()
+            ->where('id', $id)
+            ->first();
     }
 }

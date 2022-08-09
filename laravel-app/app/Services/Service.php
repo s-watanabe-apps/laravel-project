@@ -10,7 +10,7 @@ class Service
      * Cache remember.
      * 
      * @param string $key
-     * @param object $json
+     * @param Closure $function
      * @param int $ttl
      * @return array
      */
@@ -29,7 +29,7 @@ class Service
      * Cache remember forever.
      * 
      * @param string $key
-     * @param object $json
+     * @param Closure $function
      * @return array
      */
     private function rememberForever(string $key, Closure $function)

@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Cache;
 class ArticlesService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    private function query()
+    private function base()
     {
         return Articles::query()
             ->select([
@@ -38,13 +38,13 @@ class ArticlesService extends Service
     /**
      * Get articles by id.
      * 
-     * @param int articles.id
-     * @param int articles.user_id
+     * @param int $id
+     * @param int $userId
      * @return App\Models\Articles
      */
     public function getById(int $id, int $userId)
     {
-        $articles = $this->query()
+        $articles = $this->base()
             ->where('articles.id', $id)
             ->first();
 
@@ -64,13 +64,13 @@ class ArticlesService extends Service
     /**
      * Get articles by user id.
      * 
-     * @param int articleUserId
-     * @param int userId
+     * @param int $articleUserId
+     * @param int $userId
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
     public function getByUserId(int $articleUserId, int $userId)
     {
-        $builder = $this->query()
+        $builder = $this->base()
             ->where('articles.user_id', $userId);
         
         if ($articleUserId != $userId) {
@@ -89,9 +89,9 @@ class ArticlesService extends Service
     /**
      * Get latest article headlines by user id for Cache or Database.
      * 
-     * @param int articles.user_id
-     * @param int users.id
-     * @param int limit
+     * @param int $articleUserId
+     * @param int $userId
+     * @param int $limit = 5
      * @return array[App\Models\Articles]
      */
     public function getLatestArticles(int $articleUserId, int $userId, int $limit = 5)
@@ -101,7 +101,7 @@ class ArticlesService extends Service
         $key = sprintf('%s-latest-%d-%d', $articles->table, $articleUserId, $articleUserId == $userId ? 1 : 0);
 
         $cache = $this->remember($key, function() use($articleUserId, $userId, $limit) {
-            $builder = $this->query()->where('articles.user_id', $articleUserId);
+            $builder = $this->base()->where('articles.user_id', $articleUserId);
 
             if ($articleUserId != $userId) {
                 $builder->where('articles.status', Status::ENABLED);
@@ -122,7 +122,7 @@ class ArticlesService extends Service
     /**
      * Add as an array.
      * 
-     * @param array
+     * @param array $values
      * @return App\Models\Articles
      */
     private function saveArticles(array $values) {
@@ -134,7 +134,8 @@ class ArticlesService extends Service
     /**
      * Register the entered article.
      * 
-     * @param App\Http\Requests\ArticlesRequest
+     * @param int $userId
+     * @param App\Http\Requests\ArticlesRequest $request
      * @return App\Models\Articles
      */
     public function saveMemberArticles(int $userId, ArticlesRequest $request)
@@ -151,8 +152,8 @@ class ArticlesService extends Service
     /**
      * Update as an array.
      * 
-     * @param int articles.id
-     * @param array
+     * @param int $id
+     * @param array $values
      * @return App\Models\Articles
      */
     private function editArticles(int $id, array $values)
@@ -164,8 +165,8 @@ class ArticlesService extends Service
     /**
      * Update the entered article.
      * 
-     * @param int userId
-     * @param App\Models\Articles
+     * @param int $userId
+     * @param App\Models\Articles $request
      * @return
      */
     public function editMemberArticles(int $userId, ArticlesRequest $request)

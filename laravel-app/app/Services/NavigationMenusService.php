@@ -6,11 +6,11 @@ use App\Models\NavigationMenus;
 class NavigationMenusService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function base()
     {
         return NavigationMenus::query()->select([
                 'navigation_menus.id',
@@ -33,7 +33,7 @@ class NavigationMenusService extends Service
         $navigationMenus = new NavigationMenus();
 
         $cache = $this->remember($navigationMenus->table, function() {
-            $data = $this->query()->get();
+            $data = $this->base()->get();
             return json_encode($data);
         });
 
@@ -52,7 +52,7 @@ class NavigationMenusService extends Service
      */
     public function save($validated)
     {
-        $this->query()->delete();
+        $this->base()->delete();
 
         for ($index = 0; $index < count($validated['names']); $index++) {
             NavigationMenus::create([

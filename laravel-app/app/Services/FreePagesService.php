@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\FreePages;
+use App\Http\Requests\ManagementsFreepagesRequest;
 
 class FreePagesService extends Service
 {
@@ -18,10 +19,10 @@ class FreePagesService extends Service
     /**
      * Get free pages by id.
      * 
-     * @param int
+     * @param int $id
      * @return App\Models\FreePages
      */
-    public function find($id)
+    public function find(int $id)
     {
         return FreePages::find($id);
     }
@@ -29,22 +30,37 @@ class FreePagesService extends Service
     /**
      * Add as an array.
      * 
-     * @param array
+     * @param App\Requests\ManagementsFreepagesRequest $request
      * @return App\Models\FreePages
      */
-    public function add($values) {
+    public function save(ManagementsFreepagesRequest $request)
+    {
         $freePages = new FreePages();
-        $freePages->fill($values)->save();
+
+        $freePages->fill($request->validated())->save();
+
         return $freePages;
+    }
+
+    /**
+     * Update as an array.
+     * 
+     * @param int $id
+     * @param App\Requests\ManagementsFreepagesRequest $request
+     * @return App\Models\FreePages
+     */
+    private function edit(int $id, ManagementsFreepagesRequest $request)
+    {
+        return FreePages::where('id', $id)->update($request->validated());
     }
 
     /**
      * Get free page by code.
      * 
-     * @param string
+     * @param string $code
      * @return App\Models\FreePages
      */
-    public function getByCode($code)
+    public function getByCode(string $code)
     {
         return FreePages::query()->where(['code' => $code,])->first();
     }

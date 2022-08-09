@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Models\Settings;
 use App\Http\Requests\ManagementsSettingsRequest;
-use Illuminate\Support\Facades\Cache;
 
 class SettingsService extends Service
 {

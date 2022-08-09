@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Managements;
 
+use App\Models\FreePages;
 use App\Services\FreePagesService;
 use App\Http\Requests\ManagementsFreepagesRequest;
 use Illuminate\Http\Request;
@@ -33,9 +34,7 @@ class FreepagesController extends ManagementsController
     {
         $freePages = $this->freePagesService->all();
 
-        return view('managements.freepages.index', compact(
-            'freePages'
-        ));
+        return view('managements.freepages.index', compact('freePages'));
     }
 
     /**
@@ -46,15 +45,9 @@ class FreepagesController extends ManagementsController
      */
     public function get(Request $request)
     {
-        $freePage = $this->freePagesService->find($request->id);
+        $freePages = $this->freePagesService->find($request->id);
 
-        $values = $freePage->getAttributes();
-
-        $index = 1;
-
-        return view('managements.freepages.editor', compact(
-            'values', 'index'
-        ));
+        return view('managements.freepages.edit', compact('freePages'));
     }
 
     /**
@@ -67,11 +60,7 @@ class FreepagesController extends ManagementsController
     {
         $code = Str::random(32);
 
-        $index = 2;
-
-        return view('managements.freepages.editor', compact(
-            'code', 'index'
-        ));
+        return view('managements.freepages.create', compact('code'));
     }
 
     /**
@@ -82,11 +71,13 @@ class FreepagesController extends ManagementsController
      */
     public function confirm(ManagementsFreepagesRequest $request)
     {
-        $values = $request->validated();
+        $freePages = (new FreePages())->bind($request->validated());
 
-        return view('managements.freepages.viewer', compact(
-            'values',
-        ));
+        $method = $request->method();
+
+        $tabIndex = $request->isPost() ? 1 : 2;
+
+        return view('managements.freepages.confirm', compact('freePages', 'method', 'tabIndex'));
     }
 
     /**
@@ -97,12 +88,13 @@ class FreepagesController extends ManagementsController
      */
     public function register(ManagementsFreepagesRequest $request)
     {
-
         \DB::transaction(function() use ($request) {
             if ($request->isPost()) {
-                $this->freePagesService->add($request->validated());
-            } else {
+                $this->freePagesService->save($request);
+            } else if ($request->isPut()) {
 
+            } else {
+                abort(404);
             }
         });
 

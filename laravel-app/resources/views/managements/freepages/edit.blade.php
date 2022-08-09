@@ -16,10 +16,15 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.freepages.tabControl', ['index' => $index])
+        @include('managements.freepages.formset.tabControl', ['index' => 1])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'informations', 'url' => '/managements/freepages/confirm', 'method' => 'post', 'files' => true])}}
+            {{Form::open([
+                'name' => 'informations',
+                'url' => '/managements/freepages/confirm',
+                'method' => 'post',
+                'files' => true
+            ])}}
             @csrf
 
             <div class="mb-3">

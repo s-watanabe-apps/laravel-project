@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\DB;
 class ProfilesService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function base()
     {
-        return Profiles::query()->select([
-            'profiles.id',
-            'profiles.type',
-            'profiles.name',
-            'profiles.required',
-        ]);
+        return Profiles::query()
+            ->select([
+                'profiles.id',
+                'profiles.type',
+                'profiles.name',
+                'profiles.required',
+            ]);
     }
 
     /**
@@ -31,7 +32,7 @@ class ProfilesService extends Service
      */
     public function getUserProfiles($userId)
     {
-        $subQuery = $this->query()->addSelect([
+        $subQuery = $this->base()->addSelect([
                 'profile_choices.id as profile_choice_id',
                 'profile_choices.name as value',
                 'profile_values.user_id',
@@ -42,7 +43,8 @@ class ProfilesService extends Service
             })->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
             ->where('profiles.type', ProfileInputType::CHOICE);
 
-        $query = $this->query()->addSelect([
+        $query = $this->base()
+            ->addSelect([
                 DB::raw('null as profile_choice_id'),
                 'profile_values.value',
                 'profile_values.user_id',
@@ -67,7 +69,8 @@ class ProfilesService extends Service
      */
     public function getProfileChoicesHash()
     {
-        $results = $this->query()->select([
+        $results = $this->base()
+            ->select([
                 'profiles.id',
                 'profile_choices.id as choice_id',
                 'profile_choices.name',
@@ -89,7 +92,7 @@ class ProfilesService extends Service
      */
     public function getProfilesHash()
     {
-        $profiles = $this->query()->orderBy('order')->get();
+        $profiles = $this->base()->orderBy('order')->get();
 
         $hash = [];
         foreach ($profiles as $profile) {
@@ -106,7 +109,7 @@ class ProfilesService extends Service
      */
     public function getProfiles()
     {
-        $profiles = $this->query()->orderBy('order')->get();
+        $profiles = $this->base()->orderBy('order')->get();
 
         foreach ($profiles as &$profile) {
             if ($profile->type == ProfileInputType::CHOICE) {

@@ -3,15 +3,16 @@ namespace App\Services;
 
 use App\Models\Favorites;
 use App\Libs\Status;
+use Illuminate\Http\Request;
 
 class FavoritesService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function base()
     {
         return Favorites::query()
             ->select([
@@ -53,7 +54,7 @@ class FavoritesService extends Service
      * @param Illuminate\Http\Request $request
      * @return boolean
      */
-    public function isFavorite($request)
+    public function isFavorite(Request $request)
     {
         return $this->getFaivoritesByUserIdAndRequest($request->user->id, $request->path()) != null ? 1 : 0;
     }
@@ -62,12 +63,12 @@ class FavoritesService extends Service
      * Get favorites by user id and request.
      * 
      * @param int $userId
-     * @param int $path
+     * @param string $path
      * @return App\Models\Favorites
      */
-    public function getFaivoritesByUserIdAndRequest($userId, $path)
+    public function getFaivoritesByUserIdAndRequest(int $userId, string $path)
     {
-        return $this->query()
+        return $this->base()
             ->where('user_id', $userId)
             ->where('uri', '/' . $path)
             ->get()->first();
@@ -79,12 +80,14 @@ class FavoritesService extends Service
      * @param string $favoriteCode
      * @return string
      */
-    public function getFavoriteName($favoriteCode)
+    public function getFavoriteName(string $favoriteCode)
     {
         $favoriteNames = Favorites::getFavoriteNames();
+
         if (array_key_exists($favoriteCode, $favoriteNames)) {
             return $favoriteNames[$favoriteCode];
         }
+
         return null;
     }
 
@@ -94,9 +97,9 @@ class FavoritesService extends Service
      * @param int $userId
      * @return App\Models\Favorites
      */
-    public function getFavoritesByUserId($userId)
+    public function getFavoritesByUserId(int $userId)
     {
-        $result = $this->query()->get();
+        $result = $this->base()->get();
 
         foreach ($result as &$value) {
             $value->favorite_name = $this->getFavoriteName($value->favorite_code);
@@ -109,9 +112,9 @@ class FavoritesService extends Service
      * Add favorites.
      * 
      * @var int $userId
-     * @var string $favoriteUri
+     * @var string $uri
      */
-    public function add($userId, $uri)
+    public function add(int $userId, string $uri)
     {
         list($favoriteCode, $favoriteId) = $this->decomposeUri($uri);
 
@@ -120,6 +123,7 @@ class FavoritesService extends Service
         $favorites->uri = $uri;
         $favorites->favorite_code = $favoriteCode;
         $favorites->favorite_id = $favoriteId;
+
         return $favorites->save();
     }
 
@@ -129,9 +133,9 @@ class FavoritesService extends Service
      * @param int $userId
      * @param string $uri
      */
-    public function remove($userId, $uri)
+    public function remove(int $userId, string $uri)
     {
-        return $this->query()
+        return $this->base()
             ->where('user_id', $userId)
             ->where('uri', $uri)
             ->delete();
@@ -143,12 +147,12 @@ class FavoritesService extends Service
      * @var string $uri
      * @return [string, string]
      */
-    private function decomposeUri($uri)
+    private function decomposeUri(string $uri)
     {
         $favoriteCodes = implode('|', array_keys(Favorites::getFavoriteNames()));
         $pattern = sprintf('/^\/(%s)\/([0-9]{1,})$/', $favoriteCodes);
-        \Log::info($pattern);
         preg_match($pattern, $uri, $matchs);
+
         return [$matchs[1], $matchs[2]];
     }
 }

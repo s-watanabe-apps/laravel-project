@@ -16,7 +16,7 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.freepages.tabControl', ['index' => 1])
+        @include('managements.freepages.formset.tabControl', ['index' => 1])
 
         <div class="col-lg-10 px-0 px-lg-2">
 

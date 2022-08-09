@@ -6,14 +6,34 @@ use App\Models\Images;
 class ImagesService extends Service
 {
     /**
-     * Get by id.
+     * Get base query builder.
      * 
-     * @var int images.id
-     * @return App\Models\Images
+     * @return Illuminate\Database\Eloquent\Builder
      */
-    public function getById($id)
+    private function base()
     {
         return Images::query()
+            ->select([
+                'images.id',
+                'images.enabled',
+                'images.type',
+                'images.target_id',
+                'images.name',
+                'images.created_at',
+                'images.updated_at',
+                'images.deleted_at',
+            ]);
+    }
+
+    /**
+     * Get by id.
+     * 
+     * @param int $id
+     * @return App\Models\Images
+     */
+    public function getById(int $id)
+    {
+        return $this->base()
             ->where('id', $id)
             ->whereNull('deleted_at')
             ->orderByRaw('created_at desc')
@@ -23,12 +43,13 @@ class ImagesService extends Service
     /**
      * Get by type and target_id.
      * 
-     * @var int images.id
+     * @param int $type
+     * @param int $targetId
      * @return App\Models\Images
      */
-    public function getByTargetIdAndType($type, $targetId)
+    public function getByTargetIdAndType(int $type, int $targetId)
     {
-        return Images::query()
+        return $this->base
             ->where('id', $id)
             ->wnere('target_id', $targetId)
             ->whereNull('deleted_at')
@@ -39,12 +60,12 @@ class ImagesService extends Service
     /**
      * Get name by id.
      * 
-     * @var int images.id
+     * @var int $id
      * @return string images.name
      */
-    public function getNameById($id)
+    public function getNameById(int $id)
     {
-        $result = self::getById($id);
+        $result = $this->getById($id);
         if (is_null($result)) {
             return null;
         } else {
@@ -55,13 +76,12 @@ class ImagesService extends Service
     /**
      * Disable record.
      * 
-     * @var int images.id
+     * @var int $id
      * @return bool result
      */
-    public function disableById($id)
+    public function disableById(int $id)
     {
-        return Images::where('id', $id)
-            ->update(['deleted_at' => carbon()]);
+        return $this->base()->where('id', $id)->delete();
     }
 
     /**
@@ -102,15 +122,16 @@ class ImagesService extends Service
     /**
      * Save profile image.
      * 
-     * @var Illuminate\Http\UploadedFile
-     * @var int
+     * @var Illuminate\Http\UploadedFile $file
+     * @var int $userId
      * @return String
      */
     public function saveProfileImageFile($file, $userId)
     {
         $extension = self::getExtensions()[$file->getMimetype()];
-        $fileName = "profiles/" . $userId . '.' . $extension;
+        $fileName = 'profiles/' . $userId . '.' . $extension;
         $file->storeAs('contents/images/', $fileName);
+
         return urlencode($fileName);
     }
 
@@ -146,16 +167,7 @@ class ImagesService extends Service
 
     public function getPictureImages()
     {
-        return self::query()->select([
-                'images.id',
-                'images.enabled',
-                'images.type',
-                'images.target_id',
-                'images.name',
-                'images.created_at',
-                'images.updated_at',
-                'images.deleted_at',
-            ])
+        return $this->base()
             ->where('images.type', self::TYPE_PICTURE_IMAGE)
             ->orderBy('images.created_at', 'desc')
             ->get()->toArray();

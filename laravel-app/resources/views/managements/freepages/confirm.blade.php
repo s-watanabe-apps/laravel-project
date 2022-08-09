@@ -16,22 +16,22 @@
     <div class="row mx-1">
 
         <!-- Tab Control -->
-        @include('managements.freepages.tabControl', ['index' => 2])
+        @include('managements.freepages.formset.tabControl', ['index' => $tabIndex])
 
         <div class="col-lg-10 px-0 px-lg-2">
-            {{Form::open(['name' => 'freepages', 'url' => '/managements/freepages/register', 'method' => 'post', 'files' => true])}}
+            {{Form::open([
+                'name' => 'freepages',
+                'url' => '/managements/freepages/register',
+                'method' => $method,
+            ])}}
             @csrf
 
+            <!-- View Control -->
+            @include('managements.freepages.formset.viewControl', compact('freePages'))
 
-            {{$values['title']}}
-            {{Form::hidden('title', $values['title'])}}
-
-            {{$values['code']}}
-            {{Form::hidden('code', $values['code'])}}
-
-            {{$values['body']}}
-            {{Form::hidden('body', $values['body'])}}
-
+            {{Form::hidden('title', $freePages->title)}}
+            {{Form::hidden('code', $freePages->code)}}
+            {{Form::hidden('body', $freePages->body)}}
 
             <a href="javascript:freepages.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
                 <i class="fas fa-check fa-sm"></i> @lang('strings.save')

@@ -6,11 +6,11 @@ use App\Models\Pictures;
 class PicturesService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function base()
     {
         return Pictures::query()->select([
                 'pictures.id',
@@ -32,7 +32,7 @@ class PicturesService extends Service
      */
     public function getPictures()
     {
-        return $this->query()
+        return $this->base()
             ->orderBy('pictures.created_at', 'desc')
             ->paginate(Pictures::PAGENATE);
     }
@@ -44,7 +44,7 @@ class PicturesService extends Service
      */
     public function getPictureById($id)
     {
-        return $this->query()
+        return $this->base()
             ->where('pictures.id', $id)
             ->first();
     }

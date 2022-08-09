@@ -6,11 +6,11 @@ use App\Models\ArticleComments;
 class ArticleCommentsService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    private function base()
     {
         return ArticleComments::query()
             ->select([
@@ -31,12 +31,12 @@ class ArticleCommentsService extends Service
     /**
      * Get articles by id.
      * 
-     * @param int id
+     * @param int $id
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getByArticleId($id)
     {
-        return $this->query()
+        return $this->base()
             ->where('article_comments.article_id', $id)
             ->orderByRaw('article_comments.created_at asc')
             ->get();
@@ -45,7 +45,7 @@ class ArticleCommentsService extends Service
     /**
      * Add as an array.
      * 
-     * @param array
+     * @param array $values
      * @return App\Models\ArticleComments
      */
     public function save($values) {
@@ -57,7 +57,7 @@ class ArticleCommentsService extends Service
     /**
      * Get articles comment count.
      * 
-     * @param array
+     * @param array $articleIds 
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getArticlesCommentCount(array $articleIds)

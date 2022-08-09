@@ -9,11 +9,11 @@ use App\Requests\ManagementsInformationsRequest;
 class InformationsService extends Service
 {
     /**
-     * Get base query.
+     * Get base query builder.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
-    public function query() {
+    private function base() {
         return Informations::query()
             ->select([
                 'informations.id',
@@ -34,7 +34,7 @@ class InformationsService extends Service
      */
     public function getEnabled() {
         $now = carbon();
-        return $this->query()
+        return $this->base()
             ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
             ->where('status', Status::ENABLED)
             ->where('start_time', '<=', $now)
@@ -52,7 +52,7 @@ class InformationsService extends Service
      */
     public function all($columns = [])
     {
-        return $this->query()->get();
+        return $this->base()->get();
     }
 
     /**
@@ -62,7 +62,7 @@ class InformationsService extends Service
      */
     public function get($id)
     {
-        return $this->query()->where(['informations.id' => $id])->get()->first();
+        return $this->base()->where(['informations.id' => $id])->get()->first();
     }
 
 

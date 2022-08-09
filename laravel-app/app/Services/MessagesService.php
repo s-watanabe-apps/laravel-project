@@ -2,12 +2,44 @@
 namespace App\Services;
 
 use App\Models\Messages;
+use App\Libs\Status;
 
 class MessagesService extends Service
 {
-    public function getUnreadMessages($userId)
+    /**
+     * Get base query builder.
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    private function base()
     {
         return Messages::query()
+            ->select([
+                'messages.id',
+                'messages.subject',
+                'messages.body',
+                'messages.readed',
+                'messages.enable',
+                'messages.from_user_id',
+                'messages.message_id',
+                'users.name',
+                'users.image_file',
+                'messages.created_at',
+            ])->leftJoin('users', function ($join) {
+                $join->on('messages.from_user_id', '=', 'users.id')
+                    ->where('users.status', Status::ENABLED);
+            })->whereNull('messages.deleted_at');
+    }
+
+    /**
+     * Get unread messages.
+     * 
+     * @param int users.id
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getUnreadMessages($userId)
+    {
+        return $this->base()
             ->where('messages.to_user_id', $userId)
             ->where('messages.readed', 0)
             ->orderBy('messages.created_at', 'desc')
@@ -24,7 +56,7 @@ class MessagesService extends Service
      */
     public function getByUserIdAndMessageId($userId, $messageId)
     {
-        return Messages::query()
+        return $this->base()
             ->where('messages.to_user_id', $userId)
             ->where('messages.message_id', $messageId)->get()->first();
     }
@@ -38,7 +70,7 @@ class MessagesService extends Service
      */
     public function getByUserId($userId)
     {
-        return Messages::query()
+        return $this->base()
             ->where('messages.to_user_id', $userId)
             ->orderBy('messages.created_at', 'desc')->get();
     }
@@ -51,7 +83,7 @@ class MessagesService extends Service
      */
     public function getByFromUserId($userId)
     {
-        return Messages::query()
+        return $this->base()
             ->where('from_user_id', $userId)->get();
     }
 
@@ -64,7 +96,7 @@ class MessagesService extends Service
      */
     public function getByUserIdAndFromUserId($userId, $fromUserId)
     {
-        return Messages::query()
+        return $this->base()
             ->where('messages.to_user_id', $userId)
             ->where('messages.from_user_id', $fromUserId)
             ->orderBy('messages.created_at', 'desc')->get();
