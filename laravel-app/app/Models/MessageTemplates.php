@@ -3,6 +3,7 @@ namespace App\Models;
 
 class MessageTemplates extends Model
 {
+    // Table name.
     public $table = 'message_templates';
 
     public $timestamps = false;

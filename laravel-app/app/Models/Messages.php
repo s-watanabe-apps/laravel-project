@@ -5,6 +5,7 @@ use App\Libs\Status;
 
 class Messages extends Model
 {
+    // Table name.
     public $table = 'messages';
 
     /**

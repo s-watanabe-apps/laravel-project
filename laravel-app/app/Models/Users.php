@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Users extends Authenticatable
 {
+    // Table name.
     public $table = 'users';
 
     use SoftDeletes;

@@ -6,12 +6,30 @@ use Illuminate\Notifications\Notifiable;
 
 class Images extends Model
 {
+    // Table name.
     public $table = 'images';
 
+    // Model constants.
     const TYPE_PROFILE_IMAGE = 1;
     const TYPE_ARTICLE_IMAGE = 2;
     const TYPE_PICTURE_IMAGE = 3;
 
+    const MIME_TYPE_PNG = 'image/png';
+    const MIME_TYPE_JPG = 'image/jpeg';
+    const MIME_TYPE_GIF = 'image/gif';
+
+    // Multiple assignable attributes.
+    protected $fillable = [
+        'type',
+        'target_id',
+        'name',
+    ];
+
+    /**
+     * Get image types.
+     * 
+     * @return [image_type(int) => image_type_name(string)]
+     */
     public static function getTypes()
     {
         return [
@@ -21,10 +39,11 @@ class Images extends Model
         ];
     }
 
-    const MIME_TYPE_PNG = 'image/png';
-    const MIME_TYPE_JPG = 'image/jpeg';
-    const MIME_TYPE_GIF = 'image/gif';
-
+    /**
+     * Get extensions.
+     * 
+     * @return [mime_type(string) => extensions(string)]
+     */
     public static function getExtensions()
     {
         return [
@@ -33,11 +52,4 @@ class Images extends Model
             self::MIME_TYPE_GIF => 'gif',
         ];
     }
-
-    protected $fillable = [
-        'type',
-        'target_id',
-        'name',
-    ];
-
 }

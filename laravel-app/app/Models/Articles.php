@@ -7,6 +7,7 @@ class Articles extends Model
 {
     use SoftDeletes;
 
+    // Table name.
     public $table = 'articles';
 
     // Model constants.

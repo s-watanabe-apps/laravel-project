@@ -6,8 +6,7 @@ use Illuminate\Support\Str;
 
 class PasswordResets extends Model
 {
-    use Notifiable;
-
+    // Table name.
     public $table = 'password_resets';
 
     public $timestamps = false;

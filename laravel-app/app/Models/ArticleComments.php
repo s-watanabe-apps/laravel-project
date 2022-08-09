@@ -7,6 +7,7 @@ class ArticleComments extends Model
 {
     use SoftDeletes;
 
+    // Table name.
     public $table = 'article_comments';
 
     // Multiple assignable attributes.

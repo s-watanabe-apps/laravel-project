@@ -3,6 +3,7 @@ namespace App\Models;
 
 class Informations extends Model
 {
+    // Table name.
     public $table = 'informations';
 
     public $timestamps = true;

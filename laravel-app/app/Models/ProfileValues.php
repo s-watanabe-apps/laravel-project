@@ -5,8 +5,7 @@ use Illuminate\Notifications\Notifiable;
 
 class ProfileValues extends Model
 {
-    use Notifiable;
-
+    // Table name.
     public $table = 'profile_values';
 
     public $timestamps = false;

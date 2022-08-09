@@ -3,6 +3,7 @@ namespace App\Models;
 
 class PictureComments extends Model
 {
+    // Table name.
     public $table = 'picture_comments';
 
     public static function getByPictureId($pictureId)

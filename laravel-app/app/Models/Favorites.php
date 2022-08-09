@@ -3,6 +3,7 @@ namespace App\Models;
 
 class Favorites extends Model
 {
+    // Table name.
     public $table = 'favorites';
 
     // Model constants.

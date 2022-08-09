@@ -3,6 +3,7 @@ namespace App\Models;
 
 class VisitedUsers extends Model
 {
+    // Table name.
     public $table = 'visited_users';
 
     public $timestamps = false;
