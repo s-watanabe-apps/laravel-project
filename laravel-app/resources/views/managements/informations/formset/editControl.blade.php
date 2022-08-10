@@ -51,7 +51,7 @@
             <td class="bg-light text-dark">
                 {{Form::text(
                     'start_time',
-                    $informations->start_time ?? (old('start_time') ?? carbon()->format($dateFormat->getDateTimeFullFormat())),
+                    $informations->start_time ?? (old('start_time') ?? carbon()->format(\DateFormat::getDateTimeFullFormat())),
                     ['id' => 'start_time', 'class' => 'form-control',]
                 )}}
                 <div class="text-danger">{{$errors->first('start_time') ?? ''}}</div>
@@ -76,7 +76,7 @@
             </th>
             <td class="bg-light">
                 <input type="checkbox"
-                    @if (!isset($informations) || $informations->status == \App\Libs\Status::ENABLED)
+                    @if (!isset($informations) || $informations->status == \Status::ENABLED)
                         checked                                                
                     @endif
                     name="status"

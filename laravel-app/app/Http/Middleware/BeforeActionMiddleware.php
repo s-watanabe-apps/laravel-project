@@ -3,7 +3,6 @@ namespace App\Http\Middleware;
 
 use App\Models\Settings;
 use App\Services\MessagesService;
-use App\Libs\DateFormat;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
@@ -26,8 +25,6 @@ class BeforeActionMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $this->viewFactory->share('dateFormat', new DateFormat(\App::getLocale()));
-
         if (isset($request->user->id)) {
             $receiveMessages = (new MessagesService())->getUnreadMessages($request->user->id);
             $this->viewFactory->share('receiveMessages', $receiveMessages);    

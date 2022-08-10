@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Favorites;
-use App\Libs\Status;
 use Illuminate\Http\Request;
 
 class FavoritesService extends Service
@@ -26,7 +25,7 @@ class FavoritesService extends Service
             ])->join('users', function ($join) {
                 $join->on('users.id', '=', 'favorites.favorite_id')
                     ->where('favorites.favorite_code', Favorites::FAVORITE_CODE_PROFILES)
-                    ->where('users.status', Status::ENABLED);
+                    ->where('users.status', \Status::ENABLED);
             })->unionAll(
                 Favorites::query()
                     ->select([
@@ -43,7 +42,7 @@ class FavoritesService extends Service
                             ->whereNull('pictures.deleted_at');
                     })->leftJoin('users', function ($join) {
                         $join->on('users.id', '=', 'pictures.user_id')
-                            ->where('users.status', Status::ENABLED);
+                            ->where('users.status', \Status::ENABLED);
                     })
             );
     }

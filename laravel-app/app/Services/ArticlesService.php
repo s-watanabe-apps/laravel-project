@@ -5,7 +5,6 @@ use App\Http\Exceptions\NotFoundException;
 use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Models\Articles;
-use App\Libs\Status;
 use Illuminate\Support\Facades\Cache;
 
 class ArticlesService extends Service
@@ -53,7 +52,7 @@ class ArticlesService extends Service
         }
 
         if ($articles->user_id != $userId) {
-            if ($articles->status != Status::ENABLED) {
+            if ($articles->status != \Status::ENABLED) {
                 throw new ForbiddenException();
             }
         }
@@ -74,7 +73,7 @@ class ArticlesService extends Service
             ->where('articles.user_id', $userId);
         
         if ($articleUserId != $userId) {
-            $builder->where('articles.status', Status::ENABLED);
+            $builder->where('articles.status', \Status::ENABLED);
         }
         
         $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(3);
@@ -104,7 +103,7 @@ class ArticlesService extends Service
             $builder = $this->base()->where('articles.user_id', $articleUserId);
 
             if ($articleUserId != $userId) {
-                $builder->where('articles.status', Status::ENABLED);
+                $builder->where('articles.status', \Status::ENABLED);
             }
 
             $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get();
@@ -145,7 +144,7 @@ class ArticlesService extends Service
             'body' => $request->body,
             'user_id' => $userId,
             'type' => Articles::TYPE_MEMBER_ARTICLE,
-            'status' => Status::ENABLED,
+            'status' => \Status::ENABLED,
         ]);
     }
 

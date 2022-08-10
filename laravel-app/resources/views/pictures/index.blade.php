@@ -27,7 +27,7 @@
                         loading="lazy">
                     <div class="caption my-2">
                         <small class="text-muted">@lang('strings.title')</small> <small>{{$image->title}}</small><br>
-                        <small class="text-muted">@lang('strings.contribute_date')</small> <small>{{$image->created_at->format($dateFormat->getDateFormat())}}</small><br>
+                        <small class="text-muted">@lang('strings.contribute_date')</small> <small>{{$image->created_at->format(\DateFormat::getDateFormat())}}</small><br>
                         <small class="text-muted">@lang('strings.contributor')</small> <small>{{$image->name}}</small>
                     </div>
                 </a>

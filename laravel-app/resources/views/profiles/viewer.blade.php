@@ -65,7 +65,7 @@
                             @lang('strings.birth_date')
                         </th>
                         <td class="bg-light text-dark">
-                            {{carbon($profileUser->birthdate)->format($dateFormat->getDateFormat())}}
+                            {{carbon($profileUser->birthdate)->format(\DateFormat::getDateFormat())}}
                         </td>
                     </tr>
 
@@ -97,7 +97,7 @@
                     @foreach($articles as $value)
                     <tr>
                         <td class="w-25 text-secondary text-center text-nowrap">
-                            <small>{{$value->created_at->format($dateFormat->getDateFormat())}}</small>
+                            <small>{{$value->created_at->format(\DateFormat::getDateFormat())}}</small>
                         </td>
                         <td class="w-75">
                             <a href="/articles/{{$value->id}}">{{$value->title}}</a>

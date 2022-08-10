@@ -44,14 +44,14 @@
                             </a>
                         </td>
                         <td class="dt-center">
-                            {{$value->start_time == null ? '' : carbon($value->start_time)->format($dateFormat->getDateTimeFormat())}}
+                            {{$value->start_time == null ? '' : carbon($value->start_time)->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{$value->end_time == null ? '' : carbon($value->end_time)->format($dateFormat->getDateTimeFormat())}}
+                            {{$value->end_time == null ? '' : carbon($value->end_time)->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td class="dt-center text-nowrap">
                             <input type="checkbox"
-                                @if ($value->status == \App\Libs\Status::ENABLED)
+                                @if ($value->status == \Status::ENABLED)
                                     checked                                                
                                 @endif
                                 data-onstyle="success" data-offstyle="secondary"

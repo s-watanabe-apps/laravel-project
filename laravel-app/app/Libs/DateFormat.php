@@ -3,28 +3,14 @@ namespace App\Libs;
 
 class DateFormat
 {
-    private $locale = 'ja';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct($locale = null)
-    {
-        if (!is_null($locale)) {
-            $this->locale = $locale;
-        }
-    }
-
     /**
      * Date format corresponding to the locale.
      * 
      * @return array
      */
-    public function getDateFormat()
+    public static function getDateFormat()
     {
-        if (strcmp($this->locale, 'ja') == 0) {
+        if (strcmp(\App::getLocale(), 'ja') == 0) {
             return 'Y/n/j';
         } else {
             return 'n/j/Y';
@@ -36,9 +22,9 @@ class DateFormat
      * 
      * @return array
      */
-    public function getDateTimeFormat()
+    public static function getDateTimeFormat()
     {
-        if (strcmp($this->locale, 'ja') == 0) {
+        if (strcmp(\App::getLocale(), 'ja') == 0) {
             return 'Y/n/j h:i';
         } else {
             return 'n/j/Y g:i a';
@@ -50,9 +36,9 @@ class DateFormat
      * 
      * @return array
      */
-    public function getDateTimeFullFormat()
+    public static function getDateTimeFullFormat()
     {
-        if (strcmp($this->locale, 'ja') == 0) {
+        if (strcmp(\App::getLocale(), 'ja') == 0) {
             return 'Y/m/d h:i';
         } else {
             return 'n/j/Y g:i a';
@@ -64,9 +50,9 @@ class DateFormat
      * 
      * @return array
      */
-    public function getDateFormatShort()
+    public static function getDateFormatShort()
     {
-        if (strcmp($this->locale, 'ja') == 0) {
+        if (strcmp(\App::getLocale(), 'ja') == 0) {
             return 'n/j';
         } else {
             return 'n/j';

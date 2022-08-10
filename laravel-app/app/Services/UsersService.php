@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Users;
-use App\Libs\Status;
 use Illuminate\Support\Facades\DB;
 
 class UsersService extends Service
@@ -44,7 +43,7 @@ class UsersService extends Service
     public function getUsers()
     {
         return $this->base()
-            ->where('users.status', Status::ENABLED)
+            ->where('users.status', \Status::ENABLED)
             ->paginate(Users::PAGENATE);
     }
 

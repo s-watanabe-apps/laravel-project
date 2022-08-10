@@ -40,7 +40,7 @@ class AuthCheckReadPermissionMiddleware
         } else {
             $user = Authenticate::user();
         }
-        \Log::info(json_encode($user));
+
         $request->merge([
             'user' => $user,
         ]);

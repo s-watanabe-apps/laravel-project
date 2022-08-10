@@ -30,10 +30,10 @@
                         <a href="/files/{{$value->getfileName()}}">{{$value->getfileName()}}</a>
                     </td>
                     <td class="dt-center">
-                        {{$value->createdAt->format($dateFormat->getDateTimeFormat())}}
+                        {{$value->createdAt->format(\DateFormat::getDateTimeFormat())}}
                     </td>
                     <td class="dt-center">
-                        {{$value->updatedAt->format($dateFormat->getDateTimeFormat())}}
+                        {{$value->updatedAt->format(\DateFormat::getDateTimeFormat())}}
                     </td>
                 </tr>
                 @endforeach

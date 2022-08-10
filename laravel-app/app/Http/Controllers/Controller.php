@@ -16,16 +16,11 @@ class Controller extends BaseController
             header_remove('X-Powered-By');
         });
 
-        \Log::info('callAction');
-
-/*
         $request = isset($parameters[0]) ? $parameters[0] : '';
         if (preg_match('/Request$/', get_class($request))) {
-            if (isset($request->user->id)) {
-                \Log::info($request->user->id . ',' . $request->url());
-            }
+            \Log::info(sprintf("user_id=%s, %s", $request->user->id ?? '', $request->url()));
         }
-*/
+
         return parent::callAction($method, $parameters);
     }
 }

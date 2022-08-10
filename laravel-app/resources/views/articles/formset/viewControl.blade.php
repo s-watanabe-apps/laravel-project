@@ -21,7 +21,7 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th">@lang('strings.contribute_date')</th>
             <td class="view-box">
-                {{isset($articles->created_at) ? $articles->created_at->format($dateFormat->getDateTimeFullFormat()) : carbon()->format($dateFormat->getDateTimeFullFormat())}}
+                {{isset($articles->created_at) ? $articles->created_at->format(\DateFormat::getDateTimeFullFormat()) : carbon()->format(\DateFormat::getDateTimeFullFormat())}}
             </td>
         </tr>
     </tbody>

@@ -54,7 +54,7 @@
                             @lang('strings.received_time')
                         </th>
                         <td class="bg-light text-dark">
-                            {{$message->created_at->format($dateFormat->getDateTimeFormat())}}
+                            {{$message->created_at->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                     </tr>
                 </tbody>
@@ -79,7 +79,7 @@
                     @foreach ($fromUserMessages as $fromUserMessage)
                     <tr>
                         <td class="bg-light text-dark" style="width: 20%;">
-                            {{$fromUserMessage->created_at->format($dateFormat->getDateFormat())}}
+                            {{$fromUserMessage->created_at->format(\DateFormat::getDateFormat())}}
                         </td>
                         <td class="bg-light text-dark">
                             <a href="/messages/{{$fromUserMessage->message_id}}">{{$fromUserMessage->subject}}</a>

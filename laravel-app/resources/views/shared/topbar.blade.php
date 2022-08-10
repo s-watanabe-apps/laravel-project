@@ -120,7 +120,7 @@
                     </div>
                     <div class="font-weight-bold">
                         <div class="text-truncate">{{$receiveMessage->subject}}</div>
-                        <div class="small text-gray-500">{{$receiveMessage->created_at->format($dateFormat->getDateTimeFormat())}}</div>
+                        <div class="small text-gray-500">{{$receiveMessage->created_at->format(\DateFormat::getDateTimeFormat())}}</div>
                     </div>
                 </a>
                 @endforeach

@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Models\Messages;
-use App\Libs\Status;
 
 class MessagesService extends Service
 {
@@ -27,7 +26,7 @@ class MessagesService extends Service
                 'messages.created_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('messages.from_user_id', '=', 'users.id')
-                    ->where('users.status', Status::ENABLED);
+                    ->where('users.status', \Status::ENABLED);
             })->whereNull('messages.deleted_at');
     }
 

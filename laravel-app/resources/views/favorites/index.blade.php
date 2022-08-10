@@ -46,7 +46,7 @@
                             {{$favorite->name}}
                         </td>
                         <td>
-                            {{$favorite->created_at->format($dateFormat->getDateTimeFormat())}}
+                            {{$favorite->created_at->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td>
                             <a href="/favorites/remove/{{urlencode($favorite->uri)}}" class="py-0 btn btn-secondary shadow-sm">

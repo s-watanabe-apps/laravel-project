@@ -45,14 +45,14 @@
                             {{$value->group_name ?? __('strings.none')}}
                         </td>
                         <td class="dt-center">
-                            {{$value->created_at->format($dateFormat->getDateTimeFormat())}}
+                            {{$value->created_at->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{!$value->last_activity ? '' : carbon($value->last_activity)->format($dateFormat->getDateTimeFormat())}}
+                            {{!$value->last_activity ? '' : carbon($value->last_activity)->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
                             <input type="checkbox"
-                                @if ($value->status == \App\Libs\Status::ENABLED)
+                                @if ($value->status == \Status::ENABLED)
                                     checked                                                
                                 @endif
                                 data-onstyle="success" data-offstyle="secondary"

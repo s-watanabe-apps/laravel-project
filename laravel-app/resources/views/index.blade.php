@@ -120,7 +120,7 @@
                                 text-primary
                             @default
                         @endswitch
-                        " style="width:20%;"><small class="font-weight-bold">{{$date['date']->format($dateFormat->getDateFormatShort())}}</small></th>
+                        " style="width:20%;"><small class="font-weight-bold">{{$date['date']->format(\DateFormat::getDateFormatShort())}}</small></th>
                         <td style="width:80%;" class="p-1">
                         @foreach ($date['users'] as $birthdayUser)
                             <small class="mb-0"><a href="/profiles/{{$birthdayUser->id}}"><i class="fas fa-birthday-cake text-danger"></i> {{$birthdayUser->name}}</a></small>

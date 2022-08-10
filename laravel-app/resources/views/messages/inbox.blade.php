@@ -52,7 +52,7 @@
                             </td>
                         </td>
                         <td class="dt-center">
-                            {{$message->created_at->format($dateFormat->getDateTimeFormat())}}
+                            {{$message->created_at->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                         <td class="dt-center">
                             <a href="#"><i class="fas fa-trash-alt"></i></a>

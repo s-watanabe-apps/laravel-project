@@ -44,7 +44,7 @@
             </th>
             <td class="bg-light">
                 <input type="checkbox"
-                    @if ($informations->status == \App\Libs\Status::ENABLED)
+                    @if ($informations->status == \Status::ENABLED)
                         checked
                     @endif
                     name="status"

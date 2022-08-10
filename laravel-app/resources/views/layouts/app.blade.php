@@ -16,7 +16,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Nav Bar -->
-                @include('shared.navbar')
+                @include('shared.navbar', compact('settings'))
 
                 <!-- Top Bar -->
                 @include('shared.topbar')
