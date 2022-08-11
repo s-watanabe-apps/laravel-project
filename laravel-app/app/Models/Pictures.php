@@ -1,10 +1,12 @@
 <?php
 namespace App\Models;
 
-use App\Models\Images;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pictures extends Model
 {
+    use SoftDeletes;
+
     // Table name.
     public $table = 'pictures';
 

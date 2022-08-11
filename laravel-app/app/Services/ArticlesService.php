@@ -79,7 +79,7 @@ class ArticlesService extends Service
         $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(3);
 
         foreach ($articles as &$article) {
-            $article->body_text = strip_tags($article->body, '<br>');
+            $article->body_text = mb_substr(strip_tags($article->body, '<br>'), 0, 120) . '...';
         }
 
         return $articles;

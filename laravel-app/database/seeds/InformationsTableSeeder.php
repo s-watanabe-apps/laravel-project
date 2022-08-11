@@ -13,11 +13,19 @@ class InformationsTableSeeder extends Seeder
     public function run()
     {
         $now = carbon();
+
+        $bodies = [];
+        $bodies[] = <<<__TEXT__
+<p>システムメンテナンスのため、下記日程にてサービス停止を予定しております。</p>
+<p>■システム停止期間：0000年00月00日（○曜日）00:00～00:00</p>
+__TEXT__;
+
         DB::table('informations')->truncate();
+
         $informations = [
             'title' => 'メンテナンスのお知らせ',
             'mark_id' => 1,
-            'body' => '<p>システムメンテナンスのため、下記日程にてサービス停止を予定しております。<br>■システム停止期間：0000年00月00日（○曜日）00:00～00:00</p>',
+            'body' => $bodies[0],
             'status' => \Status::ENABLED,
             'start_time' => $now,
             'end_time' => null,
@@ -25,6 +33,7 @@ class InformationsTableSeeder extends Seeder
             'updated_at' => null,
             'deleted_at' => null,
         ];
+
         Informations::query()->create($informations);
     }
 }

@@ -68,6 +68,10 @@ td.view-box {
   transform: translateY(-50%);
 }
 
+p {
+  line-height: 140%;
+}
+
 .card-body > p {
   line-height: 125%;
 }
