@@ -99,6 +99,15 @@ small > div#calendar .btn {
   height: 28px;
 }
 
+span.label {
+  padding: 1px 8px 1px 8px;
+  margin: 3px;
+  background-color: #eee;
+  border-radius: 15px;
+  border: 1px solid gray;
+  line-height: 35px;
+}
+
 @media only screen and (max-width:768px) {
   .carousel-caption {
     top: 30%;

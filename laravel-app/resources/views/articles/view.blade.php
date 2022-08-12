@@ -24,7 +24,7 @@
             @endif
         </div>
         <div class="col-lg-4 mb-12">
-            @include('articles.formset.sidemenu', compact('latestArticles'))
+            @include('articles.formset.sidemenu', compact('latestArticles', 'userLabels'))
         </div>
     </div>
 </div>

@@ -24,5 +24,15 @@
                 {{isset($articles->created_at) ? $articles->created_at->format(\DateFormat::getDateTimeFullFormat()) : carbon()->format(\DateFormat::getDateTimeFullFormat())}}
             </td>
         </tr>
+        <tr>
+            <th class="text-secondary text-nowrap bg-th">@lang('strings.label')</th>
+            <td class="view-box">
+                <nobr>
+                    @foreach($labels as $label)
+                    <a href="/articles/user/{{$articles->user_id}}?label={{$label->label_id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
+                    @endforeach
+                </nobr>
+            </td>
+        </tr>
     </tbody>
 </table>

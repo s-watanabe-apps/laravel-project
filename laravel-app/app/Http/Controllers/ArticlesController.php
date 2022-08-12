@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Services\ArticleLabelsService;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
@@ -15,6 +16,7 @@ class ArticlesController extends Controller
 {
     // Instance variables.
     private $articleCommentsService;
+    private $articleLabelsService;
     private $articlesService;
     private $usersService;
 
@@ -22,16 +24,19 @@ class ArticlesController extends Controller
      * Create a new controller instance.
      *
      * @param App\Services\ArticleCommentsService
+     * @param App\Services\ArticleLabelsService
      * @param App\Services\ArticlesService
      * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
         ArticleCommentsService $articleCommentsService,
+        ArticleLabelsService $articleLabelsService,
         ArticlesService $articlesService,
         UsersService $usersService
     ) {
         $this->articleCommentsService = $articleCommentsService;
+        $this->articleLabelsService = $articleLabelsService;
         $this->articlesService = $articlesService;
         $this->usersService = $usersService;
     }
@@ -67,7 +72,9 @@ class ArticlesController extends Controller
 
         $latestArticles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
 
-        return view('articles.user', compact('articles', 'articlesUser', 'commentCount', 'latestArticles'));
+        $userLabels = $this->articleLabelsService->getByUserId($request->id);
+
+        return view('articles.user', compact('articles', 'articlesUser', 'commentCount', 'latestArticles', 'userLabels'));
     }
 
     /**
@@ -84,13 +91,17 @@ class ArticlesController extends Controller
             $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
             $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
+
+            $labels = $this->articleLabelsService->getByArticleId($request->id);
+
+            $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
         } catch(NotFoundException $e) {
             abort(404);
         } catch(ForbiddenException $e) {
             abort(403);
         }
 
-        return view('articles.view', compact('articles', 'articleComments', 'latestArticles'));
+        return view('articles.view', compact('articles', 'articleComments', 'latestArticles', 'labels', 'userLabels'));
     }
 
     /**
