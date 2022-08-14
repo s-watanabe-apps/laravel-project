@@ -11,6 +11,7 @@ use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Libs\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ArticlesController extends Controller
 {
@@ -60,6 +61,16 @@ class ArticlesController extends Controller
      */
     public function user(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'label' => 'numeric',
+        ]);
+
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        //dump($validator->validated());
+
         $articlesUser = $this->usersService->getUsersById($request->user->id);
         if (!$articlesUser) {
             abort(404);

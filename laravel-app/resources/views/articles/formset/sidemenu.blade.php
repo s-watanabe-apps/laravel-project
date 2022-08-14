@@ -60,7 +60,7 @@
             <td class="view-box">
                 <nobr>
                     @foreach($userLabels as $label)
-                    <a href="/articles/user/TODO?label={{$label->label_id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
+                    <a href="/articles/user/{{$articleUserId}}?label={{$label->id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
                     @endforeach
                 </nobr>
             </td>

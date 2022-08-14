@@ -24,7 +24,10 @@
             @endif
         </div>
         <div class="col-lg-4 mb-12">
-            @include('articles.formset.sidemenu', compact('latestArticles', 'userLabels'))
+            @include('articles.formset.sidemenu', array_merge(
+                compact('latestArticles', 'userLabels')),
+                ['articleUserId' => $articles->user_id]
+            )
         </div>
     </div>
 </div>

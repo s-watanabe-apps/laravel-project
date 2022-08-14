@@ -77,7 +77,7 @@
             <td class="bg-light">
                 <input type="checkbox"
                     @if (!isset($informations) || $informations->status == \Status::ENABLED)
-                        checked                                                
+                        checked
                     @endif
                     name="status"
                     value="1"

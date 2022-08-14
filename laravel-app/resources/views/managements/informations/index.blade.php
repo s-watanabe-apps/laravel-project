@@ -52,7 +52,7 @@
                         <td class="dt-center text-nowrap">
                             <input type="checkbox"
                                 @if ($value->status == \Status::ENABLED)
-                                    checked                                                
+                                    checked
                                 @endif
                                 data-onstyle="success" data-offstyle="secondary"
                                 data-toggle="toggle"
