@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Exceptions\NotFoundException;
 use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +76,11 @@ class UsersService extends Service
 
         $cache = $this->remember($key, function() use($id) {
             $data = $this->base()->where('users.id', $id)->first();
+            
+            if (!$data) {
+                throw new NotFoundException();
+            }
+
             return json_encode($data);
         });
 

@@ -119,69 +119,44 @@ class ArticlesService extends Service
     }
 
     /**
-     * Add as an array.
-     * 
-     * @param array $values
-     * @return App\Models\Articles
-     */
-    private function saveArticles(array $values) {
-        $articles = new Articles();
-        $articles->fill($values)->save();
-        return $articles;
-    }
-
-    /**
      * Register the entered article.
      * 
-     * @param int $userId
      * @param App\Http\Requests\ArticlesRequest $request
      * @return App\Models\Articles
      */
-    public function saveMemberArticles(int $userId, ArticlesRequest $request)
+    public function saveMemberArticles(ArticlesRequest $request)
     {
-        return $this->saveArticles([
+        $articles = new Articles();
+
+        $articles->fill([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => $userId,
+            'user_id' => $request->user->id,
             'type' => Articles::TYPE_MEMBER_ARTICLE,
             'status' => \Status::ENABLED,
-        ]);
-    }
+        ])->save();
 
-    /**
-     * Update as an array.
-     * 
-     * @param int $id
-     * @param array $values
-     * @return App\Models\Articles
-     */
-    private function editArticles(int $id, array $values)
-    {
-        return Articles::where('id', $id)
-            ->update($values);
+        return $articles;
     }
 
     /**
      * Update the entered article.
      * 
-     * @param int $userId
-     * @param App\Models\Articles $request
+     * @param App\Http\Requests\ArticlesRequest $request
      * @return
      */
-    public function editMemberArticles(int $userId, ArticlesRequest $request)
+    public function editMemberArticles(ArticlesRequest $request)
     {
-        $articles = $this->getById($request->id);
-        if (!$articles) {
-            throw new NotFoundException();
-        }
+        $articles = $this->getById($request->id, $request->user->id);
 
-        if ($articles->user_id != $userId) {
+        if ($articles->user_id != $request->user->id) {
             throw new ForbiddenException();
         }
 
-        return $this->editArticles($request->id, [
-            'title' => $request->title,
-            'body' => $request->body,
-        ]);
+        $articles->title = $request->title;
+        $articles->body = $request->body;
+        $articles->save();
+
+        return $articles;
     }
 }

@@ -6,7 +6,7 @@ use App\Services\ArticleLabelsService;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
 use App\Services\UsersService;
-use App\Http\Exceptions\NotFoundException;
+use App\Http\Exceptions\BusinessException;
 use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Libs\Status;
@@ -66,15 +66,10 @@ class ArticlesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            abort(404);
+            throw new BusinessException();
         }
 
-        //dump($validator->validated());
-
-        $articlesUser = $this->usersService->getUsersById($request->user->id);
-        if (!$articlesUser) {
-            abort(404);
-        }
+        $articlesUser = $this->usersService->getUsersById($request->id);
 
         $articles = $this->articlesService->getByUserId($request->id, $request->user->id);
 
@@ -96,21 +91,15 @@ class ArticlesController extends Controller
      */
     public function get(Request $request)
     {
-        try {
-            $articles = $this->articlesService->getById($request->id, $request->user->id);
+        $articles = $this->articlesService->getById($request->id, $request->user->id);
 
-            $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
+        $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
-            $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
+        $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
 
-            $labels = $this->articleLabelsService->getByArticleId($request->id);
+        $labels = $this->articleLabelsService->getByArticleId($request->id);
 
-            $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
-        } catch(NotFoundException $e) {
-            abort(404);
-        } catch(ForbiddenException $e) {
-            abort(403);
-        }
+        $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
 
         return view('articles.view', compact('articles', 'articleComments', 'latestArticles', 'labels', 'userLabels'));
     }
@@ -134,13 +123,7 @@ class ArticlesController extends Controller
      */
     public function edit(Request $request)
     {
-        try {
-            $articles = $this->articlesService->getById($request->id, $request->user->id);
-        } catch(NotFoundException $e) {
-            abort(404);
-        } catch(ForbiddenException $e) {
-            abort(403);
-        }
+        $articles = $this->articlesService->getById($request->id, $request->user->id);
 
         return view('articles.edit', compact('articles'));
     }
@@ -155,9 +138,11 @@ class ArticlesController extends Controller
     {
         $articles = (new Articles())->bind($request->validated());
 
+        $labels = [];
+
         $method = $request->method();
 
-        return view('articles.confirm', compact('articles', 'method'));
+        return view('articles.confirm', compact('articles', 'labels', 'method'));
     }
 
     /**
@@ -169,18 +154,12 @@ class ArticlesController extends Controller
     public function register(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            try {
-                if (strcmp(strtolower($request->method()), Parent::REQUEST_METHOD_POST) == 0) {
-                    $this->articlesService->saveMemberArticles($request->user->id, $request);
-                } else if (strcmp(strtolower($request->method()), Parent::REQUEST_METHOD_PUT) == 0) {
-                    $this->articlesService->editMemberArticles($request->user->id, $request);
-                } else {
-                    throw new NotFoundException();
-                }
-            } catch(NotFoundException $e) {
-                abort(404);
-            } catch(ForbiddenException $e) {
-                abort(403);
+            if ($request->isPost()) {
+                $this->articlesService->saveMemberArticles($request);
+            } else if ($request->isPut()) {
+                $this->articlesService->editMemberArticles($request);
+            } else {
+                throw new NotFoundException();
             }
         });
 

@@ -7,6 +7,9 @@ class Articles extends Model
 {
     use SoftDeletes;
 
+    // Primary key.
+    protected $primaryKey = 'id';
+
     // Table name.
     public $table = 'articles';
 
