@@ -65,12 +65,20 @@ class ArticlesService extends Service
      * 
      * @param int $articleUserId
      * @param int $userId
+     * @param int $labelId = null
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getByUserId(int $articleUserId, int $userId)
+    public function getByUserId(int $articleUserId, int $userId, int $labelId = null)
     {
         $builder = $this->base()
             ->where('articles.user_id', $userId);
+        
+        if (!is_null($labelId)) {
+            $builder->join('article_labels', function($join) use($labelId) {
+                $join->on('article_labels.article_id', '=', 'articles.id')
+                    ->where('article_labels.label_id', $labelId);
+            });
+        }
         
         if ($articleUserId != $userId) {
             $builder->where('articles.status', \Status::ENABLED);

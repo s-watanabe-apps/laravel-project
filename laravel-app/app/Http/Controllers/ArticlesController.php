@@ -5,6 +5,7 @@ use App\Models\Articles;
 use App\Services\ArticleLabelsService;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
+use App\Services\LabelsService;
 use App\Services\UsersService;
 use App\Http\Exceptions\BusinessException;
 use App\Http\Exceptions\ForbiddenException;
@@ -19,6 +20,7 @@ class ArticlesController extends Controller
     private $articleCommentsService;
     private $articleLabelsService;
     private $articlesService;
+    private $labelsService;
     private $usersService;
 
     /**
@@ -34,11 +36,13 @@ class ArticlesController extends Controller
         ArticleCommentsService $articleCommentsService,
         ArticleLabelsService $articleLabelsService,
         ArticlesService $articlesService,
+        LabelsService $labelsService,
         UsersService $usersService
     ) {
         $this->articleCommentsService = $articleCommentsService;
         $this->articleLabelsService = $articleLabelsService;
         $this->articlesService = $articlesService;
+        $this->labelsService = $labelsService;
         $this->usersService = $usersService;
     }
 
@@ -69,9 +73,16 @@ class ArticlesController extends Controller
             throw new BusinessException();
         }
 
+        $labelId = $validator->validated()['label'] ?? null;
+
+        $searchLabels = null;
+        if (!is_null($labelId)) {
+            $searchLabels = $this->labelsService->getById($labelId);
+        }
+        
         $articlesUser = $this->usersService->getUsersById($request->id);
 
-        $articles = $this->articlesService->getByUserId($request->id, $request->user->id);
+        $articles = $this->articlesService->getByUserId($request->id, $request->user->id, $labelId);
 
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
@@ -80,7 +91,7 @@ class ArticlesController extends Controller
 
         $userLabels = $this->articleLabelsService->getByUserId($request->id);
 
-        return view('articles.user', compact('articles', 'articlesUser', 'commentCount', 'latestArticles', 'userLabels'));
+        return view('articles.user', compact('searchLabels', 'articles', 'articlesUser', 'commentCount', 'latestArticles', 'userLabels'));
     }
 
     /**

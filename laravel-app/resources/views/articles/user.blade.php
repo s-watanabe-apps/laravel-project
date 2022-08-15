@@ -6,7 +6,12 @@
     <div class="row">
         <nav aria-label="breadcrumb" class="col-md-12 h5">
             <ol class="breadcrumb">
+                @if (!$searchLabels)
                 <li class="breadcrumb-item"><i class="fas fa-blog"></i> {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}</li>
+                @else
+                <li class="breadcrumb-item"><a href="/articles/user/{{$articlesUser->id}}"><i class="fas fa-blog"></i> {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-tag"></i> {{$searchLabels->value}}</li>
+                @endif
             </ol>
         </nav>
     </div>
