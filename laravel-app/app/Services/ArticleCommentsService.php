@@ -72,4 +72,26 @@ class ArticleCommentsService extends Service
             ->groupBy('id')
             ->get();
     }
+
+    /**
+     * Get favorite article ids.
+     * 
+     * @param int $userId
+     * @param int $limit
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getFavoriteArticleIds(int $userId, int $limit)
+    {
+        return \DB::table('article_comments')
+            ->select('article_comments.article_id', \DB::raw('count(article_comments.article_id) as count'))
+            ->join('articles', function ($join) use($userId) {
+                $join->on('articles.id', '=', 'article_comments.article_id')
+                    ->where('articles.user_id', $userId)
+                    ->where('articles.status', \Status::ENABLED);
+            })
+            ->groupBy('article_comments.article_id')
+            ->orderBy('count', 'desc')
+            ->limit(5)
+            ->get();
+    }
 }

@@ -44,10 +44,13 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th">@lang('strings.popular_articles')</th>
         </tr>
+        @foreach($favoriteArticles as $value)
         <tr>
             <td class="view-box">
+                <a href="/articles/{{$value->id}}">{{$value->title}}</a>
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 

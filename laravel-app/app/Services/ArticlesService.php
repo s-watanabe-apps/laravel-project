@@ -61,6 +61,25 @@ class ArticlesService extends Service
     }
 
     /**
+     * Get articles by ids.
+     * 
+     * @param array $ids
+     * @return App\Models\Articles
+     */
+    public function getByIds(array $ids)
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        $articles = $this->base()
+            ->whereIn('articles.id', $ids)
+            ->get();
+
+        return $articles;
+    }
+
+    /**
      * Get articles by user id.
      * 
      * @param int $articleUserId
@@ -84,7 +103,7 @@ class ArticlesService extends Service
             $builder->where('articles.status', \Status::ENABLED);
         }
         
-        $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(3);
+        $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(Articles::USER_ARTICLES_ON_PAGE);
 
         foreach ($articles as &$article) {
             $article->body_text = mb_substr(strip_tags($article->body, '<br>'), 0, 120) . '...';
@@ -98,10 +117,10 @@ class ArticlesService extends Service
      * 
      * @param int $articleUserId
      * @param int $userId
-     * @param int $limit = 5
+     * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array[App\Models\Articles]
      */
-    public function getLatestArticles(int $articleUserId, int $userId, int $limit = 5)
+    public function getLatestArticles(int $articleUserId, int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
@@ -116,6 +135,34 @@ class ArticlesService extends Service
 
             $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get();
 
+            return json_encode($data);
+        });
+
+        $data = array_map(function($value) use($articles) {
+            return (clone $articles)->bind($value);
+        }, $cache);
+
+        return $data;
+    }
+
+    /**
+     * Get favorite article headlines by user id for Cache or Database.
+     * 
+     * @param int $articleUserId
+     * @param int $limit = Articles::HEADLINE_LIMIT
+     * @return array[App\Models\Articles]
+     */
+    public function getFavoriteArticles(int $articleUserId, $limit = Articles::HEADLINE_LIMIT)
+    {
+        $articles = new Articles();
+
+        $key = sprintf('%s-favorite-%d', $articles->table, $articleUserId);
+
+        $cache = $this->remember($key, function() use($articleUserId, $limit) {
+            $ids = (new ArticleCommentsService())->getFavoriteArticleIds($articleUserId, $limit);
+
+            $data = $this->getByIds(array_column($ids->toArray(), 'article_id'));
+    
             return json_encode($data);
         });
 

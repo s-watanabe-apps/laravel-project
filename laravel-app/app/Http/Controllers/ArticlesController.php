@@ -89,9 +89,12 @@ class ArticlesController extends Controller
 
         $latestArticles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
 
+        $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
+
         $userLabels = $this->articleLabelsService->getByUserId($request->id);
 
-        return view('articles.user', compact('searchLabels', 'articles', 'articlesUser', 'commentCount', 'latestArticles', 'userLabels'));
+        return view('articles.user', compact(
+            'searchLabels', 'articles', 'articlesUser', 'commentCount', 'latestArticles', 'favoriteArticles', 'userLabels'));
     }
 
     /**
@@ -108,11 +111,13 @@ class ArticlesController extends Controller
 
         $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
 
+        $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
+
         $labels = $this->articleLabelsService->getByArticleId($request->id);
 
         $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
 
-        return view('articles.view', compact('articles', 'articleComments', 'latestArticles', 'labels', 'userLabels'));
+        return view('articles.view', compact('articles', 'articleComments', 'latestArticles', 'favoriteArticles', 'labels', 'userLabels'));
     }
 
     /**
