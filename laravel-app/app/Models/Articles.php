@@ -16,7 +16,7 @@ class Articles extends Model
     // Model constants.
     const TYPE_MEMBER_ARTICLE = 1;
 
-    const USER_ARTICLES_ON_PAGE = 10;
+    const USER_ARTICLES_ON_PAGE = 8;
     const HEADLINE_LIMIT = 5;
 
     // Multiple assignable attributes.

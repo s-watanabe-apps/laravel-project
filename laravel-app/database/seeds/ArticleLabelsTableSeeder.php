@@ -43,6 +43,34 @@ class ArticleLabelsTableSeeder extends Seeder
                 'article_id' => 4,
                 'label_id' => 2,
             ],
+            [
+                'article_id' => 5,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 6,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 7,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 8,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 9,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 10,
+                'label_id' => 1,
+            ],
+            [
+                'article_id' => 11,
+                'label_id' => 1,
+            ],
         ];
 
         foreach ($articleLabels as $value) {

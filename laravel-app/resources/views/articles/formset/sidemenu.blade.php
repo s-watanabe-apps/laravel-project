@@ -42,7 +42,7 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="text-secondary text-nowrap bg-th">@lang('strings.popular_articles')</th>
+            <th class="text-secondary text-nowrap bg-th"><i class="fas fa-blog"></i> @lang('strings.popular_articles')</th>
         </tr>
         @foreach($favoriteArticles as $value)
         <tr>
