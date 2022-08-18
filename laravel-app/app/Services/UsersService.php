@@ -72,7 +72,7 @@ class UsersService extends Service
      */
     public function getUsersById($id) : Users
     {
-        $key = sprintf('users-%d', $id);
+        $key = sprintf(parent::CACHE_KEY_USERS_BY_ID, $id);
 
         $cache = $this->remember($key, function() use($id) {
             $data = $this->base()->where('users.id', $id)->first();
@@ -95,7 +95,7 @@ class UsersService extends Service
      */
     public function getByEmail($email) : Users
     {
-        $key = sprintf('users-%s', $email);
+        $key = sprintf(parent::CACHE_KEY_USERS_BY_EMAIL, $email);
 
         $cache = $this->remember($key, function() use($email) {
             $data = $this->base()->where('email', $email)->first();
@@ -119,7 +119,7 @@ class UsersService extends Service
             return $value->toDateString();
         }, $birthdays);
 
-        $key = sprintf('%s-birthday-%s-%s', $users->table, $dates[0], $dates[count($dates) - 1]);
+        $key = sprintf(parent::CACHE_KEY_USERS_BIRTHDAY, $dates[0], $dates[count($dates) - 1]);
 
         $cache = $this->remember($key, function() use($birthdays) {
             $builder = $this->base();

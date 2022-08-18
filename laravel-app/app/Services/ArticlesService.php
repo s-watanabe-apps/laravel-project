@@ -118,13 +118,13 @@ class ArticlesService extends Service
      * @param int $articleUserId
      * @param int $userId
      * @param int $limit = Articles::HEADLINE_LIMIT
-     * @return array[App\Models\Articles]
+     * @return array<App\Models\Articles>
      */
     public function getLatestArticles(int $articleUserId, int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
-        $key = sprintf('%s-latest-%d-%d', $articles->table, $articleUserId, $articleUserId == $userId ? 1 : 0);
+        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, $articleUserId, $articleUserId == $userId ? 1 : 0);
 
         $cache = $this->remember($key, function() use($articleUserId, $userId, $limit) {
             $builder = $this->base()->where('articles.user_id', $articleUserId);
@@ -150,13 +150,13 @@ class ArticlesService extends Service
      * 
      * @param int $articleUserId
      * @param int $limit = Articles::HEADLINE_LIMIT
-     * @return array[App\Models\Articles]
+     * @return array<App\Models\Articles>
      */
     public function getFavoriteArticles(int $articleUserId, $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
-        $key = sprintf('%s-favorite-%d', $articles->table, $articleUserId);
+        $key = sprintf(parent::CACHE_KEY_FAVORITE_ARTICLES, $articleUserId);
 
         $cache = $this->remember($key, function() use($articleUserId, $limit) {
             $ids = (new ArticleCommentsService())->getFavoriteArticleIds($articleUserId, $limit);
@@ -198,7 +198,7 @@ class ArticlesService extends Service
      * Update the entered article.
      * 
      * @param App\Http\Requests\ArticlesRequest $request
-     * @return
+     * @return App\Models\Articles
      */
     public function editMemberArticles(ArticlesRequest $request)
     {

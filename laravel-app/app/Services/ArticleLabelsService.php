@@ -26,11 +26,11 @@ class ArticleLabelsService extends Service
      * Get article labels by article id.
      * 
      * @param int $articleId
-     * @return array
+     * @return array<App\Models\ArticleLabels>
      */
     public function getByArticleId(int $articleId)
     {
-        $key = sprintf("article-labels-%d", $articleId);
+        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS, $articleId);
 
         $cache = $this->remember($key, function() use($articleId) {
             $data = $this->base()
@@ -49,11 +49,11 @@ class ArticleLabelsService extends Service
      * Get article labels by article id.
      * 
      * @param int $userId
-     * @return array
+     * @return array<App\Models\Labels>
      */
     public function getByUserId(int $userId)
     {
-        $key = sprintf("article-labels-user-%d", $userId);
+        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS_USER, $userId);
 
         $cache = $this->remember($key, function() use($userId) {
             $temp = ArticleLabels::query()->select([

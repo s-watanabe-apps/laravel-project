@@ -39,7 +39,7 @@ class SettingsService extends Service
     {
         $settings = new Settings();
 
-        $cache = $this->remember($settings->table, function() {
+        $cache = $this->remember(parent::CACHE_KEY_SETTINGS, function() {
             $data = Settings::query()->select()->first();
             return json_encode($data);
         });

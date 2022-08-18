@@ -85,7 +85,7 @@ class CalendarService extends Service
     /**
      * Get events for the month.
      * 
-     * @var Carbon
+     * @var Carbon = null
      * @return array
      */
     public function getMonthlyCalendarEvents($date = null)
@@ -126,9 +126,6 @@ class CalendarService extends Service
     {
         $events = [];
 
-        //\Log::info($start);
-        //\Log::info($end);
-
         $dates = [];
         $startDatetime = carbon($start);
         $endDatetime = carbon($end);
@@ -137,10 +134,6 @@ class CalendarService extends Service
             $dates[] = $startDatetime;
             $startDatetime = $startDatetime->addDays(1)->copy();
         }
-
-        //foreach ($range as $value) {
-        //    \Log::info($value->toString());
-        //}
 
         $users = (new UsersService())->getBirthdayUsers($dates);
         $year = carbon()->year;
@@ -152,8 +145,6 @@ class CalendarService extends Service
                 'start' => sprintf("%d-%02d-%02d", $year, $carbon->month, $carbon->day),
             ];
         } 
-
-        //\Log::info(json_encode($events));
 
         return $events;
     }

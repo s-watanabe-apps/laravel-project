@@ -6,6 +6,17 @@ use Illuminate\Support\Facades\Cache;
 
 class Service
 {
+    // Service constant cache keys.
+    const CACHE_KEY_SETTINGS = 'settings';
+    const CACHE_KEY_NAVIGATION_MENUS = 'navigation-menus';
+    const CACHE_KEY_USERS_BY_ID = 'users-%d';
+    const CACHE_KEY_USERS_BY_EMAIL = 'users-%s';
+    const CACHE_KEY_USERS_BIRTHDAY = 'users-birthday-%s-%s';
+    const CACHE_KEY_LATEST_ARTICLES = 'latest-articles-%d-%d';
+    const CACHE_KEY_FAVORITE_ARTICLES = 'favorite-articles-%d';
+    const CACHE_KEY_ARTICLE_LABELS = 'article-labels-%d';
+    const CACHE_KEY_ARTICLE_LABELS_USER = 'article-labels-user-%d';
+    
     /**
      * Cache remember.
      * 

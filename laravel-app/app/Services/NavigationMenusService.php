@@ -32,7 +32,7 @@ class NavigationMenusService extends Service
     {
         $navigationMenus = new NavigationMenus();
 
-        $cache = $this->remember($navigationMenus->table, function() {
+        $cache = $this->remember(parent::CACHE_KEY_NAVIGATION_MENUS, function() {
             $data = $this->base()->get();
             return json_encode($data);
         });
