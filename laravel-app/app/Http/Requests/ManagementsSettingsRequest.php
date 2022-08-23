@@ -33,8 +33,8 @@ class ManagementsSettingsRequest extends AppFormRequest
         ];
 
         if ($this->basic_auth == '0') {
-            unset($rules['basic_user']);
-            unset($rules['basic_password']);
+            $rules['basic_user'] = 'max:255';
+            $rules['basic_password'] = 'max:255';
         }
 
         return $rules;

@@ -36,7 +36,7 @@ class SettingsController extends ManagementsController
      * Register input information.
      * 
      * @param App\Http\Requests\ManagementsInformationsRequest
-     * @return Illuminate\View\View
+     * @return void
      */
     public function register(ManagementsSettingsRequest $request)
     {
