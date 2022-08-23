@@ -27,4 +27,14 @@ class Users extends Authenticatable
 
         return $this;
     }
+
+    public static function anonymous()
+    {
+        return (object) [
+            'id' => 0,
+            'role_id' => Roles::ANONYMOUS,
+            'email' => null,
+            'name' => __('strings.anonymous_user_name'),
+        ];
+    }
 }

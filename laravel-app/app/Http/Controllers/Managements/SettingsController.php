@@ -29,6 +29,7 @@ class SettingsController extends ManagementsController
      */
     public function index(Request $request)
     {
+        dump(auth()->user()->id);
         return view('managements.settings.index');
     }
 
