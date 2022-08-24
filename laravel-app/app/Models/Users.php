@@ -38,7 +38,7 @@ class Users extends Authenticatable
     /**
      * Anonymous user attributes.
      * 
-     * return Object
+     * return stdClass
      */
     public static function anonymous()
     {

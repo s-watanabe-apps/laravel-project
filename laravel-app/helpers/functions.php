@@ -26,9 +26,9 @@ if (!function_exists('carbon')) {
 
 if (!function_exists('user')) {
     /**
-     * Global user.
+     * Global authenticating user or anonymous user.
      * 
-     * @return \App\Models\Users
+     * @return App\Models\Users
      */
     function user()
     {
