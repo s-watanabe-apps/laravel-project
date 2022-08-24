@@ -21,7 +21,7 @@
 
         <!-- Content Column -->
         <div class="col-lg-2 mb-4 text-center">
-            <img id="preview" class="img-fluid" src="/show/image?file={{$user->image_file}}" />
+            <img id="preview" class="img-fluid" src="/show/image?file={{user()->image_file}}" />
 
             <div class="col-lg-12 mt-2 text-center">
                 <label>
@@ -141,7 +141,7 @@
             <a href="javascript:profiles.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
                 <i class="fas fa-check fa-sm"></i> @lang('strings.save')
             </a>
-            <a href="/profiles/{{$user->id}}" class="btn btn-secondary shadow-sm btn-edit-cancel-save">
+            <a href="/profiles/{{user()->id}}" class="btn btn-secondary shadow-sm btn-edit-cancel-save">
                 <i class="fas fa-window-close fa-sm"></i> @lang('strings.cancel')
             </a>
         </div>

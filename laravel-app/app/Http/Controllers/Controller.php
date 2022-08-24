@@ -21,7 +21,7 @@ class Controller extends BaseController
     
             $request = isset($parameters[0]) ? $parameters[0] : '';
             if (preg_match('/Request$/', get_class($request))) {
-                \Log::info(sprintf("user_id=%s, %s", $request->user->id ?? '', $request->url()));
+                \Log::info(sprintf("user_id=%s, %s", user()->id ?? '', $request->url()));
             }
     
             return parent::callAction($method, $parameters);

@@ -27,25 +27,10 @@ class AuthCheckReadPermissionMiddleware
     public function handle($request, Closure $next)
     {
         if (!Authenticate::check()) {
-            if ($request->settings->anonymous_permission) {
-                // Anonymous User
-                $user = new Users();
-                $user->id = 0;
-                $user->role_id = Roles::ANONYMOUS;
-                $user->email = null;
-                $user->name = __('strings.anonymous_user_name');
-            } else {
+            if (!$request->settings->anonymous_permission) {
                 return redirect('/login')->with('redirect', $request->url());
             }
-        } else {
-            $user = Authenticate::user();
         }
-
-        $request->merge([
-            'user' => $user,
-        ]);
-
-        $this->viewFactory->share('user', $user);
 
         return $next($request);
     }

@@ -41,7 +41,7 @@ class ArticlesService extends Service
      * @param int $userId
      * @return App\Models\Articles
      */
-    public function getById(int $id, int $userId)
+    public function getById(int $id)
     {
         $articles = $this->base()
             ->where('articles.id', $id)
@@ -51,7 +51,7 @@ class ArticlesService extends Service
             throw new NotFoundException();
         }
 
-        if ($articles->user_id != $userId) {
+        if ($articles->user_id != user()->id) {
             if ($articles->status != \Status::ENABLED) {
                 throw new ForbiddenException();
             }
@@ -82,12 +82,11 @@ class ArticlesService extends Service
     /**
      * Get articles by user id.
      * 
-     * @param int $articleUserId
      * @param int $userId
      * @param int $labelId = null
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getByUserId(int $articleUserId, int $userId, int $labelId = null)
+    public function getByUserId(int $userId, int $labelId = null)
     {
         $builder = $this->base()
             ->where('articles.user_id', $userId);
@@ -99,7 +98,7 @@ class ArticlesService extends Service
             });
         }
         
-        if ($articleUserId != $userId) {
+        if ($userId != user()->id) {
             $builder->where('articles.status', \Status::ENABLED);
         }
         
@@ -115,21 +114,20 @@ class ArticlesService extends Service
     /**
      * Get latest article headlines by user id for Cache or Database.
      * 
-     * @param int $articleUserId
      * @param int $userId
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array<App\Models\Articles>
      */
-    public function getLatestArticles(int $articleUserId, int $userId, int $limit = Articles::HEADLINE_LIMIT)
+    public function getLatestArticles(int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
-        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, $articleUserId, $articleUserId == $userId ? 1 : 0);
+        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, $userId, $userId == user()->id ? 1 : 0);
 
-        $cache = $this->remember($key, function() use($articleUserId, $userId, $limit) {
-            $builder = $this->base()->where('articles.user_id', $articleUserId);
+        $cache = $this->remember($key, function() use($userId, $limit) {
+            $builder = $this->base()->where('articles.user_id', $userId);
 
-            if ($articleUserId != $userId) {
+            if ($userId != user()->id) {
                 $builder->where('articles.status', \Status::ENABLED);
             }
 
@@ -148,18 +146,18 @@ class ArticlesService extends Service
     /**
      * Get favorite article headlines by user id for Cache or Database.
      * 
-     * @param int $articleUserId
+     * @param int $userId
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array<App\Models\Articles>
      */
-    public function getFavoriteArticles(int $articleUserId, $limit = Articles::HEADLINE_LIMIT)
+    public function getFavoriteArticles(int $userId, $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
-        $key = sprintf(parent::CACHE_KEY_FAVORITE_ARTICLES, $articleUserId);
+        $key = sprintf(parent::CACHE_KEY_FAVORITE_ARTICLES, $userId);
 
-        $cache = $this->remember($key, function() use($articleUserId, $limit) {
-            $ids = (new ArticleCommentsService())->getFavoriteArticleIds($articleUserId, $limit);
+        $cache = $this->remember($key, function() use($userId, $limit) {
+            $ids = (new ArticleCommentsService())->getFavoriteArticleIds($userId, $limit);
 
             $data = $this->getByIds(array_column($ids->toArray(), 'article_id'));
     
@@ -186,7 +184,7 @@ class ArticlesService extends Service
         $articles->fill([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => $request->user->id,
+            'user_id' => user()->id,
             'type' => Articles::TYPE_MEMBER_ARTICLE,
             'status' => \Status::ENABLED,
         ])->save();
@@ -202,9 +200,9 @@ class ArticlesService extends Service
      */
     public function editMemberArticles(ArticlesRequest $request)
     {
-        $articles = $this->getById($request->id, $request->user->id);
+        $articles = $this->getById($request->id, user()->id);
 
-        if ($articles->user_id != $request->user->id) {
+        if ($articles->user_id != user()->id) {
             throw new ForbiddenException();
         }
 

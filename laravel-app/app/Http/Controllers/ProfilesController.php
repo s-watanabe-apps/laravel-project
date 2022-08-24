@@ -77,7 +77,7 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $articles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
+        $articles = $this->articlesService->getLatestArticles($request->id);
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 
@@ -99,11 +99,11 @@ class ProfilesController extends Controller
      */
     public function edit(Request $request)
     {
-        $birthDate = $this->usersService->getBirthDate($request->user->birthdate);
+        $birthDate = $this->usersService->getBirthDate(user()->birthdate);
 
-        $profileUser = $request->user;
+        $profileUser = user();
 
-        $userProfiles = $this->profilesService->getUserProfiles($request->user->id);
+        $userProfiles = $this->profilesService->getUserProfiles(user()->id);
 
         $choices = $this->profilesService->getProfileChoicesHash();
 
@@ -123,24 +123,24 @@ class ProfilesController extends Controller
      */
     public function register(ProfilesRequest $request)
     {
-        $profileValues = ProfileValues::getProfileValuesHashByUserId($request->user->id);
+        $profileValues = ProfileValues::getProfileValuesHashByUserId(user()->id);
         $inputValues = $request->validated();
 
         \DB::transaction(function() use ($request, $profileValues, $inputValues) {
             if (isset($inputValues['choose_profile_image'])) {
                 $file = $inputValues['choose_profile_image'];
                 $extension = Images::getExtensions()[$file->getMimetype()];
-                $fileName = "profiles/" . $request->user->id . '.' . $extension;
+                $fileName = "profiles/" . user()->id . '.' . $extension;
                 $file->storeAs('contents/images/', $fileName);
                 $inputValues['image_file'] = urlencode($fileName);
             }
 
-            $request->user->save($inputValues, $request->user->id);
+            user()->save($inputValues, user()->id);
 
             ProfileValues::saveProfileValues(
-                $request->user->id, $inputValues['dynamic_values']);
+                user()->id, $inputValues['dynamic_values']);
         });
 
-        return redirect()->route('profiles.get', ['id' => $request->user->id])->with('result', 1);
+        return redirect()->route('profiles.get', ['id' => user()->id])->with('result', 1);
     }
 }

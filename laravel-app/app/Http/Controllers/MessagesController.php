@@ -32,19 +32,19 @@ class MessagesController extends Controller
 
     public function inbox(Request $request)
     {
-        $messages = $this->messagesService->getByUserId($request->user->id);
+        $messages = $this->messagesService->getByUserId(user()->id);
 
         return view('messages.inbox', compact(
             'messages'
         ) + [
             'index' => 1,
-            'sizes' => $this->getSizes($request->user->id),
+            'sizes' => $this->getSizes(user()->id),
         ]);
     }
 
     public function get(Request $request)
     {
-        $message = $this->messagesService->getByUserIdAndMessageId($request->user->id, $request->id);
+        $message = $this->messagesService->getByUserIdAndMessageId(user()->id, $request->id);
         if (is_null($message)) {
             abort(404);
         }
@@ -54,7 +54,7 @@ class MessagesController extends Controller
                 'name' => __('strings.garbage'),
                 'link' => '/messages/inbox',
             ];
-        } else if ($request->user->id == $message->to_user_id) {
+        } else if (user()->id == $message->to_user_id) {
             $backlink = [
                 'name' => __('strings.outbox'),
                 'link' => '/messages/outbox',
@@ -71,7 +71,7 @@ class MessagesController extends Controller
             $message->save();
         }
 
-        $fromUserMessages = $this->messagesService->getByUserIdAndFromUserId($request->user->id, $message->from_user_id);
+        $fromUserMessages = $this->messagesService->getByUserIdAndFromUserId(user()->id, $message->from_user_id);
 
         return view('messages.get', compact(
             'message',
@@ -79,7 +79,7 @@ class MessagesController extends Controller
             'fromUserMessages'
         ) + [
             'index' => 1,
-            'sizes' => $this->getSizes($request->user->id),
+            'sizes' => $this->getSizes(user()->id),
         ]);
     }
 }

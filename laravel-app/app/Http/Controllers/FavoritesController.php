@@ -30,7 +30,7 @@ class FavoritesController extends Controller
      */
     public function index(Request $request)
     {
-        $favorites = $this->favoritesService->getFavoritesByUserId($request->user->id);
+        $favorites = $this->favoritesService->getFavoritesByUserId(user()->id);
 
         return view('favorites.index', compact(
             'favorites'
@@ -56,7 +56,7 @@ class FavoritesController extends Controller
 
         $validated = $validator->validated();
 
-        $this->favoritesServices->remove($request->user->id, $validated['uri']);
+        $this->favoritesServices->remove(user()->id, $validated['uri']);
 
         return redirect()->route('favorites');
     }

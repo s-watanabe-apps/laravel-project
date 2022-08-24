@@ -34,7 +34,7 @@
             </li>
             @endforeach
 
-            @if ($user->role_id == \App\Models\Roles::ADMIN)
+            @if (user()->role_id == \App\Models\Roles::ADMIN)
             <li class="nav-item nav-hover dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @lang('strings.admin_menus')

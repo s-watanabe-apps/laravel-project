@@ -55,7 +55,7 @@ class FavoritesService extends Service
      */
     public function isFavorite(Request $request)
     {
-        return $this->getFaivoritesByUserIdAndRequest($request->user->id, $request->path()) != null ? 1 : 0;
+        return $this->getFaivoritesByUserIdAndRequest(user()->id, $request->path()) != null ? 1 : 0;
     }
 
     /**

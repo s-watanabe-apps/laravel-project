@@ -114,7 +114,7 @@
         </div>
 
         <div class="col-lg-8 mb-5 text-center">
-            @if ($user->id == $profileUser->id)
+            @if (user()->id == $profileUser->id)
             <a href="/profiles/edit" class="btn btn-primary shadow-sm btn-edit-cancel-save">
                 <i class="fas fa-user-edit fa-sm text-white-50"></i> @lang('strings.edit')
             </a>

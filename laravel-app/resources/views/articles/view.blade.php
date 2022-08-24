@@ -16,7 +16,7 @@
         <div class="col-lg-8 mb-3">
             @include('articles.formset.viewControl', compact('articles'))
 
-            @if ($articles->user_id == $user->id)
+            @if ($articles->user_id == user()->id)
             <div class="col-lg-12 text-center">
                 <a type="button" class="btn btn-success" href="/articles/edit/{{$articles->id}}"><i class="fas fa-fw fa-edit"></i> @lang('strings.edit')</a>
                 <a type="button" class="btn btn-danger" href="#"><i class="fas fa-fw fa-trash"></i> @lang('strings.delete')</a>

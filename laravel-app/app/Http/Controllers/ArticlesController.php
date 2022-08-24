@@ -54,7 +54,7 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
-        return redirect()->route('articles.user', ['id' => $request->user->id]);
+        return redirect()->route('articles.user', ['id' => user()->id]);
     }
 
     /**
@@ -82,12 +82,12 @@ class ArticlesController extends Controller
         
         $articlesUser = $this->usersService->getUsersById($request->id);
 
-        $articles = $this->articlesService->getByUserId($request->id, $request->user->id, $labelId);
+        $articles = $this->articlesService->getByUserId($request->id, $labelId);
 
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
 
-        $latestArticles = $this->articlesService->getLatestArticles($request->id, $request->user->id);
+        $latestArticles = $this->articlesService->getLatestArticles($request->id);
 
         $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
 
@@ -105,11 +105,11 @@ class ArticlesController extends Controller
      */
     public function get(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id, $request->user->id);
+        $articles = $this->articlesService->getById($request->id);
 
         $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
-        $latestArticles = $this->articlesService->getLatestArticles($articles->user_id, $request->user->id);
+        $latestArticles = $this->articlesService->getLatestArticles($articles->user_id);
 
         $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
 
@@ -139,7 +139,7 @@ class ArticlesController extends Controller
      */
     public function edit(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id, $request->user->id);
+        $articles = $this->articlesService->getById($request->id);
 
         return view('articles.edit', compact('articles'));
     }
@@ -179,6 +179,6 @@ class ArticlesController extends Controller
             }
         });
 
-        return redirect()->route('articles.user', ['id' => $request->user->id]);
+        return redirect()->route('articles.user', ['id' => user()->id]);
     }
 }

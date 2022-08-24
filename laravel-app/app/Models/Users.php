@@ -28,6 +28,11 @@ class Users extends Authenticatable
         return $this;
     }
 
+    /**
+     * Anonymous user attributes.
+     * 
+     * return Object
+     */
     public static function anonymous()
     {
         return (object) [
@@ -35,6 +40,7 @@ class Users extends Authenticatable
             'role_id' => Roles::ANONYMOUS,
             'email' => null,
             'name' => __('strings.anonymous_user_name'),
+            'image_file' => null,
         ];
     }
 }

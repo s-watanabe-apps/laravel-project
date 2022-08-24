@@ -6,7 +6,7 @@ use App\Services\MessagesService;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth as Authenticate;
 
 class BeforeActionMiddleware
 {
@@ -25,9 +25,9 @@ class BeforeActionMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (isset($request->user->id)) {
-            $receiveMessages = (new MessagesService())->getUnreadMessages($request->user->id);
-            $this->viewFactory->share('receiveMessages', $receiveMessages);    
+        if (Authenticate::check()) {
+            $receiveMessages = (new MessagesService())->getUnreadMessages(user()->id);
+            $this->viewFactory->share('receiveMessages', $receiveMessages);
         }
 
         return $next($request);

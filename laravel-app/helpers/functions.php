@@ -5,22 +5,20 @@ if (!function_exists('carbon')) {
     /**
      * Global carbon.
      *
-     * @param null $time time
-     * @param null $timezone timezone
-     * @param string $format date format
+     * @param null $time = null
+     * @param null $timezone = null
      * @return Carbon\Carbon
      */
-    function carbon($time = null, $timezone = null, $format = 'Y-m-d H:i:s'): Carbon\Carbon
+    function carbon($time = null, $timezone = null): Carbon\Carbon
     {
         $timezone = $timezone ?: config('app.timezone');
-        if (empty($time)) {
-            return Carbon\Carbon::now($timezone);
-        } elseif (is_int($time) || ctype_digit($time)) {
+
+        if (is_int($time) || ctype_digit($time)) {
             return Carbon\Carbon::createFromTimestamp($time, $timezone);
         } elseif (is_string($time)) {
             return Carbon\Carbon::parse($time, $timezone);
         } else {
-            return Carbon\Carbon::createFromFormat($format, $time, $timezone);
+            return Carbon\Carbon::now($timezone);
         }
     }
 

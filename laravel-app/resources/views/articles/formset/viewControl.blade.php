@@ -15,7 +15,7 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th">@lang('strings.contributor')</th>
             <td class="view-box">
-                {{$articles->name ?? $user->name}}
+                {{$articles->name ?? user()->name}}
             </td>
         </tr>
         <tr>
