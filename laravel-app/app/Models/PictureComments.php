@@ -9,4 +9,10 @@ class PictureComments extends Model
 
     // Table name.
     public $table = 'picture_comments';
+
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
+    public $timestamps = true;
 }

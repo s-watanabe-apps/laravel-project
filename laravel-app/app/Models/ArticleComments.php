@@ -10,6 +10,12 @@ class ArticleComments extends Model
     // Table name.
     public $table = 'article_comments';
 
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
+    public $timestamps = true;
+    
     // Multiple assignable attributes.
     protected $fillable = [
         'article_id',

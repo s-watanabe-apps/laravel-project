@@ -6,11 +6,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Users extends Authenticatable
 {
+    use SoftDeletes;
+
     // Table name.
     public $table = 'users';
 
-    use SoftDeletes;
+    // Primary key.
+    protected $primaryKey = 'id';
 
+    // Timestamps.
+    public $timestamps = true;
+
+    // Model constant, page limit.
     const PAGENATE = 12;
 
     /**

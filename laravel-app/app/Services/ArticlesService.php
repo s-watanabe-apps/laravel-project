@@ -47,14 +47,10 @@ class ArticlesService extends Service
             ->where('articles.id', $id)
             ->first();
 
-        if (!$articles) {
-            throw new NotFoundException();
-        }
+        throw_if(!$articles, NotFoundException::class);
 
-        if ($articles->user_id != user()->id) {
-            if ($articles->status != \Status::ENABLED) {
-                throw new ForbiddenException();
-            }
+        if ($articles->status != \Status::ENABLED) {
+            throw_if($articles->user_id != user()->id, ForbiddenException::class);
         }
 
         return $articles;
@@ -202,9 +198,7 @@ class ArticlesService extends Service
     {
         $articles = $this->getById($request->id, user()->id);
 
-        if ($articles->user_id != user()->id) {
-            throw new ForbiddenException();
-        }
+        throw_if($articles->user_id != user()->id, ForbiddenException::class);
 
         $articles->title = $request->title;
         $articles->body = $request->body;

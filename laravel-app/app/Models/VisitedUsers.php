@@ -6,6 +6,10 @@ class VisitedUsers extends Model
     // Table name.
     public $table = 'visited_users';
 
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
     public $timestamps = false;
 
     /**
@@ -18,6 +22,7 @@ class VisitedUsers extends Model
     public static function visit($userId, $visitedId)
     {
         $carbon = carbon();
+
         if (self::query()
             ->where('date', $carbon->format('Y-m-d'))
             ->where('user_id', $userId)

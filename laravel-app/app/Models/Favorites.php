@@ -6,7 +6,10 @@ class Favorites extends Model
     // Table name.
     public $table = 'favorites';
 
-    // Model constants.
+    // Timestamps.
+    public $timestamps = true;
+
+    // Model constant, favorite codes.
     const FAVORITE_CODE_PROFILES = 'profiles';
     const FAVORITE_CODE_PICTURES = 'pictures';
 

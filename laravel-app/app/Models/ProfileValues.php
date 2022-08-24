@@ -8,6 +8,10 @@ class ProfileValues extends Model
     // Table name.
     public $table = 'profile_values';
 
+    // Primary key.
+    protected $primaryKey = ['user_id', 'profile_id'];
+
+    // Timestamps.
     public $timestamps = false;
 
     /**

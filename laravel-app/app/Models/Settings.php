@@ -6,6 +6,10 @@ class Settings extends Model
     // Table name.
     public $table = 'settings';
 
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
     public $timestamps = false;
 
     // Attribute default values.

@@ -7,15 +7,19 @@ class Articles extends Model
 {
     use SoftDeletes;
 
-    // Primary key.
-    protected $primaryKey = 'id';
-
     // Table name.
     public $table = 'articles';
 
-    // Model constants.
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
+    public $timestamps = true;
+
+    // Model constant, article types.
     const TYPE_MEMBER_ARTICLE = 1;
 
+    // Model constant, article acquisition limits.
     const USER_ARTICLES_ON_PAGE = 8;
     const HEADLINE_LIMIT = 5;
 

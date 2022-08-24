@@ -9,11 +9,18 @@ class Images extends Model
     // Table name.
     public $table = 'images';
 
-    // Model constants.
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
+    public $timestamps = true;
+
+    // Model constants, image types.
     const TYPE_PROFILE_IMAGE = 1;
     const TYPE_ARTICLE_IMAGE = 2;
     const TYPE_PICTURE_IMAGE = 3;
 
+    // Model constants, mine types.
     const MIME_TYPE_PNG = 'image/png';
     const MIME_TYPE_JPG = 'image/jpeg';
     const MIME_TYPE_GIF = 'image/gif';

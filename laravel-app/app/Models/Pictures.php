@@ -10,5 +10,12 @@ class Pictures extends Model
     // Table name.
     public $table = 'pictures';
 
+    // Primary key.
+    protected $primaryKey = 'id';
+
+    // Timestamps.
+    public $timestamps = true;
+
+    // Model constant, page limit.
     const PAGENATE = 12;
 }
