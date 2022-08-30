@@ -82,6 +82,9 @@ class ArticlesController extends Controller
         
         $articlesUser = $this->usersService->getUsersById($request->id);
 
+        $test = $this->articlesService->getArchiveMonths($request->id);
+        dump($test->toArray());
+
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
 
         $articleIds = array_column($articles->toArray()['data'], 'id');

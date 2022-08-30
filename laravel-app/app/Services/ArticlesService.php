@@ -206,4 +206,16 @@ class ArticlesService extends Service
 
         return $articles;
     }
+
+    public function getArchiveMonths(int $userId)
+    {
+        return \DB::table(function ($query) use ($userId) {
+            $query->from('articles')
+                ->selectRaw('date_format(created_at, \'%Y/%m\') as month')
+                ->where('user_id', $userId);
+        })->selectRaw('month, count(month) as count')
+        ->groupBy('month')
+        ->orderBy('month', 'desc')
+        ->get();
+    }
 }
