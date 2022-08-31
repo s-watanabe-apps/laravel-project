@@ -7,12 +7,10 @@
             <td class="view-box">
                 {{Form::select(
                     'archives',
-                    [
-                        '#1' => '月を選択',
-                        '#2' => '2022/01 (1)',
-                        '#3' => '2022/02 (2)',
-                        '#4' => '2022/03 (3)',
-                    ],
+                    array_merge([
+                        '#' => '月を選択',
+                        ], $archiveMonths[0] ?? []
+                    ),
                     old('archives') ?? 0,
                     [
                         'class' => 'w-100',

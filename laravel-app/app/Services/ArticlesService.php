@@ -118,7 +118,7 @@ class ArticlesService extends Service
     {
         $articles = new Articles();
 
-        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, $userId, $userId == user()->id ? 1 : 0);
+        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
 
         $cache = $this->remember($key, function() use($userId, $limit) {
             $builder = $this->base()->where('articles.user_id', $userId);
@@ -150,7 +150,7 @@ class ArticlesService extends Service
     {
         $articles = new Articles();
 
-        $key = sprintf(parent::CACHE_KEY_FAVORITE_ARTICLES, $userId);
+        $key = sprintf(parent::CACHE_KEY_FAVORITE_ARTICLES_BY_USER_ID, $userId);
 
         $cache = $this->remember($key, function() use($userId, $limit) {
             $ids = (new ArticleCommentsService())->getFavoriteArticleIds($userId, $limit);
@@ -207,15 +207,35 @@ class ArticlesService extends Service
         return $articles;
     }
 
+    /**
+     * Get archive months by user id.
+     * 
+     * @param int $userId
+     * @return array
+     */
     public function getArchiveMonths(int $userId)
     {
-        return \DB::table(function ($query) use ($userId) {
-            $query->from('articles')
-                ->selectRaw('date_format(created_at, \'%Y/%m\') as month')
-                ->where('user_id', $userId);
-        })->selectRaw('month, count(month) as count')
-        ->groupBy('month')
-        ->orderBy('month', 'desc')
-        ->get();
+        $key = sprintf(parent::CACHE_KEY_ARTICLE_MONTHS_BY_USER_ID, $userId);
+
+        $cache = $this->remember($key, function() use($userId) {
+            $data = \DB::table(function ($query) use ($userId) {
+                $query->from('articles')
+                    ->selectRaw('date_format(created_at, \'%Y/%m\') as month')
+                    ->where('user_id', $userId);
+            })->selectRaw('month, count(month) as count')
+            ->groupBy('month')
+            ->orderBy('month', 'desc')
+            ->get();
+
+            return json_encode($data);
+        });
+
+        $data = array_map(function($value) {
+            return [
+                sprintf('/articles/user?month=%s', $value->month) => sprintf('%s (%d)', $value->month, $value->count),
+            ];
+        }, $cache);
+
+        return $data;
     }
 }

@@ -30,7 +30,7 @@ class ArticleLabelsService extends Service
      */
     public function getByArticleId(int $articleId)
     {
-        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS, $articleId);
+        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS_BY_ARTICLE_ID, $articleId);
 
         $cache = $this->remember($key, function() use($articleId) {
             $data = $this->base()
@@ -53,7 +53,7 @@ class ArticleLabelsService extends Service
      */
     public function getByUserId(int $userId)
     {
-        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS_USER, $userId);
+        $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS_BY_USER_ID, $userId);
 
         $cache = $this->remember($key, function() use($userId) {
             $temp = ArticleLabels::query()->select([

@@ -82,8 +82,7 @@ class ArticlesController extends Controller
         
         $articlesUser = $this->usersService->getUsersById($request->id);
 
-        $test = $this->articlesService->getArchiveMonths($request->id);
-        dump($test->toArray());
+        $archiveMonths = $this->articlesService->getArchiveMonths($request->id);
 
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
 
@@ -97,7 +96,7 @@ class ArticlesController extends Controller
         $userLabels = $this->articleLabelsService->getByUserId($request->id);
 
         return view('articles.user', compact(
-            'searchLabels', 'articles', 'articlesUser', 'commentCount', 'latestArticles', 'favoriteArticles', 'userLabels'));
+            'searchLabels', 'articles', 'articlesUser', 'archiveMonths', 'commentCount', 'latestArticles', 'favoriteArticles', 'userLabels'));
     }
 
     /**
@@ -110,6 +109,8 @@ class ArticlesController extends Controller
     {
         $articles = $this->articlesService->getById($request->id);
 
+        $archiveMonths = $this->articlesService->getArchiveMonths($articles->user_id);
+
         $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
         $latestArticles = $this->articlesService->getLatestArticles($articles->user_id);
@@ -120,7 +121,7 @@ class ArticlesController extends Controller
 
         $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
 
-        return view('articles.view', compact('articles', 'articleComments', 'latestArticles', 'favoriteArticles', 'labels', 'userLabels'));
+        return view('articles.view', compact('articles', 'archiveMonths', 'articleComments', 'latestArticles', 'favoriteArticles', 'labels', 'userLabels'));
     }
 
     /**

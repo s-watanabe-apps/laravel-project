@@ -119,7 +119,7 @@ class UsersService extends Service
             return $value->toDateString();
         }, $birthdays);
 
-        $key = sprintf(parent::CACHE_KEY_USERS_BIRTHDAY, $dates[0], $dates[count($dates) - 1]);
+        $key = sprintf(parent::CACHE_KEY_USERS_BY_BIRTHDAY_RANGE, $dates[0], $dates[count($dates) - 1]);
 
         $cache = $this->remember($key, function() use($birthdays) {
             $builder = $this->base();
