@@ -33,16 +33,12 @@
 <style type="text/css">
 <!--
 body#page-top {
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 992px;
-        border-left: 1px solid;
-        border-right: 1px solid;
-        border-color: #ededed;
-}
-
-th.bg-th {
-    background-color: #f0f8ff;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 992px;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-color: #ededed;
 }
 
 td.view-box {
@@ -68,12 +64,9 @@ td.view-box {
     transform: translateY(-50%);
 }
 
-p {
-    line-height: 140%;
-}
-
 .card-body > p {
-    line-height: 125%;
+    line-height: 130%;
+    margin-bottom: 10px;
 }
 
 pre > code {

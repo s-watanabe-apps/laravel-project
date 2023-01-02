@@ -39,7 +39,7 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        dump(auth()->check());
+        //dump(auth()->check());
         //var_dump(\App\Services\Files::getRegex());
 
         //echo "<pre>";
