@@ -1,8 +1,6 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-
 class ProfileValues extends Model
 {
     // Table name.
@@ -11,6 +9,10 @@ class ProfileValues extends Model
     // Primary key.
     protected $primaryKey = ['user_id', 'profile_id'];
 
+    protected $fillable = ['user_id', 'profile_id'];
+    
+    public $incrementing = false;
+    
     // Timestamps.
     public $timestamps = false;
 

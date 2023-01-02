@@ -35,6 +35,7 @@ class ProfileValuesTableSeeder extends Seeder
                 'value' => '自己紹介２',
             ],
         ];
+
         foreach($profileValues as $profileValue) {
             ProfileValues::query()->create($profileValue);
         }

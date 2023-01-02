@@ -84,6 +84,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::post('users/confirm', 'Managements\UsersController@confirm');
             Route::post('users/register', 'Managements\UsersController@register');
 
+            // Groups
+            Route::get('groups', 'Managements\GroupsController@index')->name('managementsGroups');
+
             // Navigation Menus
             Route::get('navigations', 'Managements\NavigationMenusController@index')->name('managementsNavigations');
             Route::post('navigations/register', 'Managements\NavigationMenusController@register');
