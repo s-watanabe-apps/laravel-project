@@ -1,8 +1,6 @@
 <?php
 namespace App\Services;
 
-use App\Http\Exceptions\NotFoundException;
-use App\Http\Exceptions\ForbiddenException;
 use App\Models\Groups;
 use Illuminate\Support\Facades\Cache;
 
@@ -19,26 +17,22 @@ class GroupsService extends Service
             ->select([
                 'groups.id',
                 'groups.name',
-                'articles.created_at',
-                'articles.updated_at',
-            ]);
+                'groups.description',
+                'groups.order',
+                'groups.created_at',
+                'groups.updated_at',
+            ])->orderBy('order');
     }
 
     /**
-     * Get articles by id.
+     * Get all groups.
      * 
      * @param int $id
      * @param int $userId
-     * @return App\Models\Articles
+     * @return array<App\Models\Groups>
      */
-    public function getById(int $id)
+    public function all()
     {
-        $articles = $this->base()
-            ->where('groups.id', $id)
-            ->first();
-
-        throw_if(!$articles, NotFoundException::class);
-
-        return $articles;
+        return $this->base()->get();
     }
 }

@@ -18,18 +18,21 @@ class GroupsTableSeeder extends Seeder
         $groups = [
             [
                 'name' => 'グループ１',
+                'description' => null,
                 'order' => 1,
                 'created_at' => carbon(),
                 'updated_at' => carbon(),
             ],
             [
                 'name' => 'グループ２',
+                'description' => null,
                 'order' => 2,
                 'created_at' => carbon(),
                 'updated_at' => carbon(),
             ],
             [
                 'name' => 'グループ３',
+                'description' => null,
                 'order' => 3,
                 'created_at' => carbon(),
                 'updated_at' => carbon(),

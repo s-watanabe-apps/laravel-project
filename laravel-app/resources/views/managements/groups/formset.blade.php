@@ -5,7 +5,7 @@
                 <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
             </div>
             <div class="col-md-10 col-9 pt-1 pb-2">
-                {{Form::input('text', 'names[]', $navigationMenu->name ?? '', [
+                {{Form::input('text', 'names[]', $group->name ?? '', [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2'
                 ])}}
@@ -13,11 +13,11 @@
         </div>
 
         <div class="row col-md-5 col-12">
-            <div class="col-md-2 col-3 pt-2 text-right">
-                <span class="h6 text-nowrap">リンク</span>
+            <div class="col-md-3 col-3 pt-2 text-right">
+                <span class="h6 text-nowrap">説明(任意)</span>
             </div>
-            <div class="col-md-10 col-9 pt-1 pb-2">
-                {{Form::input('text', 'links[]', $navigationMenu->link ?? '', [
+            <div class="col-md-9 col-9 pt-1 pb-2">
+                {{Form::input('text', 'descriptions[]', $group->description ?? '', [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2'
                 ])}}
@@ -29,7 +29,7 @@
                 <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
             </div>
             <div class="col-md-6 col-9 pt-1 pb-2">
-                {{Form::input('number', 'orders[]', $navigationMenu->order ?? '', [
+                {{Form::input('number', 'orders[]', $group->order ?? '', [
                     'style' => 'width: 100%;',
                     'class' => 'ml-2',
                 ])}}
