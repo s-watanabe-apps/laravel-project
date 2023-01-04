@@ -1,10 +1,10 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.mark')
             </th>
-            <td class="bg-light">
+            <td>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     @foreach ($informationMarks as $informationMark)
                     <label class="btn btn-light active">
@@ -23,10 +23,10 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.title')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {{Form::text(
                     'title',
                     $informations->title ?? old('title'),
@@ -36,19 +36,19 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.body')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 <textarea class="form-control" name="body" id="summernote">{{$informations->body ?? old('body')}}</textarea>
                 <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.start_time')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {{Form::text(
                     'start_time',
                     $informations->start_time ?? (old('start_time') ?? carbon()->format(\DateFormat::getDateTimeFullFormat())),
@@ -58,10 +58,10 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.end_time')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {{Form::text(
                     'end_time',
                     $informations->end_time ?? (old('end_time') ?? ''),
@@ -71,10 +71,10 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.status')
             </th>
-            <td class="bg-light">
+            <td>
                 <input type="checkbox"
                     @if (!isset($informations) || $informations->status == \Status::ENABLED)
                         checked

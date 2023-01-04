@@ -1,12 +1,12 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.title')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 {{Form::text(
                     'title',
                     $freePages->title ?? old('title'),
@@ -16,12 +16,12 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.free_page_code')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 {{Form::text(
                     'code',
                     $freePages->code ?? ($code ?? old('code')),
@@ -31,12 +31,12 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.body')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 <textarea class="form-control" name="body" id="summernote" id="summernote">{!! $freePages->body ?? old('body') !!}</textarea>
                 <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
             </td>

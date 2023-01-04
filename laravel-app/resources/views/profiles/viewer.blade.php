@@ -35,46 +35,46 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap w-25">
+                        <th class="w-25">
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$profileUser->email}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.name')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$profileUser->name}}
                         </td>
                     </tr>
                     @if(__('strings.name_kana') != 'strings.name_kana')
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.name_kana')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$profileUser->name_kana}}
                         </td>
                     </tr>
                     @endif
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.birth_date')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{carbon($profileUser->birthdate)->format(\DateFormat::getDateFormat())}}
                         </td>
                     </tr>
 
                     @foreach($userProfiles as $userProfile)
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             {{$userProfile->name}}
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$userProfile->value}}
                         </td>
                     </tr>
@@ -84,10 +84,10 @@
         </div>
 
         <div class="col-lg-4 mb-4">
-            <table class="table table-bordered">
+            <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th colspan="2" class="bg-th">
+                        <th colspan="2">
                             <h2 class="h5 mb-0 text-gray-800">
                                 <i class="fas fa-blog"></i>
                                 <small>@lang('strings.latest_articles')

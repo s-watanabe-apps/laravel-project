@@ -43,18 +43,18 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap w-25">
+                        <th class="w-25">
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light text-dark view-box">
+                        <td>
                             {{$profileUser->email}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.name')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{Form::text(
                                 'name',
                                 old('name') ?? $profileUser->name,
@@ -65,10 +65,10 @@
                     </tr>
                     @if(__('strings.name_kana') != 'strings.name_kana')
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.name_kana')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{Form::text(
                                 'name_kana',
                                 old('name_kana') ?? $profileUser->name_kana,
@@ -79,10 +79,10 @@
                     </tr>
                     @endif
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             @lang('strings.birth_date')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{Form::text(
                                 'birth_date',
                                 old('birth_date') ?? carbon($profileUser->birthdate)->format(\DateFormat::getDateFormat()),
@@ -94,10 +94,10 @@
 
                     @foreach($userProfiles as $userProfile)
                     <tr>
-                        <th class="bg-th text-secondary text-nowrap">
+                        <th>
                             {{$userProfile->name}}
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             @if($userProfile->type == App\Libs\ProfileInputType::FILLIN)
                                 {{Form::text('dynamic_values[$userProfile->id]', $userProfile->value, [
                                     'class' => 'form-control',

@@ -1,14 +1,14 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="text-secondary text-nowrap bg-th">@lang('strings.title')</th>
+            <th>@lang('strings.title')</th>
             <td>
                 <input type="text" name="title" class="form-control" id="title" placeholder="" value="{{$articles->title ?? ''}}">
                 <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
             </td>
         </tr>
         <tr>
-            <th class="text-secondary text-nowrap bg-th">@lang('strings.article_body')</th>
+            <th>@lang('strings.article_body')</th>
             <td>
                 <textarea class="form-control" name="body" id="summernote">{{$articles->body ?? ''}}</textarea>
                 <div class="text-danger">{{$errors->first('body') ?? ''}}</div>

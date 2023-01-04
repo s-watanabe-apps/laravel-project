@@ -26,34 +26,34 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap" style="width: 20%;">
+                        <th class="w-25">
                             @lang('strings.subject')
                         </th>
-                        <td class="bg-light text-dark" style="width: 80%;">
+                        <td>
                             {{$message->subject}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th>
                             @lang('strings.body')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             <pre class="mb-0">{{$message->body}}</pre>
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th>
                             @lang('strings.message_from')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$message->name}}
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap">
+                        <th>
                             @lang('strings.received_time')
                         </th>
-                        <td class="bg-light text-dark">
+                        <td>
                             {{$message->created_at->format(\DateFormat::getDateTimeFormat())}}
                         </td>
                     </tr>
@@ -72,16 +72,16 @@
             <table class="table table-bordered">
                 <tbody>
                     <tr>
-                        <td class="bg-light text-dark" colspan="2">
+                        <td colspan="2">
                             <i class="fas fa-fw fa-mail-bulk"></i> {{sprintf(__('strings.message_from_user'), $message->name)}}
                         </td>
                     </tr>
                     @foreach ($fromUserMessages as $fromUserMessage)
                     <tr>
-                        <td class="bg-light text-dark" style="width: 20%;">
+                        <td style="width: 20%;">
                             {{$fromUserMessage->created_at->format(\DateFormat::getDateFormat())}}
                         </td>
-                        <td class="bg-light text-dark">
+                        <td>
                             <a href="/messages/{{$fromUserMessage->message_id}}">{{$fromUserMessage->subject}}</a>
                         </td>
                     </tr>

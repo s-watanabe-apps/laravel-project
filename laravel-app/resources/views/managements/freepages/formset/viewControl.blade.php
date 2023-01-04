@@ -1,32 +1,32 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.title')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 {{$freePages->title}}
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.free_page_code')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 {{$freePages->code}}
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.body')
             </th>
         </tr>
         <tr>
-            <td class="bg-light">
+            <td>
                 {!! $freePages->body ?? old('body') !!}
             </td>
         </tr>

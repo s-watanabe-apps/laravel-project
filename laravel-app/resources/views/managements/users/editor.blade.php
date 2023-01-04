@@ -26,10 +26,10 @@
             <table class="table table-bordered responsive-table">
                 <tbody>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th>
                             @lang('strings.email')
                         </th>
-                        <td class="bg-light">
+                        <td>
                             {{Form::text(
                                 'email',
                                 old('email'),
@@ -39,10 +39,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="bg-gradient-light text-secondary text-nowrap w-25">
+                        <th>
                             @lang('strings.name')
                         </th>
-                        <td class="bg-light">
+                        <td>
                             {{Form::text(
                                 'name',
                                 old('name'),

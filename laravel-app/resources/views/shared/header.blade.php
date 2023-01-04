@@ -41,8 +41,14 @@ body#page-top {
     border-color: #ededed;
 }
 
-td.view-box {
-    width: 90%;
+.responsive-table > tbody > tr > th {
+    white-space: nowrap;
+    font-weight: bold;
+    background-color: #eeeeee;
+}
+
+.responsive-table > tbody > tr > td > p {
+    line-height: 150%;
 }
 
 .nav-hover:hover {

@@ -1,10 +1,10 @@
 <table class="table table-bordered responsive-table">
     <tbody>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.title')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 <i class="fas {{$informationMark}} text-primary-50"></i>
                 {{$informations->title}}
                 {{Form::hidden('mark_id', $informations->mark_id)}}
@@ -12,37 +12,37 @@
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.body')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {!!$informations->body!!}
                 {{Form::hidden('body', $informations->body)}}
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.start_time')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {{$informations->start_time}}
                 {{Form::hidden('start_time', $informations->start_time)}}
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.end_time')
             </th>
-            <td class="bg-light text-dark">
+            <td>
                 {{$informations->end_time}}
                 {{Form::hidden('end_time', $informations->end_time)}}
             </td>
         </tr>
         <tr>
-            <th class="bg-th text-secondary text-nowrap w-25">
+            <th>
                 @lang('strings.status')
             </th>
-            <td class="bg-light">
+            <td>
                 <input type="checkbox"
                     @if ($informations->status == \Status::ENABLED)
                         checked
