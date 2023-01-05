@@ -26,6 +26,8 @@
             ])}}
             @csrf
 
+            {{Form::hidden('id', $informations->id)}}
+
             @include('managements.informations.formset.editControl', compact('informations', 'informationMarks'))
  
             <a href="javascript:informations.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">

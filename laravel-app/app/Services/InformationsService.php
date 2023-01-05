@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 
+use App\Http\Exceptions\NotFoundException;
+use App\Http\Exceptions\ForbiddenException;
 use App\Models\Informations;
 use App\Models\InformationMarks;
 use App\Requests\ManagementsInformationsRequest;
@@ -66,21 +68,39 @@ class InformationsService extends Service
 
 
     /**
-     * Add as an array.
+     * Update or create record.
      * 
      * @var App\Requests\ManagementsInformationsRequest
      * @return App\Models\Informations
      */
-    //public function save(ManagementsInformationsRequest $request)
     public function save($request)
     {
-        $informations = new Informations();
+        if (isset($request->id)) {
+            // Update
+            $informations = $this->get($request->id);
+            throw_if(!$informations, NotFoundException::class);
 
-        $informations->fill($request->validated())->save();
+            foreach ($request->validated() as $key => $value) {
+                $informations->$key = $value;
+            }
+        } else {
+            // Insert
+            $informations = new Informations();
+            $informations->fill($request->validated())->save();
+        }
 
+        $informations->status = $request->status ?? \Status::DISABLED;
+
+        $informations->save();
         return $informations;
     }
 
+    /**
+     * Get information mark.
+     * 
+     * @param int $id
+     * @return int
+     */
     public function getInformationMark($id)
     {
         $result = InformationMarks::query(['mark'])->where('id', $id)->first();

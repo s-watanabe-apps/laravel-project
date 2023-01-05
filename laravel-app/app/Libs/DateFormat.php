@@ -25,7 +25,7 @@ class DateFormat
     public static function getDateTimeFormat()
     {
         if (strcmp(\App::getLocale(), 'ja') == 0) {
-            return 'Y/n/j h:i';
+            return 'Y/n/j a h:i';
         } else {
             return 'n/j/Y g:i a';
         }
@@ -39,7 +39,7 @@ class DateFormat
     public static function getDateTimeFullFormat()
     {
         if (strcmp(\App::getLocale(), 'ja') == 0) {
-            return 'Y/m/d h:i';
+            return 'Y/m/d H:i';
         } else {
             return 'n/j/Y g:i a';
         }

@@ -79,7 +79,7 @@ class InformationsController extends ManagementsController
     public function confirm(ManagementsInformationsRequest $request)
     {
         $informations = (new Informations())->bind($request->validated());
-dump($request->validated());
+
         $informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
 
         $method = $request->method();

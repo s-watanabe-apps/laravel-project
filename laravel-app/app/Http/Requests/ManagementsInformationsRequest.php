@@ -23,6 +23,7 @@ class ManagementsInformationsRequest extends AppFormRequest
     public function rules()
     {
         return [
+            'id' => 'integer|min:1',
             'title' => 'required|max:255',
             'body' => 'required',
             'start_time' => 'required|date_format:Y/m/d H:i',
@@ -53,6 +54,7 @@ class ManagementsInformationsRequest extends AppFormRequest
     public function attributes()
     {
         return [
+            'id' => '予期せぬ入力値が送信されました。初めからやり直してください。',
             'title' => __('strings.title'),
             'body' => __('strings.body'),
             'start_time' => __('strings.start_time'),

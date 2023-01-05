@@ -51,7 +51,7 @@
             <td>
                 {{Form::text(
                     'start_time',
-                    $informations->start_time ?? (old('start_time') ?? carbon()->format(\DateFormat::getDateTimeFullFormat())),
+                    carbon($informations->start_time)->format(\DateFormat::getDateTimeFullFormat()) ?? (old('start_time') ?? carbon()->format(\DateFormat::getDateTimeFullFormat())),
                     ['id' => 'start_time', 'class' => 'form-control',]
                 )}}
                 <div class="text-danger">{{$errors->first('start_time') ?? ''}}</div>
@@ -64,7 +64,7 @@
             <td>
                 {{Form::text(
                     'end_time',
-                    $informations->end_time ?? (old('end_time') ?? ''),
+                    !old('end_time') ?? !$informations->end_time ? '' : carbon($informations->end_time)->format(\DateFormat::getDateTimeFullFormat()),
                     ['id' => 'end_time', 'class' => 'form-control',]
                 )}}
                 <div class="text-danger">{{$errors->first('end_time') ?? ''}}</div>
