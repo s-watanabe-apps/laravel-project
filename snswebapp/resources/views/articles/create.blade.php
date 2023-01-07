@@ -24,7 +24,6 @@
 
             @include('articles.formset.editControl')
 
-            {{Form::hidden('id', 0)}}
             {{Form::close()}}
         </div>
     </div>

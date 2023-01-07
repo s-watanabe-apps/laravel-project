@@ -25,7 +25,10 @@
 
             @include('articles.formset.viewControl', compact('articles'))
 
-            {{Form::hidden('id', $articles->id ?? '')}}
+            @if (isset($articles->id))
+                {{Form::hidden('id', $articles->id)}}
+            @endif
+
             {{Form::hidden('title', $articles->title)}}
             {{Form::hidden('body', $articles->body)}}
             <div class="col-auto mb-5 text-center">

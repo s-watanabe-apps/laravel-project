@@ -34,6 +34,10 @@ class ArticlesService extends Service
             });
     }
 
+    public function get(int $id) {
+        return $this->base()->where('articles.id', $id)->first();
+    }
+
     /**
      * Get articles by id.
      * 
@@ -43,9 +47,7 @@ class ArticlesService extends Service
      */
     public function getById(int $id)
     {
-        $articles = $this->base()
-            ->where('articles.id', $id)
-            ->first();
+        $articles = $this->base()->where('articles.id', $id)->first();
 
         throw_if(!$articles, NotFoundException::class);
 
@@ -168,42 +170,33 @@ class ArticlesService extends Service
     }
 
     /**
-     * Register the entered article.
+     * Register or Update the entered article.
      * 
      * @param App\Http\Requests\ArticlesRequest $request
      * @return App\Models\Articles
      */
-    public function saveMemberArticles(ArticlesRequest $request)
-    {
-        $articles = new Articles();
+    public function save(ArticlesRequest $request) {
+        if (isset($request->id)) {
+            // Update
+            $articles = $this->getById($request->id, user()->id);
+            throw_if($articles->user_id != user()->id, ForbiddenException::class);
 
-        $articles->fill([
-            'title' => $request->title,
-            'body' => $request->body,
-            'user_id' => user()->id,
-            'type' => Articles::TYPE_MEMBER_ARTICLE,
-            'status' => \Status::ENABLED,
-        ])->save();
+            foreach ($request->validated() as $key => $value) {
+                $articles->$key = $value;
+            }
+        } else {
+            // Insert
+            $articles = new Articles();
+            $values = $request->validated();
 
-        return $articles;
-    }
+            $values['user_id'] = user()->id;
+            $values['type'] = Articles::TYPE_MEMBER_ARTICLE;
+            $values['status'] = \Status::ENABLED;
 
-    /**
-     * Update the entered article.
-     * 
-     * @param App\Http\Requests\ArticlesRequest $request
-     * @return App\Models\Articles
-     */
-    public function editMemberArticles(ArticlesRequest $request)
-    {
-        $articles = $this->getById($request->id, user()->id);
+            $articles->fill($values);
+        }
 
-        throw_if($articles->user_id != user()->id, ForbiddenException::class);
-
-        $articles->title = $request->title;
-        $articles->body = $request->body;
         $articles->save();
-
         return $articles;
     }
 

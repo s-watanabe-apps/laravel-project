@@ -174,13 +174,7 @@ class ArticlesController extends Controller
     public function register(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            if ($request->isPost()) {
-                $this->articlesService->saveMemberArticles($request);
-            } else if ($request->isPut()) {
-                $this->articlesService->editMemberArticles($request);
-            } else {
-                throw new NotFoundException();
-            }
+            $this->articlesService->save($request);
         });
 
         return redirect()->route('articles.user', ['id' => user()->id]);
