@@ -42,7 +42,7 @@ class FreePagesService extends Service
      */
     public function get($id)
     {
-        return $this->base()->where(['free_pages.id' => $id])->get()->first();
+        return $this->base()->where(['free_pages.id' => $id])->first();
     }
 
     /**
@@ -72,18 +72,6 @@ class FreePagesService extends Service
     }
 
     /**
-     * Update as an array.
-     * 
-     * @param int $id
-     * @param App\Requests\ManagementsFreepagesRequest $request
-     * @return App\Models\FreePages
-     */
-    private function edit(int $id, ManagementsFreepagesRequest $request)
-    {
-        return FreePages::where('id', $id)->update($request->validated());
-    }
-
-    /**
      * Get free page by code.
      * 
      * @param string $code
@@ -91,7 +79,7 @@ class FreePagesService extends Service
      */
     public function getByCode(string $code)
     {
-        return FreePages::query()->where(['code' => $code,])->first();
+        return $this->base()->where(['code' => $code,])->first();
     }
 
 }

@@ -29,10 +29,10 @@ class PageController extends Controller
      */
     public function get(Request $request)
     {
-        $values = $this->freePagesService->getByCode($request->code);
+        $freePages = $this->freePagesService->getByCode($request->code);
 
         return view('page.viewer', compact(
-            'values'
+            'freePages'
         ));
     }
 }
