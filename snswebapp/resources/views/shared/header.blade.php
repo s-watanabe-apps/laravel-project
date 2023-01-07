@@ -41,6 +41,10 @@ body#page-top {
     border-color: #ededed;
 }
 
+p {
+    display: block;
+}
+
 .responsive-table > tbody > tr > th {
     white-space: nowrap;
     font-weight: bold;

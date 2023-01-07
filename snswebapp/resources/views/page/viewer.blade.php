@@ -14,7 +14,12 @@
 
     <!-- Content Row -->
     <div class="row mx-1">
+        <div class="col-md-10">
         {!!$freePages->body!!}
+        </div>
+        <div class="col-md-2">
+        AD
+        </div>
     </div>
 
 </div>
