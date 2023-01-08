@@ -58,6 +58,30 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Get side menu informations.
+     * 
+     * @param int $userId
+     * @return array
+     */
+    private function getSidemenus(int $userId)
+    {
+        $archiveMonths = $this->articlesService->getArchiveMonths($userId);
+
+        $latestArticles = $this->articlesService->getLatestArticles($userId);
+
+        $favoriteArticles = $this->articlesService->getFavoriteArticles($userId);
+
+        $userLabels = $this->articleLabelsService->getByUserId($userId);
+
+        return compact(
+            'archiveMonths',
+            'latestArticles',
+            'favoriteArticles',
+            'userLabels'
+        );
+    }
+
+    /**
      * Get user articles.
      * 
      * @param Illuminate\Http\Request
@@ -82,21 +106,20 @@ class ArticlesController extends Controller
         
         $articlesUser = $this->usersService->getUsersById($request->id);
 
-        $archiveMonths = $this->articlesService->getArchiveMonths($request->id);
-
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
 
         $articleIds = array_column($articles->toArray()['data'], 'id');
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
 
-        $latestArticles = $this->articlesService->getLatestArticles($request->id);
-
-        $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
-
-        $userLabels = $this->articleLabelsService->getByUserId($request->id);
+        $sidemenus = $this->getSidemenus($request->id);
 
         return view('articles.user', compact(
-            'searchLabels', 'articles', 'articlesUser', 'archiveMonths', 'commentCount', 'latestArticles', 'favoriteArticles', 'userLabels'));
+            'searchLabels',
+            'articles',
+            'articlesUser',
+            'commentCount',
+            'sidemenus'
+        ));
     }
 
     /**
@@ -109,19 +132,18 @@ class ArticlesController extends Controller
     {
         $articles = $this->articlesService->getById($request->id);
 
-        $archiveMonths = $this->articlesService->getArchiveMonths($articles->user_id);
-
         $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
-
-        $latestArticles = $this->articlesService->getLatestArticles($articles->user_id);
-
-        $favoriteArticles = $this->articlesService->getFavoriteArticles($request->id);
 
         $labels = $this->articleLabelsService->getByArticleId($request->id);
 
-        $userLabels = $this->articleLabelsService->getByUserId($articles->user_id);
+        $sidemenus = $this->getSidemenus($articles->user_id);
 
-        return view('articles.view', compact('articles', 'archiveMonths', 'articleComments', 'latestArticles', 'favoriteArticles', 'labels', 'userLabels'));
+        return view('articles.view', compact(
+            'articles',
+            'articleComments',
+            'labels',
+            'sidemenus'
+        ));
     }
 
     /**

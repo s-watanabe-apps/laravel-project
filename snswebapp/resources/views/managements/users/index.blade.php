@@ -29,7 +29,6 @@
                         <th class="dt-center">@lang('strings.created_at')</th>
                         <th class="dt-center">@lang('strings.last_login')</th>
                         <th class="dt-center">@lang('strings.status')</th>
-                        <th class="dt-center"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,31 +44,16 @@
                             {{$value->group_name ?? __('strings.none')}}
                         </td>
                         <td class="dt-center">
-                            {{$value->created_at->format(\DateFormat::getDateTimeFormat())}}
+                            {{$value->created_at->format(\DateFormat::getDateTimeFullFormat())}}
                         </td>
                         <td class="dt-center">
-                            {{!$value->last_activity ? '' : carbon($value->last_activity)->format(\DateFormat::getDateTimeFormat())}}
+                            {{!$value->last_activity ? '' : carbon($value->last_activity)->format(\DateFormat::getDateTimeFullFormat())}}
                         </td>
                         <td class="dt-center">
-                            <input type="checkbox"
-                                @if ($value->status == \Status::ENABLED)
-                                    checked                                                
-                                @endif
-                                data-onstyle="success" data-offstyle="secondary"
-                                data-toggle="toggle"
-                                data-size="sm"
-                                data-on="@lang('strings.enable')"
-                                data-off="@lang('strings.disable')" />
-                        </td>
-                        <td class="dt-center text-nowrap">
-                            @if ($value->enable == 0)
-                            <a href="/managements/users/deleted/{{$value->id}}" class="py-0 btn btn-danger shadow-sm mb-2">
-                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.delete')
-                            </a><br>
+                            @if ($value->status == \Status::ENABLED)
+                            <span class="enable">@lang('strings.enable')</span>
                             @else
-                            <a href="/managements/users/disabled/{{$value->id}}" class="py-0 btn btn-secondary shadow-sm">
-                                <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.disable')
-                            </a>
+                            <span class="disable">@lang('strings.disable')</span>
                             @endif
                         </td>
                     </tr>

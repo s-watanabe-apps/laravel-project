@@ -9,7 +9,7 @@
                     'archives',
                     array_merge([
                         '#' => '月を選択',
-                        ], $archiveMonths[0] ?? []
+                        ], $sidemenus['archiveMonths'][0] ?? []
                     ),
                     old('archives') ?? 0,
                     [
@@ -27,7 +27,7 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th"><i class="fas fa-blog"></i> @lang('strings.latest_articles')</th>
         </tr>
-        @foreach($latestArticles as $value)
+        @foreach($sidemenus['latestArticles'] as $value)
         <tr>
             <td class="view-box">
                 <a href="/articles/{{$value->id}}">{{$value->title}}</a>
@@ -42,7 +42,7 @@
         <tr>
             <th class="text-secondary text-nowrap bg-th"><i class="fas fa-blog"></i> @lang('strings.popular_articles')</th>
         </tr>
-        @foreach($favoriteArticles as $value)
+        @foreach($sidemenus['favoriteArticles'] as $value)
         <tr>
             <td class="view-box">
                 <a href="/articles/{{$value->id}}">{{$value->title}}</a>
@@ -60,7 +60,7 @@
         <tr>
             <td class="view-box">
                 <nobr>
-                    @foreach($userLabels as $label)
+                    @foreach($sidemenus['userLabels'] as $label)
                     <a href="/articles/user/{{$articleUserId}}?label={{$label->id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
                     @endforeach
                 </nobr>

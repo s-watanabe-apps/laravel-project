@@ -43,7 +43,7 @@
 
         <div class="col-lg-4 mb-12">
             @include('articles.formset.sidemenu', array_merge(
-                compact('archiveMonths', 'latestArticles', 'favoriteArticles', 'userLabels')),
+                compact('sidemenus')),
                 ['articleUserId' => $articlesUser->id]
             )
         </div>

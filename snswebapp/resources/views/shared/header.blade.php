@@ -112,6 +112,28 @@ span.label {
     color: #555;
 }
 
+span.enable {
+    padding: 1px 8px 1px 8px;
+    margin: 3px;
+    background-color: #afa;
+    border-radius: 15px;
+    border: 1px solid #7a7;
+    line-height: 35px;
+    font-weight: bold;
+    color: #484;
+}
+
+span.disable {
+    padding: 1px 8px 1px 8px;
+    margin: 3px;
+    background-color: #faa;
+    border-radius: 15px;
+    border: 1px solid #a77;
+    line-height: 35px;
+    font-weight: bold;
+    color: #844;
+}
+
 @media only screen and (max-width:768px) {
     .carousel-caption {
         top: 30%;
