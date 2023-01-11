@@ -71,6 +71,8 @@ return [
     'link' => 'リンク',
     'read_article' => '記事を読む',
     'label' => 'ラベル',
+    'group_code' => 'グループコード',
+    'group_name' => 'グループ名',
 
     // Side menus
     'write_articles' => '記事を書く',

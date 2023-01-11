@@ -101,10 +101,10 @@ class ArticlesController extends Controller
 
         $searchLabels = null;
         if (!is_null($labelId)) {
-            $searchLabels = $this->labelsService->getById($labelId);
+            $searchLabels = $this->labelsService->get($labelId);
         }
         
-        $articlesUser = $this->usersService->getUsersById($request->id);
+        $articlesUser = $this->usersService->get($request->id);
 
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
 
@@ -130,7 +130,7 @@ class ArticlesController extends Controller
      */
     public function get(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id);
+        $articles = $this->articlesService->get($request->id);
 
         $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
 
@@ -165,7 +165,7 @@ class ArticlesController extends Controller
      */
     public function edit(Request $request)
     {
-        $articles = $this->articlesService->getById($request->id);
+        $articles = $this->articlesService->get($request->id);
 
         return view('articles.edit', compact('articles'));
     }

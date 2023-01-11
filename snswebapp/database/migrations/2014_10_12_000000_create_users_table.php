@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('name_kana')->nullable();
             $table->string('password')->nullable();
             $table->date('birthdate')->nullable();
-            $table->integer('group_id')->nullable();
+            $table->string('group_code', 10)->nullable();
             $table->string('image_file')->nullable();
             $table->string('api_token')->nullable();
             $table->integer('status')->default(\Status::ENABLED);

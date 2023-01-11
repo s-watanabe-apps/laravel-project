@@ -31,9 +31,10 @@ class UsersService extends Service
                 'users.remember_token',
                 'users.created_at',
                 'users.updated_at',
+                'users.group_code',
                 \DB::raw('groups.name as group_name'),
             ])
-            ->leftJoin('groups', 'users.group_id', '=', 'groups.id');
+            ->leftJoin('groups', 'users.group_code', '=', 'groups.code');
     }
 
     /**
@@ -41,7 +42,7 @@ class UsersService extends Service
      * 
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getUsers()
+    public function getEnabledUsers()
     {
         return $this->base()
             ->where('users.status', \Status::ENABLED)
@@ -53,7 +54,7 @@ class UsersService extends Service
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getAllUsers()
+    public function all()
     {
         $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
 
@@ -70,7 +71,7 @@ class UsersService extends Service
      * @var int id
      * @return App\Models\Users
      */
-    public function getUsersById($id) : Users
+    public function get($id) : Users
     {
         $key = sprintf(parent::CACHE_KEY_USERS_BY_ID, $id);
 
@@ -178,7 +179,7 @@ class UsersService extends Service
             return $users;
         } else {
             Users::where('id', $id)->update($values);
-            return $this->getUsersById($id);
+            return $this->get($id);
         }
     }
 }

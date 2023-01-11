@@ -72,6 +72,8 @@ return [
     'link' => 'Link',
     'read_article' => 'Read article',
     'label' => 'Labels',
+    'group_code' => 'Group code',
+    'group_name' => 'Group name',
 
     // Side menus
     'write_articles' => 'Write articles',

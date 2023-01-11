@@ -34,10 +34,6 @@ class ArticlesService extends Service
             });
     }
 
-    public function get(int $id) {
-        return $this->base()->where('articles.id', $id)->first();
-    }
-
     /**
      * Get articles by id.
      * 
@@ -45,15 +41,13 @@ class ArticlesService extends Service
      * @param int $userId
      * @return App\Models\Articles
      */
-    public function getById(int $id)
+    public function get(int $id)
     {
         $articles = $this->base()->where('articles.id', $id)->first();
 
         throw_if(!$articles, NotFoundException::class);
 
-        if ($articles->status != \Status::ENABLED) {
-            throw_if($articles->user_id != user()->id, ForbiddenException::class);
-        }
+        throw_if(!$this->checkAccessRight($articles), ForbiddenException::class);
 
         return $articles;
     }
@@ -70,9 +64,7 @@ class ArticlesService extends Service
             return [];
         }
 
-        $articles = $this->base()
-            ->whereIn('articles.id', $ids)
-            ->get();
+        $articles = $this->base()->whereIn('articles.id', $ids)->get();
 
         return $articles;
     }

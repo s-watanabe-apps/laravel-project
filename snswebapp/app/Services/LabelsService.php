@@ -26,7 +26,7 @@ class LabelsService extends Service
      * @param int $id
      * @return array
      */
-    public function getById(int $id)
+    public function get(int $id)
     {
         $data = $this->base()->where('labels.id', $id)->first();
 

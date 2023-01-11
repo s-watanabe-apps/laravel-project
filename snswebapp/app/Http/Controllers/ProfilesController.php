@@ -53,7 +53,7 @@ class ProfilesController extends Controller
      */
     public function index(Request $request)
     {
-        $profileUsers = $this->usersService->getUsers();
+        $profileUsers = $this->usersService->getEnabledUsers();
 
         return view('profiles.index', compact(
             'profileUsers'
@@ -72,7 +72,7 @@ class ProfilesController extends Controller
             return view('404');
         }
 
-        $profileUser = $this->usersService->getUsersById($request->id);
+        $profileUser = $this->usersService->get($request->id);
         if ($profileUser == null) {
             abort(404);
         }

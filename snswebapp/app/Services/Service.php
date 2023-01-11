@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Closure;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Roles;
 
 class Service
 {
@@ -47,5 +48,23 @@ class Service
     private function rememberForever(string $key, Closure $function)
     {
         return Cache::rememberForever($key, $function);
+    }
+
+    /**
+     * Check access rights to data.
+     * 
+     * @param stdClass $std
+     * @return boolean
+     */
+    protected function checkAccessRight($std) {
+        if (user()->role_id == Roles::ADMIN) {
+            return true;
+        }
+
+        if ($std->status != \Status::ENABLED) {
+            return $std->user_id == user()->id;
+        }
+
+        return true;
     }
 }

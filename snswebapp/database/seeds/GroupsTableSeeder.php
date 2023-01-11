@@ -17,6 +17,7 @@ class GroupsTableSeeder extends Seeder
 
         $groups = [
             [
+                'code' => 'G001',
                 'name' => 'グループ１',
                 'description' => null,
                 'order' => 1,
@@ -24,6 +25,7 @@ class GroupsTableSeeder extends Seeder
                 'updated_at' => carbon(),
             ],
             [
+                'code' => 'G002',
                 'name' => 'グループ２',
                 'description' => null,
                 'order' => 2,
@@ -31,6 +33,7 @@ class GroupsTableSeeder extends Seeder
                 'updated_at' => carbon(),
             ],
             [
+                'code' => 'G003',
                 'name' => 'グループ３',
                 'description' => null,
                 'order' => 3,

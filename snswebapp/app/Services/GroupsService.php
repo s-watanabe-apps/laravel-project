@@ -15,7 +15,7 @@ class GroupsService extends Service
     {
         return Groups::query()
             ->select([
-                'groups.id',
+                'groups.code',
                 'groups.name',
                 'groups.description',
                 'groups.order',

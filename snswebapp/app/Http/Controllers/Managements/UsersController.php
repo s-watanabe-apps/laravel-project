@@ -36,7 +36,7 @@ class UsersController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $users = $this->usersService->getAllUsers();
+        $users = $this->usersService->all();
 
         return view('managements.users.index', compact(
             'users'
