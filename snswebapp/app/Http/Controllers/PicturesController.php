@@ -3,31 +3,31 @@ namespace App\Http\Controllers;
 
 use App\Services\FavoritesService;
 use App\Services\PicturesService;
-use App\Services\PictureCommentsSetvice;
+use App\Services\PictureCommentsService;
 use Illuminate\Http\Request;
 
 class PicturesController extends Controller
 {
     // Instance variables.
     private $picturesService;
-    private $pictureCommentsServices;
+    private $pictureCommentsService;
     private $favoritesService;
 
     /**
      * Create a new controller instance.
      *
      * @param App\Services\PicturesService
-     * @param App\Services\PictureCommentsServices
+     * @param App\Services\PictureCommentsService
      * @param App\Services\FavoritesService
      * @return void
      */
     public function __construct(
         PicturesService $picturesService,
-        PictureCommentsServices $pictureCommentsServices,
+        PictureCommentsService $pictureCommentsService,
         FavoritesService $favoritesService
     ) {
         $this->picturesService = $picturesService;
-        $this->pictureCommentsServices = $pictureCommentsServices;
+        $this->pictureCommentsService = $pictureCommentsService;
         $this->favoritesService = $favoritesService;
     }
 
@@ -59,7 +59,7 @@ class PicturesController extends Controller
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 
-        $pictureComments = $this->pictureCommentsServices->getByPictureId($request->id);
+        $pictureComments = $this->pictureCommentsService->getByPictureId($request->id);
 
         return view('pictures.get', compact(
             'image',
