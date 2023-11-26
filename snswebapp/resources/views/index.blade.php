@@ -10,7 +10,7 @@
         @foreach ($informations as $information)
         <div class="card shadow mb-4">
             <!-- Card Header - Accordion -->
-            <a href="#collapseCard-information-{{$information->id}}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <a href="#collapseCard-information-{{$information->id}}" class="d-block card-header" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                 <h6 class="m-0 font-weight-bold text-primary">
                     <i class="fas {{$information->mark}} text-primary-50"></i>
                     {{$information->title}}
@@ -102,7 +102,7 @@
 
         <!-- Calendar -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <div class="card-header">
                 <h6 class="m-0 font-weight-bold text-primary">
                     <i class="fas fa-calendar-alt text-primary-50"></i>
                     @lang('strings.weekly_calendar')
@@ -135,36 +135,29 @@
             </div>
         </div>
 
-        <!-- Illustrations -->
+        <!-- AD -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">AD</h6>
             </div>
             <div class="card-body">
                 <div class="text-center">
                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
                         src="img/undraw_posting_photo.svg" alt="...">
                 </div>
-                <p>Add some quality, svg illustrations to your project courtesy of <a
-                        target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                    constantly updated collection of beautiful svg images that you can use
-                    completely free and without attribution!</p>
-                <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                    unDraw &rarr;</a>
             </div>
         </div>
 
-        <!-- Approach -->
+        <!-- AD -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">AD</h6>
             </div>
             <div class="card-body">
-                <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                    CSS bloat and poor page performance. Custom CSS classes are used to create
-                    custom components and custom utility classes.</p>
-                <p class="mb-0">Before working with this theme, you should become familiar with the
-                    Bootstrap framework, especially the utility classes.</p>
+                <div class="text-center">
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                        src="img/undraw_posting_photo.svg" alt="...">
+                </div>
             </div>
         </div>
 

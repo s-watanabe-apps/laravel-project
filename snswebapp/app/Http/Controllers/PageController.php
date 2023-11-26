@@ -31,7 +31,7 @@ class PageController extends Controller
     {
         $freePages = $this->freePagesService->getByCode($request->code);
 
-        return view('page.index', compact(
+        return view('page.viewer', compact(
             'freePages'
         ));
     }

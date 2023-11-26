@@ -18,9 +18,9 @@ class PictureCommentsService extends Service
                 'picture_comments.user_id',
                 \DB::raw('users.id as user_id'),
                 'picture_comments.comment',
-                'pictures.created_at',
-                'pictures.updated_at',
-                'pictures.deleted_at',
+                'picture_comments.created_at',
+                'picture_comments.updated_at',
+                'picture_comments.deleted_at',
             ])
             ->leftJoin('users', 'picture_comments.user_id', '=', 'users.id');
     }
@@ -29,7 +29,7 @@ class PictureCommentsService extends Service
     {
         return $this->base()
             ->where('picture_id', $pictureId)
-            ->orderBy('created_at')
+            ->orderBy('picture_comments.created_at')
             ->get();
     }
 }
