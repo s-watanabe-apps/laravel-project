@@ -33,12 +33,23 @@
 <style type="text/css">
 <!--
 body#page-top {
+    overflow-y:scroll !important;
+}
+
+div#wrapper {
+}
+
+div#content-wrapper {
     margin-right: auto;
     margin-left: auto;
     max-width: 992px;
     border-left: 1px solid;
     border-right: 1px solid;
     border-color: #ededed;
+}
+
+div#content {
+    min-height: 820px;
 }
 
 p {

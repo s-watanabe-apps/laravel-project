@@ -1,21 +1,15 @@
 @extends('layouts.app')
 @section('content')
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="row">
-                <nav aria-label="breadcrumb" class="col-md-12 h5">
-                        <ol class="breadcrumb">
-                                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-calendar-alt"></i>@lang('strings.monthry_calendar')</li>
-                        </ol>
-                </nav>
-        </div>
-
-        <div id='calendar'></div>
-
+<!-- Page Heading -->
+<div class="row">
+    <nav aria-label="breadcrumb" class="col-md-12 h5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-calendar-alt"></i>@lang('strings.monthry_calendar')</li>
+        </ol>
+    </nav>
 </div>
-<!-- /.container-fluid -->
+
+<div id='calendar'></div>
 
 <!-- Full Calendar -->
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />

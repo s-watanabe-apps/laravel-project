@@ -67,9 +67,9 @@ class ArticlesController extends Controller
     {
         $archiveMonths = $this->articlesService->getArchiveMonths($userId);
 
-        $latestArticles = $this->articlesService->getLatestArticles($userId);
+        $latestArticles = $this->articlesService->getLatestArticlesByUserId($userId);
 
-        $favoriteArticles = $this->articlesService->getFavoriteArticles($userId);
+        $favoriteArticles = $this->articlesService->getFavoriteArticlesByUserId($userId);
 
         $userLabels = $this->articleLabelsService->getByUserId($userId);
 

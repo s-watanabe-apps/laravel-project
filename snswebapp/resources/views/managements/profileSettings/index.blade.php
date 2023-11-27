@@ -1,60 +1,54 @@
 @extends('layouts.app')
 @section('content')
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <div id="formset" hidden>
-        @include('managements.profileSettings.formset', [
-            'types' => $types,
-            'profile' => null,
-        ])
-    </div>
-
-    @if ($errors->any())
-    <div class="text-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    {{Form::open(['name' => 'profileSettings', 'url' => '/managements/profile/settings/post', 'method' => 'post', 'files' => true])}}
-    @csrf
-
-    <!-- Page Heading -->
-    <div class="row">
-        <nav aria-label="breadcrumb" class="col-md-12 h5">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-user-edit"></i>@lang('strings.profile_settings')</li>
-            </ol>
-        </nav>
-    </div>
-
-    <!-- Button trigger modal -->
-    <div class="col-md-12 col-12 text-right">
-        <a href="#" data-toggle="modal" data-target="#exampleModal">@lang('strings.input_type_description_link')</a>
-    </div>
-
-    <div id="items">
-        @foreach ($profiles as $index => $profile)
-            @include('managements.profileSettings.formset')
-        @endforeach
-    </div>
-    <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
-
-    <div class="row">
-        <div class="col-12 mb-5 text-center">
-            <a href="javascript:profileSettings.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-                <i class="fas fa-check fa-sm"></i> @lang('strings.save')
-            </a>
-        </div>
-    </div>
-    {{Form::close()}}
-
+<div id="formset" hidden>
+    @include('managements.profileSettings.formset', [
+        'types' => $types,
+        'profile' => null,
+    ])
 </div>
-<!-- /.container-fluid -->
+
+@if ($errors->any())
+<div class="text-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+{{Form::open(['name' => 'profileSettings', 'url' => '/managements/profile/settings/post', 'method' => 'post', 'files' => true])}}
+@csrf
+
+<!-- Page Heading -->
+<div class="row">
+    <nav aria-label="breadcrumb" class="col-md-12 h5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-user-edit"></i>@lang('strings.profile_settings')</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Button trigger modal -->
+<div class="col-md-12 col-12 text-right">
+    <a href="#" data-toggle="modal" data-target="#exampleModal">@lang('strings.input_type_description_link')</a>
+</div>
+
+<div id="items">
+    @foreach ($profiles as $index => $profile)
+        @include('managements.profileSettings.formset')
+    @endforeach
+</div>
+<button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
+
+<div class="row">
+    <div class="col-12 mb-5 text-center">
+        <a href="javascript:profileSettings.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
+            <i class="fas fa-check fa-sm"></i> @lang('strings.save')
+        </a>
+    </div>
+</div>
+{{Form::close()}}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

@@ -1,52 +1,46 @@
 @extends('layouts.app')
 @section('content')
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <div id="formset" hidden>
-        @include('managements.groups.formset', [])
-    </div>
-
-    @if ($errors->any())
-    <div class="text-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    {{Form::open(['name' => 'form', 'url' => '/managements/groups/register', 'method' => 'post', 'files' => true])}}
-    @csrf
-
-    <!-- Page Heading -->
-    <div class="row">
-        <nav aria-label="breadcrumb" class="col-md-12 h5">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.navigation_management')</li>
-            </ol>
-        </nav>
-    </div>
-
-    <div id="items">
-        @foreach ($groups as $index => $group)
-            @include('managements.groups.formset', compact('group'))
-        @endforeach
-    </div>
-    <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
-
-    <div class="row">
-        <div class="col-12 mb-5 text-center">
-            <a href="javascript:form.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-                <i class="fas fa-check fa-sm"></i> @lang('strings.save')
-            </a>
-        </div>
-    </div>
-    {{Form::close()}}
-
+<div id="formset" hidden>
+    @include('managements.groups.formset', [])
 </div>
-<!-- /.container-fluid -->
+
+@if ($errors->any())
+<div class="text-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+{{Form::open(['name' => 'form', 'url' => '/managements/groups/register', 'method' => 'post', 'files' => true])}}
+@csrf
+
+<!-- Page Heading -->
+<div class="row">
+    <nav aria-label="breadcrumb" class="col-md-12 h5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.navigation_management')</li>
+        </ol>
+    </nav>
+</div>
+
+<div id="items">
+    @foreach ($groups as $index => $group)
+        @include('managements.groups.formset', compact('group'))
+    @endforeach
+</div>
+<button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
+
+<div class="row">
+    <div class="col-12 mb-5 text-center">
+        <a href="javascript:form.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
+            <i class="fas fa-check fa-sm"></i> @lang('strings.save')
+        </a>
+    </div>
+</div>
+{{Form::close()}}
 
 <!-- Toast -->
 @include('shared.toast')

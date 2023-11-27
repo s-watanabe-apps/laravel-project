@@ -28,6 +28,10 @@
         </div>
         @endforeach
 
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div class="h5 mb-0 text-gray-800">&nbsp;<i class="fas fa-blog"></i> @lang('strings.latest_articles')</div>
+        </div>
+
         <!-- Color System -->
         <div class="row">
             <div class="col-lg-6 mb-4">
@@ -166,11 +170,6 @@
 
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-</div>
 
 <!-- Content Row -->
 <div class="row">
@@ -287,8 +286,8 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="myAreaChart" width="570" height="320" style="display: block; width: 570px; height: 320px;" class="chartjs-render-monitor"></canvas>
                 </div>
             </div>
         </div>

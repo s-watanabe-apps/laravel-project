@@ -67,7 +67,9 @@ class InformationsController extends ManagementsController
     {
         $informationMarks = $this->informationMarksService->all();
 
-        return $this->postView('managements.informations.create', compact('informationMarks'));
+        $informations = new Informations();
+
+        return view('managements.informations.create', compact('informations', 'informationMarks'));
     }
 
     /**

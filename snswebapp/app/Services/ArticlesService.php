@@ -108,13 +108,15 @@ class ArticlesService extends Service
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array<App\Models\Articles>
      */
-    public function getLatestArticles(int $userId, int $limit = Articles::HEADLINE_LIMIT)
+    public function getLatestArticlesByUserId(int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
-        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
+        //$key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
+        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId);
 
         $cache = $this->remember($key, function() use($userId, $limit) {
+            dump("test");
             $builder = $this->base()->where('articles.user_id', $userId);
 
             if ($userId != user()->id) {
@@ -140,7 +142,7 @@ class ArticlesService extends Service
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array<App\Models\Articles>
      */
-    public function getFavoriteArticles(int $userId, $limit = Articles::HEADLINE_LIMIT)
+    public function getFavoriteArticlesByUserId(int $userId, $limit = Articles::HEADLINE_LIMIT)
     {
         $articles = new Articles();
 
