@@ -13,6 +13,7 @@ class Service
     const CACHE_KEY_USERS_BY_ID = 'users-%d';
     const CACHE_KEY_USERS_BY_EMAIL = 'users-%s';
     const CACHE_KEY_USERS_BY_BIRTHDAY_RANGE = 'users-birthday-range-%s-%s';
+    const CACHE_KEY_LATEST_ARTICLES = 'latest-articles';
     //const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d-%d';
     const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d';
     const CACHE_KEY_FAVORITE_ARTICLES_BY_USER_ID = 'favorite-articles-%d';

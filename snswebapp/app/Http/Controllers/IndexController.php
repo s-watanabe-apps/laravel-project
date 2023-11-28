@@ -5,6 +5,7 @@ use App\Mail\ContactMail;
 use App\Models\Settings;
 use App\Services\CalendarService;
 use App\Services\InformationsService;
+use App\Services\ArticlesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ class IndexController extends Controller
     // Instance variables.
     private $informationsService;
     private $calendarService;
+    private $articlesService;
 
     /**
      * Create a new controller instance.
@@ -25,10 +27,12 @@ class IndexController extends Controller
      */
     public function __construct(
         InformationsService $informationsService,
-        CalendarService $calendarService
+        CalendarService $calendarService,
+        ArticlesService $articlesService
     ) {
         $this->informationsService = $informationsService;
         $this->calendarService = $calendarService;
+        $this->articlesService = $articlesService;
     }
 
     /**
@@ -51,15 +55,16 @@ class IndexController extends Controller
 
         // Informations
         $informations = $this->informationsService->getEnabled();
-
+dump($informations);
         // Weekly calendar
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
         // Latest Articles
-        
+        $articles = $this->articlesService->getLatestArticles();
+        //dump($articles);
 
         return view('index', compact(
-            'informations', 'calendar'
+            'informations', 'calendar', 'articles'
         ));
     }
 }

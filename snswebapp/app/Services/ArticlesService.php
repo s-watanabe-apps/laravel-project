@@ -102,6 +102,32 @@ class ArticlesService extends Service
     }
 
     /**
+     * Get latest article headlines for Cache or Database.
+     * 
+     * @param int $limit = Articles::HEADLINE_LIMIT
+     * @return array<App\Models\Articles>
+     */
+    public function getLatestArticles(int $limit = Articles::HEADLINE_LIMIT)
+    {
+        $articles = new Articles();
+
+        $cache = $this->remember(parent::CACHE_KEY_LATEST_ARTICLES, function() use($limit) {
+            $builder = $this->base();
+            $builder->where('articles.status', \Status::ENABLED);
+            $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get();
+            return json_encode($data);
+        });
+
+        $data = array_map(function($value) use($articles) {
+            $article = (clone $articles)->bind($value);
+            $article->body_text = mb_substr(strip_tags($value->body, '<br>'), 0, 120) . '...';
+            return $article;
+        }, $cache);
+
+        return $data;
+    }
+
+    /**
      * Get latest article headlines by user id for Cache or Database.
      * 
      * @param int $userId
@@ -116,7 +142,6 @@ class ArticlesService extends Service
         $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId);
 
         $cache = $this->remember($key, function() use($userId, $limit) {
-            dump("test");
             $builder = $this->base()->where('articles.user_id', $userId);
 
             if ($userId != user()->id) {
@@ -172,7 +197,7 @@ class ArticlesService extends Service
     public function save(ArticlesRequest $request) {
         if (isset($request->id)) {
             // Update
-            $articles = $this->getById($request->id, user()->id);
+            $articles = $this->get($request->id);
             throw_if($articles->user_id != user()->id, ForbiddenException::class);
 
             foreach ($request->validated() as $key => $value) {
