@@ -2,9 +2,9 @@
 @section('content')
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-images"></i>@lang('strings.pictures')</a></li>
+            <li class="breadcrumb-item"><a href="/pictures"><i class="fas fa-fw fa-images"></i> @lang('strings.pictures')</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$image->title}}</li>
             <span style="margin:0 0 0 auto">
                 <a id="switchFavorites" href="#">

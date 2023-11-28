@@ -35,15 +35,25 @@ class InformationsService extends Service
      */
     public function getEnabled() {
         $now = carbon();
-        return $this->base()
-            ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
-            ->where('status', \Status::ENABLED)
-            ->where('start_time', '<=', $now)
-            ->where(function($query) use($now) {
-                $query->where('end_time', '>=', $now)
-                      ->orWhereNull('end_time');
-            })->orderBy('start_time')
-            ->get();
+        $cache = $this->remember(parent::CACHE_KEY_INFORMATIONS, function() use($now) {
+            $data = $this->base()
+                ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
+                ->where('status', \Status::ENABLED)
+                ->where('start_time', '<=', $now)
+                ->where(function($query) use($now) {
+                    $query->where('end_time', '>=', $now)
+                        ->orWhereNull('end_time');
+                })->orderBy('start_time')
+                ->get();
+            return json_encode($data);
+        });
+
+        $informations = new Informations();
+        $data = array_map(function($value) use($informations) {
+            return (clone $informations)->bind($value);
+        }, $cache);
+
+        return $data;
     }
 
     /**

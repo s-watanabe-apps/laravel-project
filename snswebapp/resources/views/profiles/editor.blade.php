@@ -5,9 +5,9 @@
 @csrf
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page"><a href="/profiles/{{$profileUser->id}}"><i class="fas fa-fw fa-user"></i>@lang('strings.profile')</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a href="/profiles/{{$profileUser->id}}"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a></li>
             <li class="breadcrumb-item" aria-current="page"><a href="/profiles/{{$profileUser->id}}">{{$profileUser->name}}</a></li>
             <li class="breadcrumb-item active" aria-current="page">@lang('strings.edit')</li>
         </ol>

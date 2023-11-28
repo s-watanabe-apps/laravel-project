@@ -6,9 +6,9 @@
 
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i>@lang('strings.site_settings')</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i> @lang('strings.site_settings')</li>
         </ol>
     </nav>
 </div>

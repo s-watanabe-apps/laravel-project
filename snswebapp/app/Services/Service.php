@@ -10,6 +10,7 @@ class Service
     // Service constant, cache keys.
     const CACHE_KEY_SETTINGS = 'settings';
     const CACHE_KEY_NAVIGATION_MENUS = 'navigation-menus';
+    const CACHE_KEY_INFORMATIONS = 'informations';
     const CACHE_KEY_USERS_BY_ID = 'users-%d';
     const CACHE_KEY_USERS_BY_EMAIL = 'users-%s';
     const CACHE_KEY_USERS_BY_BIRTHDAY_RANGE = 'users-birthday-range-%s-%s';

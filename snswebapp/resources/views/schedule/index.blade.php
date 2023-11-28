@@ -2,9 +2,9 @@
 @section('content')
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-calendar-alt"></i>@lang('strings.monthry_calendar')</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-calendar-alt"></i> @lang('strings.monthry_calendar')</li>
         </ol>
     </nav>
 </div>

@@ -1,19 +1,28 @@
 @extends('layouts.app')
 @section('content')
 <!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-users"></i>@lang('strings.member_search')</li>
-        </ol>
-    </nav>
+<div class="card mb-3">
+    <!-- Card Header - Accordion -->
+    <a href="#test" class="d-block card-header p-0" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+        <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold p-0 m-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-users"></i> @lang('strings.member_search')</li>
+            </ol>
+        </nav>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse show" id="test">
+        <div class="card-body py-2">
+            hogehoge
+        </div>
+    </div>
 </div>
 
 <div class="container p-0">
     <!-- Content Row -->
     <div class="row">
         @foreach ($profileUsers as $profileUser)
-        <div class="col-md-2 col-4 p-2">
+        <div class="col-md-2 col-4">
             <div class="thumbnail">
                 <a href="/profiles/{{$profileUser->id}}" class="text-decoration-none">
                     <img

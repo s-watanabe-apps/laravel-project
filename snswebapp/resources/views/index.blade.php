@@ -32,7 +32,7 @@
         </div>
         @endforeach
 
-        <div class="d-sm-flex align-items-center justify-content-between">
+        <div class="d-sm-flex align-items-center justify-content-between mt-4">
             <div class="h6 text-gray-800 font-weight-bold">&nbsp;<i class="fas fa-blog"></i> @lang('strings.latest_articles')</div>
         </div>
 
@@ -54,6 +54,7 @@
             </div>
         </div>
         @endforeach
+        <div class="col-12 text-right"><a href="/articles">@lang('strings.readmore')</a></div>
 
 
     </div>

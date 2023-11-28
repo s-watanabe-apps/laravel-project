@@ -2,9 +2,9 @@
 @section('content')
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-user"></i>@lang('strings.profile')</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$profileUser->name}}</li>
             <span style="margin:0 0 0 auto">
                 <a id="switchFavorites" href="#">

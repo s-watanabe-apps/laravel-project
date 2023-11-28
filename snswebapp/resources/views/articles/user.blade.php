@@ -2,7 +2,7 @@
 @section('content')
 <!-- Page Heading -->
 <div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h5">
+    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
         <ol class="breadcrumb">
             @if (!$searchLabels)
             <li class="breadcrumb-item"><i class="fas fa-blog"></i> {{sprintf(__('strings.articles_index_title'), $articlesUser->name)}}</li>
