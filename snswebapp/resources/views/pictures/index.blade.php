@@ -1,12 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-images"></i> @lang('strings.pictures')</li>
-        </ol>
-    </nav>
+<div class="card mb-3">
+    <!-- Card Header - Accordion -->
+    <a href="#test" class="d-block card-header p-0" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+        <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold p-0 m-0">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-images"></i> @lang('strings.pictures')</li>
+            </ol>
+        </nav>
+    </a>
+    <!-- Card Content - Collapse -->
+    <div class="collapse show" id="test">
+        <div class="card-body py-2">
+            hogehoge
+        </div>
+    </div>
 </div>
 
 <!-- Content Row -->

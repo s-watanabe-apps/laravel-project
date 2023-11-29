@@ -25,6 +25,12 @@ class SettingsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $db_name = 'mysql';
+        if ($request->server()['HTTP_HOST'] != env('HOST_NAME')) {
+            // TODO
+        }
+        session()->put('db_name', $db_name);
+        
         $settings = (new SettingsService())->get();
         $navigations = (new NavigationMenusService())->get();
 
