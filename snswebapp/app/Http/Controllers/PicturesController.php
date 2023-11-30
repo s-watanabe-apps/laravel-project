@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Services\FavoritesService;
 use App\Services\PicturesService;
 use App\Services\PictureCommentsService;
+use App\Services\UsersService;
 use Illuminate\Http\Request;
 
 class PicturesController extends Controller
@@ -12,6 +13,7 @@ class PicturesController extends Controller
     private $picturesService;
     private $pictureCommentsService;
     private $favoritesService;
+    private $usersService;
 
     /**
      * Create a new controller instance.
@@ -24,11 +26,13 @@ class PicturesController extends Controller
     public function __construct(
         PicturesService $picturesService,
         PictureCommentsService $pictureCommentsService,
-        FavoritesService $favoritesService
+        FavoritesService $favoritesService,
+        UsersService $usersService
     ) {
         $this->picturesService = $picturesService;
         $this->pictureCommentsService = $pictureCommentsService;
         $this->favoritesService = $favoritesService;
+        $this->usersService = $usersService;
     }
 
 
@@ -42,8 +46,11 @@ class PicturesController extends Controller
     {
         $images = $this->picturesService->getPictures();
 
+        $users = $this->usersService->getEnabledUsers();
+
         return view('pictures.index', compact(
-            'images'
+            'images',
+            'users'
         ));
     }
 
@@ -61,7 +68,7 @@ class PicturesController extends Controller
 
         $pictureComments = $this->pictureCommentsService->getByPictureId($request->id);
 
-        return view('pictures.get', compact(
+        return view('pictures.viewer', compact(
             'image',
             'isFavorite',
             'pictureComments'

@@ -74,6 +74,8 @@ return [
     'label' => 'Labels',
     'group_code' => 'Group code',
     'group_name' => 'Group name',
+    'search' => 'Search',
+    'search_menu' => 'Search Menu',
 
     // Side menus
     'write_articles' => 'Write articles',

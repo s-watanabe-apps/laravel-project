@@ -73,6 +73,8 @@ return [
     'label' => 'ラベル',
     'group_code' => 'グループコード',
     'group_name' => 'グループ名',
+    'search' => '検索',
+    'search_menu' => '検索メニュー',
 
     // Side menus
     'write_articles' => '記事を書く',

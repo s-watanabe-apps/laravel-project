@@ -22,7 +22,7 @@
 
 <!-- Content Row -->
 <div class="row">
-    <div class="col-md-6 p-2">
+    <div class="col-md-6 px-3 pb-4">
         <a href="/show/image/?file={{$image->file}}">
             <img
                 src="/img/loading.gif"
@@ -34,22 +34,22 @@
         </a>
     </div>
 
-    <div class="col-md-6 p-2">
+    <div class="col-md-6">
         <table class="table table-bordered responsive-table">
             <tbody>
                 <tr>
-                    <th class="bg-gradient-light text-secondary text-nowrap w-25 py-2">
+                    <th>
                         @lang('strings.title')
                     </th>
-                    <td class="bg-light text-dark py-2">
+                    <td>
                         {{$image->title}}
                     </td>
                 </tr>
                 <tr>
-                    <th class="bg-gradient-light text-secondary text-nowrap w-25 py-2">
+                    <th>
                         @lang('strings.contributor')
                     </th>
-                    <td class="bg-light text-dark py-2">
+                    <td>
                         <a href="/profiles/{{$image->user_id}}">{{$image->name}}</a>
                     </td>
                 </tr>
