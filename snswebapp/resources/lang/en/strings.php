@@ -76,6 +76,7 @@ return [
     'group_name' => 'Group name',
     'search' => 'Search',
     'search_menu' => 'Search Menu',
+    'registration' => 'Registration',
 
     // Side menus
     'write_articles' => 'Write articles',

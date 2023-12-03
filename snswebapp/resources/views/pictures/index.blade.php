@@ -56,7 +56,25 @@
                             {{Form::close()}}
                         </td>
                         <td style="width: 50%">
-                            TODO
+                        <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <input type="file" name="choose_image" value="@lang('strings.choose_file')" />
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-12 py-2">
+                                    <div class="h-100 border">
+                                        <span class="z-0 position-absolute px-2 py-2 text-gray">プレビュー</span>
+                                        <img id="preview" class="z-1 position-absolute img-fluid" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-12 py-2">
+                                    <textarea name="picture_comment" placeholder="コメント" rows="4" class="form-control"></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <a href="javascript:picturesUpload.submit()" class="btn btn-success shadow-sm w-25">
+                                        <i class="fas fa-upload fa-sm"></i> @lang('strings.registration')
+                                    </a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -98,4 +116,18 @@
 <!-- Lazyload -->
 @include('shared.lazyload')
 
+<script>
+$(function(){
+    $("[name='choose_image']").on('change', function (e) {
+        console.log('test');
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);   
+    });
+});
+</script>
+
 @endsection
+
