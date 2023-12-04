@@ -24,7 +24,6 @@
                                 'url' => '/pictures',
                                 'method' => 'get',
                             ])}}
-
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-3">
                                     <span>@lang('strings.title')</span>
@@ -53,18 +52,20 @@
                                     </a>
                                 </div>
                             </div>
-                            {{Form::close()}}
+                        {{Form::close()}}
                         </td>
                         <td style="width: 50%">
+                        {{Form::open([
+                            'name' => 'picturesPost',
+                            'url' => '/pictures',
+                            'method' => 'post',
+                        ])}}
                         <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <input type="file" name="choose_image" value="@lang('strings.choose_file')" />
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-12 py-2">
-                                    <div class="h-100 border">
-                                        <span class="z-0 position-absolute px-2 py-2 text-gray">プレビュー</span>
-                                        <img id="preview" class="z-1 position-absolute img-fluid" />
-                                    </div>
+                                    <img id="preview" class="img-preview" />
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-12 py-2">
                                     <textarea name="picture_comment" placeholder="コメント" rows="4" class="form-control"></textarea>
@@ -76,6 +77,7 @@
                                 </div>
                             </div>
                         </td>
+                        {{Form::close()}}
                     </tr>
                 </tbody>
             </table>

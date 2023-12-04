@@ -183,5 +183,11 @@ a.tab-item:hover {
     -ms-transform: translate(-50%, -50%);
 }
 
+.img-preview {
+  object-fit: contain;
+  object-position: center center;
+  width: 100%;
+  height: 100%;
+}
 -->
 </style>
