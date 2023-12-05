@@ -76,6 +76,7 @@ return [
     'search' => '検索',
     'search_menu' => '検索メニュー',
     'registration' => '登録',
+    'keyword' => 'キーワード',
 
     // Side menus
     'write_articles' => '記事を書く',

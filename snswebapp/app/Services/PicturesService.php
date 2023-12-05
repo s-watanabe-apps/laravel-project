@@ -17,7 +17,7 @@ class PicturesService extends Service
                 'pictures.title',
                 'pictures.file',
                 'pictures.comment',
-                \DB::raw('users.id as user_id'),
+                'pictures.user_id',
                 'users.name',
                 'pictures.created_at',
             ])
@@ -28,21 +28,37 @@ class PicturesService extends Service
     /**
      * Get pictures.
      * 
+     * @param string keyword
+     * @param int user_id
+     * 
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getPictures()
+    public function getPictures(string $keyword = null, int $user_id = null)
     {
-        return $this->base()
+        $query = $this->base();
+
+        if (!is_null($keyword)) {
+            $keyword = '%' . addcslashes($keyword, '%_\\') . '%';
+            $query->where('pictures.title', 'like', $keyword);
+        }
+
+        if (!is_null($user_id) && $user_id > 0) {
+            $query->where('pictures.user_id', $user_id);
+        }
+
+        return $query
             ->orderBy('pictures.created_at', 'desc')
             ->paginate(Pictures::PAGENATE);
     }
 
     /**
-     * Get pictures.
+     * Get picture.
+     * 
+     * @param int id
      * 
      * @return App\Models\Pictures
      */
-    public function getPictureById($id)
+    public function getPictureById(int $id)
     {
         return $this->base()
             ->where('pictures.id', $id)

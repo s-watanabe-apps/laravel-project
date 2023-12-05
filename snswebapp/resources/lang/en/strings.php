@@ -77,6 +77,7 @@ return [
     'search' => 'Search',
     'search_menu' => 'Search Menu',
     'registration' => 'Registration',
+    'keyword' => 'Keyword',
 
     // Side menus
     'write_articles' => 'Write articles',

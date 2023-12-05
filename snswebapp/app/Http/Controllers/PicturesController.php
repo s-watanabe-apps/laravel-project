@@ -6,6 +6,7 @@ use App\Services\PicturesService;
 use App\Services\PictureCommentsService;
 use App\Services\UsersService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PicturesController extends Controller
 {
@@ -44,13 +45,27 @@ class PicturesController extends Controller
      */
     public function index(Request $request)
     {
-        $images = $this->picturesService->getPictures();
+        $validator = Validator::make([
+            'keyword' => $request->keyword,
+            'user_id' => $request->user_id
+        ], [
+            'keyword' => 'string|nullable',
+            'user_id' => 'integer|nullable|min:0',
+        ]);
+        if ($validator->fails()) {
+            abort(422);
+        }
+
+        $validated = $validator->validated();
+
+        $images = $this->picturesService->getPictures($validated['keyword'], $validated['user_id']);
 
         $users = $this->usersService->getEnabledUsers();
 
         return view('pictures.index', compact(
             'images',
-            'users'
+            'users',
+            'validated'
         ));
     }
 

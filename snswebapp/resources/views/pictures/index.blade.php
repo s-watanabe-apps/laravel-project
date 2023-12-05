@@ -25,26 +25,28 @@
                                 'method' => 'get',
                             ])}}
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 col-3">
-                                    <span>@lang('strings.title')</span>
+                                <div class="col-lg-3 col-md-4 col-4">
+                                    <span>@lang('strings.keyword')</span>
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-9 pb-2">
-                                    {{Form::input('text', 'title', old('title'), [
+                                <div class="col-lg-9 col-md-8 col-8 pb-2">
+                                    {{Form::input('text', 'keyword', $validated['keyword'], [
                                         'style' => 'width: 100%;'
                                     ])}}
-                                    <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
                                 </div>
-                                <div class="col-lg-3 col-md-4 col-3">
+                                <div class="col-lg-3 col-md-4 col-4">
                                     <span>@lang('strings.contributor')</span>
                                 </div>
-                                <div class="col-lg-9 col-md-8 col-9 pb-3">
+                                <div class="col-lg-9 col-md-8 col-8 pb-3">
                                     <select name="user_id" class="btn dropdown-toggle bg-white pr-1 border text-left w-100">
                                         <option value="0"></option>
                                         @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}"
+                                            @if ($user->id == $validated['user_id'])
+                                                selected
+                                            @endif
+                                        >{{$user->name}}</option>
                                         @endforeach
                                     </select>
-                                    <div class="text-danger">{{$errors->first('user_id') ?? ''}}</div>
                                 </div>
                                 <div class="col-12 text-center">
                                     <a href="javascript:picturesSearch.submit()" class="btn btn-primary shadow-sm w-25">
@@ -52,15 +54,15 @@
                                     </a>
                                 </div>
                             </div>
-                        {{Form::close()}}
+                            {{Form::close()}}
                         </td>
                         <td style="width: 50%">
-                        {{Form::open([
-                            'name' => 'picturesPost',
-                            'url' => '/pictures',
-                            'method' => 'post',
-                        ])}}
-                        <div class="row">
+                            {{Form::open([
+                                'name' => 'picturesPost',
+                                'url' => '/pictures',
+                                'method' => 'post',
+                            ])}}
+                            <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <input type="file" name="choose_image" value="@lang('strings.choose_file')" />
                                 </div>
@@ -76,8 +78,8 @@
                                     </a>
                                 </div>
                             </div>
+                            {{Form::close()}}
                         </td>
-                        {{Form::close()}}
                     </tr>
                 </tbody>
             </table>
