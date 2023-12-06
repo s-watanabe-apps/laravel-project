@@ -132,6 +132,7 @@ return [
         'validation' => '入力値が不正です。はじめからやり直してください。',
         'unauthorized' => 'この機能を使うためには認証が必要です。',
         'to_admin_message' => '改善しない場合はシステム管理者へ連絡してください。',
+        'upload_image_unselected' => 'アップロードするイメージを選択してください。',
     ],
 
     // Roles

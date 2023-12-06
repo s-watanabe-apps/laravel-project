@@ -133,6 +133,7 @@ return [
         'validation' => 'Input value is invalid. Please try again from the beginning.',
         'unauthorized' => 'Authentication is required to use this feature.',
         'to_admin_message' => 'If it does not improve, contact your system administrator.',
+        'upload_image_unselected' => 'Select an image to upload.',
     ],
 
     // Roles

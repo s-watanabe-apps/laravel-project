@@ -64,17 +64,23 @@
                             ])}}
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
-                                    <input type="file" name="choose_image" value="@lang('strings.choose_file')" />
+                                    <input type="file" name="choose_image" value="@lang('strings.choose_file')" accept=".jpg, .png" />
+                                    <div class="text-danger" id="choose_image_error"></div>
                                 </div>
-                                <div class="col-lg-6 col-md-12 col-12 py-2">
+                                <div class="col-lg-4 col-md-12 col-12 py-2">
                                     <img id="preview" class="img-preview" />
                                 </div>
-                                <div class="col-lg-6 col-md-12 col-12 py-2">
-                                    <textarea name="picture_comment" placeholder="コメント" rows="4" class="form-control"></textarea>
+                                <div class="col-lg-8 col-md-12 col-12 py-2">
+                                    {{Form::input('text', 'title', old('title'), [
+                                        'placeholder' => __('strings.title'),
+                                        'style' => 'width: 100%;',
+                                        'class' => 'mb-1',
+                                    ])}}
+                                    <textarea name="comment" placeholder="コメント" rows="3" class="form-control"></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <a href="javascript:picturesUpload.submit()" class="btn btn-success shadow-sm w-25">
-                                        <i class="fas fa-upload fa-sm"></i> @lang('strings.registration')
+                                    <a href="#" id="uploadConfirmButton" class="btn btn-success shadow-sm w-25">
+                                        <i class="fas fa-check fa-sm"></i> @lang('strings.confirm')
                                     </a>
                                 </div>
                             </div>
@@ -83,6 +89,28 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="uploadConfirm" tabindex="-1" role="dialog" aria-labelledby="uploadConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="h6 modal-title" id="uploadConfirmLabel">@lang('strings.confirm')</div>
+                <button type="button" id="uploadClose" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="preview_confirm" class="img-preview" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="uploadCancel" class="btn btn-secondary" data-dismiss="modal">@lang('strings.cancel')</button>
+                <a href="javascript:picturesPost.submit()" type="button" class="btn btn-success" aria-label="Close">
+                    <i class="fas fa-upload fa-sm"></i> @lang('strings.upload_files')
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -123,13 +151,36 @@
 <script>
 $(function(){
     $("[name='choose_image']").on('change', function (e) {
-        console.log('test');
         var reader = new FileReader();
         reader.onload = function (e) {
             $("#preview").attr('src', e.target.result);
+            $("#preview_confirm").attr('src', e.target.result);
         }
         reader.readAsDataURL(e.target.files[0]);   
     });
+
+    $("#uploadConfirmButton").on('click', function (e) {
+        let error = document.getElementById('choose_image_error');
+        if ($("[name='choose_image']").val() == "") {
+            error.innerText = "{{__('strings.errors.upload_image_unselected')}}";
+        } else {
+            error.innerText = "";
+            $('#uploadConfirm').modal('show');
+        }
+    });
+
+    $("#uploadCancel").on('click', function (e) {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        $('#uploadConfirm').modal('hide'); 
+    });
+
+    $("#uploadClose").on('click', function (e) {
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        $('#uploadConfirm').modal('hide'); 
+    });
+
 });
 </script>
 
