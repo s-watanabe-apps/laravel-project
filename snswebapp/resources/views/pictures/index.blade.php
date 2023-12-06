@@ -108,7 +108,7 @@
             <div class="modal-footer">
                 <button type="button" id="uploadCancel" class="btn btn-secondary" data-dismiss="modal">@lang('strings.cancel')</button>
                 <a href="javascript:picturesPost.submit()" type="button" class="btn btn-success" aria-label="Close">
-                    <i class="fas fa-upload fa-sm"></i> @lang('strings.upload_files')
+                    <i class="fas fa-upload fa-sm"></i> @lang('strings.upload')
                 </a>
             </div>
         </div>
