@@ -76,7 +76,7 @@
                                         'style' => 'width: 100%;',
                                         'class' => 'mb-1',
                                     ])}}
-                                    <textarea name="comment" placeholder="コメント" rows="3" class="form-control"></textarea>
+                                    <textarea name="comment" placeholder="@lang('strings.comment')" rows="3" class="form-control"></textarea>
                                 </div>
                                 <div class="col-12 text-center">
                                     <a href="#" id="uploadConfirmButton" class="btn btn-success shadow-sm w-25">

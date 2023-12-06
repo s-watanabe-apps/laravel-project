@@ -78,6 +78,7 @@ return [
     'registration' => '登録',
     'keyword' => 'キーワード',
     'upload' => 'アップロード',
+    'comment' => 'コメント',
 
     // Side menus
     'write_articles' => '記事を書く',

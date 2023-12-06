@@ -79,6 +79,7 @@ return [
     'registration' => 'Registration',
     'keyword' => 'Keyword',
     'upload' => 'Upload',
+    'comment' => 'Comment',
 
     // Side menus
     'write_articles' => 'Write articles',
