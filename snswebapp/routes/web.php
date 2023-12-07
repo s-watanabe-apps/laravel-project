@@ -50,6 +50,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // Pictures
         Route::get('/pictures', 'PicturesController@index');
         Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+');
+        Route::group(['middleware' => ['authcheck.writepermission']], function () {
+            Route::get('/pictures/upload', 'PicturesController@upload');
+        });
 
         // Messages
         Route::get('/messages/inbox', 'MessagesController@inbox');

@@ -115,6 +115,10 @@
     </div>
 </div>
 
+<div class="col-md-12 col-12 text-right pt-2">
+    <a href="/pictures/upload">@lang('strings.upload_files')</a>
+</div>
+
 <!-- Content Row -->
 <div class="container p-1">
     <div class="row">

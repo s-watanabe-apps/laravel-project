@@ -89,4 +89,9 @@ class PicturesController extends Controller
             'pictureComments'
         ));
     }
+
+    public function upload(Request $request)
+    {
+        return view('pictures.upload');
+    }
 }
