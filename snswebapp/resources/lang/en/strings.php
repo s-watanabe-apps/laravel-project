@@ -80,6 +80,8 @@ return [
     'keyword' => 'Keyword',
     'upload' => 'Upload',
     'comment' => 'Comment',
+    'untitled' => 'Untitled',
+    'no_comment' => 'No comment',
 
     // Side menus
     'write_articles' => 'Write articles',

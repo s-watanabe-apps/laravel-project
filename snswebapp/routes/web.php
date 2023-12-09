@@ -52,6 +52,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
             Route::get('/pictures/upload', 'PicturesController@upload');
+            Route::post('/pictures/post', 'PicturesController@post');
         });
 
         // Messages

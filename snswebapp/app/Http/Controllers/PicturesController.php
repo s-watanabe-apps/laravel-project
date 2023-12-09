@@ -5,6 +5,7 @@ use App\Services\FavoritesService;
 use App\Services\PicturesService;
 use App\Services\PictureCommentsService;
 use App\Services\UsersService;
+use App\Http\Requests\PicturesUploadRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -93,5 +94,11 @@ class PicturesController extends Controller
     public function upload(Request $request)
     {
         return view('pictures.upload');
+    }
+
+    public function post(PicturesUploadRequest $request)
+    {
+        dump($request->validated());
+        exit;
     }
 }

@@ -11,6 +11,14 @@
 </div>
 
 <!-- Content Row -->
+{{Form::open([
+    'name' => 'picturesPost',
+    'url' => '/pictures/post',
+    'method' => 'post',
+    'files' => true,
+    'enctype' => 'multipart/form-data'
+])}}
+@csrf
 <div class="row">
     <div class="col-md-6 px-3 pb-4">
         <img id="preview" class="img-preview pb-2" />
@@ -27,7 +35,7 @@
                     </th>
                     <td class="w-75">
                         {{Form::input('text', 'title', old('title'), [
-                            //'placeholder' => __('strings.title'),
+                            'id' => 'title',
                             'class' => 'w-100',
                         ])}}
                     </td>
@@ -37,7 +45,7 @@
                         @lang('strings.contributor')
                     </th>
                     <td>
-                        <textarea name="comment" rows="6" class="form-control"></textarea>
+                        <textarea id="comment" name="comment" rows="6" class="form-control"></textarea>
                     </td>
                 </tr>
             </tbody>
@@ -48,8 +56,9 @@
             </a>
         </div>
     </div>
-
+    
 </div>
+{{Form::close()}}
 
 <div class="modal fade" id="uploadConfirm" tabindex="-1" role="dialog" aria-labelledby="uploadConfirmLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -62,10 +71,12 @@
             </div>
             <div class="modal-body">
                 <img id="preview_confirm" class="img-preview" />
+                <div id="title_confirm" class="h6 pt-2 text-center font-weight-bold"></div>
+                <div id="comment_confirm" class="px-2"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="uploadCancel" class="btn btn-secondary" data-dismiss="modal">@lang('strings.cancel')</button>
-                <a href="javascript:picturesPost.submit()" type="button" class="btn btn-success" aria-label="Close">
+                <a href="#" id="doUpload" type="button" class="btn btn-success">
                     <i class="fas fa-upload fa-sm"></i> @lang('strings.upload')
                 </a>
             </div>
@@ -90,6 +101,23 @@ $(function(){
             error.innerText = "{{__('strings.errors.upload_image_unselected')}}";
         } else {
             error.innerText = "";
+            let title = $("#title").val();
+            let titleConfirm = document.getElementById('title_confirm');
+            if (title != "") {
+                titleConfirm.innerText = title;
+            } else {
+                titleConfirm.innerText = "{{__('strings.untitled')}}";
+            }
+
+            let comment = $("#comment").val();
+            let commentConfirm = document.getElementById('comment_confirm');
+            if (comment != "") {
+                commentConfirm.innerText = comment;
+            } else {
+                commentConfirm.innerText = "{{__('strings.no_comment')}}";
+            }
+
+            console.log(title);
             $('#uploadConfirm').modal('show');
         }
     });
@@ -104,6 +132,11 @@ $(function(){
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
         $('#uploadConfirm').modal('hide'); 
+    });
+
+    $("#doUpload").on('click', function (e) {
+        console.log(111);
+        document.picturesPost.submit();
     });
 
 });

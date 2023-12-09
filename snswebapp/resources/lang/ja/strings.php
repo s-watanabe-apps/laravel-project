@@ -79,6 +79,8 @@ return [
     'keyword' => 'キーワード',
     'upload' => 'アップロード',
     'comment' => 'コメント',
+    'untitled' => '無題',
+    'no_comment' => 'コメントなし',
 
     // Side menus
     'write_articles' => '記事を書く',
