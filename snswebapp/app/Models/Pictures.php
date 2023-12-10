@@ -18,4 +18,6 @@ class Pictures extends Model
 
     // Model constant, page limit.
     const PAGENATE = 12;
+
+    // SHOW TABLE STATUS LIKE 'pictures';
 }

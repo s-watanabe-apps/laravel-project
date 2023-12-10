@@ -5,12 +5,9 @@ use Illuminate\Database\Eloquent;
 
 class Model extends Eloquent\Model
 {
-    protected $connection = 'mysql';
-
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->connection = session()->get('db_name');
     }
 
     /**
