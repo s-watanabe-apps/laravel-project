@@ -42,10 +42,10 @@
                 </tr>
                 <tr>
                     <th>
-                        @lang('strings.contributor')
+                        @lang('strings.description')
                     </th>
                     <td>
-                        <textarea id="comment" name="comment" rows="6" class="form-control"></textarea>
+                        <textarea id="description" name="description" rows="6" class="form-control"></textarea>
                     </td>
                 </tr>
             </tbody>
@@ -72,7 +72,7 @@
             <div class="modal-body">
                 <img id="preview_confirm" class="img-preview" />
                 <div id="title_confirm" class="h6 pt-2 text-center font-weight-bold"></div>
-                <div id="comment_confirm" class="px-2"></div>
+                <div id="description_confirm" class="px-2"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="uploadCancel" class="btn btn-secondary" data-dismiss="modal">@lang('strings.cancel')</button>
@@ -109,12 +109,12 @@ $(function(){
                 titleConfirm.innerText = "{{__('strings.untitled')}}";
             }
 
-            let comment = $("#comment").val();
-            let commentConfirm = document.getElementById('comment_confirm');
-            if (comment != "") {
-                commentConfirm.innerText = comment;
+            let description = $("#description").val();
+            let descriptionConfirm = document.getElementById('description_confirm');
+            if (description != "") {
+                descriptionConfirm.innerText = description;
             } else {
-                commentConfirm.innerText = "{{__('strings.no_comment')}}";
+                descriptionConfirm.innerText = "{{__('strings.no_comment')}}";
             }
 
             console.log(title);

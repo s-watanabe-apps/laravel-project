@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Models\Pictures;
+use App\Models\Images;
+use Illuminate\Support\Facades\Hash;
 
 class PicturesService extends Service
 {
@@ -16,7 +18,7 @@ class PicturesService extends Service
                 'pictures.id',
                 'pictures.title',
                 'pictures.file',
-                'pictures.comment',
+                'pictures.description',
                 'pictures.user_id',
                 'users.name',
                 'pictures.created_at',
@@ -63,5 +65,34 @@ class PicturesService extends Service
         return $this->base()
             ->where('pictures.id', $id)
             ->first();
+    }
+
+
+    /**
+     * Save picture.
+     * 
+     * @param array params(PicturesUploadRequest->validated)
+     */
+    public function save($params)
+    {
+        $lastRow = $this->base()
+            ->orderBy('pictures.id', 'desc')
+            ->limit(1)
+            ->first();
+
+        $id = sprintf('%06d', $lastRow->id + 1);
+        $hash = base64_encode(substr(Hash::make($id), -27));
+        $file = $params['image'];
+        $extension = Images::getExtensions()[$file->getMimetype()];
+        $fileName = sprintf('pictures/image-%s-%s.%s', $id, $hash, $extension);
+
+        $pictures = new Pictures();
+        $pictures->file = $fileName;
+        $pictures->user_id = user()->id;
+        $pictures->title = $params['title'];
+        $pictures->description = $params['description'];
+        $pictures->save();
+
+        $file->storeAs('contents/images/', $fileName);
     }
 }

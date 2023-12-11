@@ -8,7 +8,6 @@ use App\Services\UsersService;
 use App\Http\Requests\PicturesUploadRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
 class PicturesController extends Controller
 {
@@ -92,21 +91,30 @@ class PicturesController extends Controller
         ));
     }
 
+    /**
+     * Upload picture forms.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
     public function upload(Request $request)
     {
-        $hash = Hash::make('000001');
-        dump($hash);
-        $hash2 = substr($hash, -27);
-        dump($hash2);
-        $base64 = base64_encode($hash2);
-        dump($base64);
-        
         return view('pictures.upload');
     }
 
+    /**
+     * Post picture.
+     * 
+     * @param App\Http\Requests\PicturesUploadRequest
+     */
     public function post(PicturesUploadRequest $request)
     {
-        dump($request->validated());
-        exit;
+        $params = $request->validated();
+        
+        \DB::transaction(function() use ($params) {
+            $this->picturesService->save($params);
+        });
+
+        return redirect()->route('pictures.index');
     }
 }

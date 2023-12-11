@@ -18,7 +18,7 @@ class CreatePicturesTable extends Migration
             $table->string('file');
             $table->unsignedBigInteger('user_id');
             $table->string('title')->nullable();
-            $table->text('comment')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

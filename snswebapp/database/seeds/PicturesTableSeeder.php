@@ -21,7 +21,7 @@ class PicturesTableSeeder extends Seeder
                 'user_id' => 1,
                 'file' => urlencode(sprintf('pictures/sample-%d.jpg', $i + 1)),
                 'title' => '写真タイトル',
-                'comment' => '写真コメント',
+                'description' => '写真コメント',
                 'created_at' => carbon()->addDays(-(30 - $i))->copy(),
                 'updated_at' => carbon()->addDays(-(30 - $i))->copy(),
             ];

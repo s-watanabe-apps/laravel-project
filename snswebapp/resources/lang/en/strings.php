@@ -82,6 +82,7 @@ return [
     'comment' => 'Comment',
     'untitled' => 'Untitled',
     'no_comment' => 'No comment',
+    'description' => 'Description',
 
     // Side menus
     'write_articles' => 'Write articles',

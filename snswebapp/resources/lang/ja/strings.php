@@ -81,6 +81,7 @@ return [
     'comment' => 'コメント',
     'untitled' => '無題',
     'no_comment' => 'コメントなし',
+    'description' => '説明',
 
     // Side menus
     'write_articles' => '記事を書く',

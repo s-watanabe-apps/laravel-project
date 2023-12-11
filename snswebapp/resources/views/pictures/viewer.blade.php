@@ -38,11 +38,11 @@
         <table class="table table-bordered responsive-table">
             <tbody>
                 <tr>
-                    <th>
+                    <th class="w-25">
                         @lang('strings.title')
                     </th>
-                    <td>
-                        {{$image->title}}
+                    <td class="w-75">
+                        {{$image->title ?? __('strings.untitled')}}
                     </td>
                 </tr>
                 <tr>
