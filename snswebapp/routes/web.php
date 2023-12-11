@@ -49,10 +49,11 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
         // Pictures
         Route::get('/pictures', 'PicturesController@index')->name('pictures.index');
-        Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+');
+        Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+')->name('pictures.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
             Route::get('/pictures/upload', 'PicturesController@upload');
             Route::post('/pictures/post', 'PicturesController@post');
+            Route::post('/pictures/comment', 'PicturesController@comment');
         });
 
         // Messages

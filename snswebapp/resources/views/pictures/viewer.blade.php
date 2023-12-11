@@ -53,10 +53,65 @@
                         <a href="/profiles/{{$image->user_id}}">{{$image->name}}</a>
                     </td>
                 </tr>
+                @if (!is_null($image->description))
+                <tr>
+                    <th>
+                        @lang('strings.description')
+                    </th>
+                    <td>
+                        {{$image->description}}
+                    </td>
+                </tr>
+                @endif
+                <tr>
+                    <th class="w-25">
+                        @lang('strings.contribute_date')
+                    </th>
+                    <td class="w-75">
+                        {{$image->created_at->format(\DateFormat::getDateFormat())}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered responsive-table">
+            <tbody>
+                <tr>
+                    <th class="text-center">@lang('strings.comment')</th>
+                </tr>
+                @foreach ($pictureComments as $comment)
+                <tr>
+                    <td>
+                        <div>{{$comment->comment}}</div>
+                        <div class="text-right"><small class="text-left">
+                            {{$comment->created_at->format(\DateFormat::getDateFormat())}}&nbsp;
+                            <a href="/profiles/{{$comment->user_id}}">{{$comment->user_name}}</a>
+                        </small></div>
+                    </td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td>
+                        {{Form::open([
+                            'name' => 'picturesComment',
+                            'url' => '/pictures/comment',
+                            'method' => 'post',
+                        ])}}
+                        @csrf
+                        {{Form::hidden('id', $image->id)}}
+                        <textarea id="description" name="comment" rows="2" class="form-control"></textarea>
+                        <div class="text-danger">{{$errors->first('comment') ?? ''}}</div>
+                        <div class="text-center">
+                            <a href="javascript:picturesComment.submit()" class="btn btn-success shadow-sm py-0 mt-2">
+                                <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.save')
+                            </a>
+                        </div>
+                        {{Form::close()}}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-
 </div>
 
 <!-- Lazyload -->

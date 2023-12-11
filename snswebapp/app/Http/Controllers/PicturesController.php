@@ -6,6 +6,7 @@ use App\Services\PicturesService;
 use App\Services\PictureCommentsService;
 use App\Services\UsersService;
 use App\Http\Requests\PicturesUploadRequest;
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -116,5 +117,16 @@ class PicturesController extends Controller
         });
 
         return redirect()->route('pictures.index');
+    }
+
+    public function comment(CommentRequest $request)
+    {
+        $params = $request->validated();
+        
+        \DB::transaction(function() use ($params) {
+            $this->pictureCommentsService->save(user()->id, $params);
+        });
+
+        return redirect()->route('pictures.get', ['id' => $params['id']]);
     }
 }

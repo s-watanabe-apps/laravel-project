@@ -16,7 +16,7 @@ class PictureCommentsService extends Service
                 'picture_comments.id',
                 'picture_comments.picture_id',
                 'picture_comments.user_id',
-                \DB::raw('users.id as user_id'),
+                \DB::raw('users.name as user_name'),
                 'picture_comments.comment',
                 'picture_comments.created_at',
                 'picture_comments.updated_at',
@@ -31,5 +31,16 @@ class PictureCommentsService extends Service
             ->where('picture_id', $pictureId)
             ->orderBy('picture_comments.created_at')
             ->get();
+    }
+
+    public function save($userId, $params)
+    {
+        $pictureComments = new PictureComments();
+
+        $pictureComments->user_id = $userId;
+        $pictureComments->picture_id = $params['id'];
+        $pictureComments->comment = $params['comment'];
+
+        $pictureComments->save();
     }
 }
