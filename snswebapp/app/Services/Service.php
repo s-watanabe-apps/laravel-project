@@ -47,7 +47,8 @@ class Service
      * @param stdClass $std
      * @return boolean
      */
-    protected function checkAccessRight($std) {
+    protected function checkAccessRight($std)
+    {
         if (user()->role_id == Roles::ADMIN) {
             return true;
         }
@@ -57,5 +58,15 @@ class Service
         }
 
         return true;
+    }
+
+     /**
+     * Cache purge.
+     * 
+     * @param string $key
+     */
+    protected function cacheForget($key)
+    {
+        Cache::forget($key);
     }
 }

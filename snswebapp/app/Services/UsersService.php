@@ -183,6 +183,7 @@ class UsersService extends Service
      * @param int
      * @return App\Models\Users
      */
+/*
     public function save($values, $id = null)
     {
         if ($id == null) {
@@ -194,4 +195,5 @@ class UsersService extends Service
             return $this->get($id);
         }
     }
+*/
 }

@@ -29,7 +29,7 @@
     </div>
 
     <div class="col-lg-6 mb-4">
-        <table class="table table-bordered responsive-table">
+        <table class="table table-bordered">
             <tbody>
                 <tr>
                     <th class="w-25">
@@ -81,7 +81,7 @@
     </div>
 
     <div class="col-lg-4 mb-4">
-        <table class="table table-bordered responsive-table">
+        <table class="table table-bordered">
             <tbody>
                 <tr>
                     <th colspan="2">

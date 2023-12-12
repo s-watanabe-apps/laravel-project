@@ -1,10 +1,16 @@
 <?php
 namespace App\Services;
 
+use App\Models\Images;
 use App\Models\Profiles;
 use App\Models\ProfileChoices;
+use App\Models\ProfileValues;
+use App\Models\Users;
 use App\Libs\ProfileInputType;
+use App\Services\UsersService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class ProfilesService extends Service
 {
@@ -118,5 +124,32 @@ class ProfilesService extends Service
         }
 
         return $profiles;
+    }
+
+    public function save($params)
+    {
+        if (isset($params['image_file'])) {
+            $id = sprintf('%06d', user()->id);
+            $hash = base64_encode(substr(Hash::make($id), -27));
+            $file = $params['image_file'];
+            $extension = Images::getExtensions()[$file->getMimetype()];
+            $fileName = sprintf('profiles/image-%s-%s.%s', $id, $hash, $extension);
+    
+            $file->storeAs('contents/images/', $fileName);
+            $params['image_file'] = urlencode($fileName);
+        }
+
+        
+        $users = (new Users())->find(user()->id);
+        $users->name = $params['name'];
+        $users->name_kana = $params['name_kana'];
+        $users->birthdate = $params['birth_date'];
+        $users->image_file = $params['image_file'];
+        $users->save();
+        
+        ProfileValues::saveProfileValues(user()->id, $params['dynamic_values']);
+
+        $key = sprintf(Service::CACHE_KEY_USERS_BY_ID, user()->id);
+        $this->cacheForget($key);
     }
 }

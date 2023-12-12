@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favorites;
-use App\Models\ProfileValues;
-use App\Models\Images;
 use App\Models\VisitedUsers;
 use App\Services\ArticlesService;
 use App\Services\FavoritesService;
@@ -144,22 +142,10 @@ class ProfilesController extends Controller
      */
     public function register(ProfilesRequest $request)
     {
-        $profileValues = ProfileValues::getProfileValuesHashByUserId(user()->id);
-        $inputValues = $request->validated();
+        $params = $request->validated();
 
-        \DB::transaction(function() use ($request, $profileValues, $inputValues) {
-            if (isset($inputValues['image_file'])) {
-                $file = $inputValues['image_file'];
-                $extension = Images::getExtensions()[$file->getMimetype()];
-                $fileName = "profiles/" . user()->id . '.' . $extension;
-                $file->storeAs('contents/images/', $fileName);
-                $inputValues['image_file'] = urlencode($fileName);
-            }
-
-            user()->save($inputValues, user()->id);
-
-            ProfileValues::saveProfileValues(
-                user()->id, $inputValues['dynamic_values']);
+        \DB::transaction(function() use ($params) {
+            $this->profilesService->save($params);
         });
 
         return redirect()->route('profiles.get', ['id' => user()->id])->with('result', 1);
