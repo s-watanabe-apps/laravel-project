@@ -18,8 +18,8 @@ class UploadfilesController extends ManagementsController
     {
         $files = array_map(
             function($file) {
-                $file->createdAt = carbon(filectime($file->getPathName()));
-                $file->updatedAt = carbon(filemtime($file->getPathName()));
+                $file->created_at = carbon(filectime($file->getPathName()));
+                $file->updated_at = carbon(filemtime($file->getPathName()));
                 return $file;
             },
             \File::files(storage_path('app/contents/files/'))
