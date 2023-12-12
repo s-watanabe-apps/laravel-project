@@ -71,7 +71,7 @@ class ProfilesRequest extends AppFormRequest
             'name' => 'required|max:255',
             'name_kana' => 'required|max:255',
             'birth_date' => 'required|date',
-            'choose_profile_image' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
+            'image_file' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
             'dynamic_values.*' => $dynamicRules,
         ];
     }
@@ -87,6 +87,7 @@ class ProfilesRequest extends AppFormRequest
             'name' => __('strings.name'),
             'name_kana' => __('strings.name_kana'),
             'birth_date' => __('strings.birth_date'),
+            'image_file' => __('strings.choose_file'),
         ];
     }
 

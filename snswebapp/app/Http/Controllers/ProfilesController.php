@@ -9,6 +9,7 @@ use App\Services\ArticlesService;
 use App\Services\FavoritesService;
 use App\Services\ProfilesService;
 use App\Services\UsersService;
+use App\Services\GroupsService;
 use App\Http\Requests\ProfilesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class ProfilesController extends Controller
     private $favoritesService;
     private $profilesService;
     private $usersService;
+    private $groupsService;
 
     /**
      * Create a new controller instance.
@@ -37,12 +39,14 @@ class ProfilesController extends Controller
         ArticlesService $articlesService,
         FavoritesService $favoritesService,
         ProfilesService $profilesService,
-        UsersService $usersService
+        UsersService $usersService,
+        GroupsService $groupsService
     ) {
         $this->articlesService = $articlesService;
         $this->favoritesService = $favoritesService;
         $this->profilesService = $profilesService;
         $this->usersService = $usersService;
+        $this->groupsService = $groupsService;
     }
 
     /**
@@ -53,10 +57,27 @@ class ProfilesController extends Controller
      */
     public function index(Request $request)
     {
-        $profileUsers = $this->usersService->getEnabledUsers();
+        $validator = Validator::make([
+            'keyword' => $request->keyword,
+            'group_code' => $request->group_code
+        ], [
+            'keyword' => 'string|nullable',
+            'group_code' => 'string|nullable',
+        ]);
+        if ($validator->fails()) {
+            abort(422);
+        }
+
+        $validated = $validator->validated();
+
+        $profileUsers = $this->usersService->getEnabledUsers($validated['keyword'], $validated['group_code']);
+
+        $groups = $this->groupsService->all();
 
         return view('profiles.index', compact(
-            'profileUsers'
+            'profileUsers',
+            'groups',
+            'validated'
         ));
     }
 
@@ -127,8 +148,8 @@ class ProfilesController extends Controller
         $inputValues = $request->validated();
 
         \DB::transaction(function() use ($request, $profileValues, $inputValues) {
-            if (isset($inputValues['choose_profile_image'])) {
-                $file = $inputValues['choose_profile_image'];
+            if (isset($inputValues['image_file'])) {
+                $file = $inputValues['image_file'];
                 $extension = Images::getExtensions()[$file->getMimetype()];
                 $fileName = "profiles/" . user()->id . '.' . $extension;
                 $file->storeAs('contents/images/', $fileName);

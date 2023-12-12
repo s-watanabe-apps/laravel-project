@@ -25,7 +25,7 @@
             <label>
                 <span class="d-sm-inline-block btn btn-primary shadow-sm text-nowrap">
                     <i class="fas fa-upload fa-sm text-white-50"></i><small>@lang('strings.choose_file')</small>
-                    <input type="file" name="choose_profile_image" class="form-control" style="display:none" />
+                    <input type="file" name="image_file" class="form-control" style="display:none" />
                 </span>
             </label>
             <label>
@@ -157,7 +157,7 @@
     });
 
     $(function(){
-        $("[name='choose_profile_image']").on('change', function (e) {
+        $("[name='image_file']").on('change', function (e) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $("#preview").attr('src', e.target.result);

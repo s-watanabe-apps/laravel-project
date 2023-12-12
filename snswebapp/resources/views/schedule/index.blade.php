@@ -9,7 +9,15 @@
     </nav>
 </div>
 
-<div id='calendar'></div>
+<div class="row">
+    <div class="col-md-10">
+        <div id='calendar'></div>
+    </div>
+    <div class="col-md-2">
+        AD
+    </div>
+</div>
+
 
 <!-- Full Calendar -->
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css' rel='stylesheet' />

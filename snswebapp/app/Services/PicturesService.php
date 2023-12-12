@@ -82,7 +82,7 @@ class PicturesService extends Service
 
         $id = sprintf('%06d', $lastRow->id + 1);
         $hash = base64_encode(substr(Hash::make($id), -27));
-        $file = $params['image'];
+        $file = $params['image_file'];
         $extension = Images::getExtensions()[$file->getMimetype()];
         $fileName = sprintf('pictures/image-%s-%s.%s', $id, $hash, $extension);
 

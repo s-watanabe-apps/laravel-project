@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-md-6 px-3 pb-4">
         <img id="preview" class="img-preview pb-2" />
-        <input type="file" id="inputfile" name="image" value="@lang('strings.choose_file')" accept=".jpg, .png" />
+        <input type="file" id="inputfile" name="image_file" value="@lang('strings.choose_file')" accept=".jpg, .png" />
         <div class="text-danger" id="inputfile_error"></div>
     </div>
 

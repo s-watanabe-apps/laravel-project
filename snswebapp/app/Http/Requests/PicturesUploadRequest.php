@@ -27,7 +27,7 @@ class PicturesUploadRequest extends AppFormRequest
         return [
             'title' => 'nullable|max:255',
             'description' => 'nullable',
-            'image' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
+            'image_file' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
         ];
     }
 
@@ -41,7 +41,7 @@ class PicturesUploadRequest extends AppFormRequest
         return [
             'title' => __('strings.title'),
             'description' => __('strings.description'),
-            'image' => __('strings.choose_file'),
+            'image_file' => __('strings.choose_file'),
         ];
     }
 

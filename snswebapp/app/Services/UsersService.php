@@ -40,13 +40,25 @@ class UsersService extends Service
     /**
      * Get enabled users.
      * 
+     * @param string keyword
+     * @param int group_code
+     * 
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getEnabledUsers()
+    public function getEnabledUsers(string $keyword = null, string $group_code = null)
     {
-        return $this->base()
-            ->where('users.status', \Status::ENABLED)
-            ->paginate(Users::PAGENATE);
+        $query = $this->base()->where('users.status', \Status::ENABLED);
+        
+        if (!is_null($keyword)) {
+            $keyword = '%' . addcslashes($keyword, '%_\\') . '%';
+            $query->where('users.name', 'like', $keyword);
+        }
+
+        if (!is_null($group_code) && $group_code != '0') {
+            $query->where('users.group_code', $group_code);
+        }
+            
+        return $query->paginate(Users::PAGENATE);
     }
 
     /**
