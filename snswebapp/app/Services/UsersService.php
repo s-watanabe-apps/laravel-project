@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Http\Exceptions\NotFoundException;
 use App\Models\Users;
+use App\Models\Roles;
 use Illuminate\Support\Facades\DB;
 
 class UsersService extends Service
@@ -34,7 +35,8 @@ class UsersService extends Service
                 'users.group_code',
                 \DB::raw('groups.name as group_name'),
             ])
-            ->leftJoin('groups', 'users.group_code', '=', 'groups.code');
+            ->leftJoin('groups', 'users.group_code', '=', 'groups.code')
+            ->where('users.role_id', '!=', Roles::SYSTEM);
     }
 
     /**
@@ -42,10 +44,11 @@ class UsersService extends Service
      * 
      * @param string keyword
      * @param int group_code
+     * @param bool pagenation
      * 
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getEnabledUsers(string $keyword = null, string $group_code = null)
+    public function getEnabledUsers(string $keyword = null, string $group_code = null, $pagenation = true)
     {
         $query = $this->base()->where('users.status', \Status::ENABLED);
         
@@ -58,7 +61,13 @@ class UsersService extends Service
             $query->where('users.group_code', $group_code);
         }
             
-        return $query->paginate(Users::PAGENATE);
+        if ($pagenation) {
+            $result = $query->paginate(Users::PAGENATE);
+        } else {
+            $result = $query->get();
+        }
+
+        return $result;
     }
 
     /**

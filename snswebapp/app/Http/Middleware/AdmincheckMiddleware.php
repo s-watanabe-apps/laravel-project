@@ -15,7 +15,7 @@ class AdmincheckMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (user()->role_id != Roles::ADMIN) {
+        if (user()->role_id != Roles::ADMIN && user()->role_id != Roles::SYSTEM) {
             abort(404);
         }
 

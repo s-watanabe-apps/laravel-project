@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Users;
 use App\Models\PasswordResets;
+use App\Services\UsersService;
+use App\Services\PasswordResetsService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgetPasswordSendResetMailRequest;
 use App\Mail\ContactMail;
@@ -13,6 +14,23 @@ use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
+    private $usersService;
+    private $passwordResetsService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param App\Services\UsersService
+     * @return void
+     */
+    public function __construct(
+        UsersService $usersService,
+        PasswordResetsService $passwordResetsService
+    ) {
+        $this->usersService = $usersService;
+        $this->passwordResetsService = $passwordResetsService;
+    }
+
     /**
      * Reset password.
      * 
@@ -21,7 +39,7 @@ class ForgotPasswordController extends Controller
      */
     public function index(Request $request)
     {
-        return view('forgotPassword');
+        return view('auth.passwords.forgot');
     }
 
     /**
@@ -32,7 +50,7 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetMail(ForgetPasswordSendResetMailRequest $request)
     {
-        $user = Users::getByEmail($request->email);
+        $user = $this->usersService->getByEmail($request->email);
         if ($user != null) {
             $expire_in_minutes = 30;
             $token = (new PasswordResets())->issue($user, $expire_in_minutes);
@@ -53,6 +71,19 @@ class ForgotPasswordController extends Controller
 
         $resultMessage = str_replace(':email', $request->email, __('auth.send_reset_mail_result_message'));
 
-        return view('forgotPassword', compact('resultMessage'));
+        return view('auth.passwords.forgot', compact('resultMessage'));
+    }
+
+    /**
+     * Reset password.
+     * 
+     * @var Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function reset(Request $request)
+    {
+        $token = 'hogehoge';
+
+        return view('auth.passwords.reset', compact('token'));
     }
 }

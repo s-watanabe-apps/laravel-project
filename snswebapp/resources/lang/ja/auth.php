@@ -35,6 +35,8 @@ return [
     'forgot_password_link' => 'パスワードを忘れた場合',
     'forgot_password_title' => 'パスワードを忘れましたか？',
     'forgot_password_message' => '以下に登録済みのEメールを入力してください。パスワードをリセットするためのリンクを送信します。',
+    'reset_password_title' => 'パスワードをリセットします。',
+    'reset_password_message' => '新しいパスワードを入力してください。',
     'reset_password' => 'パスワードをリセットする',
     'send_reset_mail_result_message' => 'パスワードをリセットするためのリンクを `:email` に送信しました。30分経ってもメールが届かない場合、入力したメールアドレスが間違っている可能性がありますのでご確認ください。',
     'password' => 'パスワードは最低６文字で、確認項目と一致している必要があります。',

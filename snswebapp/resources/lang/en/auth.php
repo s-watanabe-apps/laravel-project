@@ -35,6 +35,8 @@ return [
     'forgot_password_link' => 'Forgot Password?',
     'forgot_password_title' => 'Forgot Your Password?',
     'forgot_password_message' => 'We get it, stuff happens. Just enter your email address below and we\'ll send you a link to reset your password!',
+    'reset_password_title' => 'Reset your password.',
+    'reset_password_message' => 'Enter a new password.',
     'reset_password' => 'Reset Password',
     'send_reset_mail_result_message' => 'Sent a link to `aaa@test.com` to reset my password. If you do not receive the email after 30 minutes, please check that the email address you entered may be incorrect.',
     'reset' => 'Your password has been reset!',

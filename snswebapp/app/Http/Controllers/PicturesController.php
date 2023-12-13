@@ -62,7 +62,7 @@ class PicturesController extends Controller
 
         $images = $this->picturesService->getPictures($validated['keyword'], $validated['user_id']);
 
-        $users = $this->usersService->getEnabledUsers();
+        $users = $this->usersService->getEnabledUsers(null, null, false);
 
         return view('pictures.index', compact(
             'images',

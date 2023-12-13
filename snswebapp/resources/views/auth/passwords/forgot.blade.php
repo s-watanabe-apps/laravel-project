@@ -23,21 +23,25 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">@lang('auth.forgot_password_title')</h1>
-                                        <p class="mb-4">@lang('auth.forgot_password_message')</p>
+                                        <div class="mb-4">@lang('auth.forgot_password_message')</div>
                                     </div>
-                                    <form class="user" action="/password/email" method="post">
+                                    {{Form::open([
+                                        'url' => '/password/email',
+                                        'method' => 'post',
+                                        'class' => 'user',
+                                    ])}}
                                         @csrf
                                         <div class="form-group">
                                             <input
                                                 id="inputEmail" name="email" type="email"
                                                 class="form-control form-control-user"
                                                 aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                placeholder="@lang('strings.email')">
                                             <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
                                         </div>
 
                                         <input type="submit" value="@lang('auth.reset_password')" class="btn btn-primary btn-user btn-block" />
-                                    </form>
+                                    {{Form::close()}}
 
                                     <div class="mt-4 p-2 text-primary font-weight-bold">{{$resultMessage ?? ''}}</div>
 

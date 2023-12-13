@@ -49,7 +49,7 @@ class Service
      */
     protected function checkAccessRight($std)
     {
-        if (user()->role_id == Roles::ADMIN) {
+        if (user()->role_id == Roles::ADMIN || user()->role_id == Roles::SYSTEM) {
             return true;
         }
 

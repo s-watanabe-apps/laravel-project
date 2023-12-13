@@ -142,6 +142,7 @@ return [
 
     // Roles
     'roles' => [
+        'system' => 'システム管理者',
         'admin' => '管理者',
         'member' => 'メンバー',
     ],
@@ -211,5 +212,4 @@ return [
     'anonymous_permisshon_allowed' => '未認証ユーザーの閲覧を許可する',
     'anonymous_permisshon_not_allowed' => '未認証ユーザーの閲覧を許可しない',
     'upload_files' => 'ファイルアップロード',
-
 ];

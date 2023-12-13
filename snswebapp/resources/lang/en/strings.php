@@ -143,6 +143,7 @@ return [
 
     // Roles
     'roles' => [
+        'system' => 'System Administrator',
         'admin' => 'Administrator',
         'member' => 'Member',
     ],
