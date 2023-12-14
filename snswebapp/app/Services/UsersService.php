@@ -115,7 +115,7 @@ class UsersService extends Service
      * @var string email
      * @return App\Models\Users
      */
-    public function getByEmail($email) : Users
+    public function getByEmail($email)
     {
         $key = sprintf(parent::CACHE_KEY_USERS_BY_EMAIL, $email);
 
@@ -123,6 +123,10 @@ class UsersService extends Service
             $data = $this->base()->where('email', $email)->first();
             return json_encode($data);
         });
+
+        if (is_null($cache)) {
+            return null;
+        }
 
         return (new Users())->bind($cache);
     }
@@ -183,6 +187,34 @@ class UsersService extends Service
     public function getBirthDate($birthdate)
     {
         return carbon($birthdate)->format('Y-m-d');
+    }
+
+    public function sendResetMail($email)
+    {
+        $user = $this->usersService->getByEmail($request->email);
+
+        if ($user != null) {
+            $expire_in_minutes = 30;
+            $token = (new PasswordResets())->issue($user, $expire_in_minutes);
+
+            $encryptToken = Crypt::encryptString($request->email . ',' . $token);
+
+            $data = [
+                'name' => $user->name,
+                'token' => $encryptToken,
+                'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
+            ];
+
+            $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.reset_password'));
+            $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
+
+            Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
+        } else {
+            sleep(2);
+        }
+
+        $resultMessage = sprintf(__('auth.send_reset_mail_result_message'), $request->email);
+
     }
 
     /**

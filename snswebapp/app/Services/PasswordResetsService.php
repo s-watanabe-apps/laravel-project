@@ -21,7 +21,7 @@ class PasswordResetsService extends Service
             ]);
     }
 
-        /**
+    /**
      * Issue a token and insert a new record.
      *
      * @param App\Models\Users

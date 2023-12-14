@@ -23,17 +23,22 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">{{$settings->site_name}}</h1>
                                     </div>
-                                    <form class="user" action="/login" method="post">
+                                    {{Form::open([
+                                        'url' => route('login'),
+                                        'method' => 'post',
+                                        'class' => 'user',
+                                    ])}}
+
                                         @csrf
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="inputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." />
+                                                placeholder="@lang('strings.email')" />
                                             <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"
-                                                id="inputPassword" placeholder="Password" />
+                                                id="inputPassword" placeholder="@lang('strings.password')" />
                                             <div class="text-danger">{{$errors->first('password') ?? ''}}</div>
                                         </div>
                                         <div class="form-group text-danger">{{$faild ?? ''}}</div>
@@ -46,7 +51,7 @@
                                         </div>
                                         <input type="hidden" name="redirect" value="{{session('redirect')}}" />
                                         <input type="submit" value="@lang('auth.login')" class="btn btn-primary btn-user btn-block" />
-                                    </form>
+                                    {{Form::close()}}
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="/password/email">@lang('auth.forgot_password_link')</a>

@@ -29,39 +29,28 @@
                                     {{Form::open([
                                         'method' => 'post',
                                         'url' => '/password/reset',
+                                        'class' => 'user',
                                     ])}}
                                         @csrf
                                         <input type="hidden" name="token" value="{{$token}}">
 
-                                        <div class="form-group row">
-                                            <label for="password" class="col-md-4 col-form-label text-md-right">@lang('strings.password')</label>
-
-                                            <div class="col-md-6 px-0">
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                                @error('password')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
+                                        <div class="form-group">
+                                            <input
+                                                id="password" name="password" type="password"
+                                                class="form-control form-control-user"
+                                                placeholder="@lang('strings.password')">
+                                            <div class="text-danger">{{$errors->first('password') ?? ''}}</div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">@lang('strings.confirm')</label>
-
-                                            <div class="col-md-6 px-0">
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                            </div>
+                                        <div class="form-group">
+                                            <input
+                                                id="password-confirm" name="password_confirm" type="password"
+                                                class="form-control form-control-user"
+                                                placeholder="@lang('strings.confirm')">
+                                            <div class="text-danger">{{$errors->first('password_confirm') ?? ''}}</div>
                                         </div>
 
-                                        <div class="row mb-0">
-                                            <div class="col-md-12 text-center">
-                                                <button type="submit" class="btn btn-primary">
-                                                    @lang('auth.reset_password')
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <input type="submit" value="@lang('auth.reset_password')" class="btn btn-primary btn-user btn-block" />
                                     {{Form::close()}}
 
                                     <div class="mt-4 p-2 text-primary font-weight-bold">{{$resultMessage ?? ''}}</div>

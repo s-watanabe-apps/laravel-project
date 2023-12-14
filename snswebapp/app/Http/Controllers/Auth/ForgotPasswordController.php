@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
-
 class ForgotPasswordController extends Controller
 {
     private $usersService;
@@ -51,6 +50,7 @@ class ForgotPasswordController extends Controller
     public function sendResetMail(ForgetPasswordSendResetMailRequest $request)
     {
         $user = $this->usersService->getByEmail($request->email);
+
         if ($user != null) {
             $expire_in_minutes = 30;
             $token = (new PasswordResets())->issue($user, $expire_in_minutes);
@@ -67,9 +67,11 @@ class ForgotPasswordController extends Controller
             $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
 
             Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
+        } else {
+            sleep(2);
         }
 
-        $resultMessage = str_replace(':email', $request->email, __('auth.send_reset_mail_result_message'));
+        $resultMessage = sprintf(__('auth.send_reset_mail_result_message'), $request->email);
 
         return view('auth.passwords.forgot', compact('resultMessage'));
     }

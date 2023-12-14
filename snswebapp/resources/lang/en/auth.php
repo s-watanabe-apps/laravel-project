@@ -38,7 +38,7 @@ return [
     'reset_password_title' => 'Reset your password.',
     'reset_password_message' => 'Enter a new password.',
     'reset_password' => 'Reset Password',
-    'send_reset_mail_result_message' => 'Sent a link to `aaa@test.com` to reset my password. If you do not receive the email after 30 minutes, please check that the email address you entered may be incorrect.',
+    'send_reset_mail_result_message' => 'Sent a link to %s to reset my password. If you do not receive the email after 30 minutes, please check that the email address you entered may be incorrect.',
     'reset' => 'Your password has been reset!',
     'sent' => 'We have e-mailed your password reset link!',
     'throttled' => 'Please wait before retrying.',

@@ -43,7 +43,7 @@
                                         <input type="submit" value="@lang('auth.reset_password')" class="btn btn-primary btn-user btn-block" />
                                     {{Form::close()}}
 
-                                    <div class="mt-4 p-2 text-primary font-weight-bold">{{$resultMessage ?? ''}}</div>
+                                    <div class="mt-4 p-2 text-success">{{$resultMessage ?? ''}}</div>
 
                                     <hr>
                                     <div class="text-center">
