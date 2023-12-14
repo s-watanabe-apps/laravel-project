@@ -4,6 +4,11 @@ namespace App\Services;
 use App\Http\Exceptions\NotFoundException;
 use App\Models\Users;
 use App\Models\Roles;
+use App\Models\PasswordResets;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\DB;
 
 class UsersService extends Service
@@ -189,32 +194,32 @@ class UsersService extends Service
         return carbon($birthdate)->format('Y-m-d');
     }
 
-    public function sendResetMail($email)
+    /**
+     * Send password reset mail.
+     * 
+     * @param string $email
+     */
+    public function sendResetMail(string $email)
     {
-        $user = $this->usersService->getByEmail($request->email);
-
-        if ($user != null) {
+        if (($user = $this->base()->where('email', $email)->first()) != null) {
             $expire_in_minutes = 30;
             $token = (new PasswordResets())->issue($user, $expire_in_minutes);
 
-            $encryptToken = Crypt::encryptString($request->email . ',' . $token);
-
+            $encryptToken = Crypt::encryptString($email . ',' . $token);
+            
             $data = [
                 'name' => $user->name,
                 'token' => $encryptToken,
                 'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
             ];
 
-            $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.reset_password'));
+            $subject = sprintf("[%s] %s", settings()->site_name, __('strings.reset_password'));
             $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
 
-            Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
+            Mail::to($email)->send(new ContactMail($subject, $template, $data));
         } else {
             sleep(2);
         }
-
-        $resultMessage = sprintf(__('auth.send_reset_mail_result_message'), $request->email);
-
     }
 
     /**

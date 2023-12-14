@@ -35,3 +35,15 @@ if (!function_exists('user')) {
         return auth()->user() ?? App\Models\Users::anonymous();
     }
 }
+
+if (!function_exists('settings')) {
+    /**
+     * Global function that returns settings.
+     * 
+     * @return App\Models\Settings
+     */
+    function settings()
+    {
+        return \Session::get('settings');
+    }
+}

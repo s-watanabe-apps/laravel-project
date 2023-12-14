@@ -80,12 +80,12 @@ class LoginController extends Controller
             return redirect()->intended($this->redirectTo);
         } else {
             $faild = __('auth.failed');
-            return view('login', compact('faild'));
+            return view('auth.login', compact('faild'));
         }
     }
 
     /**
-     * login Get.
+     * Login.
      * 
      * @return Illuminate\View\View
      */
@@ -98,6 +98,6 @@ class LoginController extends Controller
             ]
         );
 
-        return view('login');
+        return view('auth.login');
     }
 }

@@ -189,5 +189,12 @@ a.tab-item:hover {
   aspect-ratio: 16 / 9;
   object-fit: contain;
 }
+
+.bg-login-image {
+  background: url("/images/pexels-nati-17788277.jpg") !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
 -->
 </style>

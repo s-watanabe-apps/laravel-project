@@ -6,10 +6,10 @@ use App\Services\UsersService;
 use App\Services\PasswordResetsService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgetPasswordSendResetMailRequest;
-use App\Mail\ContactMail;
+use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
@@ -31,7 +31,7 @@ class ForgotPasswordController extends Controller
     }
 
     /**
-     * Reset password.
+     * View for sending password reset email.
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -49,43 +49,37 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetMail(ForgetPasswordSendResetMailRequest $request)
     {
-        $user = $this->usersService->getByEmail($request->email);
+        \DB::transaction(function() use ($request) {
+            $this->usersService->sendResetMail($request->email);
+        });
 
-        if ($user != null) {
-            $expire_in_minutes = 30;
-            $token = (new PasswordResets())->issue($user, $expire_in_minutes);
-
-            $encryptToken = Crypt::encryptString($request->email . ',' . $token);
-
-            $data = [
-                'name' => $user->name,
-                'token' => $encryptToken,
-                'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
-            ];
-
-            $subject = sprintf("[%s] %s", $request->settings->site_name, __('strings.reset_password'));
-            $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
-
-            Mail::to($request->email)->send(new ContactMail($subject, $template, $data));
-        } else {
-            sleep(2);
-        }
-
-        $resultMessage = sprintf(__('auth.send_reset_mail_result_message'), $request->email);
-
-        return view('auth.passwords.forgot', compact('resultMessage'));
+        return view('auth.passwords.forgot', [
+            'result_message' => sprintf(__('auth.send_reset_mail_result_message'), $request->email),
+        ]);
     }
 
     /**
-     * Reset password.
+     * View to reset password.
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function reset(Request $request)
     {
-        $token = 'hogehoge';
+        $validator = Validator::make([
+            'token' => $request->token,
+        ], [
+            'token' => 'string|max:288',
+        ]);
 
-        return view('auth.passwords.reset', compact('token'));
+        return view('auth.passwords.reset', [
+            'token' => $validator->validated()['token'],
+        ]);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+        dump($request->validated());
+        exit;
     }
 }

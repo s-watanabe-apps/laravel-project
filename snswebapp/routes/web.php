@@ -19,7 +19,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
     Route::get('/password/email', 'Auth\ForgotPasswordController@index');
     Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetMail');
     Route::get('/password/reset', 'Auth\ForgotPasswordController@reset');
-    Route::post('/password/reset', 'Auth\ForgotPasswordController@updatePassword');
+    Route::post('/password/reset', 'Auth\ForgotPasswordController@resetPassword');
     Route::get('/register', 'AppRegisterController@index');
     Route::post('/register', 'AppRegisterController@index');
 

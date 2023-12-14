@@ -29,6 +29,7 @@ class SettingsMiddleware
         $navigations = (new NavigationMenusService())->get();
 
         $request->merge(compact('settings', 'navigations'));
+        \Session::put('settings', $settings);
 
         $this->viewFactory->share('settings', $settings);
         $this->viewFactory->share('navigations', $navigations);

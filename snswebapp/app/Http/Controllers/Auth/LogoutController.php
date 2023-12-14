@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LogoutController extends Controller
 {
     /**
-     * index
+     * Logout.
      *
      * @param  \Illuminate\Http\Request
      * @return void
