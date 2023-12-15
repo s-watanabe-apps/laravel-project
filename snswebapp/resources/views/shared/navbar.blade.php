@@ -1,7 +1,7 @@
 <div class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/images/header01.jpg" class="d-block w-100" alt="...">
+            <img src="/images/header03.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
                 <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
                 <p>{{$settings->site_description}}</p>
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <a class="sidebar-brand d-flex align-items-center justify-content-center text-decoration-none" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>

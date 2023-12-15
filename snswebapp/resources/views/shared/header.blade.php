@@ -30,164 +30,36 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<style type="text/css">
-<!--
-body#page-top {
-    overflow-y:scroll !important;
-}
-
-div#wrapper {
-}
-
-div#content-wrapper {
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 992px;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-color: #ededed;
-}
-
-div#content {
-    min-height: 820px;
-}
-
-p {
-    display: block;
-}
-
-.responsive-table > tbody > tr > th {
-    white-space: nowrap;
-    font-weight: bold;
-    background-color: #eeeeee;
-}
-
-.responsive-table > tbody > tr > td > p {
-    line-height: 150%;
-}
-
-.nav-hover:hover {
-    background-color: #ededed;
-}
-
-.container-fluid {
-    padding: 0 12px 0 12px;
+<!-- Light Theme
+.carousel-caption > h3 {
+    color: #454545 !important;
 }
 
 .navbar {
-    padding-top: 3px;
-    padding-bottom: 3px;
+    background: #fcfcfc !important;
+}
+-->
+
+<style type="text/css">
+<!--
+body {
+    background: #fefefe;
 }
 
-.carousel-caption {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+.carousel-caption > h3 {
+    color: #454545 !important;
 }
 
-.card-body > p {
-    line-height: 130%;
-    margin-bottom: 10px;
+.navbar {
+    background: #fcfcfc !important;
 }
 
-pre > code {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #9e9e9e;
+.nav-hover:hover {
+    background-color: #ededed !important;
 }
 
-small > div#calendar .fc-header-toolbar {
-    margin-bottom: 10px;
-}
-
-small > div#calendar .fc-footer-toolbar {
-    margin-top: 10px;
-}
-
-small > div#calendar .fc-toolbar-title {
-    font-size: 1.5em;
-}
-
-small > div#calendar .btn {
-    font-size: 0.9em;
-    height: 28px;
-}
-
-span.label {
-    padding: 1px 8px 1px 8px;
-    margin: 3px;
-    background-color: #eee;
-    border-radius: 15px;
-    border: 1px solid gray;
-    line-height: 35px;
-    color: #555;
-}
-
-span.enable {
-    padding: 1px 8px 1px 8px;
-    margin: 3px;
-    background-color: #afa;
-    border-radius: 15px;
-    border: 1px solid #7a7;
-    line-height: 35px;
-    font-weight: bold;
-    color: #484;
-}
-
-span.disable {
-    padding: 1px 8px 1px 8px;
-    margin: 3px;
-    background-color: #faa;
-    border-radius: 15px;
-    border: 1px solid #a77;
-    line-height: 35px;
-    font-weight: bold;
-    color: #844;
-}
-
-@media only screen and (max-width:768px) {
-    .carousel-caption {
-        top: 30%;
-    }
-    .carousel-caption > h3 {
-        font-size: 18px;
-    }
-    .carousel-caption > p {
-        font-size: 12px;
-    }
-}
-
-a.tab-active {
-    background: #dfdfdf;
-    background-image: url("/img/arrow-right150.png");
-    background-repeat: no-repeat;
-    background-size: 10px;
-    background-position: 3% 50%;
-}
-
-a.tab-item:hover {
-    background-image: url("/img/arrow-right75.png");
-    background-repeat: no-repeat;
-    background-size: 10px;
-    background-position: 3% 50%;
-}
-
-.toast-area {
-    position: absolute;
-    z-index: 1;
-    top: 20%;
-    left: 50%;
-    width: 300px;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
-
-.img-preview {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
+#content {
+    background: #fcfcfc !important;
 }
 
 .bg-login-image {
@@ -195,6 +67,5 @@ a.tab-item:hover {
   background-position: center !important;
   background-size: cover !important;
 }
-
 -->
 </style>
