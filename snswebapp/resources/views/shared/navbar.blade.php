@@ -1,7 +1,7 @@
 <div class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/images/header03.jpg" class="d-block w-100" alt="...">
+            <img src="/images/header/1.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption">
                 <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
                 <p>{{$settings->site_description}}</p>
