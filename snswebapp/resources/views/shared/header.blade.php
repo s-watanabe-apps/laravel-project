@@ -63,5 +63,15 @@ body {
   background-position: center !important;
   background-size: cover !important;
 }
+
+
+
+.hidden_radio {
+  display: none;
+}
+
+input[type="radio"]:checked + label > img {
+  outline:3px solid #ff0000;
+}
 -->
 </style>

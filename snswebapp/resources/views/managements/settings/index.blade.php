@@ -129,13 +129,21 @@
                 <div class="row">
                     @foreach($headers as $header)
                     <div class="col-lg-6 col-md-6 col-6 p-2">
-                        <img
-                            src="/img/loading.gif"
-                            data-src="/images/header/{{$header->file_name}}"
-                            alt="{{$header->file_name}}"
-                            style="width:100%;"
-                            class="lazyload rounded"
-                            loading="lazy" />
+                        <input type="radio" id="radio{{$header->id}}" name="header_id" value="{{$header->id}}" class="hidden_radio"
+                        @if ($settings->header_id == $header->id)
+                            checked == "checked"
+                        @endif
+                        />
+
+                        <label for="radio{{$header->id}}">
+                            <img
+                                src="/img/loading.gif"
+                                data-src="/images/header/{{$header->file_name}}"
+                                alt="{{$header->file_name}}"
+                                style="width:100%;"
+                                class="lazyload rounded"
+                                loading="lazy" />
+                        </label>
                     </div>
                     @endforeach
                 </div>
