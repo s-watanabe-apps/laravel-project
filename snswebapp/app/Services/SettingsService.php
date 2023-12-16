@@ -24,12 +24,15 @@ class SettingsService extends Service
                 'settings.basic_user',
                 'settings.basic_password',
                 'settings.anonymous_permission',
-                'settings.header_id',
-                \DB::raw('headers.file_name as header_file_name'),
-                'headers.title_color',
+                'settings.header_image_id',
+                \DB::raw('header_images.file_name as header_file_name'),
+                'header_images.title_color',
+                'settings.login_image_id',
+                \DB::raw('login_images.file_name as login_file_name'),
             ])
             ->where('settings.id', 1)
-            ->leftJoin('headers', 'settings.header_id', '=', 'headers.id');
+            ->leftJoin('header_images', 'settings.header_image_id', '=', 'header_images.id')
+            ->leftJoin('login_images', 'settings.login_image_id', '=', 'login_images.id');
     }
 
     /**

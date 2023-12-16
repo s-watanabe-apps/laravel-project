@@ -59,7 +59,7 @@ body {
 }
 
 .bg-login-image {
-  background: url("/images/pexels-nati-17788277.jpg") !important;
+  background: url("/images/logins/1.jpg") !important;
   background-position: center !important;
   background-size: cover !important;
 }

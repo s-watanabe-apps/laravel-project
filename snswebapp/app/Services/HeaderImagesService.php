@@ -1,10 +1,10 @@
 <?php
 namespace App\Services;
 
-use App\Models\Headers;
+use App\Models\HeaderImages;
 use Illuminate\Support\Facades\DB;
 
-class HeadersService extends Service
+class HeaderImagesService extends Service
 {
     /**
      * Get base query builder builder.
@@ -13,11 +13,11 @@ class HeadersService extends Service
      */
     private function base()
     {
-        return Headers::query()
+        return HeaderImages::query()
             ->select([
-                'headers.id',
-                'headers.file_name',
-                'headers.title_color',
+                'header_images.id',
+                'header_images.file_name',
+                'header_images.title_color',
             ]);
     }
 

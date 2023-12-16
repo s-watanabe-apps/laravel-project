@@ -1,10 +1,10 @@
 <?php
-use App\Models\Headers;
+use App\Models\HeaderImages;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class HeadersTableSeeder extends Seeder
+class HeaderImagesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class HeadersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('headers')->truncate();
+        DB::table('header_images')->truncate();
         $headers = [
             ['file_name' => '1.jpg', 'title_color' => '#454545',],
             ['file_name' => '2.jpg', 'title_color' => '#454545',],
@@ -29,7 +29,7 @@ class HeadersTableSeeder extends Seeder
             ['file_name' => '12.jpg', 'title_color' => '#454545',],
         ];
         foreach($headers as $header) {
-            Headers::query()->create($header);
+            HeaderImages::query()->create($header);
         }
     }
 }

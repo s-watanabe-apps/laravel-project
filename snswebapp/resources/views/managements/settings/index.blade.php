@@ -129,13 +129,13 @@
                 <div class="row">
                     @foreach($headers as $header)
                     <div class="col-lg-6 col-md-6 col-6 p-2">
-                        <input type="radio" id="radio{{$header->id}}" name="header_id" value="{{$header->id}}" class="hidden_radio"
-                        @if ($settings->header_id == $header->id)
+                        <input type="radio" id="header_image_radio{{$header->id}}" name="header_image_id" value="{{$header->id}}" class="hidden_radio"
+                        @if ($settings->header_image_id == $header->id)
                             checked == "checked"
                         @endif
                         />
 
-                        <label for="radio{{$header->id}}">
+                        <label for="header_image_radio{{$header->id}}">
                             <img
                                 src="/img/loading.gif"
                                 data-src="/images/header/{{$header->file_name}}"

@@ -1,10 +1,10 @@
 <?php
 namespace App\Models;
 
-class Headers extends Model
+class HeaderImages extends Model
 {
     // Table name.
-    public $table = 'headers';
+    public $table = 'header_images';
 
     // Primary key.
     protected $primaryKey = 'id';
