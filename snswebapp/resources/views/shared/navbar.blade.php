@@ -1,8 +1,8 @@
 <div class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/images/header/1.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption">
+            <img src="/images/header/{{$settings->header_file_name}}" class="d-block w-100" alt="...">
+            <div class="carousel-caption" style="color: {{$settings->title_color}};">
                 <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
                 <p>{{$settings->site_description}}</p>
             </div>

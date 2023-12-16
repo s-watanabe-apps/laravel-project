@@ -46,10 +46,6 @@ body {
     background: #fefefe;
 }
 
-.carousel-caption > h3 {
-    color: #454545 !important;
-}
-
 .navbar {
     background: #fcfcfc !important;
 }

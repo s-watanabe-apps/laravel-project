@@ -190,5 +190,6 @@ return [
     'anonymous_permisshon_allowed' => 'Allow unauthenticated users to view.',
     'anonymous_permisshon_not_allowed' => 'Not allow unauthorized users to view.',
     'upload_files' => 'Upload files',
+    'header_images' => 'Header images',
 
 ];

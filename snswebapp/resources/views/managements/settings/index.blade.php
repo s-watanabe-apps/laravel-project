@@ -84,9 +84,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-6 col-12">
         <div class="h6 font-weight-bold">@lang('strings.basic_auth')</div>
         <div class="card bg-light text-black shadow mb-3">
             <div class="card-body">
@@ -124,6 +122,26 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-12">
+        <div class="h6 font-weight-bold">@lang('strings.header_images')</div>
+        <div class="card bg-light text-black shadow mb-3">
+            <div class="card-body">
+                <div class="row">
+                    @foreach($headers as $header)
+                    <div class="col-lg-6 col-md-6 col-6 p-2">
+                        <img
+                            src="/img/loading.gif"
+                            data-src="/images/header/{{$header->file_name}}"
+                            alt="{{$header->file_name}}"
+                            style="width:100%;"
+                            class="lazyload rounded"
+                            loading="lazy" />
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -145,5 +163,8 @@
     });
 </script>
 @endif
+
+<!-- Lazyload -->
+@include('shared.lazyload')
 
 @endsection

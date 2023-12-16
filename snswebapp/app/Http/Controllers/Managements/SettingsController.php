@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Services\SettingsService;
+use App\Services\HeadersService;
 use App\Http\Requests\ManagementsSettingsRequest;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,7 @@ class SettingsController extends ManagementsController
 {
     // Instance variables.
     private $profilesService;
+    private $headersService;
 
     /**
      * Create a new controller instance.
@@ -16,9 +18,12 @@ class SettingsController extends ManagementsController
      * @param App\Services\SettingsService
      * @return void
      */
-    public function __construct(SettingsService $settingsService)
+    public function __construct(
+        SettingsService $settingsService,
+        HeadersService $headersService)
     {
         $this->settingsService = $settingsService;
+        $this->headersService = $headersService;
     }
 
     /**
@@ -29,7 +34,9 @@ class SettingsController extends ManagementsController
      */
     public function index(Request $request)
     {
-        return view('managements.settings.index');
+        $headers = $this->headersService->get();
+
+        return view('managements.settings.index', compact('headers'));
     }
 
     /**

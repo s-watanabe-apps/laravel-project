@@ -213,4 +213,5 @@ return [
     'anonymous_permisshon_allowed' => '未認証ユーザーの閲覧を許可する',
     'anonymous_permisshon_not_allowed' => '未認証ユーザーの閲覧を許可しない',
     'upload_files' => 'ファイルアップロード',
+    'header_images' => 'ヘッダー画像',
 ];
