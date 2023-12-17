@@ -30,7 +30,8 @@ class ManagementsSettingsRequest extends AppFormRequest
             'basic_user' => 'required|max:255',
             'basic_password' => 'required|max:255',
             'anonymous_permission' => 'required|in:0,1',
-            'header_image_id' => 'required|exists:header_images,id'
+            'header_image_id' => 'required|exists:header_images,id',
+            'login_image_id' => 'required|exists:login_images,id',
         ];
 
         if ($this->basic_auth == '0') {

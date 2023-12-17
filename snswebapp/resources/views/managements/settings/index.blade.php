@@ -127,19 +127,45 @@
         <div class="card bg-light text-black shadow mb-3">
             <div class="card-body">
                 <div class="row">
-                    @foreach($headers as $header)
+                    @foreach($headerImages as $image)
                     <div class="col-lg-6 col-md-6 col-6 p-2">
-                        <input type="radio" id="header_image_radio{{$header->id}}" name="header_image_id" value="{{$header->id}}" class="hidden_radio"
-                        @if ($settings->header_image_id == $header->id)
+                        <input type="radio" id="header_image_radio{{$image->id}}" name="header_image_id" value="{{$image->id}}" class="hidden_radio"
+                        @if ($settings->header_image_id == $image->id)
                             checked == "checked"
                         @endif
                         />
 
-                        <label for="header_image_radio{{$header->id}}">
+                        <label for="header_image_radio{{$image->id}}">
                             <img
                                 src="/img/loading.gif"
-                                data-src="/images/header/{{$header->file_name}}"
-                                alt="{{$header->file_name}}"
+                                data-src="/images/header/{{$image->file_name}}"
+                                alt="{{$image->file_name}}"
+                                style="width:100%;"
+                                class="lazyload rounded"
+                                loading="lazy" />
+                        </label>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        <div class="h6 font-weight-bold">@lang('strings.login_images')</div>
+        <div class="card bg-light text-black shadow mb-3">
+            <div class="card-body">
+                <div class="row">
+                    @foreach($loginImages as $image)
+                    <div class="col-lg-6 col-md-6 col-6 p-2">
+                        <input type="radio" id="login_image_radio{{$image->id}}" name="login_image_id" value="{{$image->id}}" class="hidden_radio"
+                        @if ($settings->login_image_id == $image->id)
+                            checked == "checked"
+                        @endif
+                        />
+
+                        <label for="login_image_radio{{$image->id}}">
+                            <img
+                                src="/img/loading.gif"
+                                data-src="/images/login/{{$image->file_name}}"
+                                alt="{{$image->file_name}}"
                                 style="width:100%;"
                                 class="lazyload rounded"
                                 loading="lazy" />

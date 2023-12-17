@@ -1,10 +1,10 @@
 <?php
 namespace App\Services;
 
-use App\Models\HeaderImages;
+use App\Models\LoginImages;
 use Illuminate\Support\Facades\DB;
 
-class HeaderImagesService extends Service
+class LoginImagesService extends Service
 {
     /**
      * Get base query builder builder.
@@ -13,16 +13,15 @@ class HeaderImagesService extends Service
      */
     private function base()
     {
-        return HeaderImages::query()
+        return LoginImages::query()
             ->select([
-                'header_images.id',
-                'header_images.file_name',
-                'header_images.title_color',
+                'login_images.id',
+                'login_images.file_name',
             ]);
     }
 
     /**
-     * Get header images.
+     * Get login images.
      */
     public function get()
     {
