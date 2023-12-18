@@ -81,7 +81,7 @@ class ArticlesService extends Service
         $builder = $this->base()
             ->where('articles.user_id', $userId);
         
-        if (!is_null($labelId)) {
+        if ($labelId > 0) {
             $builder->join('article_labels', function($join) use($labelId) {
                 $join->on('article_labels.article_id', '=', 'articles.id')
                     ->where('article_labels.label_id', $labelId);
