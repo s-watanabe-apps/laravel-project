@@ -16,7 +16,7 @@ class ArticleCommentsService extends Service
             ->select([
                 'article_comments.id',
                 'article_comments.user_id',
-                'users.name',
+                \DB::raw('users.name as user_name'),
                 'article_comments.comment',
                 'article_comments.created_at',
                 'article_comments.updated_at',
@@ -48,9 +48,16 @@ class ArticleCommentsService extends Service
      * @param array $values
      * @return App\Models\ArticleComments
      */
-    public function save($values) {
+    public function save($userId, $params)
+    {
         $articleComments = new ArticleComments();
-        $articleComments->fill($values)->save();
+
+        $articleComments->user_id = $userId;
+        $articleComments->article_id = $params['id'];
+        $articleComments->comment = $params['comment'];
+
+        $articleComments->save();
+
         return $articleComments;
     }
 

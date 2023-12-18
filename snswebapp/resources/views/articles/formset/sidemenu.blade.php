@@ -61,7 +61,7 @@
             <td class="view-box">
                 <nobr>
                     @foreach($sidemenus['userLabels'] as $label)
-                    <a href="/articles/user/{{$articleUserId}}?label={{$label->id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
+                    <a href="/articles/user/{{$articleUserId}}?label={{$label->value}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
                     @endforeach
                 </nobr>
             </td>

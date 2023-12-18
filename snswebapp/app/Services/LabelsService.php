@@ -47,4 +47,9 @@ class LabelsService extends Service
     {
         return $this->base()->whereIn('labels.id', $ids)->get();
     }
+
+    public function getIdByName(string $labelName)
+    {
+        return $this->base()->where('labels.value', $labelName)->first();
+    }
 }

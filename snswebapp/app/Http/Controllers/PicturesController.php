@@ -119,6 +119,11 @@ class PicturesController extends Controller
         return redirect()->route('pictures.index');
     }
 
+    /**
+     * Post picture comment.
+     * 
+     * @param App\Http\Requests\CommentRequest
+     */
     public function comment(CommentRequest $request)
     {
         $params = $request->validated();

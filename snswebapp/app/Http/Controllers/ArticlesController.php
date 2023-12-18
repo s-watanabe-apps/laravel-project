@@ -10,6 +10,7 @@ use App\Services\UsersService;
 use App\Http\Exceptions\BusinessException;
 use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
+use App\Http\Requests\CommentRequest;
 use App\Libs\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -90,20 +91,20 @@ class ArticlesController extends Controller
     public function user(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'label' => 'numeric',
+            'label' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
             throw new BusinessException();
         }
 
-        $labelId = $validator->validated()['label'] ?? null;
-
-        $searchLabels = null;
-        if (!is_null($labelId)) {
-            $searchLabels = $this->labelsService->get($labelId);
+        $labelId = null;
+        $labelName = trim($validator->validated()['label']);
+        if (!is_null($labelName)) {
+            $labels = $this->labelsService->getIdByName($labelName);
+            $labelId = $labels->id ?? 0;
         }
-        
+
         $articlesUser = $this->usersService->get($request->id);
 
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
@@ -114,7 +115,7 @@ class ArticlesController extends Controller
         $sidemenus = $this->getSidemenus($request->id);
 
         return view('articles.user', compact(
-            'searchLabels',
+            'labelName',
             'articles',
             'articlesUser',
             'commentCount',
@@ -138,7 +139,7 @@ class ArticlesController extends Controller
 
         $sidemenus = $this->getSidemenus($articles->user_id);
 
-        return view('articles.view', compact(
+        return view('articles.viewer', compact(
             'articles',
             'articleComments',
             'labels',
@@ -201,4 +202,21 @@ class ArticlesController extends Controller
 
         return redirect()->route('articles.user', ['id' => user()->id]);
     }
+
+    /**
+     * Post picture comment.
+     * 
+     * @param App\Http\Requests\CommentRequest
+     */
+    public function comment(CommentRequest $request)
+    {
+        $params = $request->validated();
+        
+        \DB::transaction(function() use ($params) {
+            $this->articleCommentsService->save(user()->id, $params);
+        });
+
+        return redirect()->route('articles.get', ['id' => $params['id']]);
+    }
+
 }

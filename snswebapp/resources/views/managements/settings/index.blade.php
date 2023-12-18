@@ -154,7 +154,7 @@
             <div class="card-body">
                 <div class="row">
                     @foreach($loginImages as $image)
-                    <div class="col-lg-6 col-md-6 col-6 p-2">
+                    <div class="col-lg-4 col-md-4 col-4 p-2 text-center">
                         <input type="radio" id="login_image_radio{{$image->id}}" name="login_image_id" value="{{$image->id}}" class="hidden_radio"
                         @if ($settings->login_image_id == $image->id)
                             checked == "checked"
@@ -166,7 +166,7 @@
                                 src="/img/loading.gif"
                                 data-src="/images/login/{{$image->file_name}}"
                                 alt="{{$image->file_name}}"
-                                style="width:100%;"
+                                style="width:100%; height: 18vh; background-position: center"
                                 class="lazyload rounded"
                                 loading="lazy" />
                         </label>

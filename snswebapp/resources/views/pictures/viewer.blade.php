@@ -82,7 +82,7 @@
                 @foreach ($pictureComments as $comment)
                 <tr>
                     <td>
-                        <div>{{$comment->comment}}</div>
+                        <div>{!!str_replace("\n", "<br>", $comment->comment)!!}</div>
                         <div class="text-right"><small class="text-left">
                             {{$comment->created_at->format(\DateFormat::getDateFormat())}}&nbsp;
                             <a href="/profiles/{{$comment->user_id}}">{{$comment->user_name}}</a>

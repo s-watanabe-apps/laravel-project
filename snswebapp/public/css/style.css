@@ -191,8 +191,17 @@ a.tab-item:hover {
 }
 
 .img-preview {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
 }
+
+.hidden_radio {
+    display: none;
+}
+
+input[type="radio"]:checked + label > img {
+    outline:3px solid #ff0000;
+}
+  

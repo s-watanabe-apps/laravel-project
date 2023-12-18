@@ -31,17 +31,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <!-- Light Theme
-.carousel-caption > h3 {
-    color: #454545 !important;
-}
-
-.navbar {
-    background: #fcfcfc !important;
-}
--->
-
-<style type="text/css">
-<!--
 body {
     background: #fefefe;
 }
@@ -57,21 +46,10 @@ body {
 #content {
     background: #fcfcfc !important;
 }
+-->
 
-.bg-login-image {
-  background: url("/images/logins/1.jpg") !important;
-  background-position: center !important;
-  background-size: cover !important;
-}
+<style type="text/css">
+<!--
 
-
-
-.hidden_radio {
-  display: none;
-}
-
-input[type="radio"]:checked + label > img {
-  outline:3px solid #ff0000;
-}
 -->
 </style>
