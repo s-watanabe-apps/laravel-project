@@ -46,10 +46,22 @@ body {
 #content {
     background: #fcfcfc !important;
 }
+
+background: radial-gradient(円の中心の位置を指定, 円の中心の色を指定 0%,円の一番外側の色を指定 100%);
 -->
 
 <style type="text/css">
 <!--
+.carousel-caption {
+    border-radius: 10%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.600) 0%, rgba(0, 0, 0, 0.0) 70%);
+}
 
+.carousel-caption > div {
+    position: absolute;
+    top: 50%;
+    -webkit-transform : translateY(-50%);
+    transform : translateY(-50%);
+}
 -->
 </style>
