@@ -14,6 +14,29 @@
                 <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
             </td>
         </tr>
+        <tr>
+            <th>@lang('strings.label')</th>
+            <td>
+                <input type="text" name="labels" class="form-control" value="" />
+                <div class="text-danger">{{$errors->first('labels') ?? ''}}</div>
+            </td>
+        </tr>
+        <tr>
+            <th>@lang('strings.display_flag')</th>
+            <td>
+                <input type="checkbox"
+                    name="status"
+                    @if (($articles->status ?? \Status::DISABLED) == \Status::ENABLED)
+                        checked
+                    @endif
+                    data-onstyle="success" data-offstyle="secondary"
+                    data-toggle="toggle"
+                    data-size="sm"
+                    data-on="@lang('strings.enable')"
+                    data-off="@lang('strings.disable')" />
+                <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
+            </td>
+        </tr>
     </tbody>
 </table>
 

@@ -23,7 +23,9 @@ class ArticlesRequest extends AppFormRequest
         return [
             'id' => 'numeric',
             'title' => 'required|max:255',
-            'body' => 'string',
+            'body' => 'nullable|string',
+            'status' => 'in:on',
+            'labels' => 'nullable|string',
         ];
     }
 
@@ -37,6 +39,8 @@ class ArticlesRequest extends AppFormRequest
         return [
             'title' => __('strings.title'),
             'body' => __('strings.article_body'),
+            'status' => __('strings.display_flag'),
+            'labels' => __('strings.labels'),
         ];
     }
 }

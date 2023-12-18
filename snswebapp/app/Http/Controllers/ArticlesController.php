@@ -179,6 +179,7 @@ class ArticlesController extends Controller
      */
     public function confirm(ArticlesRequest $request)
     {
+        dump($request->validated());
         $articles = (new Articles())->bind($request->validated());
 
         $labels = [];

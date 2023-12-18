@@ -4,7 +4,7 @@
             <img src="/images/header/{{$settings->header_file_name}}" class="d-block w-100" alt="...">
             <div class="carousel-caption" style="color: {{$settings->title_color}};">
                 <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
-                <p>{{$settings->site_description}}</p>
+                <p>{!!$settings->site_description!!}</p>
             </div>
         </div>
     </div>

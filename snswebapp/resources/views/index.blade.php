@@ -43,12 +43,13 @@
                 <div class="">{!!$value->body_text!!}</div>
                 
                 <div class="row">
-                    <div class="col-6 text-left">
+                    <div class="col-md-12 col-lg-3 text-left">
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-md-12 col-lg-9 text-right">
                         <span>{{$value->created_at->format(\DateFormat::getDateTimeFormat())}}</span>
                         <span>(0)</span>
+                        <span><a href="/profile/{{$value->user_id}}">{{$value->name}}</a></span>
                     </div>
                 </div>
             </div>

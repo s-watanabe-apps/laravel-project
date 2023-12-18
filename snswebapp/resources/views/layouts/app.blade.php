@@ -22,7 +22,7 @@
                 @include('shared.topbar')
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid px-3">
                     @yield('content')
                 </div>
             </div>

@@ -98,6 +98,11 @@ p {
     padding-bottom: 3px;
 }
 
+.nav-hover:hover {
+    background-color: #ededed !important;
+    border-radius: 10px;
+}
+
 .carousel-caption {
     position: absolute;
     top: 50%;

@@ -83,6 +83,7 @@ return [
     'no_comment' => 'コメントなし',
     'description' => '説明',
     'settings' => '設定',
+    'display_flag' => '表示フラグ',
 
     // Side menus
     'write_articles' => '記事を書く',

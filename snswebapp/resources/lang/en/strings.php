@@ -84,6 +84,7 @@ return [
     'no_comment' => 'No comment',
     'description' => 'Description',
     'settings' => 'Settings',
+    'display_flag' => 'Display flag',
 
     // Side menus
     'write_articles' => 'Write articles',
