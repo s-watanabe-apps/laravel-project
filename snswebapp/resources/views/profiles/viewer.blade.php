@@ -113,11 +113,11 @@
     <div class="col-lg-8 mb-5 text-center">
         @if (user()->id == $profileUser->id)
         <a href="/profiles/edit" class="btn btn-primary shadow-sm btn-edit-cancel-save">
-            <i class="fas fa-user-edit fa-sm text-white-50"></i> @lang('strings.edit')
+            <i class="fas fa-user-edit fa-sm text-white-50"></i>&nbsp;@lang('strings.edit')
         </a>
         @else
         <a href="/profiles/edit" class="btn btn-primary shadow-sm btn-edit-cancel-save" style="width: 12rem !important;">
-            <i class="fas fa-paper-plane fa-sm text-white-50"></i> @lang('strings.send_message')
+            <i class="fas fa-paper-plane fa-sm text-white-50"></i>&nbsp;@lang('strings.send_message')
         </a>
         @endif
     </div>

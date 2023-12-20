@@ -5,7 +5,7 @@
             <div class="carousel-caption" style="color: {{$settings->title_color}};">
                 <div class="col-12">
                     <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
-                    <p>{!!$settings->site_description!!}</p>
+                    <span>{!!$settings->site_description!!}</span>
                 </div>
             </div>
         </div>

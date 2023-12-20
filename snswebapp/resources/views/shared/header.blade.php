@@ -54,7 +54,7 @@ background: radial-gradient(円の中心の位置を指定, 円の中心の色�
 <!--
 .carousel-caption {
     border-radius: 10%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.600) 0%, rgba(0, 0, 0, 0.0) 70%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.800) 0%, rgba(0, 0, 0, 0.0) 95%);
 }
 
 .carousel-caption > div {
