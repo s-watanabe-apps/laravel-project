@@ -2,7 +2,7 @@
     <tbody>
         <tr>
             <th>@lang('strings.title')</th>
-            <td>
+            <td style="width: 90%;">
                 <input type="text" name="title" class="form-control" id="title" placeholder="" value="{{$articles->title ?? ''}}">
                 <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
             </td>
@@ -42,6 +42,6 @@
 
 <div class="col-auto mb-5 text-center">
     <a href="javascript:article.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-        <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.confirm')
+        <i class="fas fa-check fa-sm text-white-50"></i>&nbsp;@lang('strings.confirm')
     </a>
 </div>

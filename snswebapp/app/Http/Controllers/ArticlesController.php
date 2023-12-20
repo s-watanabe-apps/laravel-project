@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Labels;
 use App\Services\ArticleLabelsService;
 use App\Services\ArticleCommentsService;
 use App\Services\ArticlesService;
@@ -179,10 +180,18 @@ class ArticlesController extends Controller
      */
     public function confirm(ArticlesRequest $request)
     {
-        dump($request->validated());
         $articles = (new Articles())->bind($request->validated());
+        $articles->user_id = user()->id;
 
+        $labelsString = preg_replace('/\s+/', ' ', trim($articles->labels));
         $labels = [];
+        if ($labelsString != '') {
+            $labels = array_map(function(string $value) {
+                $label = new Labels();
+                $label->value = $value;
+                return $label;
+            }, array_unique(explode(' ', $labelsString)));
+        }
 
         $method = $request->method();
 

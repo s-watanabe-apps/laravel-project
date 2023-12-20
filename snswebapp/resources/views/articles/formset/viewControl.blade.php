@@ -2,13 +2,15 @@
     <tbody>
         <tr>
             <th>@lang('strings.title')</th>
-            <td>
+            <td style="width: 90%;">
+                {{Form::hidden('title', $articles->title)}}
                 {{$articles->title}}
             </td>
         </tr>
         <tr>
             <th>@lang('strings.article_body')</th>
             <td>
+                {{Form::hidden('body', $articles->body)}}
                 {!!$articles->body!!}
             </td>
         </tr>
@@ -27,9 +29,12 @@
         <tr>
             <th>@lang('strings.label')</th>
             <td>
+                {{Form::hidden('labels', $articles->labels ?? null)}}
                 <nobr>
                     @foreach($labels as $label)
-                    <a href="/articles/user/{{$articles->user_id}}?label={{$label->label_id}}" class="text-decoration-none"><span class="label">{{$label->value}}</span></a><wbr>
+                    <a href="/articles/user/{{$articles->user_id}}?label={{$label->value}}" class="text-decoration-none">
+                        <span class="label">{{$label->value}}</span>
+                    </a><wbr>
                     @endforeach
                 </nobr>
             </td>
