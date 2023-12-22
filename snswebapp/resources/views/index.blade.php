@@ -25,7 +25,7 @@
                     {!!$information->body!!}
 
                     <div class="col-12 text-right">
-                        <span>{{$information->start_time}}</span>
+                        <span>{{date(\DateFormat::getDateTimeFullFormat(), strtotime($information->start_time))}}</span>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
                     </div>
                     <div class="col-md-12 col-lg-9 text-right">
-                        <span>{{$value->created_at->format(\DateFormat::getDateTimeFormat())}}</span>
+                        <span>{{$value->created_at->format(\DateFormat::getDateTimeFullFormat())}}</span>
                         <span>(0)</span>
                         <span><a href="/profile/{{$value->user_id}}">{{$value->name}}</a></span>
                     </div>

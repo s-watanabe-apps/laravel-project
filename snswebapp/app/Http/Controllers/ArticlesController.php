@@ -183,15 +183,7 @@ class ArticlesController extends Controller
         $articles = (new Articles())->bind($request->validated());
         $articles->user_id = user()->id;
 
-        $labelsString = preg_replace('/\s+/', ' ', trim($articles->labels));
-        $labels = [];
-        if ($labelsString != '') {
-            $labels = array_map(function(string $value) {
-                $label = new Labels();
-                $label->value = $value;
-                return $label;
-            }, array_unique(explode(' ', $labelsString)));
-        }
+        $labels = $this->labelsService->stringToLabels($articles->labels ?? '');
 
         $method = $request->method();
 
@@ -207,7 +199,11 @@ class ArticlesController extends Controller
     public function register(ArticlesRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $this->articlesService->save($request);
+            $values = $request->validated();
+            unset($values['labels']);
+            $this->articlesService->save($values);
+
+            //$this->articleLabelsService->save($request);
         });
 
         return redirect()->route('articles.user', ['id' => user()->id]);

@@ -2,7 +2,7 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="/images/header/{{$settings->header_file_name}}" class="d-block w-100" alt="...">
-            <div class="carousel-caption" style="color: {{$settings->title_color}};">
+            <div class="carousel-caption h-100" style="color: {{$settings->title_color}};">
                 <div class="col-12">
                     <h3 class="font-weight-bold">{{$settings->site_name}}</h3>
                     <span>{!!$settings->site_description!!}</span>

@@ -21,7 +21,7 @@
         ])}}
         @csrf
 
-        @include('articles.formset.viewControl', compact('articles'))
+        @include('articles.formset.viewControl', compact('articles', 'method'))
 
         @if (isset($articles->id))
             {{Form::hidden('id', $articles->id)}}

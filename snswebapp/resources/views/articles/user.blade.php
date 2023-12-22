@@ -29,7 +29,7 @@
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
                     </div>
                     <div class="col-6 text-right">
-                        <span>{{$value->created_at->format(\DateFormat::getDateTimeFormat())}}</span>
+                        <span>{{$value->created_at->format(\DateFormat::getDateTimeFullFormat())}}</span>
                         <span>(0)</span>
                     </div>
                 </div>

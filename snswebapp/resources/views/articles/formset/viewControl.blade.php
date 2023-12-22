@@ -21,12 +21,6 @@
             </td>
         </tr>
         <tr>
-            <th>@lang('strings.contribute_date')</th>
-            <td>
-                {{isset($articles->created_at) ? $articles->created_at->format(\DateFormat::getDateTimeFullFormat()) : carbon()->format(\DateFormat::getDateTimeFullFormat())}}
-            </td>
-        </tr>
-        <tr>
             <th>@lang('strings.label')</th>
             <td>
                 {{Form::hidden('labels', $articles->labels ?? null)}}
@@ -39,5 +33,30 @@
                 </nobr>
             </td>
         </tr>
+        @if (strtolower($method ?? null) == 'post' || strtolower($method ?? null) == 'put')
+        <tr>
+            <th>@lang('strings.display_flag')</th>
+            <td>
+                <input type="checkbox"
+                    name="status"
+                    @if (($articles->status ?? \Status::DISABLED) == \Status::ENABLED)
+                        checked
+                    @endif
+                    data-onstyle="success" data-offstyle="secondary"
+                    data-toggle="toggle"
+                    data-size="sm"
+                    data-on="@lang('strings.enable')"
+                    data-off="@lang('strings.disable')" />
+                <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
+            </td>
+        </tr>
+        @else
+        <tr>
+            <th>@lang('strings.contribute_date')</th>
+            <td>
+                {{isset($articles->created_at) ? $articles->created_at->format(\DateFormat::getDateTimeFullFormat()) : carbon()->format(\DateFormat::getDateTimeFullFormat())}}
+            </td>
+        </tr>
+        @endif
     </tbody>
 </table>

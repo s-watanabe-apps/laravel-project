@@ -194,23 +194,24 @@ class ArticlesService extends Service
      * @param App\Http\Requests\ArticlesRequest $request
      * @return App\Models\Articles
      */
-    public function save(ArticlesRequest $request) {
-        if (isset($request->id)) {
+    public function save(array $values) {
+        if (isset($values['id'])) {
             // Update
-            $articles = $this->get($request->id);
+            $articles = $this->get($values['id']);
             throw_if($articles->user_id != user()->id, ForbiddenException::class);
 
-            foreach ($request->validated() as $key => $value) {
-                $articles->$key = $value;
-            }
+            $articles->title = $values['title'];
+            $articles->body = $values['body'];
+            $articles->status = ($values['status'] ?? '') == 'on' ? \Status::ENABLED : \Status::DISABLED;
+            $articles->type = Articles::TYPE_MEMBER_ARTICLE;
+            $articles->created_at = carbon();
         } else {
             // Insert
             $articles = new Articles();
-            $values = $request->validated();
 
             $values['user_id'] = user()->id;
             $values['type'] = Articles::TYPE_MEMBER_ARTICLE;
-            $values['status'] = \Status::ENABLED;
+            $values['status'] = ($values['status'] ?? '') == 'on' ? \Status::ENABLED : \Status::DISABLED;
 
             $articles->fill($values);
         }

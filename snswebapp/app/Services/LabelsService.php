@@ -52,4 +52,21 @@ class LabelsService extends Service
     {
         return $this->base()->where('labels.value', $labelName)->first();
     }
+
+    public function stringToLabels(string $value)
+    {
+        $labelsString = preg_replace('/\s+/', ' ', trim($value));
+        $labels = [];
+        
+        if ($labelsString != '') {
+            $labels = array_map(function(string $value) {
+                $label = new Labels();
+                $label->value = $value;
+                return $label;
+            }, array_unique(explode(' ', $labelsString)));
+        }
+
+        return $labels;
+    }
+
 }
