@@ -39,7 +39,7 @@
             <td>
                 <input type="checkbox"
                     name="status"
-                    @if (($articles->status ?? \Status::DISABLED) == \Status::ENABLED)
+                    @if (($articles->status ?? '') == 'on')
                         checked
                     @endif
                     data-onstyle="success" data-offstyle="secondary"
