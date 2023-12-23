@@ -121,6 +121,12 @@ class ArticlesService extends Service
         $data = array_map(function($value) use($articles) {
             $article = (clone $articles)->bind($value);
             $article->body_text = mb_substr(strip_tags($value->body, '<br>'), 0, 120) . '...';
+
+            preg_match('/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i', $article->body, $matches);
+            if (count($matches) > 1) {
+                $article->image = $matches[1];
+            }
+
             return $article;
         }, $cache);
 

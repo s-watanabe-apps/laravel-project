@@ -40,8 +40,15 @@
         <div class="card bg-light text-black shadow mb-3">
             <div class="card-body py-3">
                 <div class="h6 font-weight-bold">{{$value->title}}</div>
-                <div class="">{!!$value->body_text!!}</div>
-                
+                <div class="row">
+                @if (isset($value->image))
+                    <div class="col-3 col-md-3 col-lg-3"><img src="{{$value->image}}" style="width:100%; height: 15vh; object-fit: cover;" /></div>
+                    <div class="col-9 col-md-9 col-lg-9">{!!$value->body_text!!}</div>
+                @else
+                    <div class="col-12">{!!$value->body_text!!}</div>
+                @endif
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-12 col-lg-3 text-left">
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
