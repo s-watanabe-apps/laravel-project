@@ -18,19 +18,25 @@
     <div class="col-lg-8 mb-12">
         @foreach ($articles as $value)
         <div class="card bg-light text-black shadow mb-3">
-            <div class="card-body">
-                <div class="h5">{{$value->title}}</div>
-                <hr>
-                <div>{!!$value->body_text!!}</div>
-                <hr>
-
+            <div class="card-body py-3">
+                <div class="h6 font-weight-bold">{{$value->title}}</div>
                 <div class="row">
-                    <div class="col-6 text-left">
+                @if (isset($value->image))
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-3"><img src="{{$value->image}}" style="width:100%; height: 20vh; object-fit: cover;" /></div>
+                    <div class="col-8 col-sm-8 col-md-9 col-lg-9">{!!$value->body_text!!}</div>
+                @else
+                    <div class="col-12">{!!$value->body_text!!}</div>
+                @endif
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-lg-3 text-left">
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-md-12 col-lg-9 text-right">
                         <span>{{$value->created_at->format(\DateFormat::getDateTimeFullFormat())}}</span>
                         <span>(0)</span>
+                        <span><a href="/profile/{{$value->user_id}}">{{$value->name}}</a></span>
                     </div>
                 </div>
             </div>

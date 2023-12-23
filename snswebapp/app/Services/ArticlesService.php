@@ -5,6 +5,7 @@ use App\Http\Exceptions\NotFoundException;
 use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Models\Articles;
+use App\Models\Images;
 use Illuminate\Support\Facades\Cache;
 
 class ArticlesService extends Service
@@ -96,6 +97,11 @@ class ArticlesService extends Service
 
         foreach ($articles as &$article) {
             $article->body_text = mb_substr(strip_tags($article->body, '<br>'), 0, 120) . '...';
+
+            preg_match(Images::PATTERN_IMG, $article->body, $matches);
+            if (count($matches) > 1) {
+                $article->image = $matches[1];
+            }
         }
 
         return $articles;
@@ -122,7 +128,7 @@ class ArticlesService extends Service
             $article = (clone $articles)->bind($value);
             $article->body_text = mb_substr(strip_tags($value->body, '<br>'), 0, 120) . '...';
 
-            preg_match('/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i', $article->body, $matches);
+            preg_match(Images::PATTERN_IMG, $article->body, $matches);
             if (count($matches) > 1) {
                 $article->image = $matches[1];
             }

@@ -32,6 +32,9 @@ class Images extends Model
         'name',
     ];
 
+    // Image tag pattern.
+    const PATTERN_IMG = '/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i';
+
     /**
      * Get image types.
      * 

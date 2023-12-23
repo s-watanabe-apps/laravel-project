@@ -49,8 +49,8 @@
                         <textarea id="description" name="comment" rows="2" class="form-control"></textarea>
                         <div class="text-danger">{{$errors->first('comment') ?? ''}}</div>
                         <div class="text-center">
-                            <a href="javascript:articlesComment.submit()" class="btn btn-success shadow-sm py-0 mt-2">
-                                <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.save')
+                            <a href="javascript:articlesComment.submit()" class="btn btn-primary shadow-sm py-0 mt-2">
+                                <i class="fas fa-check fa-sm text-white-50"></i>&nbsp;@lang('strings.save')
                             </a>
                         </div>
                         {{Form::close()}}
