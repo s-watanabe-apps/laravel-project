@@ -18,7 +18,9 @@
     <div class="col-lg-8 mb-12">
         @foreach ($articles as $value)
         <div class="card bg-light text-black shadow mb-3">
-            <div class="card-body py-3">
+            <div class="card-body py-3" @if ($value->status == \Status::DISABLED)
+                style="background: #cecece;"
+            @endif>
                 <div class="h6 font-weight-bold">{{$value->title}}</div>
                 <div class="row">
                 @if (isset($value->image))
