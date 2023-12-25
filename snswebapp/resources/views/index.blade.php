@@ -48,7 +48,7 @@
                     <div class="col-12">{!!$value->body_text!!}</div>
                 @endif
                 </div>
-                <hr>
+                <div class="hr"></div>
                 <div class="row">
                     <div class="col-md-12 col-lg-3 text-left">
                         <span><a href="/articles/{{$value->id}}">@lang('strings.read_article')</a></span>
