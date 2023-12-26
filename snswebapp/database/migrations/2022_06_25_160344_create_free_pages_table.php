@@ -17,7 +17,7 @@ class CreateFreePagesTable extends Migration
             $table->increments('id');
             $table->string('code', 32);
             $table->string('title');
-            $table->text('body');
+            $table->mediumtext('body');
             $table->timestamps();
             $table->index('code');
         });

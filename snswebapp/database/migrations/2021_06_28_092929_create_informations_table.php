@@ -17,7 +17,7 @@ class CreateInformationsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('mark_id');
             $table->string('title');
-            $table->text('body');
+            $table->mediumtext('body');
             $table->tinyInteger('status')->default(1);
             $table->timestamp('start_time');
             $table->timestamp('end_time')->nullable();

@@ -56,7 +56,7 @@
                     <div class="col-md-12 col-lg-9 text-right">
                         <span>{{$value->created_at->format(\DateFormat::getDateTimeFullFormat())}}</span>
                         <span>(0)</span>
-                        <span><a href="/profile/{{$value->user_id}}">{{$value->name}}</a></span>
+                        <span><a href="/profiles/{{$value->user_id}}">{{$value->name}}</a></span>
                     </div>
                 </div>
             </div>

@@ -63,11 +63,5 @@ background: radial-gradient(円の中心の位置を指定, 円の中心の色�
     -webkit-transform : translateY(-50%);
     transform : translateY(-50%);
 }
-
-div.hr {
-    border-bottom: 1px solid #cecece;
-    padding-top: 8px;
-    margin-bottom: 8px;
-}
 -->
 </style>

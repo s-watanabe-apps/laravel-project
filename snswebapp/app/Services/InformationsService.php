@@ -102,6 +102,9 @@ class InformationsService extends Service
         $informations->status = $request->status ?? \Status::DISABLED;
 
         $informations->save();
+
+        $this->cacheForget(Service::CACHE_KEY_INFORMATIONS);
+
         return $informations;
     }
 
