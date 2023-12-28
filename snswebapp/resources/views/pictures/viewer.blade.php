@@ -86,6 +86,14 @@
                         <div class="text-right"><small class="text-left">
                             {{$comment->created_at->format(\DateFormat::getDateFormat())}}&nbsp;
                             <a href="/profiles/{{$comment->user_id}}">{{$comment->user_name}}</a>
+                            @if (user()->id == $comment->user_id)
+                            <a href="/pictures/{{$image->id}}/comments/{{$comment->id}}">
+                                <span><i class="fas fa-fw fa-edit text-primary"></i></span>
+                            </a>
+                            <a href="/pictures/{{$image->id}}/comments/{{$comment->id}}">
+                                <span><i class="fas fa-fw fa-trash text-danger"></i></span>
+                            </a>
+                            @endif
                         </small></div>
                     </td>
                 </tr>
@@ -103,7 +111,7 @@
                         <div class="text-danger">{{$errors->first('comment') ?? ''}}</div>
                         <div class="text-center">
                             <a href="javascript:picturesComment.submit()" class="btn btn-success shadow-sm py-0 mt-2">
-                                <i class="fas fa-check fa-sm text-white-50"></i>@lang('strings.save')
+                                <i class="fas fa-check fa-sm text-white-50"></i>&nbsp;@lang('strings.save')
                             </a>
                         </div>
                         {{Form::close()}}
