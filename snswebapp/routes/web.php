@@ -56,6 +56,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('/pictures/upload', 'PicturesController@upload');
             Route::post('/pictures/post', 'PicturesController@post');
             Route::post('/pictures/comment', 'PicturesController@comment');
+            Route::get('/pictures/{id}/comment/{comment_id}', 'PicturesController@editComment')
+                ->where('id', '[0-9]+')
+                ->where('comment_id', '[0-9]+');
         });
 
         // Messages

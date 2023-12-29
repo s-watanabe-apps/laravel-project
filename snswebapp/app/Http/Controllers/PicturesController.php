@@ -134,4 +134,30 @@ class PicturesController extends Controller
 
         return redirect()->route('pictures.get', ['id' => $params['id']]);
     }
+
+    public function editComment(Request $request)
+    {
+        $image = $this->picturesService->getPictureById($request->id);
+
+        $isFavorite = $this->favoritesService->isFavorite($request);
+
+        $pictureComments = $this->pictureCommentsService->getByPictureId($request->id);
+
+        $userId = user()->id;
+        $commentId = $request->comment_id;
+        $editComment = array_filter($pictureComments->toArray(), function($v, $k) use ($userId, $commentId) {
+            return $v['user_id'] == $userId && $v['id'] == $commentId;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if (!count($editComment)) {
+            abort(404);
+        }
+
+        return view('pictures.viewer', compact(
+            'image',
+            'isFavorite',
+            'pictureComments',
+            'editComment'
+        ));
+    }
 }

@@ -87,10 +87,10 @@
                             {{$comment->created_at->format(\DateFormat::getDateFormat())}}&nbsp;
                             <a href="/profiles/{{$comment->user_id}}">{{$comment->user_name}}</a>
                             @if (user()->id == $comment->user_id)
-                            <a href="/pictures/{{$image->id}}/comments/{{$comment->id}}">
+                            <a href="/pictures/{{$image->id}}/comment/{{$comment->id}}">
                                 <span><i class="fas fa-fw fa-edit text-primary"></i></span>
                             </a>
-                            <a href="/pictures/{{$image->id}}/comments/{{$comment->id}}">
+                            <a href="/pictures/{{$image->id}}/comment/{{$comment->id}}">
                                 <span><i class="fas fa-fw fa-trash text-danger"></i></span>
                             </a>
                             @endif
