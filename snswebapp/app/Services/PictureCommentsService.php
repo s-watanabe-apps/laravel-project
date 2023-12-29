@@ -25,6 +25,13 @@ class PictureCommentsService extends Service
             ->leftJoin('users', 'picture_comments.user_id', '=', 'users.id');
     }
 
+    /**
+     * Get by picture id.
+     * 
+     * @pram int $pictureId
+     * 
+     * @return App\Models\Pictures
+     */
     public function getByPictureId($pictureId)
     {
         return $this->base()
@@ -33,6 +40,14 @@ class PictureCommentsService extends Service
             ->get();
     }
 
+    /**
+     * Save picture comment.
+     * 
+     * @param int $userId
+     * @param array $params
+     * 
+     * @return void
+     */
     public function save($userId, $params)
     {
         $pictureComments = new PictureComments();
@@ -42,5 +57,27 @@ class PictureCommentsService extends Service
         $pictureComments->comment = $params['comment'];
 
         $pictureComments->save();
+    }
+
+    /**
+     * Get edit comment.
+     * 
+     * @param Illuminate\Database\Eloquent\Collection $pictureComments
+     * @param int $userId
+     * @param int $commentId
+     * 
+     * @return array $editComment
+     */
+    public function getEditComment($pictureComments, $userId, $commentId)
+    {
+        $editComment = array_filter($pictureComments->toArray(), function($v, $k) use ($userId, $commentId) {
+            return $v['user_id'] == $userId && $v['id'] == $commentId;
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if (!count($editComment)) {
+            abort(404);
+        }
+
+        return $editComment;
     }
 }

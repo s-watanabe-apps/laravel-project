@@ -56,7 +56,7 @@ class PicturesService extends Service
     /**
      * Get picture.
      * 
-     * @param int id
+     * @param int $id
      * 
      * @return App\Models\Pictures
      */
@@ -72,6 +72,8 @@ class PicturesService extends Service
      * Save picture.
      * 
      * @param array params(PicturesUploadRequest->validated)
+     * 
+     * @return void
      */
     public function save($params)
     {

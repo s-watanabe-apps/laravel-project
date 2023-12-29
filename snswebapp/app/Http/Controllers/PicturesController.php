@@ -143,15 +143,7 @@ class PicturesController extends Controller
 
         $pictureComments = $this->pictureCommentsService->getByPictureId($request->id);
 
-        $userId = user()->id;
-        $commentId = $request->comment_id;
-        $editComment = array_filter($pictureComments->toArray(), function($v, $k) use ($userId, $commentId) {
-            return $v['user_id'] == $userId && $v['id'] == $commentId;
-        }, ARRAY_FILTER_USE_BOTH);
-
-        if (!count($editComment)) {
-            abort(404);
-        }
+        $editComment = $this->pictureCommentsService->getEditComment($pictureComments, user()->id, $request->comment_id);
 
         return view('pictures.viewer', compact(
             'image',
