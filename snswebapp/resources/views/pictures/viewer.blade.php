@@ -81,6 +81,26 @@
                 </tr>
                 @foreach ($pictureComments as $comment)
                 <tr>
+                    @if (isset($editComment) && $comment->id == $editComment->id)
+                    <td>
+                        {{Form::open([
+                            'name' => 'picturesComment',
+                            'url' => '/pictures/comment',
+                            'method' => 'put',
+                        ])}}
+                        @csrf
+                        {{Form::hidden('id', $image->id)}}
+                        {{Form::hidden('comment_id', $comment->id)}}
+                        <textarea id="description" name="comment" rows="2" class="form-control">{{$comment->comment}}</textarea>
+                        <div class="text-danger">{{$errors->first('comment') ?? ''}}</div>
+                        <div class="text-center">
+                            <a href="javascript:picturesComment.submit()" class="btn btn-success shadow-sm py-0 mt-2">
+                                <i class="fas fa-check fa-sm text-white-50"></i>&nbsp;@lang('strings.save')
+                            </a>
+                        </div>
+                        {{Form::close()}}
+                    </td>
+                    @else
                     <td>
                         <div>{!!str_replace("\n", "<br>", $comment->comment)!!}</div>
                         <div class="text-right"><small class="text-left">
@@ -96,8 +116,10 @@
                             @endif
                         </small></div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
+                @if (!isset($editComment))
                 <tr>
                     <td>
                         {{Form::open([
@@ -117,6 +139,7 @@
                         {{Form::close()}}
                     </td>
                 </tr>
+                @endif
             </tbody>
         </table>
     </div>

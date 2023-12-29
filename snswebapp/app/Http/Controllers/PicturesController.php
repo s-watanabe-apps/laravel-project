@@ -135,6 +135,12 @@ class PicturesController extends Controller
         return redirect()->route('pictures.get', ['id' => $params['id']]);
     }
 
+    /**
+     * Get picture view and edit comment view.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
     public function editComment(Request $request)
     {
         $image = $this->picturesService->getPictureById($request->id);
@@ -143,7 +149,7 @@ class PicturesController extends Controller
 
         $pictureComments = $this->pictureCommentsService->getByPictureId($request->id);
 
-        $editComment = $this->pictureCommentsService->getEditComment($pictureComments, user()->id, $request->comment_id);
+        $editComment = (object) $this->pictureCommentsService->getEditComment($pictureComments, user()->id, $request->comment_id)[0];
 
         return view('pictures.viewer', compact(
             'image',
