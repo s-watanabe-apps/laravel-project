@@ -30,26 +30,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<!-- Light Theme
-body {
-    background: #fefefe;
-}
-
-.navbar {
-    background: #fcfcfc !important;
-}
-
-.nav-hover:hover {
-    background-color: #ededed !important;
-}
-
-#content {
-    background: #fcfcfc !important;
-}
-
-background: radial-gradient(円の中心の位置を指定, 円の中心の色を指定 0%,円の一番外側の色を指定 100%);
--->
-
 <style type="text/css">
 <!--
 .carousel-caption {
@@ -62,6 +42,13 @@ background: radial-gradient(円の中心の位置を指定, 円の中心の色�
     top: 50%;
     -webkit-transform : translateY(-50%);
     transform : translateY(-50%);
+}
+
+nav.navbar {
+    padding: 0px 10px 0px 10px;
+}
+nav.topbar {
+    height: 55px;
 }
 -->
 </style>
