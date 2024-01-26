@@ -45,15 +45,15 @@ class UsersService extends Service
     }
 
     /**
-     * Get enabled users.
+     * ユーザー一覧取得.
      * 
      * @param string keyword
      * @param int group_code
      * @param bool pagenation
      * 
-     * @return Illuminate\Pagination\LengthAwarePaginator
+     * @return array
      */
-    public function getEnabledUsers(string $keyword = null, string $group_code = null, $pagenation = true)
+    public function get_enabled_users(string $keyword = null, string $group_code = null, $pagenation = true)
     {
         $query = $this->base()->where('users.status', \Status::ENABLED);
         
@@ -66,13 +66,9 @@ class UsersService extends Service
             $query->where('users.group_code', $group_code);
         }
             
-        if ($pagenation) {
-            $result = $query->paginate(Users::PAGENATE);
-        } else {
-            $result = $query->get();
-        }
+        $result = $query->get();
 
-        return $result;
+        return $result->toArray();
     }
 
     /**
@@ -92,17 +88,22 @@ class UsersService extends Service
     }
 
     /**
-     * Get users by id for Cache or Database.
+     * ユーザー情報取得
      * 
      * @var int id
-     * @return App\Models\Users
+     * @return array
      */
-    public function get($id) : Users
+    public function get($id)
     {
         $key = sprintf(parent::CACHE_KEY_USERS_BY_ID, $id);
 
-        $cache = $this->remember($key, function() use($id) {
-            $data = $this->base()->where('users.id', $id)->first();
+        $data = $this->remember($key, function() use($id) {
+            $data = $this->base()
+                ->addSelect(['sessions.last_activity'])
+                ->leftJoin('sessions', 'users.id', '=', 'sessions.user_id')
+                ->where('users.id', $id)
+                ->orderBy('sessions.last_activity', 'desc')
+                ->first();
             
             if (!$data) {
                 throw new NotFoundException();
@@ -111,7 +112,7 @@ class UsersService extends Service
             return json_encode($data);
         });
 
-        return (new Users())->bind($cache);
+        return $data;
     }
 
     /**

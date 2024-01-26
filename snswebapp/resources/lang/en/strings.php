@@ -85,6 +85,7 @@ return [
     'description' => 'Description',
     'settings' => 'Settings',
     'display_flag' => 'Display flag',
+    'feature_tags' => 'Featured keywords',
 
     // Side menus
     'write_articles' => 'Write articles',
@@ -144,6 +145,7 @@ return [
     ],
 
     // Roles
+    'role' => 'Role',
     'roles' => [
         'system' => 'System Administrator',
         'admin' => 'Administrator',

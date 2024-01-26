@@ -24,15 +24,25 @@ class SettingsService extends Service
                 'settings.basic_user',
                 'settings.basic_password',
                 'settings.anonymous_permission',
-                'settings.header_image_id',
-                \DB::raw('header_images.file_name as header_file_name'),
-                'header_images.title_color',
-                'settings.login_image_id',
-                \DB::raw('login_images.file_name as login_file_name'),
+                'settings.theme_id',
+                \DB::raw('themes.name as theme_name'),
+                'themes.header_color',
+                'themes.text_color',
+                'themes.background_color',
+                'themes.body_color',
+                'themes.border_color',
+                'themes.a_color',
+                'themes.th_color',
+                //'settings.header_image_id',
+                //\DB::raw('header_images.file_name as header_file_name'),
+                //'header_images.title_color',
+                //'settings.login_image_id',
+                //\DB::raw('login_images.file_name as login_file_name'),
             ])
             ->where('settings.id', 1)
-            ->leftJoin('header_images', 'settings.header_image_id', '=', 'header_images.id')
-            ->leftJoin('login_images', 'settings.login_image_id', '=', 'login_images.id');
+            ->leftJoin('themes', 'settings.theme_id', '=', 'themes.id');
+            //->leftJoin('header_images', 'settings.header_image_id', '=', 'header_images.id')
+            //->leftJoin('login_images', 'settings.login_image_id', '=', 'login_images.id');
     }
 
     /**

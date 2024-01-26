@@ -84,6 +84,7 @@ return [
     'description' => '説明',
     'settings' => '設定',
     'display_flag' => '表示フラグ',
+    'feature_tags' => '注目のキーワード',
 
     // Side menus
     'write_articles' => '記事を書く',
@@ -143,6 +144,7 @@ return [
     ],
 
     // Roles
+    'role' => 'ロール',
     'roles' => [
         'system' => 'システム管理者',
         'admin' => '管理者',

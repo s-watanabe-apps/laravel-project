@@ -41,6 +41,7 @@ class SettingsController extends ManagementsController
     public function index(Request $request)
     {
         $headerImages = $this->headerImagesService->get();
+dump($headerImages);
 
         $loginImages = $this->loginImagesService->get();
 

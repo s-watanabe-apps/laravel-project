@@ -47,3 +47,29 @@ if (!function_exists('settings')) {
         return \Session::get('settings');
     }
 }
+
+if (!function_exists('str_date_format')) {
+    /**
+     */
+    function str_date_format($date)
+    {
+        if (is_numeric($date)) {
+            $time = $date;
+        } else {
+            if (is_null($date)) {
+                return '-';
+            }
+            
+            $time = strtotime($date);
+            if (!$time) {
+                return '-';
+            }
+        }
+        if (\App::getLocale() == 'ja') {
+            return date('Y/m/d', $time);
+        } else {
+            return date('m/d/Y', $time);
+        }
+    }
+}
+

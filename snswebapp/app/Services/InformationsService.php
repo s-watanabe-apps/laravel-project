@@ -33,7 +33,7 @@ class InformationsService extends Service
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getEnabled() {
+    public function get_enabled() {
         $now = carbon();
         $cache = $this->remember(parent::CACHE_KEY_INFORMATIONS, function() use($now) {
             $data = $this->base()
@@ -48,12 +48,7 @@ class InformationsService extends Service
             return json_encode($data);
         });
 
-        $informations = new Informations();
-        $data = array_map(function($value) use($informations) {
-            return (clone $informations)->bind($value);
-        }, $cache);
-
-        return $data;
+        return $cache;
     }
 
     /**

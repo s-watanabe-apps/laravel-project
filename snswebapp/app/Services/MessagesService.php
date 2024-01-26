@@ -33,13 +33,13 @@ class MessagesService extends Service
     /**
      * Get unread messages.
      * 
-     * @param int users.id
+     * @param int $user_id
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getUnreadMessages($userId)
+    public function get_unread_messages($user_id)
     {
         return $this->base()
-            ->where('messages.to_user_id', $userId)
+            ->where('messages.to_user_id', $user_id)
             ->where('messages.readed', 0)
             ->orderBy('messages.created_at', 'desc')
             ->limit(5)

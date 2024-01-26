@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class IndexController extends Controller
 {
@@ -43,7 +44,7 @@ class IndexController extends Controller
      */
     public function index(Request $request)
     {
-        //dump(auth()->check());
+        //dump(user()->is_admin());
         //var_dump(\App\Services\Files::getRegex());
 
         //echo "<pre>";
@@ -54,17 +55,31 @@ class IndexController extends Controller
         //var_dump(\Config::get('mail'));
 
         // Informations
-        $informations = $this->informationsService->getEnabled();
+        $informations = $this->informationsService->get_enabled();
 
         // Weekly calendar
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
         // Latest Articles
-        $articles = $this->articlesService->getLatestArticles();
-        //dump($articles);
+        $data = $this->articlesService->get_latest_articles();
+        $data[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
+
+        // ページャー生成
+        $limit = 10;
+        $page = 1;
+        $articles = new LengthAwarePaginator(
+            array_slice($data, ($page - 1) * $limit, $limit),
+            count($data),
+            $limit,
+            $page,
+            ['path' => '/']
+        );
+
+        $feature_tags = [];
 
         return view('index', compact(
-            'informations', 'calendar', 'articles'
+            'informations',
+            'articles',
         ));
     }
 }

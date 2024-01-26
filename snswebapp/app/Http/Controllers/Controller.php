@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Controller extends BaseController
 {
@@ -33,5 +34,18 @@ class Controller extends BaseController
         } catch(Exception $e) {
             abort(500);
         }
+    }
+
+    protected function pager($array, $limit, $page, $path)
+    {
+        $data = new LengthAwarePaginator(
+            array_slice($array, ($page - 1) * $limit, $limit),
+            count($array),
+            $limit,
+            $page,
+            ['path' => $path]
+        );
+
+        return $data;
     }
 }

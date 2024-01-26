@@ -1,2 +1,2 @@
 <?php
-var_dump(str_repeat('A', 256));
+var_dump(strtotime(''));

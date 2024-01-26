@@ -31,8 +31,7 @@ class SettingsMiddleware
         $request->merge(compact('settings', 'navigations'));
         \Session::put('settings', $settings);
 
-        $this->viewFactory->share('settings', $settings);
-        $this->viewFactory->share('navigations', $navigations);
+        $this->viewFactory->share(compact('settings', 'navigations'));
 
         return $next($request);
     }

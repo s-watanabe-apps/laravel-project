@@ -50,4 +50,9 @@ class Users extends Authenticatable
             'image_file' => null,
         ];
     }
+
+    public function is_admin()
+    {
+        return $this->role_id == Roles::ADMIN;
+    }
 }

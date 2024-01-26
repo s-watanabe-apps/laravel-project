@@ -99,13 +99,16 @@ class ArticlesController extends Controller
             throw new BusinessException();
         }
 
-        $labelId = null;
-        $labelName = trim($validator->validated()['label'] ?? null);
-        if (!is_null($labelName)) {
-            $labels = $this->labelsService->getIdByName($labelName);
-            $labelId = $labels->id ?? 0;
+        $label_id = null;
+        $label_name = trim($validator->validated()['label'] ?? null);
+        if (!is_null($label_name)) {
+            $labels = $this->labelsService->get_id_by_name($label_name);
+            $label_id = $labels['id'] ?? 0;
         }
 
+        $articles_user = $this->usersService->get($request->id);
+
+/*
         $articlesUser = $this->usersService->get($request->id);
 
         $articles = $this->articlesService->getByUserId($request->id, $labelId);
@@ -114,18 +117,14 @@ class ArticlesController extends Controller
         $commentCount = $this->articleCommentsService->getArticlesCommentCount($articleIds);
 
         $sidemenus = $this->getSidemenus($request->id);
-
+*/
         return view('articles.user', compact(
-            'labelName',
-            'articles',
-            'articlesUser',
-            'commentCount',
-            'sidemenus'
+            'articles_user',
         ));
     }
 
     /**
-     * Get article.
+     * 記事取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -134,22 +133,19 @@ class ArticlesController extends Controller
     {
         $articles = $this->articlesService->get($request->id);
 
-        $articleComments = $this->articleCommentsService->getByArticleId($articles->id);
+        $articleComments = $this->articleCommentsService->getByArticleId($articles['id']);
 
         $labels = $this->articleLabelsService->getByArticleId($request->id);
-
-        $sidemenus = $this->getSidemenus($articles->user_id);
 
         return view('articles.viewer', compact(
             'articles',
             'articleComments',
-            'labels',
-            'sidemenus'
+            'labels'
         ));
     }
 
     /**
-     * Write an article.
+     * 記事作成.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -173,21 +169,18 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Confirmation of the written article.
+     * 入力内容確認.
      * 
      * @param App\Http\Requests\ArticlesRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ArticlesRequest $request)
+    public function createConfirm(ArticlesRequest $request)
     {
-        $articles = (new Articles())->bind($request->validated());
-        $articles->user_id = user()->id;
+        $validated = $request->validated();
 
-        $labels = $this->labelsService->stringToLabels($articles->labels ?? '');
+        $labels = $this->labelsService->str_to_labels($validated['labels'] ?? '');
 
-        $method = $request->method();
-
-        return view('articles.confirm', compact('articles', 'labels', 'method'));
+        return view('articles.createConfirm', compact('validated', 'labels'));
     }
 
     /**

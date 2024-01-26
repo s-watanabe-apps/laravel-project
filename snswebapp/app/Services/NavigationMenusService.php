@@ -30,16 +30,10 @@ class NavigationMenusService extends Service
      */
     public function get()
     {
-        $navigationMenus = new NavigationMenus();
-
-        $cache = $this->remember(parent::CACHE_KEY_NAVIGATION_MENUS, function() {
+        $data = $this->remember(parent::CACHE_KEY_NAVIGATION_MENUS, function() {
             $data = $this->base()->get();
             return json_encode($data);
         });
-
-        $data = array_map(function($value) use($navigationMenus) {
-            return (clone $navigationMenus)->bind($value);
-        }, $cache);
 
         return $data;
     }

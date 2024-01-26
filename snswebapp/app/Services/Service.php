@@ -15,12 +15,13 @@ class Service
     const CACHE_KEY_USERS_BY_EMAIL = 'users-%s';
     const CACHE_KEY_USERS_BY_BIRTHDAY_RANGE = 'users-birthday-range-%s-%s';
     const CACHE_KEY_LATEST_ARTICLES = 'latest-articles';
-    //const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d-%d';
-    const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d';
+    const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d-%d';
+    //const CACHE_KEY_LATEST_ARTICLES_BY_USER_ID = 'latest-articles-%d';
     const CACHE_KEY_FAVORITE_ARTICLES_BY_USER_ID = 'favorite-articles-%d';
     const CACHE_KEY_ARTICLE_LABELS_BY_ARTICLE_ID = 'article-labels-%d';
     const CACHE_KEY_ARTICLE_LABELS_BY_USER_ID = 'article-labels-user-%d';
     const CACHE_KEY_ARTICLE_MONTHS_BY_USER_ID = 'article-months-user-%d';
+    const CACHE_KEY_WEATHERS = 'wethers-%s-%s';
     
     /**
      * Cache remember.
@@ -38,7 +39,7 @@ class Service
             $cache = Cache::remember($key, $ttl, $function);
         }
 
-        return json_decode($cache);
+        return json_decode($cache, true);
     }
 
     /**

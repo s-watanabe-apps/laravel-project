@@ -24,7 +24,7 @@ class ArticlesRequest extends AppFormRequest
             'id' => 'nullable|numeric',
             'title' => 'required|max:255',
             'body' => 'nullable|string',
-            'status' => 'in:on',
+            'status' => 'in:0,1',
             'labels' => 'nullable|string',
         ];
     }

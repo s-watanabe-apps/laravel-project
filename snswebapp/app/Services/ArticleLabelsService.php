@@ -76,4 +76,48 @@ class ArticleLabelsService extends Service
             return (new Labels())->bind($value);
         }, $cache);
     }
+
+        /**
+     * 人気タグ取得.
+     * 
+     * @param string $lang 言語
+     * @param string $today 現在日
+     * 
+     * @return array
+     */
+    public function get_feature_tags($date)
+    {
+        $key = 'feature-labels';
+        $ttl = 60 * 60 * 24;
+
+        $cache = $this->remember($key, function() use($date) {
+            $article_labels = ArticleLabels::select([
+                    'article_labels.label_id',
+                    \DB::raw('count(article_labels.label_id) as count'),
+                ])
+                ->join('articles', 'article_labels.article_id', '=', 'articles.id')
+                ->where('articles.status', 1)
+                ->whereNull('articles.deleted_at')
+                ->where(function($query) use($date) {
+                    $date_to = date('Y-m-d', strtotime("{$date} + 1 days"));
+                    $date_from = date('Y-m-d', strtotime("{$date} - 1 months"));
+                    $query->whereBetween('articles.created_at', [$date_from, $date_to])
+                        ->orWhereBetween('articles.updated_at', [$date_from, $date_to]);
+                })
+                ->groupBy('article_labels.label_id')
+                ->having(\DB::raw('count(article_labels.label_id)'), '>', 0);
+
+            $labels = Labels::select([
+                    'labels.id',
+                    'labels.value',
+                    'relations.count',
+                ])->join(\DB::raw("({$article_labels->toSql()}) as relations"), 'labels.id', '=', 'relations.label_id')
+                ->orderBy('relations.count', 'desc')
+                ->mergeBindings($article_labels->getQuery());
+
+            return json_encode($labels->get()->toArray());
+        }, $ttl);
+
+        return $cache;
+    }
 }

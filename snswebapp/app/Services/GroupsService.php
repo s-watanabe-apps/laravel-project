@@ -33,6 +33,6 @@ class GroupsService extends Service
      */
     public function all()
     {
-        return $this->base()->get();
+        return $this->base()->get()->toArray();
     }
 }

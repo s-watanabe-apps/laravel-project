@@ -36,16 +36,16 @@ class ProfilesService extends Service
      * @param int
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getUserProfiles($userId)
+    public function get_user_profiles($user_id)
     {
         $subQuery = $this->base()->addSelect([
                 'profile_choices.id as profile_choice_id',
                 'profile_choices.name as value',
                 'profile_values.user_id',
                 'profiles.order',
-            ])->leftJoin('profile_values', function ($join) use ($userId) {
+            ])->leftJoin('profile_values', function ($join) use ($user_id) {
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
-                    ->where('profile_values.user_id', $userId);
+                    ->where('profile_values.user_id', $user_id);
             })->leftJoin('profile_choices', 'profile_values.value', '=', 'profile_choices.id')
             ->where('profiles.type', ProfileInputType::CHOICE);
 
@@ -55,17 +55,22 @@ class ProfilesService extends Service
                 'profile_values.value',
                 'profile_values.user_id',
                 'profiles.order',
-            ])->leftJoin('profile_values', function ($join) use ($userId) {
+            ])->leftJoin('profile_values', function ($join) use ($user_id) {
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
-                    ->where('profile_values.user_id', $userId);
+                    ->where('profile_values.user_id', $user_id);
             })
             ->whereIn('profiles.type', [ProfileInputType::FILLIN, ProfileInputType::DESCRIPTION,])
             ->union($subQuery);
 
-        return DB::table($query)->select([
+        $data = DB::table($query)->select([
                 'id', 'type', 'name', 'required', 'user_id', 'profile_choice_id', 'value', 'order'
             ])->orderBy('order', 'asc')
-            ->get();
+            ->get()
+            ->toArray();
+        
+        return array_map(function($value) {
+            return (array) $value;
+        }, $data);
     }
 
     /**

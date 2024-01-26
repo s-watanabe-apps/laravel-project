@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfilesTableSeeder::class);
         $this->call(ProfileChoicesTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
+        $this->call(ThemesTableSeeder::class);
 
         if (config('app.debug')) {
             $this->call(UsersTableSeeder::class);

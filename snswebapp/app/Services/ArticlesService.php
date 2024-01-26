@@ -50,7 +50,7 @@ class ArticlesService extends Service
 
         throw_if(!$this->checkAccessRight($articles), ForbiddenException::class);
 
-        return $articles;
+        return $articles->toArray();
     }
 
     /**
@@ -111,49 +111,45 @@ class ArticlesService extends Service
      * Get latest article headlines for Cache or Database.
      * 
      * @param int $limit = Articles::HEADLINE_LIMIT
+     * 
      * @return array<App\Models\Articles>
      */
-    public function getLatestArticles(int $limit = Articles::HEADLINE_LIMIT)
+    public function get_latest_articles(int $limit = Articles::HEADLINE_LIMIT)
     {
-        $articles = new Articles();
-
         $cache = $this->remember(parent::CACHE_KEY_LATEST_ARTICLES, function() use($limit) {
             $builder = $this->base();
             $builder->where('articles.status', \Status::ENABLED);
-            $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get();
+            $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get()->toArray();
             return json_encode($data);
         });
 
-        $data = array_map(function($value) use($articles) {
-            $article = (clone $articles)->bind($value);
-            $article->body_text = mb_substr(strip_tags($value->body, '<br>'), 0, 120) . '...';
-
-            preg_match(Images::PATTERN_IMG, $article->body, $matches);
+        $data = array_map(function($value) {
+            $value['body_text'] = mb_substr(strip_tags($value['body'], '<br>'), 0, 120) . '...';
+            preg_match(Images::PATTERN_IMG, $value['body'], $matches);
             if (count($matches) > 1) {
-                $article->image = $matches[1];
+                $value['image'] = $matches[1];
             }
 
-            return $article;
+            $value['tags'] = [];
+
+            return $value;
         }, $cache);
 
         return $data;
     }
 
     /**
-     * Get latest article headlines by user id for Cache or Database.
+     * ユーザーの記事一覧取得.
      * 
-     * @param int $userId
+     * @param int $user_id
      * @param int $limit = Articles::HEADLINE_LIMIT
-     * @return array<App\Models\Articles>
+     * @return array
      */
-    public function getLatestArticlesByUserId(int $userId, int $limit = Articles::HEADLINE_LIMIT)
+    public function get_latest_articles_by_user_id(int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
-        $articles = new Articles();
+        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
 
-        //$key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
-        $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId);
-
-        $cache = $this->remember($key, function() use($userId, $limit) {
+        $data = $this->remember($key, function() use($userId, $limit) {
             $builder = $this->base()->where('articles.user_id', $userId);
 
             if ($userId != user()->id) {
@@ -164,10 +160,6 @@ class ArticlesService extends Service
 
             return json_encode($data);
         });
-
-        $data = array_map(function($value) use($articles) {
-            return (clone $articles)->bind($value);
-        }, $cache);
 
         return $data;
     }
@@ -214,7 +206,7 @@ class ArticlesService extends Service
 
             $articles->title = $values['title'];
             $articles->body = $values['body'];
-            $articles->status = ($values['status'] ?? '') == 'on' ? \Status::ENABLED : \Status::DISABLED;
+            $articles->status = $values['status'];
             $articles->type = Articles::TYPE_MEMBER_ARTICLE;
             $articles->created_at = carbon();
         } else {
@@ -223,7 +215,7 @@ class ArticlesService extends Service
 
             $values['user_id'] = user()->id;
             $values['type'] = Articles::TYPE_MEMBER_ARTICLE;
-            $values['status'] = ($values['status'] ?? '') == 'on' ? \Status::ENABLED : \Status::DISABLED;
+            $values['status'] = $values['status'];
 
             $articles->fill($values);
         }

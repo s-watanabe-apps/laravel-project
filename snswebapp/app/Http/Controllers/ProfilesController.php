@@ -48,7 +48,7 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Get user list.
+     * ユーザー一覧.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -57,30 +57,34 @@ class ProfilesController extends Controller
     {
         $validator = Validator::make([
             'keyword' => $request->keyword,
-            'group_code' => $request->group_code
+            'group_code' => $request->group_code,
+            'page' => $request->page,
         ], [
             'keyword' => 'string|nullable',
             'group_code' => 'string|nullable',
+            'page' => 'integer|nullable',
         ]);
         if ($validator->fails()) {
-            abort(422);
+            abort(404);
         }
 
         $validated = $validator->validated();
 
-        $profileUsers = $this->usersService->getEnabledUsers($validated['keyword'], $validated['group_code']);
-
+        $page = $validated['page'] ?? 1;
+        $profile_users = $this->usersService->get_enabled_users($validated['keyword'], $validated['group_code']);
+        $profile_users = $this->pager($profile_users, 10, $page, '/members/');
+        
         $groups = $this->groupsService->all();
 
         return view('profiles.index', compact(
-            'profileUsers',
+            'profile_users',
             'groups',
             'validated'
         ));
     }
 
     /**
-     * Get profile.
+     * ユーザープロフィール.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -91,27 +95,27 @@ class ProfilesController extends Controller
             return view('404');
         }
 
-        $profileUser = $this->usersService->get($request->id);
-        if ($profileUser == null) {
+        $profiles = $this->usersService->get($request->id);
+        if ($profiles == null) {
             abort(404);
         }
 
-        $articles = $this->articlesService->getLatestArticlesByUserId($request->id);
+        $articles = $this->articlesService->get_latest_articles_by_user_id($request->id);
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 
-        $userProfiles = $this->profilesService->getUserProfiles($request->id);
+        $user_profiles = $this->profilesService->get_user_profiles($request->id);
 
         return view('profiles.viewer', compact(
-            'profileUser',
-            'userProfiles',
+            'profiles',
+            'user_profiles',
             'articles',
             'isFavorite'
         ));
     }
 
     /**
-     * Edit profile.
+     * プロフィール編集.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
