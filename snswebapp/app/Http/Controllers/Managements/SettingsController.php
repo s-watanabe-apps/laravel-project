@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Managements;
 use App\Services\SettingsService;
 use App\Services\HeaderImagesService;
 use App\Services\LoginImagesService;
+use App\Services\ThemesService;
 use App\Http\Requests\ManagementsSettingsRequest;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class SettingsController extends ManagementsController
     private $profilesService;
     private $headerImagesService;
     private $loginImagesService;
+    private $themesService;
 
     /**
      * Create a new controller instance.
@@ -20,16 +22,19 @@ class SettingsController extends ManagementsController
      * @param App\Services\SettingsService
      * @param App\Services\HeaderImagesService
      * @param App\Services\LoginImagesService
+     * @param App\Services\ThemesService
      * @return void
      */
     public function __construct(
         SettingsService $settingsService,
         HeaderImagesService $headerImagesService,
-        LoginImagesService $loginImagesService)
+        LoginImagesService $loginImagesService,
+        ThemesService $themesService)
     {
         $this->settingsService = $settingsService;
         $this->headerImagesService = $headerImagesService;
         $this->loginImagesService = $loginImagesService;
+        $this->themesService = $themesService;
     }
 
     /**
@@ -41,12 +46,16 @@ class SettingsController extends ManagementsController
     public function index(Request $request)
     {
         $headerImages = $this->headerImagesService->get();
-dump($headerImages);
 
         $loginImages = $this->loginImagesService->get();
 
+        $themes = $this->themesService->all();
+        //dump($themes);
+
         return view('managements.settings.index', compact(
-            'headerImages', 'loginImages'
+            'headerImages',
+            'loginImages',
+            'themes'
         ));
     }
 

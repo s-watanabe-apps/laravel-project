@@ -23,6 +23,7 @@ class CreateThemesTable extends Migration
             $table->string('border_color', 9);
             $table->string('a_color', 9);
             $table->string('th_color', 9);
+            $table->string('box_color', 9);
         });
     }
 

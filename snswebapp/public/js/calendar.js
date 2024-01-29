@@ -103,7 +103,7 @@ document.querySelector('#next').addEventListener('click', moveCalendar)
 
 document.addEventListener("click", function(e) {
     if(e.target.classList.contains("calendar_td")) {
-        location.href = "/" + document.documentElement.getAttribute("lang") + "/?date=" + e.target.dataset.date
+        location.href = "/?date=" + e.target.dataset.date
     }
 })
 

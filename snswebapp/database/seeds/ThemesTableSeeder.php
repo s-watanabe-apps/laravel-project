@@ -23,6 +23,18 @@ class ThemesTableSeeder extends Seeder
                 'border_color' => '#ededed',
                 'a_color' => '#4169e1',
                 'th_color' => '#eeeeee',
+                'box_color' => '#efefef'
+            ],
+            [
+                'name' => 'Dark',
+                'header_color' => '#4949acaa',
+                'text_color' => '#bebebe',
+                'background_color' => '#000000',
+                'body_color' => '#323232',
+                'border_color' => '#787878',
+                'a_color' => '#639be2',
+                'th_color' => '#323232',
+                'box_color' => '#454545'
             ],
         ];
         foreach($themes as $theme) {

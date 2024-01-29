@@ -86,6 +86,7 @@ return [
     'settings' => 'Settings',
     'display_flag' => 'Display flag',
     'feature_tags' => 'Featured keywords',
+    'theme' => 'Theme',
 
     // Side menus
     'write_articles' => 'Write articles',

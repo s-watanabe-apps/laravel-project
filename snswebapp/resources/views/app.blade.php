@@ -199,9 +199,6 @@ header .sm {
     width: 100%;
     word-break: break-all;
 }
-.source > a {
-    color: #777777;
-}
 .footer {
     display: flex;
 }
@@ -210,7 +207,6 @@ header .sm {
     display: flex;
 }
 .grid-contents {
-    background: #fff;
     display: flex;
     padding-top: 10px;
 }
@@ -257,7 +253,6 @@ span.tag {
 .pagination {
     text-align: center;
     font-size: 20px;
-    background: #fff;
     padding-top: 10px;
 }
 .pagination > a {
@@ -283,7 +278,6 @@ span.tag {
 .side > .container > .title {
     padding-bottom: 5px;
     font-weight: bold;
-    color: #565656;
 }
 .feature-tags {
     line-height: 30px;
@@ -309,6 +303,14 @@ span.ad {
     font-size: 14px;
 }
 
+.hidden_radio {
+    display: none;
+}
+
+input[type="radio"]:checked + label > div {
+    outline:3px solid #ff0000;
+}
+
 /* Calendar */
 #calendar {
     display: flex;
@@ -317,6 +319,8 @@ span.ad {
 #calendar table {
     border-spacing: 0;
     border-collapse: collapse;
+    background: #fefefe;
+    color: #565656;
 }
 #calendar table td {
     border: 1px solid;
@@ -328,7 +332,6 @@ td.today {
 }
 #calendar > section > table th {
     border: 1px solid;
-    background: #eee;
     text-align: center;
     font-size: 11px;
     height: 30px;
@@ -364,6 +367,8 @@ table.weather {
     border: 1px solid #ddd;
     border-spacing: 0;
     border-collapse: collapse;
+    background: #fefefe;
+    color: #565656;
 }
 table.weather th {
     border: 1px solid #ddd;
@@ -401,7 +406,6 @@ table {
 table th {
     font-weight: normal;
     border: 1px solid #ddd;
-    background: #eee;
     text-align: center;
 }
 table td {
@@ -422,7 +426,6 @@ table.profiles th {
     font-weight: bold;
     border: 0px;
     text-align: right;
-    background: #ffffff;
     padding: 5px 5px 0 15px;
     vertical-align: top;
     font-size: 14px;
@@ -431,13 +434,11 @@ table.profiles th {
 table.profiles td {
     border: 0px;
     text-align: left;
-    background: #ffffff;
 }
 
 .flex-contents {
     text-align: center;
     width: 100%;
-    background: #fff;
     display: flex;
     flex-wrap: wrap;
     padding: 5px 0 5px 0;
@@ -470,7 +471,6 @@ table.profiles td {
     width: auto;
     margin: 10px;
     padding: 15px;
-    background: #efffef;
     border: 1px solid #ddd;
 }
 
@@ -512,14 +512,12 @@ table.profiles td {
 
 .user-menus {
     border: 1px solid #bababa;
-    background: #fafafa;
 }
 .user-menus > ul {
     text-align: left;
 }
 .admin-menus {
     border: 1px solid #baba99;
-    background: #fafacb;
 }
 .admin-menus > ul {
     font-size: 15px;
@@ -644,16 +642,22 @@ table.profiles td {
 }
 
 /** Theme */
+
 body {
     background: {{$settings['body_color']}} !important;
     color: {{$settings['text_color']}} !important;
     border-color: {{$settings['border_color']}} !important;
 }
-.main, .side {
+.main, .side, .pagination {
     background: {{$settings['background_color']}} !important;
 }
 header {
     background: {{$settings['header_color']}} !important;
+    border-left:1px solid {{$settings['header_color']}} !important;
+    border-right:1px solid {{$settings['header_color']}} !important;
+}
+div {
+    border-color: {{$settings['border_color']}} !important;
 }
 table, th, td {
     border-color: {{$settings['border_color']}} !important;
@@ -661,9 +665,49 @@ table, th, td {
 th {
     background: {{$settings['th_color']}} !important;
 }
+table.profiles th {
+    background: {{$settings['background_color']}} !important;
+}
+.search-box, .user-menus, .admin-menus {
+    background-color: {{$settings['box_color']}} !important;
+}
 a {
     color: {{$settings['a_color']}};
 }
+
+/*
+body {
+    background: #000000 !important;
+    color: #bebebe !important;
+    border-color: #4949ac !important;
+}
+.main, .side, .pagination {
+    background: #323232 !important;
+}
+header {
+    background: #4949acaa !important;
+    border-left:1px solid #4949acaa !important;
+    border-right:1px solid #4949acaa !important;
+}
+div {
+    border-color: #787878 !important;
+}
+table, th, td {
+    border-color: #787878 !important;
+}
+th {
+    background: {{$settings['th_color']}} !important;
+}
+table.profiles th {
+    background: #323232 !important;
+}
+a {
+    color: #639be2;
+}
+.search-box, .user-menus, .admin-menus {
+    background-color: #454545;
+}
+*/
         </style>
     </head>
     <body>

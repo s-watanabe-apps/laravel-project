@@ -85,6 +85,7 @@ return [
     'settings' => '設定',
     'display_flag' => '表示フラグ',
     'feature_tags' => '注目のキーワード',
+    'theme' => 'テーマ',
 
     // Side menus
     'write_articles' => '記事を書く',

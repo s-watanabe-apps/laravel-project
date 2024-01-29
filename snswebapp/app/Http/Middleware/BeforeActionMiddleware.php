@@ -37,13 +37,10 @@ class BeforeActionMiddleware
 
         // メニュー開閉状態設定
         $cookie = $request->header('cookie');
-        //dump($cookie);
         preg_match('/user-menus=(show|hide)/', $cookie, $user_menus_matchs);
-        //dump($user_menus_matchs);
         $user_menus_status = $user_menus_matchs[1] ?? 'show';
         preg_match('/admin-menus=(show|hide)/', $cookie, $admin_menus_matchs);
         $admin_menus_status = $admin_menus_matchs[1] ?? 'show';
-        //dump($admin_menus_matchs);
         
         // 地域情報取得
         $cities = [
