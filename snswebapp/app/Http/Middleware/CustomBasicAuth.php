@@ -15,7 +15,7 @@ class CustomBasicAuth
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->settings->basic_auth) {
+        if (!$request->settings['basic_auth']) {
             return $next($request);
         }
 

@@ -27,7 +27,7 @@ class AuthCheckReadPermissionMiddleware
     public function handle($request, Closure $next)
     {
         if (!Authenticate::check()) {
-            if (!$request->settings->anonymous_permission) {
+            if (!$request->settings['anonymous_permission']) {
                 return redirect('/login')->with('redirect', $request->url());
             }
         }

@@ -25,18 +25,22 @@ window.onload = initExpand;
 // toggle class when trigger is clicked
 function toggleExpand(t) {
     var name = t.dataset.name;
+    var img = t.children[0];
     for (var i = 0; i < 3; i++) {
         var t = t.parentNode;
+        //console.log(t.getElementsByTagName('div'));
 
         if (t.className == 'hide') {
             t.className = 'show';
+            img.setAttribute('src', '/img/arrow-down.png');
             document.cookie = name + '=show'
-            console.log(document.cookie);
+            //console.log(document.cookie);
             break;
         } else if (t.className == 'show') {
             t.className = 'hide';
+            img.setAttribute('src', '/img/arrow-right.png');
             document.cookie = name + '=hide'
-            console.log(document.cookie);
+            //console.log(document.cookie);
             break;
         }
     }
@@ -44,20 +48,12 @@ function toggleExpand(t) {
 
 // initialize
 function initExpand() {
-    var e = document.getElementsByTagName('*');
-
-    for (var i = 0; i < e.length; i++) {
-        // change all show classes to hide
-        //if (e[i].className == 'show') {
-        //    e[i].className = 'hide';
-        //}
-        
-        // set JavaScript triggers
-        if (e[i].className == 'trigger') {
-            e[i].setAttribute('onclick', 'toggleExpand(this)');
-            e[i].setAttribute('onkeypress','toggleExpand(this)');
-        }
-    }
+    $("#trigger-1").on('click', function() {
+        toggleExpand(this);
+    });
+    $("#trigger-2").on('click', function() {
+        toggleExpand(this);
+    });
 }
 --></script>
 
@@ -125,12 +121,12 @@ img {
 }
 header {
     max-width: 992px;
-    height: 60px;
+    height: auto;
     width: 100%;
     position: fixed;
     top: 0;
     z-index: 10;
-    display: flex;
+    display: grid;
 }
 .logo {
   font-size: 25px;
@@ -138,7 +134,7 @@ header {
 nav {
   margin: 0 0 0 auto;
 }
-header > nav > ul {
+nav > ul {
   display: flex;
   list-style: none;
   padding: 0;
@@ -441,7 +437,6 @@ table.profiles td {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px 0 5px 0;
     justify-content: center;
 }
 .flex-contents > .view-item {
@@ -516,14 +511,26 @@ table.profiles td {
 .user-menus > ul {
     text-align: left;
 }
+
+/* Admin Menus */
 .admin-menus {
     border: 1px solid #baba99;
 }
 .admin-menus > ul {
-    font-size: 15px;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    font-size: 14px;
     text-align: left;
+    border-bottom: 1px solid;
 }
-
+.admin-menus > ul > section {
+    font-weight: bold;
+    position: relative;
+    left: -18px;
+}
+.admin-menus > ul:last-child {
+    border-bottom: none;
+}
 @media only screen and (max-width:991px) {
     .grid {
         display: grid;
@@ -653,13 +660,10 @@ body {
 }
 header {
     background: {{$settings['header_color']}} !important;
-    border-left:1px solid {{$settings['header_color']}} !important;
-    border-right:1px solid {{$settings['header_color']}} !important;
+    border-left:1px solid {{$settings['border_color']}} !important;
+    border-right:1px solid {{$settings['border_color']}} !important;
 }
-div {
-    border-color: {{$settings['border_color']}} !important;
-}
-table, th, td {
+div, table, th, td, ul {
     border-color: {{$settings['border_color']}} !important;
 }
 th {
@@ -668,8 +672,8 @@ th {
 table.profiles th {
     background: {{$settings['background_color']}} !important;
 }
-.search-box, .user-menus, .admin-menus {
-    background-color: {{$settings['box_color']}} !important;
+.search-box, .user-menus, .admin-menus, .feature-tags {
+    background-color: {{$settings['box_color']}}; !important;
 }
 a {
     color: {{$settings['a_color']}};
@@ -677,35 +681,32 @@ a {
 
 /*
 body {
-    background: #000000 !important;
-    color: #bebebe !important;
+    background: #ffffff !important;
+    color: #767676 !important;
     border-color: #4949ac !important;
 }
 .main, .side, .pagination {
-    background: #323232 !important;
+    background: #f0ffff !important;
 }
 header {
-    background: #4949acaa !important;
-    border-left:1px solid #4949acaa !important;
-    border-right:1px solid #4949acaa !important;
+    background: #1e90ffee !important;
+    border-left:1px solid #1e90ffee !important;
+    border-right:1px solid #1e90ffee !important;
 }
-div {
-    border-color: #787878 !important;
-}
-table, th, td {
-    border-color: #787878 !important;
+div, table, th, td, ul {
+    border-color: #efefef !important;
 }
 th {
-    background: {{$settings['th_color']}} !important;
+    background: #acdbff !important;
 }
 table.profiles th {
-    background: #323232 !important;
+    background: #f0ffff !important;
 }
 a {
     color: #639be2;
 }
-.search-box, .user-menus, .admin-menus {
-    background-color: #454545;
+.search-box, .user-menus, .admin-menus, .feature-tags {
+    background-color: #acdbff;
 }
 */
         </style>
@@ -717,7 +718,9 @@ a {
                 @if (auth()->check())
                 <div class="container">
                     <div class="{{$user_menus_status}}">
-                        <div class="title"><div class="trigger" data-name="user-menus">会員メニュー</div></div>
+                        <div class="title">
+                            <div id="trigger-1" class="trigger" data-name="user-menus">会員メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
+                        </div>
                         <div class="target user-menus">
                             hogehoge<br>hogehoge<br>hogehoge
                         </div>
@@ -727,12 +730,26 @@ a {
                 @if (user()->role_id == \App\Models\Roles::ADMIN)
                 <div class="container">
                     <div class="{{$admin_menus_status}}">
-                        <div class="title"><div class="trigger" data-name="admin-menus">管理者メニュー</div></div>
+                        <div class="title">
+                            <div id="trigger-2" class="trigger" data-name="admin-menus">管理者メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
+                        </div>
                         <div class="target admin-menus">
                             <ul>
+                                <section>@lang('strings.common_settings')</section>
                                 <li><a href="/managements/settings">@lang('strings.site_settings')</a>
                                 <li><a href="/managements/navigations">@lang('strings.navigation_management')</a>
-                                
+                            </ul>
+                            <ul>
+                                <section>@lang('strings.user_management')</section>
+                                <li><a href="/managements/users">@lang('strings.user_management')</a></li>
+                                <li><a href="/managements/groups">@lang('strings.group_management')</a></li>
+                                <li><a href="/managements/profile/settings">@lang('strings.profile_settings')</a></li>
+                            </ul>
+                            <ul>
+                                <section>@lang('strings.contents_management')</section>
+                                <li><a href="/managements/informations">@lang('strings.informations_management')</a></li>
+                                <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
+                                <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
                             </ul>
                         </div>
                     </div>

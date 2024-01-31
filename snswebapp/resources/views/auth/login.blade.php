@@ -14,13 +14,13 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="/images/login/{{$settings->login_file_name}}"
+                                <img src="/images/login/{{$settings['login_file_name'] ?? ''}}"
                                     style="width:100%; height: 65vh; object-fit: cover;" />
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">{{$settings->site_name}}</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{$settings['site_name']}}</h1>
                                     </div>
                                     {{Form::open([
                                         'url' => route('login'),

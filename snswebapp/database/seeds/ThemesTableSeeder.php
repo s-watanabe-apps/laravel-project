@@ -23,18 +23,29 @@ class ThemesTableSeeder extends Seeder
                 'border_color' => '#ededed',
                 'a_color' => '#4169e1',
                 'th_color' => '#eeeeee',
-                'box_color' => '#efefef'
+                'box_color' => '#efefff'
             ],
             [
                 'name' => 'Dark',
                 'header_color' => '#4949acaa',
                 'text_color' => '#bebebe',
-                'background_color' => '#000000',
-                'body_color' => '#323232',
+                'background_color' => '#323232',
+                'body_color' => '#000000',
                 'border_color' => '#787878',
                 'a_color' => '#639be2',
-                'th_color' => '#323232',
+                'th_color' => '#a9a9a9',
                 'box_color' => '#454545'
+            ],
+            [
+                'name' => 'Azure',
+                'header_color' => '#1e90ffee',
+                'text_color' => '#767676',
+                'background_color' => '#f0ffff',
+                'body_color' => '#ffffff',
+                'border_color' => '#efefef',
+                'a_color' => '#639be2',
+                'th_color' => '#acdbff',
+                'box_color' => '#f0f8ff'
             ],
         ];
         foreach($themes as $theme) {

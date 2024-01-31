@@ -38,7 +38,7 @@ class SettingsController extends ManagementsController
     }
 
     /**
-     * Get setting list.
+     * サイト設定取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -50,8 +50,7 @@ class SettingsController extends ManagementsController
         $loginImages = $this->loginImagesService->get();
 
         $themes = $this->themesService->all();
-        //dump($themes);
-
+        
         return view('managements.settings.index', compact(
             'headerImages',
             'loginImages',
@@ -60,15 +59,17 @@ class SettingsController extends ManagementsController
     }
 
     /**
-     * Register input information.
+     * サイト設定更新.
      * 
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
     public function register(ManagementsSettingsRequest $request)
     {
-        \DB::transaction(function() use ($request) {
-            $this->settingsService->save($request);
+        $params = $request->validated();
+        
+        \DB::transaction(function() use ($params) {
+            $this->settingsService->save($params);
         });
 
         return redirect()->route('managementsSettings')->with('result', 1);

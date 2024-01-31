@@ -49,12 +49,12 @@ class SettingsService extends Service
     /**
      * Save settings.
      * 
-     * @param App\Http\Requests\ManagementsSettingsRequest
+     * @param array $params
      * @return App\Models\Settings
      */
-    public function save(ManagementsSettingsRequest $request)
+    public function save($params)
     {
-        $settings = Settings::where('id', 1)->update($request->validated());
+        $settings = Settings::where('id', 1)->update($params);
 
         cache()->forget(parent::CACHE_KEY_SETTINGS);
 
@@ -68,13 +68,11 @@ class SettingsService extends Service
      */
     public function get()
     {
-        $settings = new Settings();
-
-        $cache = $this->remember(parent::CACHE_KEY_SETTINGS, function() {
+        $data = $this->remember(parent::CACHE_KEY_SETTINGS, function() {
             $data = $this->base()->first();
             return json_encode($data);
         });
 
-        return $settings->bind($cache);
+        return $data;
     }
 }
