@@ -23,7 +23,8 @@ class ThemesTableSeeder extends Seeder
                 'border_color' => '#ededed',
                 'a_color' => '#4169e1',
                 'th_color' => '#eeeeee',
-                'box_color' => '#efefff'
+                'box_color' => '#efefff',
+                'contents_color' => '#deffee',
             ],
             [
                 'name' => 'Dark',
@@ -34,7 +35,8 @@ class ThemesTableSeeder extends Seeder
                 'border_color' => '#787878',
                 'a_color' => '#639be2',
                 'th_color' => '#a9a9a9',
-                'box_color' => '#454545'
+                'box_color' => '#454545',
+                'contents_color' => '#565677',
             ],
             [
                 'name' => 'Azure',
@@ -45,7 +47,8 @@ class ThemesTableSeeder extends Seeder
                 'border_color' => '#efefef',
                 'a_color' => '#639be2',
                 'th_color' => '#acdbff',
-                'box_color' => '#f0f8ff'
+                'box_color' => '#f0f8ff',
+                'contents_color' => '#a3ffef',
             ],
         ];
         foreach($themes as $theme) {

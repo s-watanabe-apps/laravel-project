@@ -170,7 +170,7 @@ header .sm {
     font-size: larger;
     font-weight: bold;
     word-break: break-all;
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 6px 0px;
     border-bottom: 2px solid #eee;
 }
 .body {
@@ -698,43 +698,16 @@ th {
 table.profiles th {
     background: {{$settings['background_color']}} !important;
 }
-.search-box, .user-menus, .admin-menus, .feature-tags, .formset-box {
-    background-color: {{$settings['box_color']}}; !important;
+.user-menus, .admin-menus, .feature-tags {
+    background-color: {{$settings['box_color']}} !important;
+}
+.search-box, .formset-box, .contents-box {
+    background-color: {{$settings['contents_color']}} !important;
 }
 a {
     color: {{$settings['a_color']}};
 }
 
-/*
-body {
-    background: #ffffff !important;
-    color: #767676 !important;
-    border-color: #4949ac !important;
-}
-.main, .side, .pagination {
-    background: #f0ffff !important;
-}
-header {
-    background: #1e90ffee !important;
-    border-left:1px solid #1e90ffee !important;
-    border-right:1px solid #1e90ffee !important;
-}
-div, table, th, td, ul {
-    border-color: #efefef !important;
-}
-th {
-    background: #acdbff !important;
-}
-table.profiles th {
-    background: #f0ffff !important;
-}
-a {
-    color: #639be2;
-}
-.search-box, .user-menus, .admin-menus, .feature-tags {
-    background-color: #acdbff;
-}
-*/
         </style>
     </head>
     <body>

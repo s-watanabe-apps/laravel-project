@@ -34,6 +34,7 @@ class SettingsService extends Service
                 'themes.a_color',
                 'themes.th_color',
                 'themes.box_color',
+                'themes.contents_color',
                 //'settings.header_image_id',
                 //\DB::raw('header_images.file_name as header_file_name'),
                 //'header_images.title_color',
