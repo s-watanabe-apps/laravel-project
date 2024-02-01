@@ -122,18 +122,15 @@ class ProfilesController extends Controller
      */
     public function edit(Request $request)
     {
-        $birthDate = $this->usersService->getBirthDate(user()->birthdate);
+        $profiles = user();
 
-        $profileUser = user();
+        $user_profiles = $this->profilesService->get_user_profiles(user()->id);
 
-        $userProfiles = $this->profilesService->getUserProfiles(user()->id);
-
-        $choices = $this->profilesService->getProfileChoicesHash();
+        $choices = $this->profilesService->get_profile_choices_hash();
 
         return view('profiles.editor', compact(
-            'profileUser',
-            'birthDate',
-            'userProfiles',
+            'profiles',
+            'user_profiles',
             'choices'
         ));
     }

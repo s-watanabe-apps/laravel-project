@@ -2,7 +2,10 @@
 @section('content')
 
 <div class="contents">
-    <div class="subject"><a href="/members"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a> &gt; {{$profiles['name']}}</div>
+    <div class="subject">
+        <a href="/members"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a>
+        &gt; {{$profiles['name']}}
+    </div>
     <div class="grid-contents">
         <div class="w-25">
             <img class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
@@ -45,8 +48,12 @@
                 </tr>
             </table>
         </div>
-
     </div>
+    @if ($profiles['id'] == user()->id)
+    <div class="flex-contents">
+        <a href="/profiles/edit"><input type="button" value="@lang('strings.edit')"></input></a>
+    </div>
+    @endif
 
     <div class="grid-contents">
         <div class="w-50">

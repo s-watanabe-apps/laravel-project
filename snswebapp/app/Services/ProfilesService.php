@@ -74,11 +74,11 @@ class ProfilesService extends Service
     }
 
     /**
-     * Get profile choices hash.
+     * プロフィール設定項目取得.
      * 
-     * @return array [profiles.id => [profile_choices.id => profile_choices.name]]
+     * @return array
      */
-    public function getProfileChoicesHash()
+    public function get_profile_choices_hash()
     {
         $results = $this->base()
             ->select([

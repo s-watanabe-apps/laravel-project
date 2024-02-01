@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
+        <title>{{$settings['site_name']}}</title>
 <!--
         <link rel="stylesheet" href="{{asset('css/app.css')}}"></link>
         <script src="{{asset('js/app.js')}}"></script>
@@ -217,6 +217,11 @@ header .sm {
     padding: 5px;
     margin: 4px;
     width: 25%;
+}
+.w-33 {
+    padding: 5px;
+    margin: 4px;
+    width: 33%;
 }
 .w-50 {
     padding: 5px;
@@ -468,6 +473,12 @@ table.profiles td {
     padding: 15px;
     border: 1px solid #ddd;
 }
+.formset-box {
+    width: auto;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
 
 .vertical-contents {
     display: grid;
@@ -505,11 +516,24 @@ table.profiles td {
     border-bottom: 1px dotted #acacac;
 }
 
+/* User Menus */
 .user-menus {
-    border: 1px solid #bababa;
+    border: 1px solid #baba99;
 }
 .user-menus > ul {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    font-size: 14px;
     text-align: left;
+    border-bottom: 1px solid;
+}
+.user-menus > ul > section {
+    font-weight: bold;
+    position: relative;
+    left: -18px;
+}
+.user-menus > ul:last-child {
+    border-bottom: none;
 }
 
 /* Admin Menus */
@@ -627,6 +651,9 @@ table.profiles td {
         width: auto;
         text-align: center;
     }
+    .w-33 {
+        width: auto;
+    }
     .w-50 {
         width: auto;
     }
@@ -649,7 +676,6 @@ table.profiles td {
 }
 
 /** Theme */
-
 body {
     background: {{$settings['body_color']}} !important;
     color: {{$settings['text_color']}} !important;
@@ -672,7 +698,7 @@ th {
 table.profiles th {
     background: {{$settings['background_color']}} !important;
 }
-.search-box, .user-menus, .admin-menus, .feature-tags {
+.search-box, .user-menus, .admin-menus, .feature-tags, .formset-box {
     background-color: {{$settings['box_color']}}; !important;
 }
 a {
@@ -715,18 +741,26 @@ a {
         @include('header', compact('lang'))
         <div class="grid">
             <div class="side">
-                @if (auth()->check())
                 <div class="container">
                     <div class="{{$user_menus_status}}">
                         <div class="title">
                             <div id="trigger-1" class="trigger" data-name="user-menus">会員メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
                         </div>
                         <div class="target user-menus">
-                            hogehoge<br>hogehoge<br>hogehoge
+                            @if (auth()->check())
+                            <ul>
+                                <li><a href="/mypage">@lang('strings.mypage')</a>
+                                <li><a href="/profiles/{{user()->id}}">@lang('strings.profile')</a>
+                                <li><a href="/logout">@lang('auth.logout')</a>
+                            </ul>
+                            @else
+                            <ul>
+                                <li><a href="/login">@lang('auth.login')</a>
+                            </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
-                @endif
                 @if (user()->role_id == \App\Models\Roles::ADMIN)
                 <div class="container">
                     <div class="{{$admin_menus_status}}">

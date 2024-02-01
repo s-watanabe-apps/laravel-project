@@ -186,16 +186,6 @@ class UsersService extends Service
     }
 
     /**
-     * Get birthdate.
-     * 
-     * @return Carbon\Carbon
-     */
-    public function getBirthDate($birthdate)
-    {
-        return carbon($birthdate)->format('Y-m-d');
-    }
-
-    /**
      * Send password reset mail.
      * 
      * @param string $email

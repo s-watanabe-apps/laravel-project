@@ -49,6 +49,8 @@ class SettingsController extends ManagementsController
 
         $loginImages = $this->loginImagesService->get();
 
+dump($request->settings);
+
         $themes = $this->themesService->all();
         
         return view('managements.settings.index', compact(

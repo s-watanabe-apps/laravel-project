@@ -26,8 +26,8 @@
             <div class="vertical-contents">
                 <div class="title">@lang('strings.anonymous_user')</div>
                 <div class="vertical-contents">
-                    <label>{{Form::radio('anonymous_permission', '1', false, []) }}&nbsp;@lang('strings.anonymous_permisshon_not_allowed')</label>
-                    <label>{{Form::radio('anonymous_permission', '0', true, []) }}&nbsp;@lang('strings.anonymous_permisshon_allowed')</label>
+                    <label>{{Form::radio('anonymous_permission', '0', $settings['anonymous_permission'] == 0, []) }}&nbsp;@lang('strings.anonymous_permisshon_not_allowed')</label>
+                    <label>{{Form::radio('anonymous_permission', '1', $settings['anonymous_permission'] == 1, []) }}&nbsp;@lang('strings.anonymous_permisshon_allowed')</label>
                 </div>
                 <div class="text-danger">{{$errors->first('display_flag') ?? ''}}</div>
             </div>
