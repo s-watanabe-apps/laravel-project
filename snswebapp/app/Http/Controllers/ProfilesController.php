@@ -122,7 +122,7 @@ class ProfilesController extends Controller
      */
     public function edit(Request $request)
     {
-        $profiles = user();
+        $profiles = $this->usersService->get(user()->id);
 
         $user_profiles = $this->profilesService->get_user_profiles(user()->id);
 
@@ -136,17 +136,15 @@ class ProfilesController extends Controller
     }
 
     /**
-     * Save profile values.
+     * プロフィール保存.
      * 
      * @param App\Http\Requests\ProfilesRequest
      * @return Illuminate\View\View
      */
     public function register(ProfilesRequest $request)
     {
-        $params = $request->validated();
-
-        \DB::transaction(function() use ($params) {
-            $this->profilesService->save($params);
+        \DB::transaction(function() use ($request) {
+            $this->profilesService->save($request->validated());
         });
 
         return redirect()->route('profiles.get', ['id' => user()->id])->with('result', 1);

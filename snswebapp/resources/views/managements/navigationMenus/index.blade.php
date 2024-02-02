@@ -18,7 +18,23 @@
     </div>
 
     {{Form::close()}}
-    <button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
+    <button id="btn-add" type="button" style="margin-left: 10px;">@lang('strings.add')</button>
+</div>
+
+@if ($errors->any())
+<div class="text-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="flex-contents">
+    <a href="javascript:form.submit()">
+        <input type="submit" class="post" value="@lang('strings.save')"></input>
+    </a>
 </div>
 
 <!-- Toast -->

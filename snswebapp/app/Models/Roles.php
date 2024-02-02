@@ -15,10 +15,10 @@ class Roles extends Model
     public $timestamps = false;
 
     // Model constant, roles.
-    const SYSTEM = 0;
-    const ADMIN = 1;
-    const MEMBER = 2;
-    const ANONYMOUS = 3;
+    const SYSTEM = 1;
+    const ADMIN = 2;
+    const MEMBER = 3;
+    const ANONYMOUS = 4;
 
     /**
      * Get favorite names.

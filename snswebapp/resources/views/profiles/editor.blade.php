@@ -28,29 +28,39 @@
                 </tr>
                 <tr>
                     <th>@lang('strings.role')&nbsp;:</th>
-                    <td>{{$profiles['role_id']}}</td>
+                    <td>{{__('strings.roles')[$profiles['role_name']]}}</td>
                 </tr>
                 <tr>
                     <th>@lang('strings.birth_date')&nbsp;:</th>
                     <td>{{str_date_format($profiles['birthdate'])}}</td>
                 </tr>
-                @foreach ($user_profiles as $value)
-                    @if ($value['type'] != \App\Libs\ProfileInputType::DESCRIPTION)
-                    <tr>
-                        <th>{{$value['name']}}&nbsp;:</th>
-                        <td>{{$value['value']}}</td>
-                    </tr>
-                    @else
-                    <tr>
-                        <th>{{$value['name']}}&nbsp;:</th>
-                        <td>{!!$value['value']!!}</td>
-                    </tr>
-                    @endif
-                @endforeach
+                @foreach($user_profiles as $value)
                 <tr>
-                    <th>@lang('strings.last_login')&nbsp;:</th>
-                    <td>{{str_date_format($profiles['last_activity'])}}</td>
+                    <th>
+                        {{$value['name']}}&nbsp;:
+                    </th>
+                    <td>
+                        @if($value['type'] == App\Libs\ProfileInputType::FILLIN)
+                            {{Form::text("dynamic_values[{$value['id']}]", $value['value'], [])}}
+                        @elseif($value['type'] == App\Libs\ProfileInputType::DESCRIPTION)
+                            <textarea
+                                style="width: 100%; resize:vertical; padding: 5px;"
+                                name="dynamic_values[{{$value['id']}}]"
+                                rows="8">{{old('dynamic_values.' . $value['id']) ?? $value['value']}}</textarea>
+                        @elseif($value['type'] == App\Libs\ProfileInputType::CHOICE)
+                            <select name="dynamic_values[{{$value['id']}}]">
+                                <optgroup label="{{$value['name']}}">
+                                    @foreach($choices[$value['id']] as $k => $v)
+                                    <option value="{{$k}}">{{$v}}</option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
+                        @endif
+                        <div class="text-danger">{{$errors->first('dynamic_values.' . $value['id']) ?? ''}}</div>
+                    </td>
                 </tr>
+                @endforeach
+
             </table>
         </div>
 

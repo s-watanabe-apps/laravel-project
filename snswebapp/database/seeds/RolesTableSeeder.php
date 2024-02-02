@@ -13,16 +13,8 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->truncate();
-        $roles = [
-            [
-                'name' => __('strings.roles.admin'),
-            ],
-            [
-                'name' => __('strings.roles.member'),
-            ],
-        ];
-        foreach($roles as $role) {
-            Roles::query()->create($role);
+        foreach(__('strings.roles') as $key => $role) {
+            Roles::query()->create(['name' => $key]);
         }
     }
 }

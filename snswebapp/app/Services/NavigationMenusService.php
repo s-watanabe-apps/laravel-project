@@ -56,6 +56,6 @@ class NavigationMenusService extends Service
             ]);
         }
 
-        cache()->forget('navigation_menus');
+        cache()->forget(parent::CACHE_KEY_NAVIGATION_MENUS);
     }
 }

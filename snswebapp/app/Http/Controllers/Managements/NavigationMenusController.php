@@ -40,8 +40,10 @@ class NavigationMenusController extends ManagementsController
      */
     public function register(ManagementsNavigationsRequest $request)
     {
-        \DB::transaction(function() use ($request) {
-            $this->navigationMenusService->save($request->validated());
+        $params = $request->validated();
+
+        \DB::transaction(function() use ($params) {
+            $this->navigationMenusService->save($params);
         });
 
         return redirect()->route('managementsNavigations')->with('result', 1);

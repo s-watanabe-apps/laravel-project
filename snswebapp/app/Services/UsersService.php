@@ -25,6 +25,7 @@ class UsersService extends Service
                 'users.id',
                 'users.name',
                 'users.role_id',
+                \DB::raw('roles.name as role_name'),
                 'users.name',
                 'users.name_kana',
                 'users.email',
@@ -41,7 +42,8 @@ class UsersService extends Service
                 \DB::raw('groups.name as group_name'),
             ])
             ->leftJoin('groups', 'users.group_code', '=', 'groups.code')
-            ->where('users.role_id', '!=', Roles::SYSTEM);
+            ->join('roles', 'users.role_id', '=', 'roles.id');
+            //->where('users.role_id', '!=', Roles::SYSTEM);
     }
 
     /**
@@ -72,7 +74,7 @@ class UsersService extends Service
     }
 
     /**
-     * Get enabled users.
+     * ユーザー一覧取得.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -88,7 +90,7 @@ class UsersService extends Service
     }
 
     /**
-     * ユーザー情報取得
+     * ユーザー情報取得.
      * 
      * @var int id
      * @return array

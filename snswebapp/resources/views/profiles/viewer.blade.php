@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <th>@lang('strings.role')&nbsp;:</th>
-                    <td>{{$profiles['role_id']}}</td>
+                    <td>{{__('strings.roles')[$profiles['role_name']]}}</td>
                 </tr>
                 <tr>
                     <th>@lang('strings.birth_date')&nbsp;:</th>
@@ -42,10 +42,6 @@
                     </tr>
                     @endif
                 @endforeach
-                <tr>
-                    <th>@lang('strings.last_login')&nbsp;:</th>
-                    <td>{{str_date_format($profiles['last_activity'])}}</td>
-                </tr>
             </table>
         </div>
     </div>

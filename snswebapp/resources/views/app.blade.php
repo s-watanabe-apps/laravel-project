@@ -436,6 +436,10 @@ table.profiles td {
     border: 0px;
     text-align: left;
 }
+table.profiles input, table.profiles select, table.profiles textarea {
+    margin: 1px;
+    width: auto;
+}
 
 .flex-contents {
     text-align: center;
@@ -673,6 +677,26 @@ table.profiles td {
     .flex-contents > .search-submit {
         width: 100%;
     }
+
+    table.profiles th, table.profiles td{
+      display: block;
+    }
+    table.profiles th{
+        position: relative;
+        padding: 5px 0 3px 16px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    table.profiles th::before{
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        border: 5px solid transparent;
+        border-left: 8px solid #9a9a9a;
+    }
+
 }
 
 /** Theme */
@@ -734,7 +758,7 @@ a {
                         </div>
                     </div>
                 </div>
-                @if (user()->role_id == \App\Models\Roles::ADMIN)
+                @if (user()->role_id == \App\Models\Roles::ADMIN || user()->role_id == \App\Models\Roles::SYSTEM)
                 <div class="container">
                     <div class="{{$admin_menus_status}}">
                         <div class="title">
