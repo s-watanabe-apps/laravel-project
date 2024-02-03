@@ -114,7 +114,7 @@ class ProfilesService extends Service
     }
 
     /**
-     * Get profiles.
+     * プロフィール情報取得.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -131,8 +131,15 @@ class ProfilesService extends Service
         return $profiles;
     }
 
+    /**
+     * プロフィール保存.
+     * 
+     * @params array $params
+     */
     public function save($params)
     {
+        $users = (new Users())->find(user()->id);
+
         if (isset($params['image_file'])) {
             $id = sprintf('%06d', user()->id);
             $hash = base64_encode(substr(Hash::make($id), -27));
@@ -141,18 +148,16 @@ class ProfilesService extends Service
             $fileName = sprintf('profiles/image-%s-%s.%s', $id, $hash, $extension);
     
             $file->storeAs('contents/images/', $fileName);
-            $params['image_file'] = urlencode($fileName);
+            $users->image_file = urlencode($fileName);
+        } else if (($params['image_file_clear'] ?? 0) == 1) {
+            $users->image_file = null;
         }
-
         
-        $users = (new Users())->find(user()->id);
         $users->name = $params['name'];
         if (isset($params['name_kana']))
             $users->name_kana = $params['name_kana'];
         if (isset($params['birth_date']))
             $users->birthdate = $params['birth_date'];
-        if (isset($params['image_file']))
-            $users->image_file = $params['image_file'];
         $users->save();
         
         ProfileValues::save_profile_values(user()->id, $params['dynamic_values']);

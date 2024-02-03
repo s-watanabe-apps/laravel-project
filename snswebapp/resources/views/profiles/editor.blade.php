@@ -19,7 +19,8 @@
     <div class="grid-contents">
         <div class="w-25">
             <div style="position: relative;">
-                <img class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+                <img id="preview" class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+                {{Form::hidden('image_file_clear', 0)}}
                 <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
                     <span aria-hidden="true"><b>&times;</b></span>
                 </button>
@@ -95,5 +96,21 @@
 
     {{Form::close()}}
 </div>
+
+<script type="text/javascript">
+$(function(){
+    $("[name='image_file']").on("change", function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);   
+    });
+    $("#btn-delete").on("click", function (e) {
+        $("#preview").attr("src", "/show/image?file=profiles%2Fno_image.png");
+        $("[name='image_file_clear']").attr("value", 1);
+    });
+});
+</script>
 
 @endsection
