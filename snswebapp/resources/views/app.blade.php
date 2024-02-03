@@ -97,7 +97,6 @@ input[type = "submit"],
 input[type = "button"] {
     margin: 0 8px 0 8px;
 }
-
 input.search {
     background: #0000cd;
     font-weight: bold;
@@ -112,6 +111,15 @@ input.cancel {
     background: #bcbcbc;
     font-weight: bold;
     color: #676767;
+}
+label.file {
+    font-size: 14px;
+    background: #0000cd;
+    font-weight: bold;
+    color: #dddddd;
+    cursor: pointer;
+    padding: 3px 6px 3px 6px;
+    border: 2px solid #444;
 }
 select {
     padding: 3px;

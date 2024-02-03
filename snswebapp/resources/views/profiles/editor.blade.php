@@ -6,9 +6,28 @@
         <a href="/members"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a>
         &gt; <a href="/profiles/{{$profiles['id']}}">{{$profiles['name']}}</a>
         &gt; @lang('strings.edit')</div>
+
+    {{Form::open([
+        'name' => 'profiles',
+        'url' => '/profiles/register',
+        'method' => 'put',
+        'files' => true,
+        'enctype' => 'multipart/form-data',
+    ])}}
+    @csrf
+
     <div class="grid-contents">
         <div class="w-25">
-            <img class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+            <div style="position: relative;">
+                <img class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+                <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
+                    <span aria-hidden="true"><b>&times;</b></span>
+                </button>
+            </div>
+
+            <div class="flex-contents">
+                <label class="file">@lang('strings.choose_file')<input type="file" name="image_file" style="display: none" /></label>
+            </div>
         </div>
 
         <div class="w-75">
@@ -16,10 +35,11 @@
                 <tr>
                     <th>@lang('strings.name')&nbsp;:</th>
                     <td>
-                    {{Form::text(
-                        'name',
-                        old('name') ?? $profiles['name'],
-                    )}}
+                        {{Form::text(
+                            'name',
+                            old('name') ?? $profiles['name'],
+                        )}}
+                        <div class="text-danger">{{$errors->first('name') ?? ''}}</div>
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +86,14 @@
 
     </div>
 
+    <div class="flex-contents">
+        <input type="submit" class="post" value="@lang('strings.save')"></input>
+        <a href="javascript:window.history.back();">
+            <input type="button" class="cancel" value="@lang('strings.cancel')"></input>
+        </a>
+    </div>
 
+    {{Form::close()}}
 </div>
 
 @endsection

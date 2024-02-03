@@ -17,43 +17,43 @@ class ProfileValues extends Model
     public $timestamps = false;
 
     /**
-     * Get the value with HashMap.
+     * プロフィールカスタム設定項目取得.
      * 
-     * @var int users.id
-     * @return array [profile_values.id => App\Models\ProfileValue]
+     * @var int $user_id
+     * @return array
      */
-    public static function getProfileValuesHashByUserId($userId) {
-        $profileValues = self::query()->where('user_id', $userId)->get();
+    public static function get_profile_values_hash_by_user_id($user_id) {
+        $profile_values = self::query()->where('user_id', $user_id)->get();
 
         $results = [];
-        foreach ($profileValues as $profileValue) {
-            $results[$profileValue->profile_id] = $profileValue;
+        foreach ($profile_values as $value) {
+            $results[$value->profile_id] = $value;
         }
 
         return $results;
     }
 
     /**
-     * Save profile values.
+     * プロフィールカスタム設定項目保存.
      * 
-     * @var int users.id
-     * @var array inputValues
+     * @var int $user_id
+     * @var array $values
      * @return void
      */
-    public static function saveProfileValues($userId, $inputValues)
+    public static function save_profile_values($user_id, $values)
     {
-        $profileValues = self::getProfileValuesHashByUserId($userId);
+        $profile_values = self::get_profile_values_hash_by_user_id($user_id);
 
-        foreach ($inputValues as $key => $value) {
-            if (array_key_exists($key, $profileValues)) {
-                if (strcmp($profileValues[$key]->value, $value) != 0) {
-                    self::where('user_id', $userId)
+        foreach ($values as $key => $value) {
+            if (array_key_exists($key, $profile_values)) {
+                if (strcmp($profile_values[$key]->value, $value) != 0) {
+                    self::where('user_id', $user_id)
                         ->where('profile_id', $key)
                         ->update(['value' => $value]);
                 }
             } else {
                 self::insert([
-                    'user_id' => $userId,
+                    'user_id' => $user_id,
                     'profile_id' => $key,
                     'value' => $value,
                 ]);

@@ -38,7 +38,7 @@
                     @else
                     <tr>
                         <th>{{$value['name']}}&nbsp;:</th>
-                        <td>{!!$value['value']!!}</td>
+                        <td><div style="white-space: pre; padding: 5px 0 10px 0;">{!!$value['value']!!}</div></td>
                     </tr>
                     @endif
                 @endforeach

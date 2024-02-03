@@ -27,8 +27,8 @@ class ProfilesRequest extends AppFormRequest
     public function rules()
     {
         $profilesService = new ProfilesService();
-        $profiles = $profilesService->getProfilesHash();
-        $choices = $profilesService->getProfileChoicesHash();
+        $profiles = $profilesService->get_profiles_hash();
+        $choices = $profilesService->get_profile_choices_hash();
 
         $dynamicRules = function($attribute, $value, $fail) use($profiles, $choices) {
             $index = (int) str_replace('dynamic_values.', '', $attribute);
@@ -69,8 +69,8 @@ class ProfilesRequest extends AppFormRequest
 
         return [
             'name' => 'required|max:255',
-            'name_kana' => 'required|max:255',
-            'birth_date' => 'required|date',
+            //'name_kana' => 'required|max:255',
+            //'birth_date' => 'required|date',
             'image_file' => 'mimetypes:' . implode(',', array_keys(Images::getExtensions())),
             'dynamic_values.*' => $dynamicRules,
         ];

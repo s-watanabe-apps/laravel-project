@@ -97,11 +97,11 @@ class ProfilesService extends Service
     }
 
     /**
-     * getProfilesHash
+     * プロフィール設定項目取得.
      * 
-     * @return array [profiles.id => App\Models\Profiles]
+     * @return array
      */
-    public function getProfilesHash()
+    public function get_profiles_hash()
     {
         $profiles = $this->base()->orderBy('order')->get();
 
@@ -147,12 +147,15 @@ class ProfilesService extends Service
         
         $users = (new Users())->find(user()->id);
         $users->name = $params['name'];
-        $users->name_kana = $params['name_kana'];
-        $users->birthdate = $params['birth_date'];
-        $users->image_file = $params['image_file'];
+        if (isset($params['name_kana']))
+            $users->name_kana = $params['name_kana'];
+        if (isset($params['birth_date']))
+            $users->birthdate = $params['birth_date'];
+        if (isset($params['image_file']))
+            $users->image_file = $params['image_file'];
         $users->save();
         
-        ProfileValues::saveProfileValues(user()->id, $params['dynamic_values']);
+        ProfileValues::save_profile_values(user()->id, $params['dynamic_values']);
 
         $key = sprintf(Service::CACHE_KEY_USERS_BY_ID, user()->id);
         $this->cacheForget($key);
