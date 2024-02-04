@@ -413,8 +413,8 @@ table {
     border-collapse: collapse;
 }
 table th {
-    font-weight: normal;
-    border: 1px solid #ddd;
+    font-weight: bold;
+    border: 1px solid;
     text-align: center;
 }
 table td {
@@ -481,7 +481,7 @@ table.profiles input, table.profiles select, table.profiles textarea {
 }
 .search-box {
     width: auto;
-    margin: 10px;
+    margin-top: 10px;
     padding: 15px;
     border: 1px solid #ddd;
 }
@@ -494,7 +494,7 @@ table.profiles input, table.profiles select, table.profiles textarea {
 
 .vertical-contents {
     display: grid;
-    padding: 3px 0 3px 0;
+    padding: 10px 0 10px 0;
 }
 .input-label{
     position: relative;
@@ -567,6 +567,30 @@ table.profiles input, table.profiles select, table.profiles textarea {
 .admin-menus > ul:last-child {
     border-bottom: none;
 }
+
+/* User Managements */
+table.user-managements {
+    font-size: 14px;
+}
+
+/* Enable, Disable */
+span.enable {
+    background: #228B22;
+    color: #efefef;
+    font-weight: bold;
+    padding: 0 4px 0 4px;
+    border-bottom: 2px solid #116911;
+    border-radius: 10px;
+}
+span.disable {
+    background: #ee1111;
+    color: #efefef;
+    font-weight: bold;
+    padding: 0 4px 0 4px;
+    border-bottom: 2px solid #990000;
+    border-radius: 10px;
+}
+
 @media only screen and (max-width:991px) {
     .grid {
         display: grid;
@@ -724,7 +748,7 @@ header {
 div, table, th, td, ul {
     border-color: {{$settings['border_color']}} !important;
 }
-th {
+table th {
     background: {{$settings['th_color']}} !important;
 }
 table.profiles th {

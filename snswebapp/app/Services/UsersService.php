@@ -86,7 +86,8 @@ class UsersService extends Service
             ->addSelect(['sessions.last_activity'])
             ->leftJoin(\DB::raw('(select user_id, max(last_activity) as last_activity from sessions group by user_id) sessions'),
                 'users.id', '=', 'sessions.user_id')
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     /**

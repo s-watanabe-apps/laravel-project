@@ -97,7 +97,7 @@ class ProfilesService extends Service
     }
 
     /**
-     * プロフィール設定項目取得.
+     * プロフィール一覧ハッシュ取得.
      * 
      * @return array
      */
@@ -118,7 +118,7 @@ class ProfilesService extends Service
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function getProfiles()
+    public function get_profiles()
     {
         $profiles = $this->base()->orderBy('order')->get();
 
