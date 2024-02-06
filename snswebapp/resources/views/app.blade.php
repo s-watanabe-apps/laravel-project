@@ -780,6 +780,7 @@ a {
                             <ul>
                                 <li><a href="/mypage">@lang('strings.mypage')</a>
                                 <li><a href="/profiles/{{user()->id}}">@lang('strings.profile')</a>
+                                <li><a href="/massages/inbox">@lang('strings.message')</a>
                                 <li><a href="/logout">@lang('auth.logout')</a>
                             </ul>
                             @else

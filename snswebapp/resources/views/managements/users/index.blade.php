@@ -38,12 +38,9 @@
     <div class="vertical-contents">
         <table class="user-managements">
             <tr>
-                <th><a href="asort=1">ID</a></th>
-                <th><a href="#">@lang('strings.name')</a></th>
-                <th><a href="#">@lang('strings.group')</a></th>
-                <th><a href="#">@lang('strings.created_at')</a></th>
-                <th><a href="#">@lang('strings.last_login')</a></th>
-                <th><a href="#">@lang('strings.status')</a></th>
+                @foreach ($headers as $value)
+                <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
+                @endforeach
             </tr>
             @foreach ($users as $value)
             <tr>

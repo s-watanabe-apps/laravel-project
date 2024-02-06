@@ -23,7 +23,6 @@ class UsersService extends Service
         return Users::query()
             ->select([
                 'users.id',
-                'users.name',
                 'users.role_id',
                 \DB::raw('roles.name as role_name'),
                 'users.name',
@@ -49,13 +48,12 @@ class UsersService extends Service
     /**
      * ユーザー一覧取得.
      * 
-     * @param string keyword
-     * @param int group_code
-     * @param bool pagenation
+     * @param string $keyword
+     * @param int $group_code
      * 
      * @return array
      */
-    public function get_enabled_users(string $keyword = null, string $group_code = null, $pagenation = true)
+    public function get_enabled_users(string $keyword = null, string $group_code = null)
     {
         $query = $this->base()->where('users.status', \Status::ENABLED);
         
@@ -74,20 +72,86 @@ class UsersService extends Service
     }
 
     /**
-     * ユーザー一覧取得.
+     * ユーザー一覧取得(管理用).
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param string $keyword
+     * @param int $group_code
+     * @param int $sortkey
+     *
+     * @return array
      */
-    public function all()
+    public function get_users_by_managements(string $keyword = null, string $group_code = null, $sortkey = null)
     {
+        $sortkey = $sortkey ?? -1;
+
+        $user_management_headers = [
+            1 => [
+                'sortkey' => 'users.id',
+                'header_name' => __('strings.id')
+            ],
+            2 => [
+                'sortkey' => 'users.name',
+                'header_name' => __('strings.name'),
+            ],
+            3 => [
+                'sortkey' => 'users.group_code',
+                'header_name' => __('strings.group'),
+            ],
+            4 => [
+                'sortkey' => 'users.created_at',
+                'header_name' => __('strings.created_at'),
+            ],
+            5 => [
+                'sortkey' => 'sessions.last_activity',
+                'header_name' => __('strings.last_login'),
+            ],
+            6 => [
+                'sortkey' => 'users.status',
+                'header_name' => __('strings.status'),
+            ],
+        ];
+    
         $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
 
-        return $this->base()
+        $query = $this->base()
             ->addSelect(['sessions.last_activity'])
             ->leftJoin(\DB::raw('(select user_id, max(last_activity) as last_activity from sessions group by user_id) sessions'),
-                'users.id', '=', 'sessions.user_id')
-            ->get()
-            ->toArray();
+                'users.id', '=', 'sessions.user_id');
+
+        if (!is_null($keyword)) {
+            $like_keyword = '%' . addcslashes($keyword, '%_\\') . '%';
+            $query->where('users.name', 'like', $like_keyword);
+        }
+
+        if (!is_null($group_code) && $group_code != '0') {
+            $query->where('users.group_code', $group_code);
+        }
+
+        // 並べ替え
+        $sortkey_name = $user_management_headers[abs($sortkey)]['sortkey'];
+        $sortkey_order = $sortkey > 0 ? 'asc' : 'desc';
+        $query->orderBy($sortkey_name, $sortkey_order);
+
+        $result = $query->get();
+
+        // ヘッダー用のパラメータ
+        $query_string = http_build_query([
+            'keyword' => $keyword,
+            'group_code' => ($group_code != 0) ? '' : $group_code,
+        ]);
+
+        // ヘッダー生成
+        $headers = array_map(function($key, $value) use($query_string, $sortkey) {
+                return [
+                    'name' => $value['header_name'] . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'link' => "/managements/users?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
+                ];
+            },
+            array_keys($user_management_headers),
+            array_values($user_management_headers)
+        );
+
+        return [$result->toArray(), $headers];
     }
 
     /**

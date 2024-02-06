@@ -34,7 +34,7 @@ class ThemesTableSeeder extends Seeder
                 'body_color' => '#000000',
                 'border_color' => '#787878',
                 'a_color' => '#639be2',
-                'th_color' => '#a9a9a9',
+                'th_color' => '#bcbcbc',
                 'box_color' => '#454545',
                 'contents_color' => '#565677',
             ],

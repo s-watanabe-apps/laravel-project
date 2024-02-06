@@ -88,6 +88,7 @@ return [
     'feature_tags' => 'Featured keywords',
     'theme' => 'Theme',
     'mypage' => 'My Page',
+    'id' => 'ID',
 
     // Side menus
     'write_articles' => 'Write articles',

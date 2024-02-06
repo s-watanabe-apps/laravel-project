@@ -87,6 +87,7 @@ return [
     'feature_tags' => '注目のキーワード',
     'theme' => 'テーマ',
     'mypage' => 'マイページ',
+    'id' => 'ID',
 
     // Side menus
     'write_articles' => '記事を書く',

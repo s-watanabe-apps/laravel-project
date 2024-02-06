@@ -47,10 +47,12 @@ class UsersController extends ManagementsController
             'keyword' => $request->keyword,
             'group_code' => $request->group_code,
             'page' => $request->page,
+            'sort' => $request->sort,
         ], [
             'keyword' => 'string|nullable',
             'group_code' => 'string|nullable',
             'page' => 'integer|nullable',
+            'sort' => 'integer|nullable|min:-6|max:6',
         ]);
         if ($validator->fails()) {
             abort(404);
@@ -59,7 +61,7 @@ class UsersController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        $users = $this->usersService->all();
+        list ($users, $headers) = $this->usersService->get_users_by_managements($validated['keyword'], $validated['group_code'], $validated['sort']);
         $users = $this->pager($users, 10, $page, '/managements/users/');
 
         $groups = $this->groupsService->all();
@@ -67,7 +69,8 @@ class UsersController extends ManagementsController
         return view('managements.users.index', compact(
             'users',
             'groups',
-            'validated'
+            'validated',
+            'headers'
         ));
     }
 
