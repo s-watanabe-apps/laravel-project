@@ -64,7 +64,7 @@ class SettingsController extends ManagementsController
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
-    public function register(ManagementsSettingsRequest $request)
+    public function save(ManagementsSettingsRequest $request)
     {
         $params = $request->validated();
         

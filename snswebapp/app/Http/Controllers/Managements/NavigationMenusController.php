@@ -22,7 +22,7 @@ class NavigationMenusController extends ManagementsController
     }
 
     /**
-     * Get create navigation menu form.
+     * ナビゲーションメニュー取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -33,12 +33,12 @@ class NavigationMenusController extends ManagementsController
     }
 
     /**
-     * Register input information.
+     * ナビゲーションメニュー更新.
      * 
      * @param App\Http\Requests\ManagementsNavigationsRequest
      * @return void
      */
-    public function register(ManagementsNavigationsRequest $request)
+    public function save(ManagementsNavigationsRequest $request)
     {
         $params = $request->validated();
 

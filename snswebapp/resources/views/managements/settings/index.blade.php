@@ -4,7 +4,7 @@
 <div class="contents">
     <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.site_settings')</div>
 
-    {{Form::open(['name' => 'settings', 'url' => '/managements/settings/register', 'method' => 'post', 'files' => true])}}
+    {{Form::open(['name' => 'settings', 'url' => '/managements/settings', 'method' => 'post', 'files' => true])}}
     @csrf
     <div class="grid-contents">
         <div class="w-50">

@@ -46,7 +46,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
             Route::get('/profiles/edit', 'ProfilesController@edit');
-            Route::put('/profiles/register', 'ProfilesController@register');
+            Route::put('/profiles/save', 'ProfilesController@save');
         });
 
         // Pictures
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
             // Settings
             Route::get('settings', 'Managements\SettingsController@index')->name('managementsSettings');
-            Route::post('settings/register', 'Managements\SettingsController@register');
+            Route::post('settings', 'Managements\SettingsController@save');
 
             // Users
             Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
@@ -99,7 +99,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // Navigation Menus
             Route::get('navigations', 'Managements\NavigationMenusController@index')->name('managementsNavigations');
-            Route::post('navigations/register', 'Managements\NavigationMenusController@register');
+            Route::post('navigations', 'Managements\NavigationMenusController@save');
 
             // Informations
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');

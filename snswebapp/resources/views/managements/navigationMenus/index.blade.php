@@ -8,7 +8,7 @@
 <div class="contents">
     <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.navigation_management')</div>
 
-    {{Form::open(['name' => 'form', 'url' => '/managements/navigations/register', 'method' => 'post', 'files' => true])}}
+    {{Form::open(['name' => 'form', 'url' => '/managements/navigations', 'method' => 'post', 'files' => true])}}
     @csrf
 
     <div id="items">

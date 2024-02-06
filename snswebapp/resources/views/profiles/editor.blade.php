@@ -9,7 +9,7 @@
 
     {{Form::open([
         'name' => 'profiles',
-        'url' => '/profiles/register',
+        'url' => '/profiles/save',
         'method' => 'put',
         'files' => true,
         'enctype' => 'multipart/form-data',

@@ -141,7 +141,7 @@ class ProfilesController extends Controller
      * @param App\Http\Requests\ProfilesRequest
      * @return Illuminate\View\View
      */
-    public function register(ProfilesRequest $request)
+    public function save(ProfilesRequest $request)
     {
         \DB::transaction(function() use ($request) {
             $this->profilesService->save($request->validated());

@@ -22,7 +22,7 @@ class GroupsController extends ManagementsController
     }
 
     /**
-     * Get group List.
+     * グループ一覧.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View

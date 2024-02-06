@@ -1,7 +1,24 @@
-@extends('layouts.app')
+@extends('app')
 @section('content')
+
 <div id="formset" hidden>
     @include('managements.groups.formset', [])
+</div>
+
+<div class="contents">
+    <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.group_management')</div>
+
+    {{Form::open(['name' => 'form', 'url' => '/managements/navigations/register', 'method' => 'post', 'files' => true])}}
+    @csrf
+
+    <div id="items">
+    @foreach ($groups as $index => $group)
+        @include('managements.groups.formset', compact('group'))
+    @endforeach
+    </div>
+
+    {{Form::close()}}
+    <button id="btn-add" type="button" style="margin-left: 10px;">@lang('strings.add')</button>
 </div>
 
 @if ($errors->any())
@@ -14,59 +31,32 @@
 </div>
 @endif
 
-{{Form::open(['name' => 'form', 'url' => '/managements/groups/register', 'method' => 'post', 'files' => true])}}
-@csrf
-
-<!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-tools"></i> @lang('strings.navigation_management')</li>
-        </ol>
-    </nav>
+<div class="flex-contents">
+    <a href="javascript:form.submit()">
+        <input type="submit" class="post" value="@lang('strings.save')"></input>
+    </a>
 </div>
-
-<div id="items">
-    @foreach ($groups as $index => $group)
-        @include('managements.groups.formset', compact('group'))
-    @endforeach
-</div>
-<button id="btn-add" class="btn-add" type="button">@lang('strings.add')</button>
-
-<div class="row">
-    <div class="col-12 mb-5 text-center">
-        <a href="javascript:form.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
-            <i class="fas fa-check fa-sm"></i> @lang('strings.save')
-        </a>
-    </div>
-</div>
-{{Form::close()}}
 
 <!-- Toast -->
-@include('shared.toast')
 @if (Session::get('result') == 1)
 <script>
-    $(window).on('load', function() {
-        $('#toastMessage').text('@lang('strings.operation_messages.saved_navigation_menus')');
-        $('#toast').toast('show');
-    });
+window.onload = function() {
+    alert('更新しました。');
+}
 </script>
 @endif
 
 <script>
 $(document).on('click', 'button#btn-add', function(){
-    //console.log("button#btn-add.click");
-    $("#items").append($("#formset").children().clone(true));
+    $("div#items").append($("#formset").children().clone(true));
 });
 
 $(document).on('click', 'button#btn-delete', function(){
-    //console.log("button#btn-delete.click");
     var index = $("button#btn-delete").index(this);
     $('div#formset-contents').eq(index).remove();
 });
 
 $(document).on('change', 'select#type', function(){
-    //console.log("select#type.change");
     var index = $("select#type").index(this);
     if ($(this).val() == {{App\Libs\ProfileInputType::CHOICE}}) {
         console.log(index);
@@ -77,7 +67,6 @@ $(document).on('change', 'select#type', function(){
         $('div#select_list_value').eq(index).css('display', 'none');
     }
 });
-
 </script>
 
 @endsection
