@@ -180,6 +180,7 @@ header .sm {
     word-break: break-all;
     padding: 10px 0px 6px 0px;
     border-bottom: 2px solid #eee;
+    margin-bottom: 10px;
 }
 .body {
     display: flex;
@@ -212,32 +213,32 @@ header .sm {
 }
 .grid-contents {
     display: flex;
-    padding-top: 10px;
 }
 .contents {
 }
 .w-20 {
-    padding: 5px;
-    margin: 4px;
+    padding: 0 5px 0 5px;
+    margin: 0 4px 0 4px;
     width: 20%;
 }
 .w-25 {
-    padding: 5px;
-    margin: 4px;
+    padding: 0 5px 0 5px;
+    margin: 0 4px 0 4px;
     width: 25%;
 }
 .w-33 {
-    padding: 5px;
-    margin: 4px;
+    padding: 0 5px 0 5px;
+    margin: 0 4px 0 4px;
     width: 33%;
 }
 .w-50 {
-    padding: 5px;
-    margin: 4px;
+    padding: 0 5px 0 5px;
+    margin: 0 4px 0 4px;
     width: 50%;
 }
 .w-75 {
-    padding: 5px;
+    padding: 0 5px 0 5px;
+    margin: 0 4px 0 4px;
     width: 75%;
 }
 
@@ -805,7 +806,7 @@ a {
                             </ul>
                             <ul>
                                 <section>@lang('strings.user_management')</section>
-                                <li><a href="/managements/users">@lang('strings.user_management')</a></li>
+                                <li><a href="/managements/users">@lang('strings.user_management')</a> &gt; <a href="/managements/users/add">@lang('strings.add')</a></li>
                                 <li><a href="/managements/groups">@lang('strings.group_management')</a></li>
                                 <li><a href="/managements/profile/settings">@lang('strings.profile_settings')</a></li>
                             </ul>

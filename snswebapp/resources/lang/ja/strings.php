@@ -88,6 +88,7 @@ return [
     'theme' => 'テーマ',
     'mypage' => 'マイページ',
     'id' => 'ID',
+    'add_user' => 'ユーザー追加',
 
     // Side menus
     'write_articles' => '記事を書く',

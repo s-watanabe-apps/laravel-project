@@ -89,6 +89,7 @@ return [
     'theme' => 'Theme',
     'mypage' => 'My Page',
     'id' => 'ID',
+    'add_user' => 'Add User',
 
     // Side menus
     'write_articles' => 'Write articles',

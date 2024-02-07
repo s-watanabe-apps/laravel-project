@@ -52,6 +52,10 @@
                     <td>{{__('strings.roles')[$profiles['role_name']]}}</td>
                 </tr>
                 <tr>
+                    <th>@lang('strings.group')&nbsp;:</th>
+                    <td>{{$profiles['group_name'] ?? __('strings.none')}}</td>
+                </tr>
+                <tr>
                     <th>@lang('strings.birth_date')&nbsp;:</th>
                     <td>{{str_date_format($profiles['birthdate'])}}</td>
                 </tr>
