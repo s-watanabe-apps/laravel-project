@@ -114,19 +114,24 @@ class ProfilesService extends Service
     }
 
     /**
-     * プロフィール情報取得.
+     * プロフィール設定項目取得.
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function get_profiles()
+    public function get_profile_items()
     {
-        $profiles = $this->base()->orderBy('order')->get();
+        $data = $this->base()
+            ->addSelect([
+                'profiles.order',
+            ])
+            ->orderBy('order')->get()->toArray();
 
-        foreach ($profiles as &$profile) {
-            if ($profile->type == ProfileInputType::CHOICE) {
-                $profile->choices = ProfileChoices::where('profile_id', $profile->id)->get();
+        $profiles = array_map(function($value) {
+            if ($value['type'] == ProfileInputType::CHOICE) {
+                $value['choices'] = ProfileChoices::where('profile_id', $value['id'])->get()->toArray();
             }
-        }
+            return $value;
+        }, $data);
 
         return $profiles;
     }

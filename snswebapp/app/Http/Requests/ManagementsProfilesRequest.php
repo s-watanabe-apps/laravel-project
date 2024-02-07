@@ -30,7 +30,7 @@ class ManagementsProfilesRequest extends AppFormRequest
         return [
             'types' => [
                 'array',
-                Rule::in(array_keys(ProfileInputType::getTypes())),
+                Rule::in(array_keys(ProfileInputType::get_types())),
             ],
             'names' => 'array',
             'names.*' => 'required|max:255',

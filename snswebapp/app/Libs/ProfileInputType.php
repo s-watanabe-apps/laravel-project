@@ -13,7 +13,7 @@ class ProfileInputType
      * 
      * @return array
      */
-    public static function getTypes()
+    public static function get_types()
     {
         return [
             self::FILLIN => __('strings.input_types.fillin'),

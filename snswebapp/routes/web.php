@@ -112,7 +112,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // Profile Settings
             Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');
-            Route::post('profile/settings/register', 'Managements\ProfileSettingsController@register');
+            Route::post('profile/settings', 'Managements\ProfileSettingsController@save');
 
             // Free Pages
             Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');

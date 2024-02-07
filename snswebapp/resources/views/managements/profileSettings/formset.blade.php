@@ -1,66 +1,49 @@
-<div id="formset-contents" class="card bg-light text-black shadow mb-3" >
-    <div class="row card-body">
-        <div class="col-md-2 col-4 pt-2">
-            <span class="h6 text-nowrap">@lang('strings.input_type')</span>
-        </div>
-        <div class="col-md-4 col-8 pb-2">
-            <select id="type" name="types[]" class="btn btn-secondary dropdown-toggle pr-1">
+<div id="formset-contents" class="grid-contents formset-box" style="position: relative;">
+    <div class="w-50">
+        <span class="input-label">@lang('strings.input_type')</span>
+        <div>
+            <select id="type" name="types[]" style="width: 100%;">
                 @foreach ($types as $key => $value)
                 <option value="{{$key}}"
-                @if (!is_null($profile) && $key == $profile->type)
+                @if (isset($profile['type']) && $key == $profile['type'])
                     selected
                 @endif
                 >{{$value}}</option>
                 @endforeach
             </select>
         </div>
-
-        <div class="row col-md-6 col-12">
-            <div class="col-md-3 col-4 pt-2">
-                <span class="h6 text-nowrap">@lang('strings.input_type_column_name')</span>
-            </div>
-            <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('text', 'names[]', is_null($profile) ? '' : $profile->name, [
-                    'style' => 'width: 100%;',
-                    'class' => 'ml-2'
-                ])}}
-            </div>
-            <div class="col-md-3 col-4 pt-2">
-                <span class="h6 text-nowrap">@lang('strings.sort_order')</span>
-            </div>
-            <div class="col-md-9 col-8 pt-1 pb-2">
-                {{Form::input('number', 'orders[]', is_null($profile) ? '' : $profile->order, [
-                    'style' => 'width: 100%;',
-                    'class' => 'ml-2',
-                ])}}
-            </div>
-            
-            <div id="select_list_name" class="col-md-3 col-4 pt-2"
-            @if (is_null($profile) || $profile->type != App\Libs\ProfileInputType::CHOICE)
-                style="display:none;"
-            @else
-                style="display:inline;"
-            @endif>
-                <span class="h6 text-nowrap">@lang('strings.select_list')</span>
-            </div>
-            <div id="select_list_value" class="col-md-9 col-8 pt-1 pb-2"
-            @if (is_null($profile) || $profile->type != App\Libs\ProfileInputType::CHOICE)
-                style="display:none;"
-            @else
-                style="display:inline;"
-            @endif>
-                <?php
-                    $choices = '';
-                    if (!is_null($profile) && $profile->type == App\Libs\ProfileInputType::CHOICE) {
-                        $choices = implode("\n", array_column($profile->choices->toArray(), 'name'));
-                    }
-                ?>
-                <textarea class="form-control ml-2" name="choices[]">{{$choices}}</textarea>
-            </div>
-        </div>
-
-        <button id="btn-delete" type="button" class="close" aria-label="Close" style="position: absolute; right: 10px; top: 4px;">
-            <span aria-hidden="true">&times;</span>
-        </button>
     </div>
+
+    <div class="w-50">
+        <span class="input-label">@lang('strings.input_type_column_name')</span>
+        {{Form::input('text', 'names[]', isset($profile['name']) ? $profile['name'] : '', [
+            'style' => 'width: 100%;',
+        ])}}
+        <span class="input-label">@lang('strings.sort_order')</span>
+        {{Form::input('number', 'orders[]', isset($profile['order']) ? $profile['order'] : '', [
+            'style' => 'width: 100%;',
+        ])}}
+        <div id="select_list"
+            @if (!isset($profile['type']) || $profile['type'] != App\Libs\ProfileInputType::CHOICE) {
+                style="display:none;"
+            @else
+                style="display:inline;"
+            @endif
+        >
+            <?php
+                $choices = '';
+                if (isset($profile['type']) && $profile['type'] == App\Libs\ProfileInputType::CHOICE) {
+                    $choices = implode("\n", array_column($profile['choices'], 'name'));
+                }
+            ?>
+
+            <span class="input-label">@lang('strings.select_list')</span>
+            <textarea style="width: 100%;" rows="3" name="choices[]">{{$choices}}</textarea>
+        </div>
+    
+    </div>
+
+    <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
+        <span aria-hidden="true"><b>&times;</b></span>
+    </button>
 </div>

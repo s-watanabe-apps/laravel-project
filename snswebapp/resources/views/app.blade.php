@@ -487,7 +487,7 @@ table.profiles input, table.profiles select, table.profiles textarea {
 }
 .formset-box {
     width: auto;
-    margin: 10px;
+    margin: 10px 0 10px 0;
     padding: 15px;
     border: 1px solid #ddd;
 }

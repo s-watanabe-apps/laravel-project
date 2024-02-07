@@ -22,18 +22,21 @@ class ProfileSettingsController extends ManagementsController
         $this->profilesService = $profilesService;
     }
 
+    /**
+     * プロフィール設定項目取得.
+     */
     public function index(Request $request)
     {
-        $types = ProfileInputType::getTypes();
+        $types = ProfileInputType::get_types();
 
-        $profiles = $this->profilesService->get_profiles();
+        $profiles = $this->profilesService->get_profile_items();
 
         return view('managements.profileSettings.index', compact(
             'types', 'profiles'
         ));
     }
 
-    public function post(ManagementsProfilesRequest $request)
+    public function save(ManagementsProfilesRequest $request)
     {
         echo "<pre>";
         var_dump($request->input());

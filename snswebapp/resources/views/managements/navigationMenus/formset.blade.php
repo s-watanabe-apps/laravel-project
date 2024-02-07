@@ -1,30 +1,27 @@
 <div id="formset-contents" class="grid-contents formset-box" style="position: relative;">
     <div class="w-33">
         <span class="input-label">@lang('strings.input_type_column_name')</span>
-        <div class="">
+        <div>
             {{Form::input('text', 'names[]', $nav['name'] ?? '', [
                 'style' => 'width: 100%;',
-                'class' => 'ml-2'
             ])}}
         </div>
     </div>
 
     <div class="w-33">
         <span class="input-label">リンク</span>
-        <div class="">
+        <div>
         {{Form::input('text', 'links[]', $nav['link'] ?? '', [
             'style' => 'width: 100%;',
-            'class' => 'ml-2'
         ])}}
         </div>
     </div>
 
     <div class="w-33">
         <span class="input-label">@lang('strings.sort_order')</span>
-        <div class="">
+        <div>
         {{Form::input('number', 'orders[]', $nav['order'] ?? '', [
             'style' => 'width: 100%;',
-            'class' => 'ml-2',
         ])}}
         </div>
     </div>
