@@ -48,10 +48,12 @@
                 @endforeach
             </table>
         </div>
+
     </div>
+
     @if ($profiles['id'] == user()->id)
-    <div class="flex-contents">
-        <a href="/profiles/edit"><input type="button" value="@lang('strings.edit')"></input></a>
+    <div class="flex-contents" style="width: 100%";>
+        <a href="/profiles/edit"><input type="button" value="@lang('strings.edit')" /></a>
     </div>
     @endif
 

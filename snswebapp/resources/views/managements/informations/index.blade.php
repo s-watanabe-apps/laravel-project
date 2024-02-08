@@ -1,75 +1,75 @@
-@extends('layouts.app')
+@extends('app')
 @section('content')
-<!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-info-circle"></i> @lang('strings.informations_management')</li>
-        </ol>
-    </nav>
-</div>
 
-<!-- Content Row -->
-<div class="row mx-1">
+<div class="contents">
+    <div class="subject"><i class="fas fa-fw fa-info-circle"></i> @lang('strings.informations_management')</div>
+    <div class="contents-header"><a href="/managements/users/add">@lang('strings.add_information')</a></div>
 
-    <!-- Tab Control -->
-    @include('managements.informations.formset.tabControl', ['index' => 1])
-
-    <div class="col-lg-10 px-0 px-lg-2">
-
-        <table id="dataTable" class="display cell-border compact responsive nowrap" style="margin: unset; width: 100%;">
-            <thead>
-                <tr class="text-nowrap">
-                    <th class="dt-center">ID</th>
-                    <th class="dt-center">@lang('strings.title')</th>
-                    <th class="dt-center">@lang('strings.start_time')</th>
-                    <th class="dt-center">@lang('strings.end_time')</th>
-                    <th class="dt-center">@lang('strings.status')</th>
-                    <th class="dt-center"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($informations as $value)
-                <tr>
-                    <td class="dt-center">
-                        {{$value->id}}
-                    </td>
-                    <td class="dt-left">
-                        <a href="/managements/informations/{{$value->id}}">
-                            <i class="fas {{$value->mark}} text-primary-50"></i>
-                            {{$value->title}}
-                        </a>
-                    </td>
-                    <td class="dt-center">
-                        {{$value->start_time == null ? '' : carbon($value->start_time)->format(\DateFormat::getDateTimeFullFormat())}}
-                    </td>
-                    <td class="dt-center">
-                        {{$value->end_time == null ? '' : carbon($value->end_time)->format(\DateFormat::getDateTimeFullFormat())}}
-                    </td>
-                    <td class="dt-center text-nowrap">
-                        <input type="checkbox"
-                            @if ($value->status == \Status::ENABLED)
-                                checked
-                            @endif
-                            data-onstyle="success" data-offstyle="secondary"
-                            data-toggle="toggle"
-                            data-size="sm"
-                            data-on="@lang('strings.enable')"
-                            data-off="@lang('strings.disable')" />
-                    </td>
-                    <td>
-                        <a href="/managements/informations/remove/{{$value->id}}" class="py-0 btn btn-danger shadow-sm mb-2">
-                            <i class="fas fa-window-close fa-sm text-white-50"></i> @lang('strings.delete')
-                        </a><br>
-                    </td>
-                </tr>
+    {{Form::open([
+        'name' => 'informationsSearch',
+        'url' => '/managements/informations',
+        'method' => 'get',
+    ])}}
+    <div class="flex-contents search-box">
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.keyword'):&nbsp;</span>
+            {{Form::input('text', 'keyword', $validated['keyword'] ?? '', [
+                'style' => 'width: 50%;',
+            ])}}
+        </div>
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.class'):&nbsp;</span>
+            <select name="m" style="width: 50%;">
+                <option value="0"></option>
+                @foreach ($marks as $mark)
+                <option value="{{$mark['id']}}"
+                    @if ($mark['id'] == $validated['m'])
+                        selected
+                    @endif
+                >{{__('strings.information_marks.' . $mark['mark'])}}</option>
                 @endforeach
-            </tbody>
+            </select>
+        </div>
+        <div class="search-submit">
+            <input type="submit" class="search" value="@lang('strings.search')" />
+        </div>
+    </div>
+    {{Form::close()}}
+
+    <div class="vertical-contents">
+        <table class="user-managements">
+            <tr>
+                @foreach ($headers as $value)
+                <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
+                @endforeach
+            </tr>
+            @foreach ($informations as $value)
+            <tr>
+                <td>
+                    {{$value['id']}}
+                </td>
+                <td style="text-align: left; padding: 0 5px 0 5px;">
+                    <a href="/managements/informations/{{$value['id']}}"><i class="fas fa-fw {{$value['mark']}}"></i> {{$value['title']}}</a>
+                </td>
+                <td>
+                    {{$value['start_time']}}
+                </td>
+                <td>
+                    {{$value['end_time']}}
+                </td>
+                <td>
+                    @if ($value['status'] == \Status::ENABLED)
+                    <span class="enable">@lang('strings.enable')</span>
+                    @else
+                    <span class="disable">@lang('strings.disable')</span>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
         </table>
     </div>
-</div>
 
-<!-- DataTables -->
-@include('shared.datatables')
+    {!!$informations->links('vendor.pagination.semantic-ui')!!}
+</div>
 
 @endsection

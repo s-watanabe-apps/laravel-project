@@ -6,7 +6,7 @@ use App\Models\InformationMarks;
 class InformationMarksService extends Service
 {
     /**
-     * Get base query builder.
+     * ベースクエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -20,14 +20,13 @@ class InformationMarksService extends Service
     }
 
     /**
-     * Get all information marks.
+     * お知らせ種別全件取得.
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function all()
+    public function get_all()
     {
-        return $this->base()
-            ->get();
+        return $this->base()->get()->toArray();
     }
 
     /**

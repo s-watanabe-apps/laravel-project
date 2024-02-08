@@ -16,7 +16,7 @@ class InformationsController extends ManagementsController
     private $informationMarksService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\InformationsService
      * @return void
@@ -30,16 +30,42 @@ class InformationsController extends ManagementsController
     }
 
     /**
-     * Get information list.
+     * お知らせ一覧取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function index(Request $request)
     {
-        $informations = $this->informationsService->all();
+        $validator = Validator::make([
+            'keyword' => $request->keyword,
+            'm' => $request->m,
+            'page' => $request->page,
+            'sort' => $request->sort,
+        ], [
+            'keyword' => 'string|nullable',
+            'm' => 'string|nullable',
+            'page' => 'integer|nullable',
+            'sort' => 'integer|nullable|min:-5|max:5',
+        ]);
+        if ($validator->fails()) {
+            abort(404);
+        }
 
-        return view('managements.informations.index', compact('informations'));
+        $validated = $validator->validated();
+
+        $page = $validated['page'] ?? 1;
+        list($informations, $headers) = $this->informationsService->get_all_informations($validated['keyword'], $validated['m'], $validated['sort']);
+        $informations = $this->pager($informations, 10, $page, '/managements/informations/');
+
+        $marks = $this->informationMarksService->get_all();
+
+        return view('managements.informations.index', compact(
+            'informations',
+            'headers',
+            'marks',
+            'validated'
+        ));
     }
 
     /**

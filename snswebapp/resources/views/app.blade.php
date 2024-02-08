@@ -215,6 +215,11 @@ header .sm {
     display: flex;
 }
 .contents {
+
+}
+.contents-header {
+    font-size: 14px;
+    padding: 0px 6px 0 6px;
 }
 .w-20 {
     padding: 0 5px 0 5px;
@@ -812,7 +817,7 @@ a {
                             </ul>
                             <ul>
                                 <section>@lang('strings.contents_management')</section>
-                                <li><a href="/managements/informations">@lang('strings.informations_management')</a></li>
+                                <li><a href="/managements/informations">@lang('strings.informations_management')</a> &gt; <a href="/managements/users/add">@lang('strings.add')</a></li>
                                 <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
                                 <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
                             </ul>

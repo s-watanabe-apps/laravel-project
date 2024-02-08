@@ -10,7 +10,7 @@ use App\Requests\ManagementsInformationsRequest;
 class InformationsService extends Service
 {
     /**
-     * Get base query builder.
+     * ベースクエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -29,7 +29,7 @@ class InformationsService extends Service
     }
 
     /**
-     * Get enabled informations.
+     * 有効なお知らせ一覧取得.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -52,13 +52,77 @@ class InformationsService extends Service
     }
 
     /**
-     * Get all informations.
+     * お知らせ全件取得.
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param string $keyword
+     * @param int $mark_id
+     * @param int $sortkey
+     * 
+     * @return array
      */
-    public function all($columns = [])
+    public function get_all_informations(string $keyword = null, string $mark_id = null, $sortkey = null)
     {
-        return $this->base()->get();
+        $sortkey = $sortkey ?? -1;
+
+        $information_management_headers = [
+            1 => [
+                'sortkey' => 'informations.id',
+                'header_name' => __('strings.id')
+            ],
+            2 => [
+                'sortkey' => 'informations.title',
+                'header_name' => __('strings.title'),
+            ],
+            3 => [
+                'sortkey' => 'informations.start_time',
+                'header_name' => __('strings.start_time'),
+            ],
+            4 => [
+                'sortkey' => 'informations.end_time',
+                'header_name' => __('strings.end_time'),
+            ],
+            5 => [
+                'sortkey' => 'informations.status',
+                'header_name' => __('strings.status'),
+            ],
+        ];
+
+        $query = $this->base();
+
+        if (!is_null($keyword)) {
+            $like_keyword = '%' . addcslashes($keyword, '%_\\') . '%';
+            $query->where('informations.title', 'like', $like_keyword);
+        }
+
+        if (!is_null($mark_id) && $mark_id != '0') {
+            $query->where('informations.mark_id', $mark_id);
+        }
+
+        // 並べ替え
+        $sortkey_name = $information_management_headers[abs($sortkey)]['sortkey'];
+        $sortkey_order = $sortkey > 0 ? 'asc' : 'desc';
+        $query->orderBy($sortkey_name, $sortkey_order);
+        
+        $result = $query->get();
+
+        // ヘッダー用のパラメータ
+        $query_string = http_build_query([
+            'keyword' => $keyword,
+            'm' => ($mark_id != 0) ? '' : $mark_id,
+        ]);
+
+        // ヘッダー生成
+        $headers = array_map(function($key, $value) use($query_string, $sortkey) {
+                return [
+                    'name' => $value['header_name'] . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'link' => "/managements/informations?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
+                ];
+            },
+            array_keys($information_management_headers),
+            array_values($information_management_headers)
+        );
+
+        return [$result->toArray(), $headers];
     }
 
     /**
@@ -70,7 +134,6 @@ class InformationsService extends Service
     {
         return $this->base()->where(['informations.id' => $id])->get()->first();
     }
-
 
     /**
      * Update or create record.

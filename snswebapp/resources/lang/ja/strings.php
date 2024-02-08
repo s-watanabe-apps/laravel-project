@@ -60,6 +60,7 @@ return [
     'expire_in_hours' => '時間',
     'expire_in_minutes' => '分間',
     'mark' => 'マーク',
+    'class' => '種別',
     'list' => 'リスト',
     'add' => '追加',
     'sort_order' => '並び順',
@@ -89,6 +90,13 @@ return [
     'mypage' => 'マイページ',
     'id' => 'ID',
     'add_user' => 'ユーザー追加',
+
+    // Information Marks
+    'information_marks' => [
+        'fa-info-circle' => '情報',
+        'fa-bolt' => '注意',
+        'fa-flag' => 'チェック',
+    ],
 
     // Side menus
     'write_articles' => '記事を書く',

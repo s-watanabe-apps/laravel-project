@@ -61,6 +61,7 @@ return [
     'expire_in_hours' => ' hours',
     'expire_in_minutes' => ' minutes',
     'mark' => 'Mark',
+    'class' => 'Class',
     'list' => 'List',
     'add' => 'Add',
     'sort_order' => 'Sort order',
@@ -91,6 +92,13 @@ return [
     'id' => 'ID',
     'add_user' => 'Add User',
 
+    // Information Marks
+    'information_marks' => [
+        'fa-info-circle' => 'Information',
+        'fa-bolt' => 'Caution',
+        'fa-flag' => 'Check',
+    ],
+    
     // Side menus
     'write_articles' => 'Write articles',
     'pictures' => 'Pictures',
