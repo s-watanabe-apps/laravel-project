@@ -39,7 +39,6 @@
         </div>
         <div class="text-danger">{{$errors->first('display_flag') ?? ''}}</div>
     </td>
-
 </div>
 
 <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
@@ -56,15 +55,15 @@ window.addEventListener("load", function() {
     $('#start_time').datetimepicker({
         format: 'Y/m/d H:i',
     });
-    $.datetimepicker.setLocale('ja');
 });
 
 window.addEventListener("load", function() {
     $('#end_time').datetimepicker({
         format: 'Y/m/d H:i',
     });
-    $.datetimepicker.setLocale('ja');
 });
+
+$.datetimepicker.setLocale('en');
 </script>
 
 @endsection

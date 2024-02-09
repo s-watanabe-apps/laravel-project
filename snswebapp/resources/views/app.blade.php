@@ -101,10 +101,16 @@ input[type = "button"] {
     margin: 0 8px 0 8px;
 }
 input[type = "text"],
-input[type = "number"],
-select {
+input[type = "number"] {
     font-size: 14px;
     padding: 4px;
+}
+select {
+    font-size: 14px;
+    padding: 3px;
+}
+img {
+    border-radius: 5px;
 }
 input.search {
     background: #0000cd;
@@ -129,12 +135,6 @@ label.file {
     cursor: pointer;
     padding: 3px 6px 3px 6px;
     border: 2px solid #444;
-}
-select {
-    padding: 3px;
-}
-img {
-    border-radius: 5px;
 }
 header {
     max-width: 992px;
@@ -837,7 +837,7 @@ a {
                 </div>
                 @endif
                 <div class="container">
-                    <div class="title">{{str_date_format($date)}}&nbsp;<select name="city_id" style="font-size: 16px;">
+                    <div class="title">{{str_date_format($date)}}&nbsp;<select name="city_id">
                         @foreach($cities as $city)
                         <option value="{{$city['id']}}">
                             @if ($lang == 'ja')
