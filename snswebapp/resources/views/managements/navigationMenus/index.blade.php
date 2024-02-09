@@ -6,7 +6,9 @@
 </div>
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.navigation_management')</div>
+    <div class="subject">
+        <span><i class="fas fa-fw fa-tools"></i> @lang('strings.navigation_management')</span>
+    </div>
 
     {{Form::open(['name' => 'form', 'url' => '/managements/navigations', 'method' => 'post', 'files' => true])}}
     @csrf

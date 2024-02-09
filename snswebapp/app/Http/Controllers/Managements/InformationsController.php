@@ -69,33 +69,36 @@ class InformationsController extends ManagementsController
     }
 
     /**
-     * Get information.
+     * お知らせ取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function get(Request $request)
     {
-        $informations = $this->informationsService->get($request->id);
+        $informations = $this->informationsService->get_by_id($request->id);
 
-        $informationMarks = $this->informationMarksService->all();
+        $marks = $this->informationMarksService->get_all();
 
-        return view('managements.informations.edit', compact('informations', 'informationMarks'));
+        return view('managements.informations.viewer', compact(
+            'informations',
+            'marks'
+        ));
     }
 
     /**
-     * Get create information form.
+     * お知らせ新規作成.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function create(Request $request)
     {
-        $informationMarks = $this->informationMarksService->all();
+        $marks = $this->informationMarksService->get_all();
 
-        $informations = new Informations();
-
-        return view('managements.informations.create', compact('informations', 'informationMarks'));
+        return view('managements.informations.create', compact(
+            'marks'
+        ));
     }
 
     /**
@@ -121,7 +124,7 @@ class InformationsController extends ManagementsController
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
-    public function register(ManagementsInformationsRequest $request)
+    public function save(ManagementsInformationsRequest $request)
     {
         \DB::transaction(function() use($request) {
             $this->informationsService->save($request);

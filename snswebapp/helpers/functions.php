@@ -73,3 +73,27 @@ if (!function_exists('str_date_format')) {
     }
 }
 
+if (!function_exists('str_datetime_format')) {
+    /**
+     */
+    function str_datetime_format($date)
+    {
+        if (is_numeric($date)) {
+            $time = $date;
+        } else {
+            if (is_null($date)) {
+                return '-';
+            }
+            
+            $time = strtotime($date);
+            if (!$time) {
+                return '-';
+            }
+        }
+        if (\App::getLocale() == 'ja') {
+            return date('Y/m/d H:i', $time);
+        } else {
+            return date('m/d/Y h:i A', $time);
+        }
+    }
+}

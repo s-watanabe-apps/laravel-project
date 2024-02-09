@@ -3,8 +3,8 @@
 
 <div class="contents">
     <div class="subject">
-        <a href="/members"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a>
-        &gt; {{$profiles['name']}}
+        <span><a href="/members"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</a></span>
+        <span>&gt; {{$profiles['name']}}</span>
     </div>
     <div class="grid-contents">
         <div class="w-25">

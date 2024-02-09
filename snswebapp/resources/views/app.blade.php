@@ -16,6 +16,9 @@
         <link href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css' rel='stylesheet'>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js'></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/build/jquery.datetimepicker.full.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-datetimepicker@2.5.20/jquery.datetimepicker.css">
+
 <!-- expand js -->
 <script type='text/javascript'><!--
 hljs.initHighlightingOnLoad();
@@ -96,6 +99,12 @@ input[type = "select"] {
 input[type = "submit"],
 input[type = "button"] {
     margin: 0 8px 0 8px;
+}
+input[type = "text"],
+input[type = "number"],
+select {
+    font-size: 14px;
+    padding: 4px;
 }
 input.search {
     background: #0000cd;
@@ -180,7 +189,7 @@ header .sm {
     word-break: break-all;
     padding: 10px 0px 6px 0px;
     border-bottom: 2px solid #eee;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 .body {
     display: flex;
@@ -211,15 +220,20 @@ header .sm {
     margin-bottom: 10px;
     display: flex;
 }
-.grid-contents {
-    display: flex;
-}
 .contents {
 
 }
+.grid-contents {
+    display: flex;
+    padding: 10px 0 5px 0;
+}
+.vertical-contents {
+    display: grid;
+    padding: 5px 0 5px 0;
+}
 .contents-header {
     font-size: 14px;
-    padding: 0px 6px 0 6px;
+    padding: 6px 6px 0 6px;
 }
 .w-20 {
     padding: 0 5px 0 5px;
@@ -487,7 +501,7 @@ table.profiles input, table.profiles select, table.profiles textarea {
 }
 .search-box {
     width: auto;
-    margin-top: 10px;
+    margin: 10px 0 10px 0;
     padding: 15px;
     border: 1px solid #ddd;
 }
@@ -498,15 +512,12 @@ table.profiles input, table.profiles select, table.profiles textarea {
     border: 1px solid #ddd;
 }
 
-.vertical-contents {
-    display: grid;
-    padding: 10px 0 10px 0;
-}
 .input-label{
     position: relative;
     padding: 5px 0 3px 16px;
     font-weight: bold;
     font-size: 14px;
+    margin-top: 3px;
 }
 .input-label::before{
     content: "";
@@ -817,7 +828,7 @@ a {
                             </ul>
                             <ul>
                                 <section>@lang('strings.contents_management')</section>
-                                <li><a href="/managements/informations">@lang('strings.informations_management')</a> &gt; <a href="/managements/users/add">@lang('strings.add')</a></li>
+                                <li><a href="/managements/informations">@lang('strings.informations_management')</a> &gt; <a href="/managements/informations/create">@lang('strings.add')</a></li>
                                 <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
                                 <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
                             </ul>

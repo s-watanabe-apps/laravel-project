@@ -126,13 +126,16 @@ class InformationsService extends Service
     }
 
     /**
-     * Get informations by id.
+     * お知らせ取得.
      * 
      * @return array
      */
-    public function get($id)
+    public function get_by_id($id)
     {
-        return $this->base()->where(['informations.id' => $id])->get()->first();
+        return $this->base()
+            ->where(['informations.id' => $id])
+            ->first()
+            ->toArray();
     }
 
     /**

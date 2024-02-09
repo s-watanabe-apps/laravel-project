@@ -2,7 +2,9 @@
 @section('content')
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</div>
+    <div class="subject">
+        <span><i class="fas fa-fw fa-user"></i> @lang('strings.profile')</span>
+    </div>
 
     {{Form::open([
         'name' => 'membersSearch',

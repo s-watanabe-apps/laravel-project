@@ -3,7 +3,7 @@
 
 <div class="contents">
     <div class="subject"><i class="fas fa-fw fa-info-circle"></i> @lang('strings.informations_management')</div>
-    <div class="contents-header"><a href="/managements/users/add">@lang('strings.add_information')</a></div>
+    <div class="contents-header"><a href="/managements/informations/create">@lang('strings.add_information')</a></div>
 
     {{Form::open([
         'name' => 'informationsSearch',
@@ -52,10 +52,10 @@
                     <a href="/managements/informations/{{$value['id']}}"><i class="fas fa-fw {{$value['mark']}}"></i> {{$value['title']}}</a>
                 </td>
                 <td>
-                    {{$value['start_time']}}
+                    {{str_datetime_format($value['start_time'])}}
                 </td>
                 <td>
-                    {{$value['end_time']}}
+                    {{str_datetime_format($value['end_time'])}}
                 </td>
                 <td>
                     @if ($value['status'] == \Status::ENABLED)

@@ -6,7 +6,9 @@
 </div>
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-user-edit"></i> @lang('strings.profile_settings')</div>
+    <div class="subject">
+        <span><i class="fas fa-fw fa-user-edit"></i> @lang('strings.profile_settings')</span>
+    </div>
 
     {{Form::open(['name' => 'form', 'url' => '/managements/profile/settings', 'method' => 'post', 'files' => true])}}
     @csrf

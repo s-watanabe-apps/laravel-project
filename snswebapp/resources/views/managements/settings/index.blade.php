@@ -2,7 +2,9 @@
 @section('content')
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.site_settings')</div>
+    <div class="subject">
+        <span><i class="fas fa-fw fa-tools"></i> @lang('strings.site_settings')</span>
+    </div>
 
     {{Form::open(['name' => 'settings', 'url' => '/managements/settings', 'method' => 'post', 'files' => true])}}
     @csrf

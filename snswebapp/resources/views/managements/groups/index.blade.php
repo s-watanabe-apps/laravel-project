@@ -6,7 +6,9 @@
 </div>
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-tools"></i> @lang('strings.group_management')</div>
+    <div class="subject">
+        <span><i class="fas fa-fw fa-tools"></i> @lang('strings.group_management')</span>
+    </div>
 
     {{Form::open(['name' => 'form', 'url' => '/managements/navigations/register', 'method' => 'post', 'files' => true])}}
     @csrf
