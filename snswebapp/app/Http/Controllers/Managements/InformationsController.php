@@ -95,27 +95,28 @@ class InformationsController extends ManagementsController
     public function create(Request $request)
     {
         $marks = $this->informationMarksService->get_all();
-dump($marks);
+
         return view('managements.informations.create', compact(
             'marks'
         ));
     }
 
     /**
-     * Confirmation of input contents.
+     * 入力内容確認.
      * 
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return Illuminate\View\View
      */
     public function confirm(ManagementsInformationsRequest $request)
     {
-        $informations = (new Informations())->bind($request->validated());
+        dump($request->validated());
+        exit;
 
-        $informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
+        //$informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
 
-        $method = $request->method();
+        //$method = $request->method();
 
-        return view('managements.informations.confirm', compact('informations', 'informationMark', 'method'));
+        //return view('managements.informations.confirm', compact('informations', 'informationMark', 'method'));
     }
 
     /**

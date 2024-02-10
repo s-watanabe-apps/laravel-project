@@ -7,11 +7,20 @@
         <span>&gt; @lang('strings.add')</span>
     </div>
 
+    {{Form::open([
+        'name' => 'form',
+        'url' => '/managements/informations/confirm',
+        'method' => 'post',
+        'files' => false,
+        'enctype' => 'multipart/form-data'
+    ])}}
+
     <div class="vertical-contents">
         <div class="input-label">@lang('strings.class')</div>
         <div class="radio">
             @foreach ($marks as $value)
-            <label>{{Form::radio('mark', $value['id'], false, []) }} <i class="fas fa-fw {{$value['mark']}}"></i> {{__('strings.information_marks')[$value['mark']]}}</label>
+            <label>{{Form::radio('mark_id', $value['id'],
+                $value['id'] == 1, [])}} <i class="fas fa-fw {{$value['mark']}}"></i> {{__('strings.information_marks')[$value['mark']]}}</label>
             @endforeach
         </div>
         <div class="text-danger">{{$errors->first('mark') ?? ''}}</div>
@@ -46,8 +55,13 @@
             <label>{{Form::radio('status', '0', true, []) }} <span class="disable">@lang('strings.disable')</span></label>
         </div>
         <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
-
     </td>
+
+    <div class="flex-contents">
+        <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+    </div>
+
+    {{Form::close()}}
 </div>
 
 <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
