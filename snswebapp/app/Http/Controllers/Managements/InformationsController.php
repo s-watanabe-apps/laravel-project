@@ -95,7 +95,7 @@ class InformationsController extends ManagementsController
     public function create(Request $request)
     {
         $marks = $this->informationMarksService->get_all();
-
+dump($marks);
         return view('managements.informations.create', compact(
             'marks'
         ));

@@ -339,6 +339,13 @@ span.ad {
 input[type="radio"]:checked + label > div {
     outline:3px solid #ff0000;
 }
+div.radio {
+    display: flex;
+    font-size: 14px;
+}
+div.radio > label {
+    padding-right: 6px;
+}
 
 /* Calendar */
 #calendar {
@@ -514,7 +521,7 @@ table.profiles input, table.profiles select, table.profiles textarea {
 
 .input-label{
     position: relative;
-    padding: 5px 0 3px 16px;
+    padding: 8px 0 3px 16px;
     font-weight: bold;
     font-size: 14px;
     margin-top: 3px;

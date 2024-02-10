@@ -8,6 +8,14 @@
     </div>
 
     <div class="vertical-contents">
+        <div class="input-label">@lang('strings.class')</div>
+        <div class="radio">
+            @foreach ($marks as $value)
+            <label>{{Form::radio('mark', $value['id'], false, []) }} <i class="fas fa-fw {{$value['mark']}}"></i> {{__('strings.information_marks')[$value['mark']]}}</label>
+            @endforeach
+        </div>
+        <div class="text-danger">{{$errors->first('mark') ?? ''}}</div>
+
         <div class="input-label">@lang('strings.title')</div>
         {{Form::input('text', 'title', '', [])}}
         <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
@@ -33,11 +41,12 @@
         <div class="text-danger">{{$errors->first('end_time') ?? ''}}</div>
 
         <div class="input-label">@lang('strings.status')</div>
-        <div style="display: flex;">
-            <label>{{Form::radio('status', '1', false, []) }}&nbsp;@lang('strings.enable')</label>
-            <label>{{Form::radio('status', '0', true, []) }}&nbsp;@lang('strings.disable')</label>
+        <div class="radio">
+            <label>{{Form::radio('status', '1', false, []) }} <span class="enable">@lang('strings.enable')</span></label>
+            <label>{{Form::radio('status', '0', true, []) }} <span class="disable">@lang('strings.disable')</span></label>
         </div>
-        <div class="text-danger">{{$errors->first('display_flag') ?? ''}}</div>
+        <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
+
     </td>
 </div>
 
