@@ -30,15 +30,13 @@ class InformationMarksService extends Service
     }
 
     /**
-     * Get all information marks.
+     * お知らせ種別取得.
      * 
-     * @param int information_marks.id
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param int $id
+     * @return array
      */
-    public function getById($id)
+    public function get_by_id($id)
     {
-        return $this->base()
-            ->where('id', $id)
-            ->first();
+        return $this->base()->where('id', $id)->first()->toArray();
     }
 }

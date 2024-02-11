@@ -235,6 +235,9 @@ header .sm {
     font-size: 14px;
     padding: 6px 6px 0 6px;
 }
+.contents .flex-contents {
+    padding: 10px 0 10px 0;
+}
 .w-20 {
     padding: 0 5px 0 5px;
     margin: 0 4px 0 4px;
@@ -602,6 +605,7 @@ span.enable {
     background: #228B22;
     color: #efefef;
     font-weight: bold;
+    font-size: 14px;
     padding: 0 4px 0 4px;
     border-bottom: 2px solid #116911;
     border-radius: 10px;
@@ -610,6 +614,7 @@ span.disable {
     background: #ee1111;
     color: #efefef;
     font-weight: bold;
+    font-size: 14px;
     padding: 0 4px 0 4px;
     border-bottom: 2px solid #990000;
     border-radius: 10px;

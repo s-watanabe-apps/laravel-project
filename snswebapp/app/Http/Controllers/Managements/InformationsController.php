@@ -80,7 +80,7 @@ class InformationsController extends ManagementsController
 
         $marks = $this->informationMarksService->get_all();
 
-        return view('managements.informations.viewer', compact(
+        return view('managements.informations.view', compact(
             'informations',
             'marks'
         ));
@@ -109,14 +109,22 @@ class InformationsController extends ManagementsController
      */
     public function confirm(ManagementsInformationsRequest $request)
     {
-        dump($request->validated());
-        exit;
+        $values = $request->validated();
 
-        //$informationMark = $this->informationMarksService->getById($request->mark_id)->mark;
+        $mark = $this->informationMarksService->get_by_id($request->mark_id);
 
-        //$method = $request->method();
-
-        //return view('managements.informations.confirm', compact('informations', 'informationMark', 'method'));
+        if ($request->isPost()) {
+            return view('managements.informations.createConfirm', compact(
+                'values',
+                'mark'
+            ));
+        } else if ($request->isPut()) {
+            return view('managements.informations.editConfirm', compact(
+                'mark'
+            ));
+        } else {
+            abort(404);
+        }
     }
 
     /**
