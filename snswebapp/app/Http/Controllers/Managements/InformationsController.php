@@ -40,12 +40,12 @@ class InformationsController extends ManagementsController
     {
         $validator = Validator::make([
             'keyword' => $request->keyword,
-            'm' => $request->m,
+            'category_id' => $request->category_id,
             'page' => $request->page,
             'sort' => $request->sort,
         ], [
             'keyword' => 'string|nullable',
-            'm' => 'string|nullable',
+            'category_id' => 'integer|nullable',
             'page' => 'integer|nullable',
             'sort' => 'integer|nullable|min:-5|max:5',
         ]);
@@ -56,7 +56,8 @@ class InformationsController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list($informations, $headers) = $this->informationsService->get_all_informations($validated['keyword'], $validated['m'], $validated['sort']);
+        list($informations, $headers) = $this->informationsService->get_all_informations(
+            $validated['keyword'], $validated['category_id'], $validated['sort']);
         $informations = $this->pager($informations, 10, $page, '/managements/informations/');
 
         $categories = $this->informationCategoriesService->get_all();

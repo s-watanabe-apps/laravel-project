@@ -55,12 +55,12 @@ class InformationsService extends Service
      * お知らせ全件取得.
      * 
      * @param string $keyword
-     * @param int $mark_id
+     * @param int $category_id
      * @param int $sortkey
      * 
      * @return array
      */
-    public function get_all_informations(string $keyword = null, string $mark_id = null, $sortkey = null)
+    public function get_all_informations(string $keyword = null, string $category_id = null, $sortkey = null)
     {
         $sortkey = $sortkey ?? -1;
 
@@ -94,8 +94,8 @@ class InformationsService extends Service
             $query->where('informations.title', 'like', $like_keyword);
         }
 
-        if (!is_null($mark_id) && $mark_id != '0') {
-            $query->where('informations.mark_id', $mark_id);
+        if (!is_null($category_id) && $category_id != '0') {
+            $query->where('informations.category_id', $category_id);
         }
 
         // 並べ替え
@@ -108,7 +108,7 @@ class InformationsService extends Service
         // ヘッダー用のパラメータ
         $query_string = http_build_query([
             'keyword' => $keyword,
-            'm' => ($mark_id != 0) ? '' : $mark_id,
+            'category_id' => ($category_id != 0) ? '' : $category_id,
         ]);
 
         // ヘッダー生成

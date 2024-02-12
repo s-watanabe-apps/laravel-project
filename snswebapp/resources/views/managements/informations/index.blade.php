@@ -19,11 +19,11 @@
         </div>
         <div class="search-item">
             <span style="width: 50%;">@lang('strings.class'):&nbsp;</span>
-            <select name="m" style="width: 50%;">
+            <select name="category_id" style="width: 50%;">
                 <option value="0"></option>
                 @foreach ($categories as $category)
                 <option value="{{$category['id']}}"
-                    @if ($category['id'] == $validated['m'])
+                    @if ($category['id'] == $validated['category_id'])
                         selected
                     @endif
                 >{{__('strings.information_categories.' . $category['style'])}}</option>
