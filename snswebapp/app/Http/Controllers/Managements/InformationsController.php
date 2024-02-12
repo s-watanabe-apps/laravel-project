@@ -129,6 +129,25 @@ class InformationsController extends ManagementsController
     }
 
     /**
+     * お知らせ編集.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function edit(Request $request)
+    {
+        $values = $this->informationsService->get_by_id($request->id);
+
+        $categories = $this->informationCategoriesService->get_all();
+
+        return view('managements.informations.edit', compact(
+            'values',
+            'categories'
+        ));
+    }
+
+
+    /**
      * Register input information.
      * 
      * @param App\Http\Requests\ManagementsInformationsRequest

@@ -90,6 +90,7 @@ return [
     'mypage' => 'マイページ',
     'id' => 'ID',
     'add_user' => 'ユーザー追加',
+    'return' => '戻る',
 
     // Information Categories
     'information_categories' => [

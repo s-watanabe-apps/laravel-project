@@ -76,18 +76,18 @@ if (!function_exists('str_date_format')) {
 if (!function_exists('str_datetime_format')) {
     /**
      */
-    function str_datetime_format($date)
+    function str_datetime_format($date, $replace = '-')
     {
         if (is_numeric($date)) {
             $time = $date;
         } else {
             if (is_null($date)) {
-                return '-';
+                return $replace;
             }
             
             $time = strtotime($date);
             if (!$time) {
-                return '-';
+                return $replace;
             }
         }
         if (\App::getLocale() == 'ja') {

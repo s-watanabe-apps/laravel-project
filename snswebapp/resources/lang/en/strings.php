@@ -91,6 +91,7 @@ return [
     'mypage' => 'My Page',
     'id' => 'ID',
     'add_user' => 'Add User',
+    'return' => 'Return',
 
     // Information Marks
     'information_categories' => [

@@ -8,6 +8,15 @@
     </div>
 
     @include('managements.informations.formset.viewer', compact('values'))
+
+    <div class="flex-contents">
+        <a href="/managements/informations/edit/{{$values['id']}}">
+            <input type="button" class="post" value="@lang('strings.edit')"></input>
+        </a>
+        <a href="javascript:window.history.back();">
+            <input type="button" class="cancel" value="@lang('strings.return')"></input>
+        </a>
+    </div>
 </div>
 
 @endsection
