@@ -1,12 +1,12 @@
 <div class="vertical-contents">
     <div class="input-label">@lang('strings.class')</div>
     <div class="radio">
-        @foreach ($marks as $value)
-        <label>{{Form::radio('mark_id', $value['id'],
-            $value['id'] == 1, [])}} <i class="fas fa-fw {{$value['mark']}}"></i> {{__('strings.information_marks')[$value['mark']]}}</label>
+        @foreach ($categories as $value)
+        <label>{{Form::radio('category_id', $value['id'],
+            $value['id'] == 1, [])}} <i class="fas fa-fw {{$value['style']}}"></i> {{__('strings.information_categories')[$value['style']]}}</label>
         @endforeach
     </div>
-    <div class="text-danger">{{$errors->first('mark') ?? ''}}</div>
+    <div class="text-danger">{{$errors->first('category_id') ?? ''}}</div>
 
     <div class="input-label">@lang('strings.title')</div>
     {{Form::input('text', 'title', '', [])}}

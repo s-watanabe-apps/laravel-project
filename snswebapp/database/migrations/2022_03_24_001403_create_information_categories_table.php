@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInformationMarksTable extends Migration
+class CreateInformationCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateInformationMarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('information_marks', function (Blueprint $table) {
+        Schema::create('information_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('mark');
+            $table->string('style');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateInformationMarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('information_marks');
+        Schema::dropIfExists('information_categories');
     }
 }

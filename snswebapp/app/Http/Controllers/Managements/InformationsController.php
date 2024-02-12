@@ -2,9 +2,9 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\Informations;
-use App\Models\InformationMarks;
+use App\Models\InformationCategories;
 use App\Services\InformationsService;
-use App\Services\InformationMarksService;
+use App\Services\InformationCategoriesService;
 use App\Http\Requests\ManagementsInformationsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,20 +13,21 @@ class InformationsController extends ManagementsController
 {
     // Instance variables.
     private $informationsService;
-    private $informationMarksService;
+    private $informationCategoriesService;
 
     /**
      * コンストラクタ.
      *
      * @param App\Services\InformationsService
+     * @param App\Services\InformationCategoriesService
      * @return void
      */
     public function __construct(
         InformationsService $informationsService,
-        InformationMarksService $informationMarksService
+        InformationCategoriesService $informationCategoriesService
     ) {
         $this->informationsService = $informationsService;
-        $this->informationMarksService = $informationMarksService;
+        $this->informationCategoriesService = $informationCategoriesService;
     }
 
     /**
@@ -58,12 +59,12 @@ class InformationsController extends ManagementsController
         list($informations, $headers) = $this->informationsService->get_all_informations($validated['keyword'], $validated['m'], $validated['sort']);
         $informations = $this->pager($informations, 10, $page, '/managements/informations/');
 
-        $marks = $this->informationMarksService->get_all();
+        $categories = $this->informationCategoriesService->get_all();
 
         return view('managements.informations.index', compact(
             'informations',
             'headers',
-            'marks',
+            'categories',
             'validated'
         ));
     }
@@ -76,13 +77,10 @@ class InformationsController extends ManagementsController
      */
     public function get(Request $request)
     {
-        $informations = $this->informationsService->get_by_id($request->id);
-
-        $marks = $this->informationMarksService->get_all();
+        $values = $this->informationsService->get_by_id($request->id);
 
         return view('managements.informations.view', compact(
-            'informations',
-            'marks'
+            'values'
         ));
     }
 
@@ -94,10 +92,10 @@ class InformationsController extends ManagementsController
      */
     public function create(Request $request)
     {
-        $marks = $this->informationMarksService->get_all();
+        $categories = $this->informationCategoriesService->get_all();
 
         return view('managements.informations.create', compact(
-            'marks'
+            'categories'
         ));
     }
 
@@ -111,16 +109,18 @@ class InformationsController extends ManagementsController
     {
         $values = $request->validated();
 
-        $mark = $this->informationMarksService->get_by_id($request->mark_id);
+        $category = $this->informationCategoriesService->get_by_id($request->category_id);
+
+        $values['style'] = $category['style'];
 
         if ($request->isPost()) {
             return view('managements.informations.createConfirm', compact(
                 'values',
-                'mark'
+                'category'
             ));
         } else if ($request->isPut()) {
             return view('managements.informations.editConfirm', compact(
-                'mark'
+                'category'
             ));
         } else {
             abort(404);

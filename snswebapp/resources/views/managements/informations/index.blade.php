@@ -21,12 +21,12 @@
             <span style="width: 50%;">@lang('strings.class'):&nbsp;</span>
             <select name="m" style="width: 50%;">
                 <option value="0"></option>
-                @foreach ($marks as $mark)
-                <option value="{{$mark['id']}}"
-                    @if ($mark['id'] == $validated['m'])
+                @foreach ($categories as $category)
+                <option value="{{$category['id']}}"
+                    @if ($category['id'] == $validated['m'])
                         selected
                     @endif
-                >{{__('strings.information_marks.' . $mark['mark'])}}</option>
+                >{{__('strings.information_categories.' . $category['style'])}}</option>
                 @endforeach
             </select>
         </div>
@@ -49,7 +49,7 @@
                     {{$value['id']}}
                 </td>
                 <td style="text-align: left; padding: 0 5px 0 5px;">
-                    <a href="/managements/informations/{{$value['id']}}"><i class="fas fa-fw {{$value['mark']}}"></i> {{$value['title']}}</a>
+                    <a href="/managements/informations/{{$value['id']}}"><i class="fas fa-fw {{$value['style']}}"></i> {{$value['title']}}</a>
                 </td>
                 <td>
                     {{str_datetime_format($value['start_time'])}}

@@ -1,9 +1,9 @@
 <?php
 namespace App\Services;
 
-use App\Models\InformationMarks;
+use App\Models\InformationCategories;
 
-class InformationMarksService extends Service
+class InformationCategoriesService extends Service
 {
     /**
      * ベースクエリ.
@@ -12,10 +12,10 @@ class InformationMarksService extends Service
      */
     private function base()
     {
-        return InformationMarks::query()
+        return InformationCategories::query()
             ->select([
-                'information_marks.id',
-                'information_marks.mark',
+                'information_categories.id',
+                'information_categories.style',
             ]);
     }
 

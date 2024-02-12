@@ -93,7 +93,7 @@ return [
     'add_user' => 'Add User',
 
     // Information Marks
-    'information_marks' => [
+    'information_categories' => [
         'fa-info-circle' => 'Information',
         'fa-bolt' => 'Caution',
         'fa-flag' => 'Check',

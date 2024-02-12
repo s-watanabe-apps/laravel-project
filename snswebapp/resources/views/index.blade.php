@@ -4,7 +4,7 @@
 <div class="subject">管理者からのお知らせ</div>
 @foreach($informations as $info)
 <div class="container">
-    <div class="title"><i class="fas {{$info['mark']}} text-primary-50"></i> {{$info['title']}}</div>
+    <div class="title"><i class="fas {{$info['style']}} text-primary-50"></i> {{$info['title']}}</div>
     <div class="body">
         <div class="description">{!!$info['body']!!}</div>
     </div>

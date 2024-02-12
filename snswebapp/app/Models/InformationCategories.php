@@ -3,10 +3,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InformationMarks extends Model
+class InformationCategories extends Model
 {
     // Table name.
-    public $table = 'information_marks';
+    public $table = 'information_categories';
 
     // Primary key.
     protected $primaryKey = 'id';

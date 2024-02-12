@@ -42,7 +42,7 @@ class ManagementsInformationsRequest extends AppFormRequest
                 \Status::ENABLED,
                 \Status::DISABLED,
             ]),
-            'mark_id' => 'required|exists:information_marks,id',
+            'category_id' => 'required|min:1|exists:information_categories,id',
         ];
     }
 

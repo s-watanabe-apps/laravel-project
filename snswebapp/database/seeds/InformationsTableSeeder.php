@@ -24,7 +24,7 @@ __TEXT__;
 
         $informations = [
             'title' => 'メンテナンスのお知らせ',
-            'mark_id' => 1,
+            'category_id' => 1,
             'body' => $bodies[0],
             'status' => \Status::ENABLED,
             'start_time' => $now,

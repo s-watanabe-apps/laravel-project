@@ -18,14 +18,14 @@ class InformationsService extends Service
         return Informations::query()
             ->select([
                 'informations.id',
-                'informations.mark_id',
-                'information_marks.mark',
+                'informations.category_id',
+                'information_categories.style',
                 'informations.title',
                 'informations.body',
                 'informations.status',
                 'informations.start_time',
                 'informations.end_time',
-            ])->join('information_marks', 'informations.mark_id', '=', 'information_marks.id');
+            ])->join('information_categories', 'informations.category_id', '=', 'information_categories.id');
     }
 
     /**

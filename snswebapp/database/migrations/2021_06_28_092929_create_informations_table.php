@@ -15,7 +15,7 @@ class CreateInformationsTable extends Migration
     {
         Schema::create('informations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('mark_id');
+            $table->integer('category_id');
             $table->string('title');
             $table->mediumtext('body');
             $table->tinyInteger('status')->default(1);

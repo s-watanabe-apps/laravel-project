@@ -91,8 +91,8 @@ return [
     'id' => 'ID',
     'add_user' => 'ユーザー追加',
 
-    // Information Marks
-    'information_marks' => [
+    // Information Categories
+    'information_categories' => [
         'fa-info-circle' => '情報',
         'fa-bolt' => '注意',
         'fa-flag' => 'チェック',
