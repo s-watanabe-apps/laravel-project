@@ -40,23 +40,22 @@
     <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
 </td>
 
+<!--<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>-->
 <script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
 <script>
 editor = CKEDITOR.replace('editor', {
     contentsCss: '/css/editor.css',
     uiColor: '#eeeeee',
     height: 400,
+    //colorButton_colors: 'FontColor1/FF9900,FontColor2/0066CC,FontColor3/F00',
 });
 editor.name = 'body';
-//console.log(editor);
+console.log(editor);
 
 window.addEventListener("load", function() {
     $('#start_time').datetimepicker({
         format: 'Y/m/d H:i',
     });
-});
-
-window.addEventListener("load", function() {
     $('#end_time').datetimepicker({
         format: 'Y/m/d H:i',
     });

@@ -22,7 +22,7 @@ class Informations extends Model
      * @var array
      */
     protected $fillable = [
-        'mark_id',
+        'category_id',
         'title',
         'body',
         'status',

@@ -4,17 +4,19 @@
 <div class="contents">
     <div class="subject">
         <span><a href="/managements/informations"><i class="fas fa-fw fa-info-circle"></i> @lang('strings.informations_management')</a><span>
-        <span>&gt; @lang('strings.add')</span>
+        <span>&gt; {{$values['title']}}</span>
         <span>&gt; @lang('strings.confirm')</span>
     </div>
 
     {{Form::open([
         'name' => 'form',
         'url' => '/managements/informations/save',
-        'method' => 'post',
+        'method' => 'put',
         'files' => false,
         'enctype' => 'multipart/form-data'
     ])}}
+
+    {{Form::hidden('id', $values['id'])}}
 
     @include('managements.informations.formset.viewer', compact('values'))
 

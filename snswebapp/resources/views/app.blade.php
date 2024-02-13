@@ -79,7 +79,6 @@ body {
     border-left: 1px solid;
     border-right: 1px solid;
 }
-
 a {
     text-decoration: none;
 }
@@ -88,6 +87,9 @@ a:hover {
 }
 p {
     margin: 0 !important;
+}
+.main ul, .main ol {
+    margin: 3px 0 3px 0;
 }
 input[type = "submit"],
 input[type = "button"],

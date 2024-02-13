@@ -139,28 +139,31 @@ class InformationsService extends Service
     }
 
     /**
-     * Update or create record.
+     * 入力内容保存.
      * 
      * @var App\Requests\ManagementsInformationsRequest
      * @return App\Models\Informations
      */
     public function save($request)
     {
-        if (isset($request->id)) {
-            // Update
-            $informations = $this->get($request->id);
-            throw_if(!$informations, NotFoundException::class);
-
-            foreach ($request->validated() as $key => $value) {
-                $informations->$key = $value;
-            }
-        } else {
+        if ($request->isPost()) {
             // Insert
             $informations = new Informations();
-            $informations->fill($request->validated())->save();
-        }
+            $values = $request->validated();
+            $informations->fill($values)->save();
+        } else if ($request->isPut()){
+            // Update
+            $informations = Informations::where('id', $request['id'])->first();
+            throw_if(!$informations, NotFoundException::class);
 
-        $informations->status = $request->status ?? \Status::DISABLED;
+            $values = $request->validated();
+            foreach ($values as $key => $value) {
+                $informations->$key = $value;
+            }
+            $informations->updated_at = carbon();
+        } else {
+            abort(405);
+        }
 
         $informations->save();
 

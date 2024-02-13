@@ -121,10 +121,11 @@ class InformationsController extends ManagementsController
             ));
         } else if ($request->isPut()) {
             return view('managements.informations.editConfirm', compact(
+                'values',
                 'category'
             ));
         } else {
-            abort(404);
+            abort(405);
         }
     }
 
@@ -148,7 +149,7 @@ class InformationsController extends ManagementsController
 
 
     /**
-     * Register input information.
+     * 入力内容保存.
      * 
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
