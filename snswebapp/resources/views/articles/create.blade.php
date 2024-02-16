@@ -12,7 +12,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('articles.formset.editControl')
+    @include('articles.formset.editor')
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.confirm')"></input>
@@ -21,15 +21,6 @@
     {{Form::close()}}
 </div>
 
-<script src="https://cdn.ckeditor.com/4.5.6/standard/ckeditor.js"></script>
-<script>
-editor = CKEDITOR.replace('editor', {
-    contentsCss: '/css/editor.css',
-    uiColor: '#EEEEEE',
-    height: 400,
-});
-editor.name = 'body';
-console.log(editor);
-</script>
+@include('shared.ckeditor', ['name' => 'body'])
 
 @endsection

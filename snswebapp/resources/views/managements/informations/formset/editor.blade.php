@@ -13,7 +13,7 @@
     <div class="text-danger">{{$errors->first('title') ?? ''}}</div>
 
     <div class="input-label">@lang('strings.body')</div>
-    <textarea id="editor" name="body">{!!$values['body'] ?? old('body')!!}</textarea>
+    <textarea id="editor" name="body">{!!isset($values['body']) ? htmlspecialchars($values['body']) : old('body')!!}</textarea>
     <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
 
     <div class="input-label">@lang('strings.start_time')</div>
@@ -40,26 +40,9 @@
     <div class="text-danger">{{$errors->first('status') ?? ''}}</div>
 </td>
 
-<!--<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>-->
-<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+@include('shared.ckeditor', ['name' => 'body'])
+
 <script>
-editor = CKEDITOR.replace('editor', {
-    contentsCss: '/css/editor.css',
-    uiColor: '#eeeeee',
-    height: 400,
-    disableNativeSpellChecker: true,
-    removeButtons: 'Save,NewPage,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Subscript,Superscript,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Iframe',
-    colorButton_backStyle: {
-        element: 'span',
-        styles: { 'background-color': '#(color)' }
-    },
-    colorButton_colors: '00f,f00,080',
-});
-
-editor.name = 'body';
-console.log(editor);
-
-
 window.addEventListener("load", function() {
     $('#start_time').datetimepicker({
         format: 'Y/m/d H:i',

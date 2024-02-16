@@ -14,7 +14,7 @@
     <div class="input-label">@lang('strings.body')</div>
     <div class="text-preview">
         {!!$values['body'] ?? '<br>'!!}
-        {{Form::hidden('body', $values['body'])}}
+        {{Form::hidden('body', htmlspecialchars($values['body']))}}
     </div>
 
     <div class="input-label">@lang('strings.start_time')</div>

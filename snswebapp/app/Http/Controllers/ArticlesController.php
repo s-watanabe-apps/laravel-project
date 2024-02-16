@@ -26,7 +26,7 @@ class ArticlesController extends Controller
     private $usersService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\ArticleCommentsService
      * @param App\Services\ArticleLabelsService
@@ -49,7 +49,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Get my articles.
+     * 自分の記事一覧取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -60,31 +60,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Get side menu informations.
-     * 
-     * @param int $userId
-     * @return array
-     */
-    private function getSidemenus(int $userId)
-    {
-        $archiveMonths = $this->articlesService->getArchiveMonths($userId);
-
-        $latestArticles = $this->articlesService->getLatestArticlesByUserId($userId);
-
-        $favoriteArticles = $this->articlesService->getFavoriteArticlesByUserId($userId);
-
-        $userLabels = $this->articleLabelsService->getByUserId($userId);
-
-        return compact(
-            'archiveMonths',
-            'latestArticles',
-            'favoriteArticles',
-            'userLabels'
-        );
-    }
-
-    /**
-     * Get user articles.
+     * ユーザーの記事一覧取得.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -137,7 +113,7 @@ class ArticlesController extends Controller
 
         $labels = $this->articleLabelsService->getByArticleId($request->id);
 
-        return view('articles.viewer', compact(
+        return view('articles.view', compact(
             'articles',
             'articleComments',
             'labels'

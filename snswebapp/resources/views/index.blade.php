@@ -9,7 +9,7 @@
         <div class="description">{!!$info['body']!!}</div>
     </div>
     <div class="footer">
-        <div class="source">hogehoge</div>
+        <div class="source">{{str_datetime_format($info['start_time'])}}</div>
     </div>
 </div>
 @endforeach
@@ -39,7 +39,7 @@
             <a href="/{{$lang}}/?tag={{$tag['name']}}"><span class="tag" style="border-color: {{$tag['frame_color']}}; background: {{$tag['body_color']}}">{{$tag['name']}}</span></a>
             @endforeach
         </div>
-        <div class="source"><a href="/profiles/{{$article['user_id']}}">{{$article['name']}}</a></div>
+        <div class="source"><small>{{str_datetime_format($article['created_at'])}}</small> <a href="/profiles/{{$article['user_id']}}">{{$article['name']}}</a></div>
     </div>
 </div>
 @endforeach
