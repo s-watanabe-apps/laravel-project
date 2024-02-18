@@ -14,7 +14,7 @@ class FreepagesController extends ManagementsController
     private $freePagesService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\FreePagesService
      * @return void
@@ -25,14 +25,15 @@ class FreepagesController extends ManagementsController
     }
 
     /**
-     * Get free page list.
+     * フリーページリスト.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function index(Request $request)
     {
-        $freePages = $this->freePagesService->all();
+        $freePages = $this->freePagesService->get_all();
+dump($freePages);
 
         return view('managements.freepages.index', compact('freePages'));
     }

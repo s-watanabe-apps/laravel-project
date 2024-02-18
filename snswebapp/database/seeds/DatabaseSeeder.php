@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             $this->call(LabelsTableSeeder::class);
             $this->call(ArticleLabelsTableSeeder::class);
             $this->call(GroupsTableSeeder::class);
+            $this->call(FreePagesTableSeeder::class);
         }
     }
 }

@@ -3,7 +3,7 @@
 
 <div class="contents">
     <div class="subject"><i class="fas fa-fw fa-info-circle"></i> @lang('strings.informations_management')</div>
-    <div class="contents-header"><a href="/managements/informations/create">@lang('strings.add_information')</a></div>
+    <div class="contents-header"><a href="/managements/informations/create">@lang('strings.create_new')</a></div>
 
     {{Form::open([
         'name' => 'informationsSearch',

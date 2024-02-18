@@ -1,72 +1,76 @@
-@extends('layouts.app')
+@extends('app')
 @section('content')
-<!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-edit"></i> @lang('strings.freepage_management')</li>
-        </ol>
-    </nav>
-</div>
 
-<!-- Content Row -->
-<div class="row mx-1">
+<div class="contents">
+    <div class="subject"><i class="fas fa-fw fa-edit"></i> @lang('strings.freepage_management')</div>
+    <div class="contents-header"><a href="/managements/informations/create">@lang('strings.create_new')</a></div>
 
-    <!-- Tab Control -->
-    @include('managements.freepages.formset.tabControl', ['index' => 1])
-
-    <div class="col-lg-10 px-0 px-lg-2">
-
-        <table id="dataTable" class="display cell-border compact responsive nowrap" style="margin: unset; width: 100%;">
-            <thead>
-                <tr class="text-nowrap">
-                    <th class="dt-center">ID</th>
-                    <th class="dt-center">@lang('strings.title')</th>
-                    <th class="dt-center">@lang('strings.created_at')</th>
-                    <th class="dt-center">@lang('strings.updated_at')</th>
-                    <th class="dt-center">@lang('strings.operation')</th>
-                    <th class="dt-center">@lang('strings.status')</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($freePages as $value)
-                <tr>
-                    <td class="dt-center">
-                        {{$value->id}}
-                    </td>
-                    <td class="dt-left">
-                        <a href="/managements/freepages/{{$value->id}}">
-                            {{$value->title}}
-                        </a>
-                    </td>
-                    <td class="dt-center">
-                        <small>{{$value->created_at}}</small>
-                    </td>
-                    <td class="dt-center">
-                        <small>{{$value->updated_at}}</small>
-                    </td>
-                    <td class="dt-center">
-                        <i class="fas fa-solid fa-link"></i>
-                    </td>
-                    <td class="dt-center">
-                        <input type="checkbox"
-                            @if ($value->status == \Status::ENABLED)
-                                checked                                                
-                            @endif
-                            data-onstyle="success" data-offstyle="secondary"
-                            data-toggle="toggle"
-                            data-size="sm"
-                            data-on="@lang('strings.enable')"
-                            data-off="@lang('strings.disable')" />
-                    </td>
-                </tr>
+    {{Form::open([
+        'name' => 'form',
+        'url' => '/managements/freepages',
+        'method' => 'get',
+    ])}}
+    <div class="flex-contents search-box">
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.keyword'):&nbsp;</span>
+            {{Form::input('text', 'keyword', $validated['keyword'] ?? '', [
+                'style' => 'width: 50%;',
+            ])}}
+        </div>
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.class'):&nbsp;</span>
+            <select name="category_id" style="width: 50%;">
+                <option value="0"></option>
+                @foreach ($categories ?? [] as $category)
+                <option value="{{$category['id']}}"
+                    @if ($category['id'] == $validated['category_id'])
+                        selected
+                    @endif
+                >{{__('strings.information_categories.' . $category['style'])}}</option>
                 @endforeach
-            </tbody>
+            </select>
+        </div>
+        <div class="search-submit">
+            <input type="submit" class="search" value="@lang('strings.search')" />
+        </div>
+    </div>
+    {{Form::close()}}
+
+    <div class="vertical-contents">
+        <table class="user-managements">
+            <tr>
+                @foreach ($headers ?? [] as $value)
+                <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
+                @endforeach
+            </tr>
+            @foreach ($freePages as $value)
+            <tr>
+                <td>
+                    {{$value['id']}}
+                </td>
+                <td style="text-align: left; padding: 0 5px 0 5px;">
+                    <a href="/managements/freepages/{{$value['id']}}">{{$value['title']}}</a>
+                </td>
+                <td>
+                    {{str_datetime_format($value['created_at'])}}
+                </td>
+                <td>
+                    {{str_datetime_format($value['updated_at'])}}
+                </td>
+                <td>
+                    @if ($value['status'] == \Status::ENABLED)
+                    <span class="enable">@lang('strings.enable')</span>
+                    @else
+                    <span class="disable">@lang('strings.disable')</span>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
         </table>
     </div>
-</div>
 
-<!-- DataTables -->
-@include('shared.datatables')
+    
+    <?php //{!!$informations->links('vendor.pagination.semantic-ui')!!} ?>
+</div>
 
 @endsection

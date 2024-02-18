@@ -92,6 +92,7 @@ return [
     'id' => 'ID',
     'add_user' => 'Add User',
     'return' => 'Return',
+    'create_new' => 'Create New',
 
     // Information Marks
     'information_categories' => [

@@ -91,6 +91,7 @@ return [
     'id' => 'ID',
     'add_user' => 'ユーザー追加',
     'return' => '戻る',
+    'create_new' => '新規作成',
 
     // Information Categories
     'information_categories' => [

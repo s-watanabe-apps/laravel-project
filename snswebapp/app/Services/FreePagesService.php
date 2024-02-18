@@ -20,19 +20,20 @@ class FreePagesService extends Service
                 'free_pages.code',
                 'free_pages.title',
                 'free_pages.body',
+                'free_pages.status',
                 'free_pages.created_at',
                 'free_pages.updated_at',
             ]);
     }
 
     /**
-     * Get all free pages.
+     * 全件取得.
      * 
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function all()
+    public function get_all()
     {
-        return $this->base()->get();
+        return $this->base()->get()->toArray();
     }
 
     /**
