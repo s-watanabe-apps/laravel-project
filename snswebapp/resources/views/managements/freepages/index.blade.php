@@ -18,16 +18,19 @@
             ])}}
         </div>
         <div class="search-item">
-            <span style="width: 50%;">@lang('strings.class'):&nbsp;</span>
-            <select name="category_id" style="width: 50%;">
-                <option value="0"></option>
-                @foreach ($categories ?? [] as $category)
-                <option value="{{$category['id']}}"
-                    @if ($category['id'] == $validated['category_id'])
+            <span style="width: 50%;">@lang('strings.status'):&nbsp;</span>
+            <select name="status" style="width: 50%;">
+                <option value=""></option>
+                <option value="{{\App\Libs\Status::DISABLED}}"
+                    @if (!is_null($validated['status']) && \App\Libs\Status::DISABLED == $validated['status'])
                         selected
                     @endif
-                >{{__('strings.information_categories.' . $category['style'])}}</option>
-                @endforeach
+                >@lang('strings.disable')</option>
+                <option value="{{\App\Libs\Status::ENABLED}}"
+                    @if (!is_null($validated['status']) && \App\Libs\Status::ENABLED == $validated['status'])
+                        selected
+                    @endif
+                >@lang('strings.enable')</option>
             </select>
         </div>
         <div class="search-submit">
@@ -70,7 +73,7 @@
     </div>
 
     
-    <?php //{!!$informations->links('vendor.pagination.semantic-ui')!!} ?>
+    {!!$freePages->links('vendor.pagination.semantic-ui')!!}
 </div>
 
 @endsection

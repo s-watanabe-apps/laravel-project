@@ -129,6 +129,11 @@ input.cancel {
     font-weight: bold;
     color: #676767;
 }
+input.delete {
+    background: #DC143C;
+    font-weight: bold;
+    color: #dddddd;
+}
 label.file {
     font-size: 14px;
     background: #0000cd;
@@ -522,6 +527,15 @@ table.profiles input, table.profiles select, table.profiles textarea {
     margin: 10px 0 10px 0;
     padding: 15px;
     border: 1px solid #ddd;
+}
+.alert-box {
+    color: #444 !important;
+    font-weight: bold;
+    width: auto;
+    margin: 10px 0 10px 0;
+    padding: 15px;
+    border: 2px solid #d00 !important;
+    background: #ed9dad;
 }
 
 .input-label{

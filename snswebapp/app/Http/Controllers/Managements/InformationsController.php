@@ -56,7 +56,7 @@ class InformationsController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list($informations, $headers) = $this->informationsService->get_all_informations(
+        list($informations, $headers) = $this->informationsService->get_informations(
             $validated['keyword'], $validated['category_id'], $validated['sort']);
         $informations = $this->pager($informations, 10, $page, '/managements/informations/');
 
@@ -81,6 +81,21 @@ class InformationsController extends ManagementsController
         $values = $this->informationsService->get_by_id($request->id);
 
         return view('managements.informations.view', compact(
+            'values'
+        ));
+    }
+
+    /**
+     * お知らせ削除確認.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function delete(Request $request)
+    {
+        $values = $this->informationsService->get_by_id($request->id);
+
+        return view('managements.informations.deleteConfirm', compact(
             'values'
         ));
     }

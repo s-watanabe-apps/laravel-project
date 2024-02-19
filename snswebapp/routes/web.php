@@ -110,6 +110,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('informations/edit/{id}', 'Managements\InformationsController@edit')->where('id', '[0-9]+');
             Route::put('informations/confirm', 'Managements\InformationsController@confirm');
             Route::put('informations/save', 'Managements\InformationsController@save');
+            Route::get('informations/delete/{id}', 'Managements\InformationsController@delete')->where('id', '[0-9]+');
 
             // Profile Settings
             Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');

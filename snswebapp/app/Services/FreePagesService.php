@@ -27,13 +27,77 @@ class FreePagesService extends Service
     }
 
     /**
-     * 全件取得.
+     * フリーページ全件取得.
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param string $keyword
+     * @param int $status
+     * @param int $sortkey
+     * 
+     * @return array
      */
-    public function get_all()
+    public function get_freepages(string $keyword = null, string $status = null, $sortkey = null)
     {
-        return $this->base()->get()->toArray();
+        $sortkey = $sortkey ?? -1;
+
+        $freepage_management_headers = [
+            1 => [
+                'sortkey' => 'free_pages.id',
+                'header_name' => __('strings.id')
+            ],
+            2 => [
+                'sortkey' => 'free_pages.title',
+                'header_name' => __('strings.title'),
+            ],
+            3 => [
+                'sortkey' => 'free_pages.created_at',
+                'header_name' => __('strings.created_at'),
+            ],
+            4 => [
+                'sortkey' => 'free_pages.updated_at',
+                'header_name' => __('strings.updated_at'),
+            ],
+            5 => [
+                'sortkey' => 'free_pages.status',
+                'header_name' => __('strings.status'),
+            ],
+        ];
+
+        $query = $this->base();
+
+        if (!is_null($keyword)) {
+            $like_keyword = '%' . addcslashes($keyword, '%_\\') . '%';
+            $query->where('free_pages.title', 'like', $like_keyword);
+        }
+
+        if (!is_null($status)) {
+            $query->where('free_pages.status', $status);
+        }
+
+        // 並べ替え
+        $sortkey_name = $freepage_management_headers[abs($sortkey)]['sortkey'];
+        $sortkey_order = $sortkey > 0 ? 'asc' : 'desc';
+        $query->orderBy($sortkey_name, $sortkey_order);
+        
+        $result = $query->get();
+
+        // ヘッダー用のパラメータ
+        $query_string = http_build_query([
+            'keyword' => $keyword,
+            'status' => $status,
+        ]);
+
+        // ヘッダー生成
+        $headers = array_map(function($key, $value) use($query_string, $sortkey) {
+                return [
+                    'name' => $value['header_name'] . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'link' => "/managements/freepages?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
+                ];
+            },
+            array_keys($freepage_management_headers),
+            array_values($freepage_management_headers)
+        );
+
+        return [$result->toArray(), $headers];
     }
 
     /**

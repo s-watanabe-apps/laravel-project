@@ -60,7 +60,7 @@ class InformationsService extends Service
      * 
      * @return array
      */
-    public function get_all_informations(string $keyword = null, string $category_id = null, $sortkey = null)
+    public function get_informations(string $keyword = null, string $category_id = null, $sortkey = null)
     {
         $sortkey = $sortkey ?? -1;
 

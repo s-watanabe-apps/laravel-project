@@ -92,6 +92,7 @@ return [
     'add_user' => 'ユーザー追加',
     'return' => '戻る',
     'create_new' => '新規作成',
+    'delete_confirm' => '削除確認',
 
     // Information Categories
     'information_categories' => [
@@ -155,6 +156,10 @@ return [
         'unauthorized' => 'この機能を使うためには認証が必要です。',
         'to_admin_message' => '改善しない場合はシステム管理者へ連絡してください。',
         'upload_image_unselected' => 'アップロードするイメージを選択してください。',
+    ],
+
+    'alert_messages' => [
+        'delete_confirm' => 'この操作は取り消すことができません。本当に削除しますか？',
     ],
 
     // Roles

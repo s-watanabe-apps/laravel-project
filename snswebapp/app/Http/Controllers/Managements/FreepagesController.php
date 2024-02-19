@@ -32,10 +32,33 @@ class FreepagesController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $freePages = $this->freePagesService->get_all();
-dump($freePages);
+        $validator = Validator::make([
+            'keyword' => $request->keyword,
+            'status' => $request->status,
+            'page' => $request->page,
+            'sort' => $request->sort,
+        ], [
+            'keyword' => 'string|nullable',
+            'status' => 'integer|nullable|in:0,1',
+            'page' => 'integer|nullable',
+            'sort' => 'integer|nullable',
+        ]);
+        if ($validator->fails()) {
+            abort(404);
+        }
 
-        return view('managements.freepages.index', compact('freePages'));
+        $validated = $validator->validated();
+
+        $page = $validated['page'] ?? 1;
+        list($freePages, $headers) = $this->freePagesService->get_freepages(
+            $validated['keyword'], $validated['status'], $validated['sort']);
+        $freePages = $this->pager($freePages, 10, $page, '/managements/freepages/');
+
+        return view('managements.freepages.index', compact(
+            'freePages',
+            'headers',
+            'validated'
+        ));
     }
 
     /**

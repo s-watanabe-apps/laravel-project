@@ -93,6 +93,7 @@ return [
     'add_user' => 'Add User',
     'return' => 'Return',
     'create_new' => 'Create New',
+    'delete_confirm' => 'Delete confirm',
 
     // Information Marks
     'information_categories' => [
@@ -158,6 +159,10 @@ return [
         'upload_image_unselected' => 'Select an image to upload.',
     ],
 
+    'alert_messages' => [
+        'delete_confirm' => 'This operation cannot be undone. Do you really want to delete this?',
+    ],
+    
     // Roles
     'role' => 'Role',
     'roles' => [
