@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 class GroupsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,24 +15,19 @@ class GroupsService extends Service
     {
         return Groups::query()
             ->select([
-                'groups.code',
-                'groups.name',
-                'groups.description',
-                'groups.order',
-                'groups.created_at',
-                'groups.updated_at',
+                'groups.*',
             ])->orderBy('order');
     }
 
     /**
      * Get all groups.
      * 
-     * @param int $id
-     * @param int $userId
      * @return array<App\Models\Groups>
      */
     public function all()
     {
-        return $this->base()->get()->toArray();
+        return $this->base()
+            ->get()
+            ->toArray();
     }
 }

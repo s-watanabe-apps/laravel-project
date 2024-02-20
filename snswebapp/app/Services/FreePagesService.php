@@ -9,20 +9,14 @@ use App\Http\Requests\ManagementsFreepagesRequest;
 class FreePagesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base() {
         return FreePages::query()
             ->select([
-                'free_pages.id',
-                'free_pages.code',
-                'free_pages.title',
-                'free_pages.body',
-                'free_pages.status',
-                'free_pages.created_at',
-                'free_pages.updated_at',
+                'free_pages.*',
             ]);
     }
 
@@ -35,7 +29,7 @@ class FreePagesService extends Service
      * 
      * @return array
      */
-    public function get_freepages(string $keyword = null, string $status = null, $sortkey = null)
+    public function getFreepages($keyword, $status, $sortkey)
     {
         $sortkey = $sortkey ?? -1;
 
@@ -101,17 +95,20 @@ class FreePagesService extends Service
     }
 
     /**
-     * Get free pages by id.
+     * フリーページ取得.
      * 
      * @return array
      */
-    public function get($id)
+    public function get_by_id($id)
     {
-        return $this->base()->where(['free_pages.id' => $id])->first();
+        return $this->base()
+            ->where(['free_pages.id' => $id])
+            ->first()
+            ->toArray();
     }
 
     /**
-     * Add as an array.
+     * 入力内容保存.
      * 
      * @param App\Requests\ManagementsFreepagesRequest $request
      * @return App\Models\FreePages

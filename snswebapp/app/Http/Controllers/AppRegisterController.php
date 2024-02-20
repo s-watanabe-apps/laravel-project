@@ -8,10 +8,9 @@ use App\Http\Controllers\Auth\RegisterController;
 class AppRegisterController extends RegisterController
 {
     /**
-     * 登録画面
+     * 登録画面.
      *
      * @param  Illuminate\Http\Request
-     *
      * @return Response
      */
     public function index(Request $request)

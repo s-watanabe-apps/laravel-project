@@ -10,32 +10,39 @@ use App\Requests\ManagementsInformationsRequest;
 class InformationsService extends Service
 {
     /**
-     * ベースクエリ.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base() {
         return Informations::query()
             ->select([
-                'informations.id',
-                'informations.category_id',
+                'informations.*',
                 'information_categories.style',
-                'informations.title',
-                'informations.body',
-                'informations.status',
-                'informations.start_time',
-                'informations.end_time',
             ])->join('information_categories', 'informations.category_id', '=', 'information_categories.id');
+    }
+
+    /**
+     * お知らせ取得.
+     * 
+     * @return array
+     */
+    public function getById($id)
+    {
+        return $this->base()
+            ->where(['informations.id' => $id])
+            ->first()
+            ->toArray();
     }
 
     /**
      * 有効なお知らせ一覧取得.
      * 
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return array
      */
-    public function get_enabled() {
+    public function getEnabledInformations() {
         $now = carbon();
-        $cache = $this->remember(parent::CACHE_KEY_INFORMATIONS, function() use($now) {
+        $data = $this->remember(parent::CACHE_KEY_INFORMATIONS, function() use($now) {
             $data = $this->base()
                 ->addSelect([\DB::raw('datediff(now(), informations.start_time) <= 7 as is_new'),])
                 ->where('status', \Status::ENABLED)
@@ -48,11 +55,11 @@ class InformationsService extends Service
             return json_encode($data);
         });
 
-        return $cache;
+        return $data;
     }
 
     /**
-     * お知らせ全件取得.
+     * お知らせ検索.
      * 
      * @param string $keyword
      * @param int $category_id
@@ -60,7 +67,7 @@ class InformationsService extends Service
      * 
      * @return array
      */
-    public function get_informations(string $keyword = null, string $category_id = null, $sortkey = null)
+    public function getInformations(string $keyword = null, string $category_id = null, $sortkey = null)
     {
         $sortkey = $sortkey ?? -1;
 
@@ -123,19 +130,6 @@ class InformationsService extends Service
         );
 
         return [$result->toArray(), $headers];
-    }
-
-    /**
-     * お知らせ取得.
-     * 
-     * @return array
-     */
-    public function get_by_id($id)
-    {
-        return $this->base()
-            ->where(['informations.id' => $id])
-            ->first()
-            ->toArray();
     }
 
     /**

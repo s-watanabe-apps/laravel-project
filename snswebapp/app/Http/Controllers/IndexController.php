@@ -55,13 +55,13 @@ class IndexController extends Controller
         //var_dump(\Config::get('mail'));
 
         // Informations
-        $informations = $this->informationsService->get_enabled();
+        $informations = $this->informationsService->getEnabledInformations();
 
         // Weekly calendar
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
         // Latest Articles
-        $data = $this->articlesService->get_latest_articles();
+        $data = $this->articlesService->getLatestArticles();
         $data[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
 
         // ページャー生成

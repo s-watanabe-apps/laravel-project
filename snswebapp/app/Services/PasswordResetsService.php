@@ -6,7 +6,7 @@ use App\Models\PasswordResets;
 class PasswordResetsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -14,10 +14,7 @@ class PasswordResetsService extends Service
     {
         return PasswordResets::query()
             ->select([
-                'password_resets.email',
-                'password_resets.token',
-                'password_resets.expire_in',
-                'password_resets.created_at',
+                'password_resets.*',
             ]);
     }
 

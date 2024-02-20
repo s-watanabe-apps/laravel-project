@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class LoginImagesService extends Service
 {
     /**
-     * Get base query builder builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,8 +15,7 @@ class LoginImagesService extends Service
     {
         return LoginImages::query()
             ->select([
-                'login_images.id',
-                'login_images.file_name',
+                'login_images.*',
             ]);
     }
 

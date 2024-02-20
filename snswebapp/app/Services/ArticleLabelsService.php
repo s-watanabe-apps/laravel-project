@@ -7,7 +7,7 @@ use App\Models\Labels;
 class ArticleLabelsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,9 +15,7 @@ class ArticleLabelsService extends Service
     {
         return ArticleLabels::query()
             ->select([
-                'article_labels.id',
-                'article_labels.article_id',
-                'article_labels.label_id',
+                'article_labels.*',
                 'labels.value',
             ])->join('labels', 'article_labels.label_id', '=', 'labels.id');
     }
@@ -77,7 +75,7 @@ class ArticleLabelsService extends Service
         }, $cache);
     }
 
-        /**
+    /**
      * 人気タグ取得.
      * 
      * @param string $lang 言語
@@ -85,7 +83,7 @@ class ArticleLabelsService extends Service
      * 
      * @return array
      */
-    public function get_feature_tags($date)
+    public function getFeatureTags($date)
     {
         $key = 'feature-labels';
         $ttl = 60 * 60 * 24;

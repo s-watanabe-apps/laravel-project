@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class UsersService extends Service
 {
     /**
-     * Get base query builder builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -22,22 +22,9 @@ class UsersService extends Service
     {
         return Users::query()
             ->select([
-                'users.id',
-                'users.role_id',
+                'users.*',
                 \DB::raw('roles.name as role_name'),
-                'users.name',
-                'users.name_kana',
-                'users.email',
-                'users.email_verified_at',
-                'users.password',
-                'users.birthdate',
                 \DB::raw('ifnull(users.image_file, "profiles%2Fno_image.png") as image_file'),
-                'users.api_token',
-                'users.status',
-                'users.remember_token',
-                'users.created_at',
-                'users.updated_at',
-                'users.group_code',
                 \DB::raw('groups.name as group_name'),
             ])
             ->leftJoin('groups', 'users.group_code', '=', 'groups.code')
@@ -53,7 +40,7 @@ class UsersService extends Service
      * 
      * @return array
      */
-    public function get_enabled_users(string $keyword = null, string $group_code = null)
+    public function getEnabledUsers(string $keyword = null, string $group_code = null)
     {
         $query = $this->base()->where('users.status', \Status::ENABLED);
         
@@ -80,7 +67,7 @@ class UsersService extends Service
      *
      * @return array
      */
-    public function get_users_by_managements(string $keyword = null, string $group_code = null, $sortkey = null)
+    public function getUsersForManagements(string $keyword = null, string $group_code = null, $sortkey = null)
     {
         $sortkey = $sortkey ?? -1;
 

@@ -7,7 +7,7 @@ use App\Models\Labels;
 class LabelsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,8 +15,7 @@ class LabelsService extends Service
     {
         return Labels::query()
             ->select([
-                'labels.id',
-                'labels.value',
+                'labels.*',
             ]);
     }
 

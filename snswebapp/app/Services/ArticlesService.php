@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 class ArticlesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -19,16 +19,8 @@ class ArticlesService extends Service
     {
         return Articles::query()
             ->select([
-                'articles.id',
-                'articles.user_id',
+                'articles.*',
                 'users.name',
-                'articles.type',
-                'articles.status',
-                'articles.title',
-                'articles.body',
-                'articles.created_at',
-                'articles.updated_at',
-                'articles.deleted_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'articles.user_id')
                     ->whereNull('users.deleted_at');
@@ -114,7 +106,7 @@ class ArticlesService extends Service
      * 
      * @return array<App\Models\Articles>
      */
-    public function get_latest_articles(int $limit = Articles::HEADLINE_LIMIT)
+    public function getLatestArticles(int $limit = Articles::HEADLINE_LIMIT)
     {
         $cache = $this->remember(parent::CACHE_KEY_LATEST_ARTICLES, function() use($limit) {
             $builder = $this->base();
@@ -145,7 +137,7 @@ class ArticlesService extends Service
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array
      */
-    public function get_latest_articles_by_user_id(int $userId, int $limit = Articles::HEADLINE_LIMIT)
+    public function getLatestArticlesByUserId(int $userId, int $limit = Articles::HEADLINE_LIMIT)
     {
         $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES_BY_USER_ID, $userId, $userId == user()->id ? 1 : 0);
 

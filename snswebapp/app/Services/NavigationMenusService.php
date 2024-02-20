@@ -6,19 +6,14 @@ use App\Models\NavigationMenus;
 class NavigationMenusService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base()
     {
         return NavigationMenus::query()->select([
-                'navigation_menus.id',
-                'navigation_menus.name',
-                'navigation_menus.link',
-                'navigation_menus.order',
-                'navigation_menus.created_at',
-                'navigation_menus.updated_at',
+                'navigation_menus.*',
             ])
             ->orderBy('navigation_menus.order', 'asc');
     }

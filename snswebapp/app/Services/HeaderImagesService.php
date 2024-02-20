@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 class HeaderImagesService extends Service
 {
     /**
-     * Get base query builder builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,9 +15,7 @@ class HeaderImagesService extends Service
     {
         return HeaderImages::query()
             ->select([
-                'header_images.id',
-                'header_images.file_name',
-                'header_images.title_color',
+                'header_images.*',
             ]);
     }
 

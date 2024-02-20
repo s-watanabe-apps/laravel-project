@@ -6,6 +6,7 @@ Use App\Http\Controllers\Controller;
 class ManagementsController extends Controller
 {
     /**
+     * コンストラクタ.
      * Create a new controller instance.
      *
      * @return void

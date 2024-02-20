@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfilesController extends Controller
 {
-    // Instance variables.
+    // サービス.
     private $articlesService;
     private $favoritesService;
     private $profilesService;
@@ -25,7 +25,7 @@ class ProfilesController extends Controller
     private $groupsService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\ArticlesService
      * @param App\Services\FavoritesService
@@ -71,7 +71,7 @@ class ProfilesController extends Controller
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        $profile_users = $this->usersService->get_enabled_users($validated['keyword'], $validated['group_code']);
+        $profile_users = $this->usersService->getEnabledUsers($validated['keyword'], $validated['group_code']);
         $profile_users = $this->pager($profile_users, 10, $page, '/members/');
         
         $groups = $this->groupsService->all();
@@ -100,11 +100,11 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $articles = $this->articlesService->get_latest_articles_by_user_id($request->id);
+        $articles = $this->articlesService->getLatestArticlesByUserId($request->id);
 
         $isFavorite = $this->favoritesService->isFavorite($request);
 
-        $user_profiles = $this->profilesService->get_user_profiles($request->id);
+        $user_profiles = $this->profilesService->getUserProfiles($request->id);
 
         return view('profiles.viewer', compact(
             'profiles',
@@ -124,9 +124,9 @@ class ProfilesController extends Controller
     {
         $profiles = $this->usersService->get(user()->id);
 
-        $user_profiles = $this->profilesService->get_user_profiles(user()->id);
+        $user_profiles = $this->profilesService->getUserProfiles(user()->id);
 
-        $choices = $this->profilesService->get_profile_choices_hash();
+        $choices = $this->profilesService->getProfileChoicesHash();
 
         return view('profiles.editor', compact(
             'profiles',

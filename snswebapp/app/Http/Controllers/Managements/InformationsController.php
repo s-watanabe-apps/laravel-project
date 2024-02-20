@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class InformationsController extends ManagementsController
 {
-    // Instance variables.
+    // サービス変数.
     private $informationsService;
     private $informationCategoriesService;
 
@@ -56,11 +56,11 @@ class InformationsController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list($informations, $headers) = $this->informationsService->get_informations(
+        list($informations, $headers) = $this->informationsService->getInformations(
             $validated['keyword'], $validated['category_id'], $validated['sort']);
         $informations = $this->pager($informations, 10, $page, '/managements/informations/');
 
-        $categories = $this->informationCategoriesService->get_all();
+        $categories = $this->informationCategoriesService->getAll();
 
         return view('managements.informations.index', compact(
             'informations',
@@ -78,7 +78,7 @@ class InformationsController extends ManagementsController
      */
     public function get(Request $request)
     {
-        $values = $this->informationsService->get_by_id($request->id);
+        $values = $this->informationsService->getById($request->id);
 
         return view('managements.informations.view', compact(
             'values'
@@ -93,7 +93,7 @@ class InformationsController extends ManagementsController
      */
     public function delete(Request $request)
     {
-        $values = $this->informationsService->get_by_id($request->id);
+        $values = $this->informationsService->getById($request->id);
 
         return view('managements.informations.deleteConfirm', compact(
             'values'
@@ -108,7 +108,7 @@ class InformationsController extends ManagementsController
      */
     public function create(Request $request)
     {
-        $categories = $this->informationCategoriesService->get_all();
+        $categories = $this->informationCategoriesService->getAll();
 
         return view('managements.informations.create', compact(
             'categories'
@@ -125,7 +125,7 @@ class InformationsController extends ManagementsController
     {
         $values = $request->validated();
 
-        $category = $this->informationCategoriesService->get_by_id($request->category_id);
+        $category = $this->informationCategoriesService->getById($request->category_id);
 
         $values['style'] = $category['style'];
 
@@ -152,9 +152,9 @@ class InformationsController extends ManagementsController
      */
     public function edit(Request $request)
     {
-        $values = $this->informationsService->get_by_id($request->id);
+        $values = $this->informationsService->getById($request->id);
 
-        $categories = $this->informationCategoriesService->get_all();
+        $categories = $this->informationCategoriesService->getAll();
 
         return view('managements.informations.edit', compact(
             'values',

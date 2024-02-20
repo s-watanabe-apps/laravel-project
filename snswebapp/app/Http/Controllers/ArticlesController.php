@@ -78,7 +78,7 @@ class ArticlesController extends Controller
         $label_id = null;
         $label_name = trim($validator->validated()['label'] ?? null);
         if (!is_null($label_name)) {
-            $labels = $this->labelsService->get_id_by_name($label_name);
+            $labels = $this->labelsService->getIdByName($label_name);
             $label_id = $labels['id'] ?? 0;
         }
 

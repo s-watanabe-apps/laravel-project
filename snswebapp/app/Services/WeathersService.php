@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 class WeathersService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,42 +15,29 @@ class WeathersService extends Service
     {
         return Weathers::query()
             ->select([
-                'weathers.city_id',
-                'weathers.time',
-                'weathers.weather_id',
-                'weathers.weather_main',
-                'weathers.weather_text',
-                'weathers.weather_icon',
-                'weathers.clouds',
-                'weathers.temp',
-                'weathers.wind_speed',
-                'weathers.rain',
-                'weathers.snow',
-                'weathers.created_at',
-                'weathers.updated_at',
-                'weathers.deleted_at',
+                'weathers.*',
             ])->orderBy('weathers.time');
     }
 
     /**
-     * Get weathers by city_id and date.
+     * お天気情報取得.
      * 
-     * @param int $city_id
+     * @param int $cityId
      * @param string $date
      * 
      * @return array
      */
-    public function get_weathers($city_id, $date)
+    public function getWeathers($cityId, $date)
     {
-        $key = sprintf(parent::CACHE_KEY_WEATHERS, $city_id, $date);
+        $key = sprintf(parent::CACHE_KEY_WEATHERS, $cityId, $date);
         $ttl = (60 * 60 * 24);
 
-        $weathers = $this->remember($key, function() use($city_id, $date) {
+        $weathers = $this->remember($key, function() use($cityId, $date) {
             $date_from = date('Y-m-d 00:00:00', strtotime($date));
             $date_to = date('Y-m-d 00:00:00', strtotime($date) + (60 * 60 * 24));
 
             $items = $this->base()
-                ->where('weathers.city_id', '=', $city_id)
+                ->where('weathers.city_id', '=', $cityId)
                 ->where('weathers.time', '>=', $date_from)
                 ->where('weathers.time', '<', $date_to)
                 ->get();

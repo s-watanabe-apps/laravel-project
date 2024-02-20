@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class FavoritesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */

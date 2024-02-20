@@ -7,24 +7,14 @@ use App\Http\Requests\ManagementsSettingsRequest;
 class SettingsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base()
     {
         return Settings::query()->select([
-                'settings.id',
-                'settings.site_name',
-                'settings.site_description',
-                'settings.user_create_any',
-                'settings.user_create_member',
-                'settings.user_create_admin',
-                'settings.basic_auth',
-                'settings.basic_user',
-                'settings.basic_password',
-                'settings.anonymous_permission',
-                'settings.theme_id',
+                'settings.*',
                 \DB::raw('themes.name as theme_name'),
                 'themes.header_color',
                 'themes.text_color',

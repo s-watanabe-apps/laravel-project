@@ -6,7 +6,7 @@ use App\Models\ArticleComments;
 class ArticleCommentsService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -14,13 +14,8 @@ class ArticleCommentsService extends Service
     {
         return ArticleComments::query()
             ->select([
-                'article_comments.id',
-                'article_comments.user_id',
+                'article_comments.*',
                 \DB::raw('users.name as user_name'),
-                'article_comments.comment',
-                'article_comments.created_at',
-                'article_comments.updated_at',
-                'article_comments.deleted_at',
             ])
             ->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'article_comments.user_id')
@@ -29,7 +24,7 @@ class ArticleCommentsService extends Service
     }
 
     /**
-     * Get articles by id.
+     * 記事に紐づくコメントの取得.
      * 
      * @param int $id
      * @return Illuminate\Database\Eloquent\Collection
@@ -43,7 +38,7 @@ class ArticleCommentsService extends Service
     }
 
     /**
-     * Add as an array.
+     * コメント保存.
      * 
      * @param array $values
      * @return App\Models\ArticleComments
@@ -62,7 +57,7 @@ class ArticleCommentsService extends Service
     }
 
     /**
-     * Get articles comment count.
+     * 記事に紐づくコメント件数取得.
      * 
      * @param array $articleIds 
      * @return Illuminate\Database\Eloquent\Collection
@@ -81,7 +76,7 @@ class ArticleCommentsService extends Service
     }
 
     /**
-     * Get favorite article ids.
+     * 人気の記事取得.
      * 
      * @param int $userId
      * @param int $limit

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 class MailService extends Service
 {
     /**
-     * Send mail.
+     * メール送信.
      * 
      * @param string
      * @param App\Mail\ContactMail
@@ -22,7 +22,7 @@ class MailService extends Service
     }
 
     /**
-     * Send invitation mail.
+     * 招待メール送信.
      * 
      * @param App\Models\Users
      * @return void

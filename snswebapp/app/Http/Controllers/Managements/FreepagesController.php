@@ -50,7 +50,7 @@ class FreepagesController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list($freePages, $headers) = $this->freePagesService->get_freepages(
+        list($freePages, $headers) = $this->freePagesService->getFreepages(
             $validated['keyword'], $validated['status'], $validated['sort']);
         $freePages = $this->pager($freePages, 10, $page, '/managements/freepages/');
 

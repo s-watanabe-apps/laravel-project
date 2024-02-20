@@ -6,7 +6,7 @@ use App\Models\InformationCategories;
 class InformationCategoriesService extends Service
 {
     /**
-     * ベースクエリ.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -14,8 +14,7 @@ class InformationCategoriesService extends Service
     {
         return InformationCategories::query()
             ->select([
-                'information_categories.id',
-                'information_categories.style',
+                'information_categories.*',
             ]);
     }
 
@@ -24,9 +23,11 @@ class InformationCategoriesService extends Service
      * 
      * @return array
      */
-    public function get_all()
+    public function getAll()
     {
-        return $this->base()->get()->toArray();
+        return $this->base()
+            ->get()
+            ->toArray();
     }
 
     /**
@@ -35,8 +36,11 @@ class InformationCategoriesService extends Service
      * @param int $id
      * @return array
      */
-    public function get_by_id($id)
+    public function getById($id)
     {
-        return $this->base()->where('id', $id)->first()->toArray();
+        return $this->base()
+            ->where('id', $id)
+            ->first()
+            ->toArray();
     }
 }

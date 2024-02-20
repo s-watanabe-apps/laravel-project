@@ -6,7 +6,7 @@ use App\Models\Messages;
 class MessagesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -14,16 +14,9 @@ class MessagesService extends Service
     {
         return Messages::query()
             ->select([
-                'messages.id',
-                'messages.subject',
-                'messages.body',
-                'messages.readed',
-                'messages.enable',
-                'messages.from_user_id',
-                'messages.message_id',
+                'messages.*',
                 'users.name',
                 'users.image_file',
-                'messages.created_at',
             ])->leftJoin('users', function ($join) {
                 $join->on('messages.from_user_id', '=', 'users.id')
                     ->where('users.status', \Status::ENABLED);
@@ -31,66 +24,76 @@ class MessagesService extends Service
     }
 
     /**
-     * Get unread messages.
+     * 未読メッセージ取得.
      * 
-     * @param int $user_id
+     * @param int $userId
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function get_unread_messages($user_id)
+    public function getUnreadMessages($userId, $limit = 5)
     {
         return $this->base()
-            ->where('messages.to_user_id', $user_id)
+            ->where('messages.to_user_id', $userId)
             ->where('messages.readed', 0)
             ->orderBy('messages.created_at', 'desc')
-            ->limit(5)
-            ->get();
+            ->limit($limit)
+            ->get()
+            ->toArray();
     }
 
     /**
-     * Get messages by userId
+     * ユーザーの受信メッセージ取得.
      * 
-     * @var int messages.to_user_id
-     * @var int messages.message_id
-     * @return App\Models\Messages
+     * @param int $userId
+     * @param int $messageId
+     * 
+     * @return array
      */
     public function getByUserIdAndMessageId($userId, $messageId)
     {
         return $this->base()
             ->where('messages.to_user_id', $userId)
-            ->where('messages.message_id', $messageId)->get()->first();
+            ->where('messages.message_id', $messageId)
+            ->first()
+            ->toArray();
     }
 
     /**
-     * Get messages by userId and messageId
+     * ユーザーの受信メッセージ全件取得.
      * 
-     * @var int messages.to_user_id
-     * @var int messages.message_id
-     * @return Illuminate\Database\Eloquent\Collection
+     * @param int $userId
+     * 
+     * @return array
      */
     public function getByUserId($userId)
     {
         return $this->base()
             ->where('messages.to_user_id', $userId)
-            ->orderBy('messages.created_at', 'desc')->get();
+            ->orderBy('messages.created_at', 'desc')
+            ->get()
+            ->toArray();
     }
 
     /**
-     * Get messages by fromUserId
+     * ユーザー(自分)の送信メッセージ全件取得.
      * 
-     * @var int messages.to_user_id
-     * @return Illuminate\Database\Eloquent\Collection
+     * @var int $fromUserId
+     * 
+     * @return array
      */
-    public function getByFromUserId($userId)
+    public function getByFromUserId($fromUserId)
     {
         return $this->base()
-            ->where('from_user_id', $userId)->get();
+            ->where('from_user_id', $fromUserId)
+            ->get()
+            ->toArray();
     }
 
     /**
-     * Get messages by userId and fromUserId
+     * 特定ユーザーからの受信メッセージ全件取得.
      * 
-     * @var int messages.to_user_id
-     * @var int messages.from_user_id
+     * @var int $userId
+     * @var int $fromUserId
+     * 
      * @return Illuminate\Database\Eloquent\Collection
      */
     public function getByUserIdAndFromUserId($userId, $fromUserId)
@@ -98,7 +101,9 @@ class MessagesService extends Service
         return $this->base()
             ->where('messages.to_user_id', $userId)
             ->where('messages.from_user_id', $fromUserId)
-            ->orderBy('messages.created_at', 'desc')->get();
+            ->orderBy('messages.created_at', 'desc')
+            ->get()
+            ->toArray();
     }
 
     public function getDisabled($userId)

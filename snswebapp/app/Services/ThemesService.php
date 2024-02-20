@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 class ThemesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -15,15 +15,7 @@ class ThemesService extends Service
     {
         return Themes::query()
             ->select([
-                'themes.id',
-                'themes.name',
-                'themes.header_color',
-                'themes.text_color',
-                'themes.background_color',
-                'themes.body_color',
-                'themes.border_color',
-                'themes.a_color',
-                'themes.th_color',
+                'themes.*',
             ]);
     }
 

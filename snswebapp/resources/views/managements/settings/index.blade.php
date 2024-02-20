@@ -36,9 +36,9 @@
 
             <div class="vertical-contents">
                 <div class="title">@lang('strings.basic_auth')</div>
-                <div class="vertical-contents">
-                    <label>{{Form::radio('basic_auth', '1', false, []) }}&nbsp;@lang('strings.enable')</label>
-                    <label>{{Form::radio('basic_auth', '0', true, []) }}&nbsp;@lang('strings.disable')</label>
+                <div class="radio">
+                    <label>{{Form::radio('basic_auth', '1', false, []) }}&nbsp;<span class="enable">@lang('strings.enable')</span></label>
+                    <label>{{Form::radio('basic_auth', '0', true, []) }}&nbsp;<span class="disable">@lang('strings.disable')</span></label>
                 </div>
 
                 <div class="input-label">@lang('strings.user_name')</div>

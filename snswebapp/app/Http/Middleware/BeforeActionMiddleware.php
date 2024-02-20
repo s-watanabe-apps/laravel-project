@@ -50,7 +50,7 @@ class BeforeActionMiddleware
         // 受信メッセージ取得
         $receive_messages = [];
         if (Authenticate::check()) {
-            $receive_messages = (new MessagesService())->get_unread_messages(user()->id);
+            $receive_messages = (new MessagesService())->getUnreadMessages(user()->id);
         }
 
         // 日付指定パラメータ取得
@@ -68,14 +68,14 @@ class BeforeActionMiddleware
         }
 
         // お天気情報取得
-        $weathers = (new WeathersService())->get_weathers(1850144, $date);
+        $weathers = (new WeathersService())->getWeathers(1850144, $date);
 
         // キーワード取得
         $feature_tags = array_map(function($label) use($date){
             $label['frame_color'] = '#dddddd';
             $label['body_color'] = '#eeeeee';
             return $label;
-        }, (new ArticleLabelsService())->get_feature_tags($date));
+        }, (new ArticleLabelsService())->getFeatureTags($date));
 
         $this->viewFactory->share(compact(
             'lang',

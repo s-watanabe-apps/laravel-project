@@ -20,6 +20,7 @@ class CreateFreePagesTable extends Migration
             $table->mediumtext('body');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
             $table->index('code');
         });
     }

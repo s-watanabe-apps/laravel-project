@@ -27,8 +27,8 @@ class ProfilesRequest extends AppFormRequest
     public function rules()
     {
         $profilesService = new ProfilesService();
-        $profiles = $profilesService->get_profiles_hash();
-        $choices = $profilesService->get_profile_choices_hash();
+        $profiles = $profilesService->getProfilesHash();
+        $choices = $profilesService->getProfileChoicesHash();
 
         $dynamicRules = function($attribute, $value, $fail) use($profiles, $choices) {
             $index = (int) str_replace('dynamic_values.', '', $attribute);

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class ProfilesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -23,10 +23,7 @@ class ProfilesService extends Service
     {
         return Profiles::query()
             ->select([
-                'profiles.id',
-                'profiles.type',
-                'profiles.name',
-                'profiles.required',
+                'profiles.*',
             ]);
     }
 
@@ -36,13 +33,12 @@ class ProfilesService extends Service
      * @param int
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function get_user_profiles($user_id)
+    public function getUserProfiles($user_id)
     {
         $subQuery = $this->base()->addSelect([
                 'profile_choices.id as profile_choice_id',
                 'profile_choices.name as value',
                 'profile_values.user_id',
-                'profiles.order',
             ])->leftJoin('profile_values', function ($join) use ($user_id) {
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
                     ->where('profile_values.user_id', $user_id);
@@ -54,7 +50,6 @@ class ProfilesService extends Service
                 DB::raw('null as profile_choice_id'),
                 'profile_values.value',
                 'profile_values.user_id',
-                'profiles.order',
             ])->leftJoin('profile_values', function ($join) use ($user_id) {
                 $join->on('profiles.id', '=', 'profile_values.profile_id')
                     ->where('profile_values.user_id', $user_id);
@@ -63,7 +58,14 @@ class ProfilesService extends Service
             ->union($subQuery);
 
         $data = DB::table($query)->select([
-                'id', 'type', 'name', 'required', 'user_id', 'profile_choice_id', 'value', 'order'
+                'id',
+                'type',
+                'name',
+                'required',
+                'user_id',
+                'profile_choice_id',
+                'value',
+                'order'
             ])->orderBy('order', 'asc')
             ->get()
             ->toArray();
@@ -78,7 +80,7 @@ class ProfilesService extends Service
      * 
      * @return array
      */
-    public function get_profile_choices_hash()
+    public function getProfileChoicesHash()
     {
         $results = $this->base()
             ->select([
@@ -101,7 +103,7 @@ class ProfilesService extends Service
      * 
      * @return array
      */
-    public function get_profiles_hash()
+    public function getProfilesHash()
     {
         $profiles = $this->base()->orderBy('order')->get();
 
@@ -118,13 +120,15 @@ class ProfilesService extends Service
      * 
      * @return array
      */
-    public function get_profile_items()
+    public function getProfileItems()
     {
         $data = $this->base()
             ->addSelect([
                 'profiles.order',
             ])
-            ->orderBy('order')->get()->toArray();
+            ->orderBy('order')
+            ->get()
+            ->toArray();
 
         $profiles = array_map(function($value) {
             if ($value['type'] == ProfileInputType::CHOICE) {

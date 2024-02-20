@@ -6,7 +6,7 @@ use App\Models\Images;
 class ImagesService extends Service
 {
     /**
-     * Get base query builder.
+     * 基本クエリ.
      * 
      * @return Illuminate\Database\Eloquent\Builder
      */
@@ -14,14 +14,7 @@ class ImagesService extends Service
     {
         return Images::query()
             ->select([
-                'images.id',
-                'images.enabled',
-                'images.type',
-                'images.target_id',
-                'images.name',
-                'images.created_at',
-                'images.updated_at',
-                'images.deleted_at',
+                'images.*',
             ]);
     }
 
