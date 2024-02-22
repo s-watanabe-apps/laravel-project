@@ -27,9 +27,9 @@ class ProfileSettingsController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $types = ProfileInputType::get_types();
+        $types = ProfileInputType::getTypes();
 
-        $profiles = $this->profilesService->get_profile_items();
+        $profiles = $this->profilesService->getProfileItems();
 
         return view('managements.profileSettings.index', compact(
             'types', 'profiles'

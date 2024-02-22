@@ -3,17 +3,18 @@ namespace App\Libs;
 
 class ProfileInputType
 {
+    // 定数
     public const FILLIN = 1;
     public const DESCRIPTION = 2;
     public const CHOICE = 3;
     //public const SELECT = 4;
 
     /**
-     * Get types KeyValue.
+     * 入力タイプ取得.
      * 
      * @return array
      */
-    public static function get_types()
+    public static function getTypes()
     {
         return [
             self::FILLIN => __('strings.input_types.fillin'),
