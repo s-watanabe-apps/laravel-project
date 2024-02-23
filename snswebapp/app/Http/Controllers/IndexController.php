@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class IndexController extends Controller
@@ -37,7 +38,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Get top page of site.
+     * トップページ.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -54,26 +55,29 @@ class IndexController extends Controller
         //Mail::to("swata82@gmail.com")->send(new ContactMail("送信テスト", "test"));
         //var_dump(\Config::get('mail'));
 
-        // Informations
+        $validator = Validator::make([
+            'date' => $request->date,
+            'page' => $request->page,
+        ], [
+            'date' => 'date|nullable',
+            'page' => 'integer|nullable',
+        ]);
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        $validated = $validator->validated();
+        dump($validated);
+
         $informations = $this->informationsService->getEnabledInformations();
 
-        // Weekly calendar
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
-        // Latest Articles
-        $data = $this->articlesService->getLatestArticles();
-        $data[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
+        $page = $validated['page'] ?? 1;
+        $articles = $this->articlesService->getLatestArticles();
+        $articles[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
+        $articles = $this->pager($articles, 10, $page, '/');
 
-        // ページャー生成
-        $limit = 10;
-        $page = 1;
-        $articles = new LengthAwarePaginator(
-            array_slice($data, ($page - 1) * $limit, $limit),
-            count($data),
-            $limit,
-            $page,
-            ['path' => '/']
-        );
 
         $feature_tags = [];
 
