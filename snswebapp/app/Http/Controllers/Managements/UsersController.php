@@ -61,7 +61,7 @@ class UsersController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list ($users, $headers) = $this->usersService->get_users_by_managements($validated['keyword'], $validated['group_code'], $validated['sort']);
+        list ($users, $headers) = $this->usersService->getUsersForManagements($validated['keyword'], $validated['group_code'], $validated['sort']);
         $users = $this->pager($users, 10, $page, '/managements/users/');
 
         $groups = $this->groupsService->all();

@@ -67,7 +67,6 @@ class IndexController extends Controller
         }
 
         $validated = $validator->validated();
-        dump($validated);
 
         $informations = $this->informationsService->getEnabledInformations();
 
