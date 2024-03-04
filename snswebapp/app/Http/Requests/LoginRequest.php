@@ -26,4 +26,18 @@ class LoginRequest extends AppFormRequest
             'remember' => 'in:on',
         ];
     }
+
+    /**
+     * Column names.
+     * 
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'email' => __('strings.email'),
+            'password' =>  __('strings.password'),
+        ];
+    }
+
 }

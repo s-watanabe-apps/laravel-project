@@ -8,7 +8,7 @@
 body {
     font-family: 'Nunito', sans-serif;
     margin: 0 auto 0 auto;
-    padding-top: 52px;
+    padding-top: 60px;
     max-width: 992px;
     min-height: 800px;
     border-left: 1px solid;

@@ -25,6 +25,7 @@ class CreateSettingsTable extends Migration
             $table->string('basic_password')->nullable();
             $table->boolean('anonymous_permission')->default(0);
             $table->integer('theme_id')->default(1);
+            $table->integer('login_image_id')->default(1);
         });
     }
 

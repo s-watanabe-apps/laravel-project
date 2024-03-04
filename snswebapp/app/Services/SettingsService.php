@@ -28,13 +28,13 @@ class SettingsService extends Service
                 //'settings.header_image_id',
                 //\DB::raw('header_images.file_name as header_file_name'),
                 //'header_images.title_color',
-                //'settings.login_image_id',
-                //\DB::raw('login_images.file_name as login_file_name'),
+                'settings.login_image_id',
+                \DB::raw('login_images.file_name as login_file_name'),
             ])
             ->where('settings.id', 1)
-            ->leftJoin('themes', 'settings.theme_id', '=', 'themes.id');
+            ->leftJoin('themes', 'settings.theme_id', '=', 'themes.id')
             //->leftJoin('header_images', 'settings.header_image_id', '=', 'header_images.id')
-            //->leftJoin('login_images', 'settings.login_image_id', '=', 'login_images.id');
+            ->leftJoin('login_images', 'settings.login_image_id', '=', 'login_images.id');
     }
 
     /**
