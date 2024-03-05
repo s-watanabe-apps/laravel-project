@@ -15,11 +15,10 @@ return [
 
     'login' => 'Login',
     'logout' => 'Logout',
-
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
     'password_remember' => 'Remember Me',
+    'create_account' => 'Create an Account',
 
     /*
     |--------------------------------------------------------------------------
