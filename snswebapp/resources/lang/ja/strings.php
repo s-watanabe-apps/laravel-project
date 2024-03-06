@@ -93,6 +93,7 @@ return [
     'return' => '戻る',
     'create_new' => '新規作成',
     'delete_confirm' => '削除確認',
+    'send' => '送信',
 
     // Information Categories
     'information_categories' => [

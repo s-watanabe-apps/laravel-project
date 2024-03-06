@@ -16,10 +16,11 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
     Route::get('/login', 'Auth\LoginController@loginGet')->name('login');
     Route::post('/login', 'Auth\LoginController@loginPost');
     Route::get('/logout', 'Auth\LogoutController@index');
-    Route::get('/password/email', 'Auth\ForgotPasswordController@index');
-    Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetMail');
-    Route::get('/password/reset', 'Auth\ForgotPasswordController@reset');
-    Route::post('/password/reset', 'Auth\ForgotPasswordController@resetPassword');
+    Route::get('/password/reset', 'Auth\PasswordController@reset');
+    Route::post('/password/reset', 'Auth\PasswordController@sendResetMail');
+
+    //Route::get('/password/reset', 'Auth\ForgotPasswordController@reset');
+    //Route::post('/password/reset', 'Auth\ForgotPasswordController@resetPassword');
     Route::get('/register', 'AppRegisterController@index');
     Route::post('/register', 'AppRegisterController@index');
 

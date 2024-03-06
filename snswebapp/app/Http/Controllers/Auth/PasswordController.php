@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
 
-class ForgotPasswordController extends Controller
+class PasswordController extends Controller
 {
     private $usersService;
     private $passwordResetsService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\UsersService
      * @return void
@@ -31,18 +31,18 @@ class ForgotPasswordController extends Controller
     }
 
     /**
-     * View for sending password reset email.
+     * パスワードリセット画面.
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function index(Request $request)
+    public function reset(Request $request)
     {
-        return view('auth.passwords.forgot');
+        return view('auth.password.reset');
     }
 
     /**
-     * Send a password reset email.
+     * パスワードリセットメール送信.
      * 
      * @var App\Request\ForgetPasswordSendResetMailRequest
      * @return \Illuminate\View\View
@@ -53,18 +53,18 @@ class ForgotPasswordController extends Controller
             $this->usersService->sendResetMail($request->email);
         });
 
-        return view('auth.passwords.forgot', [
+        return view('auth.password.reset', [
             'result_message' => sprintf(__('auth.send_reset_mail_result_message'), $request->email),
         ]);
     }
 
     /**
-     * View to reset password.
+     * .
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function reset(Request $request)
+    public function _reset(Request $request)
     {
         $validator = Validator::make([
             'token' => $request->token,

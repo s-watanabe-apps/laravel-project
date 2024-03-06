@@ -240,7 +240,7 @@ class UsersService extends Service
     }
 
     /**
-     * Send password reset mail.
+     * パスワードリセットメール送信.
      * 
      * @param string $email
      */
@@ -258,7 +258,7 @@ class UsersService extends Service
                 'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
             ];
 
-            $subject = sprintf("[%s] %s", settings()->site_name, __('strings.reset_password'));
+            $subject = sprintf("[%s] %s", settings()['site_name'], __('strings.reset_password'));
             $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
 
             Mail::to($email)->send(new ContactMail($subject, $template, $data));

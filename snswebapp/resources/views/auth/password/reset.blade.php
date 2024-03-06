@@ -13,36 +13,26 @@
                     style="width: 100%; object-fit: cover;" />
             </div>
             <div class="w-50">
-                <div class="subject">{{$settings['site_name']}}</div>
+                <div class="subject">@lang('auth.forgot_password_title')</div>
                 {{Form::open([
-                    'url' => route('login'),
+                    'url' => '/password/reset',
                     'method' => 'post',
-                    'name' => 'login',
                 ])}}
                     @csrf
 
+                    <div class="text">@lang('auth.forgot_password_message')</div>
                     {{Form::input('text', 'email', '', ['placeholder' => __('strings.email')])}}
                     <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
 
-                    {{Form::input('password', 'password', '', ['placeholder' => __('strings.password')])}}
-                    <div class="text-danger">{{$errors->first('password') ?? ''}}</div>
-
-                    <div class="text-danger">{{$faild ?? ''}}</div>
-
-                    <div>
-                        <input name="remember" type="checkbox" id="customCheck" />
-                        <label for="customCheck"><small>@lang('auth.password_remember')</small></label>
-                    </div>
+                    <div class="text-primary">{{$result_message ?? ''}}</div>
 
                     <div class="flex-contents">
-                        <input type="hidden" name="redirect" value="{{session('redirect')}}" />
-                        <input type="submit" value="@lang('auth.login')" />
+                        <input type="submit" value="@lang('strings.send')" />
                     </div>
                 {{Form::close()}}
                 <hr>
                 <div><small><a href="/password/reset">@lang('auth.forgot_password_link')</a></small></div>
                 <div><small><a href="/register">@lang('auth.create_account')</a></div>
-
             </div>
         </div>
     </div>

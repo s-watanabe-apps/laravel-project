@@ -498,6 +498,10 @@ table.profiles input, table.profiles select, table.profiles textarea {
     color: #ff0000;
     font-size: 14px;
 }
+.text-primary {
+    color: #0000ff;
+    font-size: 14px;
+}
 
 .profile-articles {
     border-bottom: 1px dotted #dedede;

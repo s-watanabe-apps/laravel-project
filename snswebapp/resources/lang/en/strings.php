@@ -94,6 +94,7 @@ return [
     'return' => 'Return',
     'create_new' => 'Create New',
     'delete_confirm' => 'Delete confirm',
+    'send' => 'Send',
 
     // Information Marks
     'information_categories' => [
