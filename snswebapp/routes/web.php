@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => ['settings', 'auth.basic']], function() {
-    // Authenticate
+    // 認証系
     Route::get('/login', 'Auth\LoginController@loginGet')->name('login');
     Route::post('/login', 'Auth\LoginController@loginPost');
     Route::get('/logout', 'Auth\LogoutController@index');
@@ -25,10 +25,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
     Route::post('/register', 'AppRegisterController@index');
 
     Route::group(['middleware' => ['authcheck.readpermission']], function () {
-        // Index
+        // トップページ
         Route::get('/', 'IndexController@index');
 
-        // Articles
+        // マイページ
+        Route::get('/mypage', 'MypageController@index');
+
+        // 記事
         Route::get('/articles', 'ArticlesController@index');
         Route::get('/articles/user/{id}', 'ArticlesController@user')->where('id', '[0-9]+')->name('articles.user');
         Route::get('/articles/{id}', 'ArticlesController@get')->where('id', '[0-9]+')->name('articles.get');
@@ -42,7 +45,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::post('/articles/comment', 'ArticlesController@comment');
         });
 
-        // Profiles
+        // プロフィール
         Route::get('/members', 'ProfilesController@index');
         Route::get('/profiles/{id}', 'ProfilesController@get')->where('id', '[0-9]+')->name('profiles.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
@@ -50,7 +53,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::put('/profiles/save', 'ProfilesController@save');
         });
 
-        // Pictures
+        // アルバム
         Route::get('/pictures', 'PicturesController@index')->name('pictures.index');
         Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+')->name('pictures.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
@@ -62,47 +65,47 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
                 ->where('comment_id', '[0-9]+');
         });
 
-        // Messages
+        // メッセージ
         Route::get('/messages/inbox', 'MessagesController@inbox');
         Route::get('/messages/{id}', 'MessagesController@get')->where('id', '[0-9]+');
 
-        // Favorites
+        // お気に入り
         Route::get('/favorites', 'FavoritesController@index')->name('favorites');
         Route::get('/favorites/remove/{uri}', 'FavoritesController@remove')->where('uri', '.*');
 
-        // Schedule
+        // スケジュール
         Route::get('/schedule', 'ScheduleController@index');
 
-        // Free Page
+        // フリーページ
         Route::get('/page/{code}', 'PageController@get')->where('code', '[a-zA-Z0-9]{32}');
 
-        // Show storage
+        // ストレージ
         Route::get('/show/image', 'ShowController@image');
 
-        // Files
+        // ファイル
         Route::get('/files/{fileName}', 'FilesController@get')->where('fileName', \App\Services\FilesService::getRegex());
 
 
-        // Managements
+        // 管理者メニュー
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
-            // Settings
+            // 設定
             Route::get('settings', 'Managements\SettingsController@index')->name('managementsSettings');
             Route::post('settings', 'Managements\SettingsController@save');
 
-            // Users
+            // ユーザー管理
             Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
             Route::get('users/create', 'Managements\UsersController@create');
             Route::post('users/confirm', 'Managements\UsersController@confirm');
             Route::post('users/register', 'Managements\UsersController@register');
 
-            // Groups
+            // グループ管理
             Route::get('groups', 'Managements\GroupsController@index')->name('managementsGroups');
 
-            // Navigation Menus
+            // ナビゲーション管理
             Route::get('navigations', 'Managements\NavigationMenusController@index')->name('managementsNavigations');
             Route::post('navigations', 'Managements\NavigationMenusController@save');
 
-            // Informations
+            // お知らせ管理
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
             Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
             Route::get('informations/create', 'Managements\InformationsController@create');
@@ -113,11 +116,11 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::put('informations/save', 'Managements\InformationsController@save');
             Route::get('informations/delete/{id}', 'Managements\InformationsController@delete')->where('id', '[0-9]+');
 
-            // Profile Settings
+            // プロフィール項目管理
             Route::get('profile/settings', 'Managements\ProfileSettingsController@index')->name('managementsProfileSettings');
             Route::post('profile/settings', 'Managements\ProfileSettingsController@save');
 
-            // Free Pages
+            // フリーページ管理
             Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');
             Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::get('freepages/create', 'Managements\FreepagesController@create');
@@ -126,13 +129,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
             Route::put('freepages/register', 'Managements\FreepagesController@register');
 
-            // Upload files
+            // ファイルアップロード
             Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');
         });
     });
 });
 
-// Other route
+// ルーティングエラー
 Route::fallback(function(){
     return view('errors/404');
 });
