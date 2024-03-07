@@ -28,6 +28,8 @@ class MypageController extends Controller
      */
     public function index(Request $request)
     {
+        dump(request()->ip());
+        dump($request->headers->get('user-agent'));
         $user = user();
 
         return view('mypage.index', compact(

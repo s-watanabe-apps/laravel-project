@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{$settings['site_name']}}</title>
+
     @include('style')
     @include('auth.style', compact('settings'))
 </head>
@@ -40,7 +44,7 @@
                     </div>
                 {{Form::close()}}
                 <hr>
-                <div><small><a href="/password/reset">@lang('auth.forgot_password_link')</a></small></div>
+                <div><small><a href="/password/email">@lang('auth.forgot_password_link')</a></small></div>
                 <div><small><a href="/register">@lang('auth.create_account')</a></div>
 
             </div>

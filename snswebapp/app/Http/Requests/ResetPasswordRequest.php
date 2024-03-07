@@ -34,8 +34,8 @@ class ResetPasswordRequest extends AppFormRequest
     public function attributes()
     {
         return [
-            'password' => __('strings.password'),
-            'password_confirm' => __('strings.confirm'),
+            'password' => __('auth.new_password'),
+            'password_confirm' => __('auth.confirm_password'),
         ];
     }
 }

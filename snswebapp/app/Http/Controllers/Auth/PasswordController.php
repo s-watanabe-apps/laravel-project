@@ -20,6 +20,7 @@ class PasswordController extends Controller
      * コンストラクタ.
      *
      * @param App\Services\UsersService
+     * @param App\Services\PasswordResetsService
      * @return void
      */
     public function __construct(
@@ -31,14 +32,14 @@ class PasswordController extends Controller
     }
 
     /**
-     * パスワードリセット画面.
+     * パスワードリセットメール送信画面.
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function reset(Request $request)
+    public function email(Request $request)
     {
-        return view('auth.password.reset');
+        return view('auth.password.email');
     }
 
     /**
@@ -53,18 +54,18 @@ class PasswordController extends Controller
             $this->usersService->sendResetMail($request->email);
         });
 
-        return view('auth.password.reset', [
+        return view('auth.password.email', [
             'result_message' => sprintf(__('auth.send_reset_mail_result_message'), $request->email),
         ]);
     }
 
     /**
-     * .
+     * パスワードリセット画面.
      * 
      * @var Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function _reset(Request $request)
+    public function reset(Request $request)
     {
         $validator = Validator::make([
             'token' => $request->token,
@@ -72,11 +73,17 @@ class PasswordController extends Controller
             'token' => 'string|max:288',
         ]);
 
-        return view('auth.passwords.reset', [
+        return view('auth.password.reset', [
             'token' => $validator->validated()['token'],
         ]);
     }
 
+    /**
+     * パスワードリセット.
+     * 
+     * @param ResetPasswordRequest $request
+     * @return \Illuminate\View\View
+     */
     public function resetPassword(ResetPasswordRequest $request)
     {
         dump($request->validated());
