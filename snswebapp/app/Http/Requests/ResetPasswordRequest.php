@@ -23,6 +23,7 @@ class ResetPasswordRequest extends AppFormRequest
         return [
             'password' =>  'required|min:8|string',
             'password_confirm' => 'same:password',
+            'token' => 'string|max:288',
         ];
     }
 

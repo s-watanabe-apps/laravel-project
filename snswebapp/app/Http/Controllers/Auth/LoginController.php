@@ -91,8 +91,6 @@ class LoginController extends Controller
      */
     public function loginGet(Request $request)
     {
-        //dump($request);
-
         $validator = Validator::make([
                 'redirect' => $request->session()->get('redirect'),
             ], [

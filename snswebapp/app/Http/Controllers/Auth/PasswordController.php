@@ -9,7 +9,6 @@ use App\Http\Requests\ForgetPasswordSendResetMailRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Crypt;
 
 class PasswordController extends Controller
 {
@@ -73,9 +72,9 @@ class PasswordController extends Controller
             'token' => 'string|max:288',
         ]);
 
-        return view('auth.password.reset', [
-            'token' => $validator->validated()['token'],
-        ]);
+        $validated = $validator->validated();
+
+        return view('auth.password.reset', $validated);
     }
 
     /**
@@ -86,7 +85,12 @@ class PasswordController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-        dump($request->validated());
-        exit;
+        \DB::transaction(function() use ($request) {
+            $this->usersService->resetPassword($request->password, $request->token);
+        });
+exit;
+        return view('auth.password.reset', [
+            'result_message' => 'OK',
+        ]);
     }
 }

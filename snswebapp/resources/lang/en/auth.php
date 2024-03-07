@@ -46,5 +46,6 @@ return [
     'user' => "We can't find a user with that e-mail address.",
     'new_password' => 'New Password',
     'confirm_password' => 'Confirm',
+    'return_to_login' => 'Return to login',
 
 ];

@@ -36,22 +36,31 @@ input[type = "submit"] {
 }
 
 @media (max-width: 638px) {
+    body {
+        padding: 0;
+        height: 100vh;
+        background: #aaa;
+        min-height: 0;
+    }
+
     .login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 100%;
-        max-width: 430px;
-        min-height: 600px;
+        height: 100vh;
+        background-position: center;
         background-image: url(/images/login/{{$settings['login_file_name']}});
-        background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.9;
+    }
+
+    .grid-contents {
+        background: {{$settings['background_color']}}cc;
     }
 }
 
 @media (max-width: 432px) {
-    body {
-        padding: 0px;
-        height: 100%;
-    }
     .login-container {
         background-size: fill;
         height: 100%;

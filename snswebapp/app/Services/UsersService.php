@@ -8,8 +8,8 @@ use App\Models\PasswordResets;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
-
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class UsersService extends Service
 {
@@ -243,6 +243,7 @@ class UsersService extends Service
      * パスワードリセットメール送信.
      * 
      * @param string $email
+     * @return void
      */
     public function sendResetMail(string $email)
     {
@@ -264,6 +265,23 @@ class UsersService extends Service
             Mail::to($email)->send(new ContactMail($subject, $template, $data));
         } else {
             sleep(2);
+        }
+    }
+
+    /**
+     * パスワードリセット.
+     * 
+     * @param string $password
+     * @param string $token
+     * @return void
+     */
+    public function resetPassword(string $password, string $token)
+    {
+        try {
+            list($email, $key) = explode(',', Crypt::decryptString($token));
+            dump($email, $key);
+        } catch (DecryptException $e) {
+            abort(500);
         }
     }
 

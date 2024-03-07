@@ -28,15 +28,17 @@
                     {{Form::input('text', 'email', '', ['placeholder' => __('strings.email')])}}
                     <div class="text-danger">{{$errors->first('email') ?? ''}}</div>
 
-                    <div class="text-primary">{{$result_message ?? ''}}</div>
+                    <div class="text-success">{{$result_message ?? ''}}</div>
 
                     <div class="flex-contents">
                         <input type="submit" value="@lang('strings.send')" />
                     </div>
                 {{Form::close()}}
                 <hr>
-                <div><small><a href="/password/reset">@lang('auth.forgot_password_link')</a></small></div>
+                <div><small><a href="/login">@lang('auth.return_to_login')</a></small></div>
+                @if ($settings['user_create_any'] == 1)
                 <div><small><a href="/register">@lang('auth.create_account')</a></div>
+                @endif
             </div>
         </div>
     </div>

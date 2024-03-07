@@ -503,6 +503,11 @@ table.profiles input, table.profiles select, table.profiles textarea {
     font-size: 14px;
 }
 
+.text-success {
+    color: #008000;
+    font-size: 14px;
+}
+
 .profile-articles {
     border-bottom: 1px dotted #dedede;
 }

@@ -45,7 +45,9 @@
                 {{Form::close()}}
                 <hr>
                 <div><small><a href="/password/email">@lang('auth.forgot_password_link')</a></small></div>
+                @if ($settings['user_create_any'] == 1)
                 <div><small><a href="/register">@lang('auth.create_account')</a></div>
+                @endif
 
             </div>
         </div>

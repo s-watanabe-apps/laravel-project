@@ -34,6 +34,7 @@
                     <div class="text-primary">{{$result_message ?? ''}}</div>
 
                     <div class="flex-contents">
+                        <input type="hidden" name="token" value="{{$token}}" />
                         <input type="submit" value="@lang('strings.reset_password')" />
                     </div>
                 {{Form::close()}}

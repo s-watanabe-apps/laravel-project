@@ -46,5 +46,6 @@ return [
     'user' => 'メールアドレスに一致するユーザーは存在していません。',
     'new_password' => '新しいパスワード',
     'confirm_password' => '確認用',
+    'return_to_login' => 'ログイン画面へ戻る',
 
 ];
