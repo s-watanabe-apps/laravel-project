@@ -2,6 +2,11 @@
 namespace App\Services;
 
 use App\Models\PasswordResets;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Str;
 
 class PasswordResetsService extends Service
 {
@@ -19,70 +24,101 @@ class PasswordResetsService extends Service
     }
 
     /**
-     * Issue a token and insert a new record.
+     * パスワードリセット登録.
      *
-     * @param App\Models\Users
-     * @param int
+     * @param App\Models\Users $user
+     * @param int $expireInMinutes
      * @return string
      */
-    public function issue($user, $expireMinutes)
+    public function issue($user, $expireInMinutes)
     {
-        self::deleteByEmail($user->email);
+        PasswordResets::query()
+            ->where('email', $user->email)
+            ->delete();
 
+        $expireInMinutes = 30;
         $token = Str::random(32);
 
-        $this->forceFill([
+        (new PasswordResets())->forceFill([
             'email' => $user->email,
             'token' => $token,
-            'expire_in' => carbon()->addMinutes($expireMinutes),
+            'expire_in' => carbon()->addMinutes($expireInMinutes),
             'created_at' => carbon(),
         ])->save();
 
-        return $this->token;
+        return $token;
     }
 
     /**
-     * Reset password.
-     *
-     * @param App\Models\Users
-     * @param string
+     * パスワードリセットメール送信.
+     * 
+     * @param string $email
      * @return void
      */
-    public function reset($user, $newPassword)
+    public function sendResetMail(string $email)
     {
-        $user->setPassword($newPassword);
-        self::deleteByEmail($user->email);
+        $user = (new UsersService())->getByEmail($email);
+
+        if ($user != null) {
+            $expireInMinutes = 30;
+            $token = $this->issue($user, $expireInMinutes);
+            
+            $encryptToken = Crypt::encryptString($email . ',' . $token);
+            
+            $data = [
+                'name' => $user->name,
+                'token' => $encryptToken,
+                'expire_in' => $expireInMinutes . __('strings.expire_in_minutes'),
+            ];
+
+            $subject = sprintf("[%s] %s", settings()['site_name'], __('strings.reset_password'));
+            $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
+
+            Mail::to($email)->send(new ContactMail($subject, $template, $data));
+        } else {
+            sleep(2);
+        }
     }
 
     /**
-     * Determining that the token is correct and overdue.
-     *
-     * @param string
-     * @return bool
-     */
-    public function isValidToken($token)
-    {
-        if ($token !== hash('sha256', $this->token)) {
-            return false;
-        }
-
-        $expire = carbon($this->created_at)->addMinutes(config('auth.passwords.users.expire'));
-        if (carbon() > $expire) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Delete by Email.
-     *
-     * @param String $email
+     * パスワードリセット.
+     * 
+     * @param string $password
+     * @param string $token
      * @return void
      */
-    private static function deleteByEmail($email)
+    public function resetPassword(string $password, string $token)
     {
-        self::query()->where('email', $email)->delete();
+        try {
+            list($email, $key) = explode(',', Crypt::decryptString($token));
+
+            $passwordResets = PasswordResets::where([
+                'email' => $email,
+                'token' => $key,
+            ])->first();
+
+            if (is_null($passwordResets)) {
+                // TODO
+                dump($passwordResets);
+                exit;
+            }
+
+            if (carbon()->gt(carbon($passwordResets->expire_in))) {
+                // TODO
+                dump(carbon()->gt(carbon($passwordResets->expire_in)));
+                exit;
+            }
+
+            UsersService::updatePasswordByEmail($email, $password);
+
+            $passwordResets->delete();
+
+        } catch (DecryptException $e) {
+            // TODO
+            dump($e->getMessage());
+            exit;
+        }
     }
+
 
 }

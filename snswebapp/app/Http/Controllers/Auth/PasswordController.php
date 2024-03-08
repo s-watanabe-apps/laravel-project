@@ -50,7 +50,7 @@ class PasswordController extends Controller
     public function sendResetMail(ForgetPasswordSendResetMailRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $this->usersService->sendResetMail($request->email);
+            $this->passwordResetsService->sendResetMail($request->email);
         });
 
         return view('auth.password.email', [
@@ -86,7 +86,7 @@ class PasswordController extends Controller
     public function resetPassword(ResetPasswordRequest $request)
     {
         \DB::transaction(function() use ($request) {
-            $this->usersService->resetPassword($request->password, $request->token);
+            $this->passwordResetsService->resetPassword($request->password, $request->token);
         });
 exit;
         return view('auth.password.reset', [

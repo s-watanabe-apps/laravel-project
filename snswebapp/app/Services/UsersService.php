@@ -4,12 +4,8 @@ namespace App\Services;
 use App\Http\Exceptions\NotFoundException;
 use App\Models\Users;
 use App\Models\Roles;
-use App\Models\PasswordResets;
-use App\Mail\ContactMail;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Hash;
 
 class UsersService extends Service
 {
@@ -170,25 +166,16 @@ class UsersService extends Service
     }
 
     /**
-     * Get by E-mail for Cache or Database.
+     * ユーザー取得.
      * 
-     * @var string email
+     * @param string email
      * @return App\Models\Users
      */
     public function getByEmail($email)
     {
-        $key = sprintf(parent::CACHE_KEY_USERS_BY_EMAIL, $email);
-
-        $cache = $this->remember($key, function() use($email) {
-            $data = $this->base()->where('email', $email)->first();
-            return json_encode($data);
-        });
-
-        if (is_null($cache)) {
-            return null;
-        }
-
-        return (new Users())->bind($cache);
+        return $this->base()
+            ->where('email', $email)
+            ->first();
     }
 
     /**
@@ -228,7 +215,7 @@ class UsersService extends Service
     }
 
     /**
-     * Update api token.
+     * APIトークン更新.
      * 
      * @var int id
      * @var string apiToken
@@ -236,53 +223,19 @@ class UsersService extends Service
      */
     public function updateApiToken($id, $apiToken)
     {
-        return Users::where('id', $id)->update(['api_token' => $apiToken]);
+        return Users::where('id', $id)
+            ->update([
+                'api_token' => $apiToken,
+            ]);
     }
 
-    /**
-     * パスワードリセットメール送信.
-     * 
-     * @param string $email
-     * @return void
-     */
-    public function sendResetMail(string $email)
+    public function updatePasswordByEmail($email, $password)
     {
-        if (($user = $this->base()->where('email', $email)->first()) != null) {
-            $expire_in_minutes = 30;
-            $token = (new PasswordResets())->issue($user, $expire_in_minutes);
-
-            $encryptToken = Crypt::encryptString($email . ',' . $token);
-            
-            $data = [
-                'name' => $user->name,
-                'token' => $encryptToken,
-                'expire_in' => $expire_in_minutes . __('strings.expire_in_minutes'),
-            ];
-
-            $subject = sprintf("[%s] %s", settings()['site_name'], __('strings.reset_password'));
-            $template = implode('.', ['emails', \App::getLocale(), 'reset_password']);
-
-            Mail::to($email)->send(new ContactMail($subject, $template, $data));
-        } else {
-            sleep(2);
-        }
-    }
-
-    /**
-     * パスワードリセット.
-     * 
-     * @param string $password
-     * @param string $token
-     * @return void
-     */
-    public function resetPassword(string $password, string $token)
-    {
-        try {
-            list($email, $key) = explode(',', Crypt::decryptString($token));
-            dump($email, $key);
-        } catch (DecryptException $e) {
-            abort(500);
-        }
+        return Users::where('email', $email)
+            ->update([
+                'password' => Hash::make($password),
+                'updated_at' => carbon(),
+            ]);
     }
 
     /**
