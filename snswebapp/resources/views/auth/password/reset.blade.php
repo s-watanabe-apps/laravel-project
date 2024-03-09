@@ -31,16 +31,22 @@
                     {{Form::input('password', 'password_confirm', '', ['placeholder' => __('auth.confirm_password')])}}
                     <div class="text-danger">{{$errors->first('password_confirm') ?? ''}}</div>
 
-                    <div class="text-primary">{{$result_message ?? ''}}</div>
+                    @if ($result)
+                        <div class="text-primary">@lang('auth.reset_password_success')</div>
+                    @else
+                        <div class="text-danger">@lang('auth.reset_password_faild')</div>
+                    @endif
 
                     <div class="flex-contents">
-                        <input type="hidden" name="token" value="{{$token}}" />
+                        <input type="hidden" name="token" value="{{$token ?? ''}}" />
                         <input type="submit" value="@lang('strings.reset_password')" />
                     </div>
                 {{Form::close()}}
                 <hr>
-                <div><small><a href="/password/reset">@lang('auth.forgot_password_link')</a></small></div>
+                <div><small><a href="/login">@lang('auth.return_to_login')</a></small></div>
+                @if ($settings['user_create_any'] == 1)
                 <div><small><a href="/register">@lang('auth.create_account')</a></div>
+                @endif
             </div>
         </div>
     </div>

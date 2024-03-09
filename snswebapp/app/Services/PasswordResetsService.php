@@ -98,25 +98,20 @@ class PasswordResetsService extends Service
             ])->first();
 
             if (is_null($passwordResets)) {
-                // TODO
-                dump($passwordResets);
-                exit;
+                throw new \Exception();
             }
 
             if (carbon()->gt(carbon($passwordResets->expire_in))) {
-                // TODO
-                dump(carbon()->gt(carbon($passwordResets->expire_in)));
-                exit;
+                throw new \Exception();
             }
 
             UsersService::updatePasswordByEmail($email, $password);
 
             $passwordResets->delete();
 
-        } catch (DecryptException $e) {
-            // TODO
-            dump($e->getMessage());
-            exit;
+            return true;
+        } catch (DecryptException | \Exception $e) {
+            return false;
         }
     }
 

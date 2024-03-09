@@ -85,12 +85,12 @@ class PasswordController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
+        $result = false;
+
         \DB::transaction(function() use ($request) {
-            $this->passwordResetsService->resetPassword($request->password, $request->token);
+            $result = $this->passwordResetsService->resetPassword($request->password, $request->token);
         });
-exit;
-        return view('auth.password.reset', [
-            'result_message' => 'OK',
-        ]);
+
+        return view('auth.password.reset', compact('result'));
     }
 }
