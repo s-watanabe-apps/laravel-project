@@ -66,6 +66,7 @@ return [
     'sort_order' => '並び順',
     'select_list' => '選択リスト',
     'file_name' => 'ファイル名',
+    'file_type' => 'ファイルの種類',
     'operation' => '操作',
     'comment_count' => 'コメント数',
     'articles_index_title' => '%sさんの投稿',

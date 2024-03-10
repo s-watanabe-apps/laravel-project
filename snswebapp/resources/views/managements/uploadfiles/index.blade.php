@@ -1,60 +1,76 @@
-@extends('layouts.app')
+@extends('app')
 @section('content')
-<!-- Page Heading -->
-<div class="row">
-    <nav aria-label="breadcrumb" class="col-md-12 h6 font-weight-bold">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-fw fa-upload"></i> @lang('strings.upload_files')</li>
-        </ol>
-    </nav>
-</div>
 
-<!-- Content Row -->
-<div class="row mx-1">
+<div class="contents">
+    <div class="subject"><i class="fas fa-fw fa-upload"></i> @lang('strings.upload_files')</div>
 
-    <table id="dataTable" class="display cell-border compact" style="margin: unset; width: 100%;">
-        <thead>
-            <tr class="text-nowrap">
-                <th class="dt-center">@lang('strings.file_name')</th>
-                <th class="dt-center">@lang('strings.link')</th>
-                <th class="dt-center">@lang('strings.created_at')</th>
-                <th class="dt-center">@lang('strings.updated_at')</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($files as $value)
+    {{Form::open([
+        'name' => 'form',
+        'url' => '/managements/uploadfiles',
+        'method' => 'get',
+    ])}}
+    <div class="flex-contents search-box">
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.keyword'):&nbsp;</span>
+            {{Form::input('text', 'keyword', $validated['keyword'] ?? '', [
+                'style' => 'width: 50%;',
+            ])}}
+        </div>
+        <div class="search-item">
+            <span style="width: 50%;">@lang('strings.file_type'):&nbsp;</span>
+            <select name="ext" style="width: 50%;">
+                <option value=""></option>
+                @foreach ($extensions as $ext)
+                <option value="{{$ext}}"
+                    @if ($ext == ($validated['ext'] ?? ''))
+                        selected
+                    @endif
+                >{{$ext}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="search-submit">
+            <input type="submit" class="search" value="@lang('strings.search')" />
+        </div>
+    </div>
+    {{Form::close()}}
+
+    <div class="vertical-contents">
+        <table class="user-managements">
             <tr>
-            <td class="dt-left">
-                    <a href="/files/{{$value->getfileName()}}">{{$value->getfileName()}}</a>
+                @foreach ($headers ?? [] as $value)
+                <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
+                @endforeach
+            </tr>
+            @foreach ([] as $file)
+            <tr>
+                <td>
+                    {{$value['id']}}
                 </td>
-                <td class="dt-left">
-                        <div><a href="javascript:copyLink('/files/{{$value->getfileName()}}')"><i class="fas fa-copy"></i></a>&nbsp;/files/{{$value->getfileName()}}</div>
+                <td style="text-align: left; padding: 0 5px 0 5px;">
+                    <a href="/managements/freepages/{{$value['id']}}">{{$value['title']}}</a>
                 </td>
-                <td class="dt-center">
-                    {{$value->created_at->format(\DateFormat::getDateFormat())}}
+                <td>
+                    {{str_datetime_format($value['created_at'])}}
                 </td>
-                <td class="dt-center">
-                    {{$value->updated_at->format(\DateFormat::getDateFormat())}}
+                <td>
+                    {{str_datetime_format($value['updated_at'])}}
                 </td>
-                <td class="dt-center">
-                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                <td>
+                    @if ($value['status'] == \Status::ENABLED)
+                    <span class="enable">@lang('strings.enable')</span>
+                    @else
+                    <span class="disable">@lang('strings.disable')</span>
+                    @endif
                 </td>
             </tr>
             @endforeach
-        </tbody>
-    </table>
+        </table>
+    </div>
 
+    <?php
+    //{!!$files->links('vendor.pagination.semantic-ui')!!}
+    ?>
 </div>
 
-<!-- DataTables -->
-@include('shared.datatables')
-
-<script>
-$(function(){
-});
-function copyLink(link) {
-    console.log(link);
-}
-</script>
 @endsection

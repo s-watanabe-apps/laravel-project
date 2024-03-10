@@ -13,15 +13,22 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * インデックスコントローラ.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class IndexController extends Controller
 {
-    // Instance variables.
+    // サービス変数.
     private $informationsService;
     private $calendarService;
     private $articlesService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\InformationsService
      * @param App\Services\CalendarService

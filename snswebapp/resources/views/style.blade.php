@@ -7,6 +7,7 @@
 }
 body {
     font-family: 'Nunito', sans-serif;
+    font-size: 15px;
     margin: 0 auto 0 auto;
     padding-top: 60px;
     max-width: 992px;
@@ -127,7 +128,7 @@ header .sm {
     border-bottom: none;
 }
 .subject {
-    font-size: larger;
+    font-size: 18px;
     font-weight: bold;
     word-break: break-all;
     padding: 10px 0px 6px 0px;
@@ -234,7 +235,7 @@ span.tag {
     padding: 10px;
 }
 .title {
-    font-size: midium;
+    font-size: 17px;
     font-weight: bold;
     word-break: break-all;
     padding-top: 5px;

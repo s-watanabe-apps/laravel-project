@@ -67,6 +67,7 @@ return [
     'sort_order' => 'Sort order',
     'select_list' => 'Selection list',
     'file_name' => 'File name',
+    'file_type' => 'File type',
     'operation' => 'Operation',
     'comment_count' => 'Comments',
     'articles_index_title' => 'Posted by Mr./Ms. %s',

@@ -2,14 +2,37 @@
 namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
+use App\Services\FilesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
+/**
+ * ファイルアップロードコントローラ.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class UploadfilesController extends ManagementsController
 {
+    // サービス変数.
+    private $filesService;
+
     /**
-     * Get upload files.
+     * コンストラクタ.
+     *
+     * @param App\Services\FilesService
+     * @return void
+     */
+    public function __construct(
+        FilesService $filesService
+    ) {
+        $this->filesService = $filesService;
+    }
+
+    /**
+     * アップロードファイル一覧.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -18,15 +41,21 @@ class UploadfilesController extends ManagementsController
     {
         $files = array_map(
             function($file) {
-                $file->created_at = carbon(filectime($file->getPathName()));
-                $file->updated_at = carbon(filemtime($file->getPathName()));
-                return $file;
-            },
-            \File::files(storage_path('app/contents/files/'))
+                return [
+                    'filename' => $file->getFilename(),
+                    'extension' => $file->getExtension(),
+                    'created_at' => carbon(filectime($file->getPathName())),
+                    'updated_at' => carbon(filemtime($file->getPathName())),
+                ];
+            }, \File::files(storage_path('app/contents/files/'))
         );
 
+        $extensions = $this->filesService::$extensions;
+dump($files);
+
         return view('managements.uploadfiles.index', compact(
-            'files'
+            'files',
+            'extensions'
         ));
     }
 
