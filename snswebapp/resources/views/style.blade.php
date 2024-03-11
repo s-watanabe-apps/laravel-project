@@ -439,6 +439,20 @@ table.profiles input, table.profiles select, table.profiles textarea {
 .flex-contents > .view-item > a {
     margin: 10px;
 }
+.flex-contents > .upload-item {
+    text-align: center;
+    width: 80%;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+}
+.flex-contents > .upload-submit {
+    text-align: center;
+    width: 20%;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+}
 .flex-contents > .search-item {
     text-align: center;
     width: 40%;
@@ -454,6 +468,12 @@ table.profiles input, table.profiles select, table.profiles textarea {
     margin: 5px 0 5px 0;
 }
 .search-box {
+    width: auto;
+    margin: 10px 0 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+.contents-box {
     width: auto;
     margin: 10px 0 10px 0;
     padding: 15px;

@@ -5,14 +5,27 @@
     <div class="subject"><i class="fas fa-fw fa-upload"></i> @lang('strings.upload_files')</div>
 
     {{Form::open([
-        'name' => 'form',
+        'url' => '/managements/uploadfiles',
+        'method' => 'post',
+    ])}}
+    <div class="flex-contents contents-box">
+        <div class="upload-item">
+            <input type="file" name="file" />
+        </div>
+        <div class="upload-submit">
+            <input type="submit" class="post" value="@lang('strings.upload')" />
+        </div>
+    </div>
+    {{Form::close()}}
+
+    {{Form::open([
         'url' => '/managements/uploadfiles',
         'method' => 'get',
     ])}}
     <div class="flex-contents search-box">
         <div class="search-item">
             <span style="width: 50%;">@lang('strings.keyword'):&nbsp;</span>
-            {{Form::input('text', 'keyword', $validated['keyword'] ?? '', [
+            {{Form::input('text', 'keyword', $validated['keyword'], [
                 'style' => 'width: 50%;',
             ])}}
         </div>
@@ -22,7 +35,7 @@
                 <option value=""></option>
                 @foreach ($extensions as $ext)
                 <option value="{{$ext}}"
-                    @if ($ext == ($validated['ext'] ?? ''))
+                    @if ($ext == ($validated['ext']))
                         selected
                     @endif
                 >{{$ext}}</option>
@@ -38,17 +51,14 @@
     <div class="vertical-contents">
         <table class="user-managements">
             <tr>
-                @foreach ($headers ?? [] as $value)
+                @foreach ($headers as $value)
                 <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
                 @endforeach
             </tr>
-            @foreach ([] as $file)
+            @foreach ($files as $value)
             <tr>
-                <td>
-                    {{$value['id']}}
-                </td>
                 <td style="text-align: left; padding: 0 5px 0 5px;">
-                    <a href="/managements/freepages/{{$value['id']}}">{{$value['title']}}</a>
+                    <a href="/files/{{$value['filename']}}">{{$value['filename']}}</a>
                 </td>
                 <td>
                     {{str_datetime_format($value['created_at'])}}
@@ -56,21 +66,12 @@
                 <td>
                     {{str_datetime_format($value['updated_at'])}}
                 </td>
-                <td>
-                    @if ($value['status'] == \Status::ENABLED)
-                    <span class="enable">@lang('strings.enable')</span>
-                    @else
-                    <span class="disable">@lang('strings.disable')</span>
-                    @endif
-                </td>
             </tr>
             @endforeach
         </table>
     </div>
 
-    <?php
-    //{!!$files->links('vendor.pagination.semantic-ui')!!}
-    ?>
+    {!!$files->links('vendor.pagination.semantic-ui')!!}
 </div>
 
 @endsection

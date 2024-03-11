@@ -39,23 +39,35 @@ class UploadfilesController extends ManagementsController
      */
     public function index(Request $request)
     {
-        $files = array_map(
-            function($file) {
-                return [
-                    'filename' => $file->getFilename(),
-                    'extension' => $file->getExtension(),
-                    'created_at' => carbon(filectime($file->getPathName())),
-                    'updated_at' => carbon(filemtime($file->getPathName())),
-                ];
-            }, \File::files(storage_path('app/contents/files/'))
-        );
+        $validator = Validator::make([
+            'keyword' => $request->keyword,
+            'ext' => $request->ext,
+            'page' => $request->page,
+            'sort' => $request->sort,
+        ], [
+            'keyword' => 'string|nullable',
+            'ext' => 'nullable|in:' . implode(',', array_values($this->filesService::$extensions)),
+            'page' => 'integer|nullable',
+            'sort' => 'integer|nullable|min:-5|max:5',
+        ]);
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        $validated = $validator->validated();
+
+        $page = $validated['page'] ?? 1;
+        list($files, $headers) = $this->filesService->getFiles(
+            $validated['keyword'], $validated['ext'], $validated['sort']);
+        $files = $this->pager($files, 10, $page, '/managements/uploadfiles/');
 
         $extensions = $this->filesService::$extensions;
-dump($files);
 
         return view('managements.uploadfiles.index', compact(
+            'headers',
             'files',
-            'extensions'
+            'extensions',
+            'validated'
         ));
     }
 
