@@ -54,6 +54,7 @@
                 @foreach ($headers as $value)
                 <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
                 @endforeach
+                <th></th>
             </tr>
             @foreach ($files as $value)
             <tr>
@@ -65,6 +66,9 @@
                 </td>
                 <td>
                     {{str_datetime_format($value['updated_at'])}}
+                </td>
+                <td>
+                    <a href="/managements/files/delete/{{$value['filename']}}">@lang('strings.delete')</a>
                 </td>
             </tr>
             @endforeach
