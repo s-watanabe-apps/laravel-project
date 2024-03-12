@@ -7,6 +7,8 @@
     {{Form::open([
         'url' => '/managements/uploadfiles',
         'method' => 'post',
+        'files' => true,
+        'enctype' => 'multipart/form-data',
     ])}}
     <div class="flex-contents contents-box">
         <div class="upload-item">
@@ -14,6 +16,9 @@
         </div>
         <div class="upload-submit">
             <input type="submit" class="post" value="@lang('strings.upload')" />
+        </div>
+        <div class="text-danger">
+            {{$errors->first('file') ?? ''}}
         </div>
     </div>
     {{Form::close()}}
@@ -68,7 +73,7 @@
                     {{str_datetime_format($value['updated_at'])}}
                 </td>
                 <td>
-                    <a href="/managements/files/delete/{{$value['filename']}}">@lang('strings.delete')</a>
+                    <a href="/managements/uploadfiles/delete/{{$value['filename']}}">@lang('strings.delete')</a>
                 </td>
             </tr>
             @endforeach

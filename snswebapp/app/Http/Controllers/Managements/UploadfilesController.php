@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
 use App\Services\FilesService;
+use App\Http\Requests\UploadFileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -57,11 +58,10 @@ class UploadfilesController extends ManagementsController
         $validated = $validator->validated();
 
         $page = $validated['page'] ?? 1;
-        list($files, $headers) = $this->filesService->getFiles(
-            $validated['keyword'], $validated['ext'], $validated['sort']);
+        list($files, $headers) = $this->filesService->getFiles($validated['keyword'], $validated['ext'], $validated['sort']);
         $files = $this->pager($files, 10, $page, '/managements/uploadfiles/');
 
-        $extensions = $this->filesService::$extensions;
+        $extensions = array_keys($this->filesService::$mineTypes);
 
         return view('managements.uploadfiles.index', compact(
             'headers',
@@ -71,4 +71,14 @@ class UploadfilesController extends ManagementsController
         ));
     }
 
+    public function uploadFile(UploadFileRequest $request)
+    {
+        $validated = $request->validated();
+
+        $file = $validated['file'];
+
+        $file->storeAs('contents/files/', $file->getClientOriginalName());
+        
+        return redirect()->route('managementsUploadfiles');
+    }
 }

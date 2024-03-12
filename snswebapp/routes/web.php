@@ -131,6 +131,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // ファイルアップロード
             Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');
+            Route::post('uploadfiles', 'Managements\UploadfilesController@uploadFile');
         });
     });
 });

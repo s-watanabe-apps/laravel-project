@@ -12,6 +12,12 @@ class FilesService extends Service
         'txt', 'pdf', 'zip',
     ];
 
+    static $mineTypes = [
+        'txt' => 'text/plain',
+        'pdf' => 'application/pdf',
+        'zip' => 'application/zip',
+    ];
+
     public static function getRegex()
     {
         return sprintf(".*[%s]", implode(',', array_map(
