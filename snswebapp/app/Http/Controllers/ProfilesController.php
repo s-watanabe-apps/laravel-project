@@ -70,9 +70,8 @@ class ProfilesController extends Controller
 
         $validated = $validator->validated();
 
-        $page = $validated['page'] ?? 1;
         $profile_users = $this->usersService->getEnabledUsers($validated['keyword'], $validated['group_code']);
-        $profile_users = $this->pager($profile_users, 10, $page, '/members/');
+        $profile_users = $this->pager($profile_users, 10, $validated['page'], '/members/');
         
         $groups = $this->groupsService->all();
 

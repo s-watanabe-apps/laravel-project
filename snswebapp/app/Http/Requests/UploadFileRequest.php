@@ -37,7 +37,7 @@ class UploadFileRequest extends AppFormRequest
     public function attributes()
     {
         return [
-            'file' => __('strings.file_name'),
+            'file' => __('strings.file'),
         ];
     }
 
@@ -49,6 +49,7 @@ class UploadFileRequest extends AppFormRequest
     public function messages()
     {
         return [
+            'mimetypes' => sprintf(__('strings.errors.upload_file_minetypes'), implode(', ', array_keys(FilesService::$mineTypes))),
         ];
     }
 }

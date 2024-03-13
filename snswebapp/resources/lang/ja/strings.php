@@ -95,6 +95,7 @@ return [
     'create_new' => '新規作成',
     'delete_confirm' => '削除確認',
     'send' => '送信',
+    'file' => 'ファイル',
 
     // Information Categories
     'information_categories' => [
@@ -158,6 +159,7 @@ return [
         'unauthorized' => 'この機能を使うためには認証が必要です。',
         'to_admin_message' => '改善しない場合はシステム管理者へ連絡してください。',
         'upload_image_unselected' => 'アップロードするイメージを選択してください。',
+        'upload_file_minetypes' => '扱えるファイルタイプは %s です。',
     ],
 
     'alert_messages' => [

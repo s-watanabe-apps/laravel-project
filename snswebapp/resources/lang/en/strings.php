@@ -96,6 +96,7 @@ return [
     'create_new' => 'Create New',
     'delete_confirm' => 'Delete confirm',
     'send' => 'Send',
+    'file' => 'File',
 
     // Information Marks
     'information_categories' => [
@@ -159,6 +160,7 @@ return [
         'unauthorized' => 'Authentication is required to use this feature.',
         'to_admin_message' => 'If it does not improve, contact your system administrator.',
         'upload_image_unselected' => 'Select an image to upload.',
+        'upload_file_minetypes' => 'File types that can be handled are %s.',
     ],
 
     'alert_messages' => [

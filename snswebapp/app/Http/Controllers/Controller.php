@@ -39,6 +39,8 @@ class Controller extends BaseController
 
     protected function pager($array, $limit, $page, $path)
     {
+        $page = $page ?? 1;
+
         $data = new LengthAwarePaginator(
             array_slice($array, ($page - 1) * $limit, $limit),
             count($array),

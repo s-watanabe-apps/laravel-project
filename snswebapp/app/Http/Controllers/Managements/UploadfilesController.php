@@ -57,9 +57,8 @@ class UploadfilesController extends ManagementsController
 
         $validated = $validator->validated();
 
-        $page = $validated['page'] ?? 1;
         list($files, $headers) = $this->filesService->getFiles($validated['keyword'], $validated['ext'], $validated['sort']);
-        $files = $this->pager($files, 10, $page, '/managements/uploadfiles/');
+        $files = $this->pager($files, 10, $validated['page'], '/managements/uploadfiles/');
 
         $extensions = array_keys($this->filesService::$mineTypes);
 
@@ -71,6 +70,11 @@ class UploadfilesController extends ManagementsController
         ));
     }
 
+    /**
+     * ファイルアップロード.
+     * 
+     * @param App\Http\Requests\UploadFileRequest
+     */
     public function uploadFile(UploadFileRequest $request)
     {
         $validated = $request->validated();
