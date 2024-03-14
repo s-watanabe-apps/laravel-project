@@ -100,18 +100,31 @@ class ArticlesService extends Service
     }
 
     /**
-     * Get latest article headlines for Cache or Database.
+     * ヘッドライン取得.
      * 
-     * @param int $limit = Articles::HEADLINE_LIMIT
+     * @param Carbon $date
      * 
      * @return array<App\Models\Articles>
      */
-    public function getLatestArticles(int $limit = Articles::HEADLINE_LIMIT)
+    public function getLatestArticles($date = null)
     {
-        $cache = $this->remember(parent::CACHE_KEY_LATEST_ARTICLES, function() use($limit) {
+        if (is_null($date)) {
+            $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, carbon()->format('Y-m-d'));
+        } else {
+            $key = sprintf(parent::CACHE_KEY_LATEST_ARTICLES, $date);
+        }
+
+        $cache = $this->remember($key, function() use($date) {
             $builder = $this->base();
+            if (!is_null($date)) {
+                $builder->where('articles.created_at', '<', $date);
+            }
             $builder->where('articles.status', \Status::ENABLED);
-            $data = $builder->orderBy('articles.created_at', 'desc')->limit($limit)->get()->toArray();
+            $data = $builder
+                ->orderBy('articles.created_at', 'desc')
+                ->limit(100)
+                ->get()
+                ->toArray();
             return json_encode($data);
         });
 

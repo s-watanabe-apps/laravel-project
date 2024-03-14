@@ -120,20 +120,19 @@ header .sm {
     min-height: 800px;
 }
 .main > .container {
-    padding-top: 8px;
-    border-bottom: 2px dotted #ddd;
+    padding-top: 1px;
+    border-bottom: 1px dotted #ddd;
 }
 .main > .container:last-child {
     padding-top: 8px;
     border-bottom: none;
 }
 .subject {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: bold;
     word-break: break-all;
-    padding: 10px 0px 6px 0px;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 2px;
+    padding: 12px 0px 6px 0px;
+    border-bottom: 2px solid;
 }
 .body {
     display: flex;
@@ -238,22 +237,16 @@ span.tag {
     font-size: 17px;
     font-weight: bold;
     word-break: break-all;
-    padding-top: 5px;
+    padding: 12px 0 4px 0;
 }
 .side {
     width: 25%;
     padding: 8px;
-    padding-top: 20px;
+    padding-top: 8px;
 }
 .side > .container {
     text-align: center;
-    padding-bottom: 16px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-.side > .container > .title {
-    padding-bottom: 5px;
-    font-weight: bold;
+    padding: 1px 5px 3px 5px;
 }
 .feature-tags {
     line-height: 30px;

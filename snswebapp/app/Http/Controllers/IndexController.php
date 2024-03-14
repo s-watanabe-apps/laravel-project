@@ -79,10 +79,9 @@ class IndexController extends Controller
 
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
-        $page = $validated['page'] ?? 1;
-        $articles = $this->articlesService->getLatestArticles();
-        $articles[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
-        $articles = $this->pager($articles, 10, $page, '/');
+        $articles = $this->articlesService->getLatestArticles(carbon($validated['date']));
+        //$articles[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
+        $articles = $this->pager($articles, 10, $validated['page'], '/');
 
 
         $feature_tags = [];

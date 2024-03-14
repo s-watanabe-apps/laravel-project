@@ -43,5 +43,6 @@
     </div>
 </div>
 @endforeach
+
 {!!$articles->links('vendor.pagination.semantic-ui')!!}
 @endsection
