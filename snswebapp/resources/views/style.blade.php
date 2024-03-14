@@ -237,7 +237,7 @@ span.tag {
     font-size: 17px;
     font-weight: bold;
     word-break: break-all;
-    padding: 12px 0 4px 0;
+    padding: 14px 0 2px 0;
 }
 .side {
     width: 25%;
