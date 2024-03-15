@@ -18,9 +18,10 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('name_kana')->nullable();
             $table->string('password')->nullable();
+            $table->timestamp('password_updated_at')->nullable();
             $table->date('birthdate')->nullable();
             $table->string('group_code', 10)->nullable();
             $table->string('image_file')->nullable();

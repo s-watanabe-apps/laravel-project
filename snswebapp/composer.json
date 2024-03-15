@@ -68,7 +68,8 @@
         ],
 	"db-init": [
 		"php artisan migrate:refresh",
-		"php artisan db:seed"
+		"php artisan db:seed",
+		"php artisan cache:clear"
 	]
     }
 }

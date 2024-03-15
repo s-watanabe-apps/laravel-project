@@ -37,7 +37,7 @@ class MypageController extends Controller
     {
         //dump(request()->ip());
         //dump($request->headers->get('user-agent'));
-        $user = user();
+        $user = user()->toArray();
 
         return view('mypage.index', compact(
             'user'

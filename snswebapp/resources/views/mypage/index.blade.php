@@ -10,7 +10,7 @@
     {{Form::input('text', 'email', $user['email'], ['disabled', 'style' => 'width: 40%;'])}} <span><a href="/mapage/emailchange">変更する</a></span>
 
     <div class="input-label">パスワード最終更新日</div>
-    {{Form::input('text', 'password_updated_at', $user['updated_at'], ['disabled', 'style' => 'width: 40%;'])}} <span><a href="/mapage/passwordchange">変更する</a></span>
+    {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled', 'style' => 'width: 40%;'])}} <span><a href="/mapage/passwordchange">変更する</a></span>
 
     <div class="title">基本情報</div>
     <div class="input-label">@lang('strings.name')</div>
