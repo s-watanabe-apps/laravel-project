@@ -94,7 +94,7 @@ class ProfilesController extends Controller
             return view('404');
         }
 
-        $profiles = $this->usersService->get($request->id);
+        $profiles = $this->usersService->getUser($request->id);
         if ($profiles == null) {
             abort(404);
         }

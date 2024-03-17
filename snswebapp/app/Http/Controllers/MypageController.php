@@ -35,9 +35,7 @@ class MypageController extends Controller
      */
     public function index(Request $request)
     {
-        //dump(request()->ip());
-        //dump($request->headers->get('user-agent'));
-        $user = user()->toArray();
+        $user = $this->usersService->getUser(user()->id);
 
         return view('mypage.index', compact(
             'user'

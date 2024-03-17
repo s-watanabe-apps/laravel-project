@@ -57,7 +57,7 @@ class PasswordResetsService extends Service
      */
     public function sendResetMail(string $email)
     {
-        $user = (new UsersService())->getByEmail($email);
+        $user = (new UsersService())->getUserByEmail($email);
 
         if ($user != null) {
             $expireInMinutes = 30;

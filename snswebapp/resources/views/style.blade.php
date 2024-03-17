@@ -595,6 +595,11 @@ span.disable {
     border-radius: 10px;
 }
 
+/** Mypage */
+.mypage input[type = "text"] {
+    width: 40%;
+}
+
 @media only screen and (max-width:991px) {
     .grid {
         display: grid;

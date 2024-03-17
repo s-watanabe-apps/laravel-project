@@ -7,6 +7,13 @@ use App\Models\Roles;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * ユーザーサービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class UsersService extends Service
 {
     /**
@@ -26,6 +33,47 @@ class UsersService extends Service
             ->leftJoin('groups', 'users.group_code', '=', 'groups.code')
             ->join('roles', 'users.role_id', '=', 'roles.id');
             //->where('users.role_id', '!=', Roles::SYSTEM);
+    }
+
+    /**
+     * ユーザー情報取得.
+     * 
+     * @var int id
+     * @return array
+     */
+    public function getUser($id)
+    {
+        $key = sprintf(parent::CACHE_KEY_USERS_BY_ID, $id);
+
+        $data = $this->remember($key, function() use($id) {
+            $data = $this->base()
+                ->addSelect(['sessions.last_activity'])
+                ->leftJoin('sessions', 'users.id', '=', 'sessions.user_id')
+                ->where('users.id', $id)
+                ->orderBy('sessions.last_activity', 'desc')
+                ->first();
+            
+            if (!$data) {
+                throw new NotFoundException();
+            }
+
+            return json_encode($data);
+        });
+
+        return $data;
+    }
+
+    /**
+     * ユーザー情報取得(by Eメール).
+     * 
+     * @param string email
+     * @return App\Models\Users
+     */
+    public function getUserByEmail($email)
+    {
+        return $this->base()
+            ->where('email', $email)
+            ->first();
     }
 
     /**
@@ -135,47 +183,6 @@ class UsersService extends Service
         );
 
         return [$result->toArray(), $headers];
-    }
-
-    /**
-     * ユーザー情報取得.
-     * 
-     * @var int id
-     * @return array
-     */
-    public function get($id)
-    {
-        $key = sprintf(parent::CACHE_KEY_USERS_BY_ID, $id);
-
-        $data = $this->remember($key, function() use($id) {
-            $data = $this->base()
-                ->addSelect(['sessions.last_activity'])
-                ->leftJoin('sessions', 'users.id', '=', 'sessions.user_id')
-                ->where('users.id', $id)
-                ->orderBy('sessions.last_activity', 'desc')
-                ->first();
-            
-            if (!$data) {
-                throw new NotFoundException();
-            }
-
-            return json_encode($data);
-        });
-
-        return $data;
-    }
-
-    /**
-     * ユーザー取得.
-     * 
-     * @param string email
-     * @return App\Models\Users
-     */
-    public function getByEmail($email)
-    {
-        return $this->base()
-            ->where('email', $email)
-            ->first();
     }
 
     /**
