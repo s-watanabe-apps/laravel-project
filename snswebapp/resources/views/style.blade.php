@@ -766,7 +766,10 @@ table.profiles th {
 .user-menus, .admin-menus, .feature-tags {
     background-color: {{$settings['box_color']}} !important;
 }
-.search-box, .formset-box, .contents-box {
+.contents-box {
+    background-color: {{$settings['th_color']}} !important;
+}
+.search-box, .formset-box {
     background-color: {{$settings['contents_color']}} !important;
 }
 a {

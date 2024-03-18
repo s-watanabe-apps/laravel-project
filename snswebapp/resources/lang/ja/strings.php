@@ -96,6 +96,11 @@ return [
     'delete_confirm' => '削除確認',
     'send' => '送信',
     'file' => 'ファイル',
+    'security' => 'セキュリティ',
+    'change' => '変更する',
+    'account_settings' => 'アカウント設定',
+    'fix_items' => '固定項目',
+    'customize_items' => 'カスタマイズ項目',
 
     // Information Categories
     'information_categories' => [

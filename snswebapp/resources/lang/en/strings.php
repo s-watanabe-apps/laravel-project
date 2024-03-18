@@ -97,6 +97,11 @@ return [
     'delete_confirm' => 'Delete confirm',
     'send' => 'Send',
     'file' => 'File',
+    'security' => 'Security',
+    'change' => 'Change',
+    'account_settings' => 'Account settings',
+    'fix_items' => 'Fixed items',
+    'customize_items' => 'Customized items',
 
     // Information Marks
     'information_categories' => [

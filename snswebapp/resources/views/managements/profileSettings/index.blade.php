@@ -13,6 +13,12 @@
     {{Form::open(['name' => 'form', 'url' => '/managements/profile/settings', 'method' => 'post', 'files' => true])}}
     @csrf
 
+    <div class="title">@lang('strings.fix_items')</div>
+    <div class="contents-box" style="margin-bottom: 0px;">
+        aaaaa
+    </div>
+
+    <div class="title">@lang('strings.customize_items')</div>
     <div id="items">
     @foreach ($profiles as $index => $profile)
         @include('managements.profileSettings.formset', compact('profile'))

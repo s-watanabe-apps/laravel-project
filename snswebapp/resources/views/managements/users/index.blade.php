@@ -3,9 +3,9 @@
 
 <div class="contents">
     <div class="subject">
-        <span><i class="fas fa-fw fa-tools"></i> @lang('strings.user_management')</span>
+        <span><i class="fas fa-fw fa-users"></i> @lang('strings.user_management')</span>
     </div>
-    <div class="contents-header"><a href="/managements/users/add">@lang('strings.add_user')</a></div>
+    <div class="contents-header"><a href="/managements/users/create">@lang('strings.add_user')</a></div>
 
     {{Form::open([
         'name' => 'usersSearch',

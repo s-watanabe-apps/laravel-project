@@ -10,15 +10,22 @@ use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * ユーザー管理コントローラ.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class UsersController extends ManagementsController
 {
-    // Instance variables.
+    // サービス変数.
     private $mailService;
     private $usersService;
     private $groupsService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\MailService
      * @param App\Services\UsersService
@@ -60,9 +67,8 @@ class UsersController extends ManagementsController
 
         $validated = $validator->validated();
 
-        $page = $validated['page'] ?? 1;
         list ($users, $headers) = $this->usersService->getUsersForManagements($validated['keyword'], $validated['group_code'], $validated['sort']);
-        $users = $this->pager($users, 10, $page, '/managements/users/');
+        $users = $this->pager($users, 10, $validated['page'], '/managements/users/');
 
         $groups = $this->groupsService->all();
 
@@ -75,14 +81,14 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * Get create user form.
+     * ユーザー作成フォーム.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
     public function create(Request $request)
     {
-        return view('managements.users.editor');
+        return view('managements.users.create');
     }
 
     /**

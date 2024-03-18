@@ -101,13 +101,13 @@ function initExpand() {
                             </ul>
                             <ul>
                                 <section>@lang('strings.user_management')</section>
-                                <li><a href="/managements/users">@lang('strings.user_management')</a> &gt; <a href="/managements/users/add">@lang('strings.add')</a></li>
+                                <li><a href="/managements/users">@lang('strings.user_management')</a></li>
                                 <li><a href="/managements/groups">@lang('strings.group_management')</a></li>
                                 <li><a href="/managements/profile/settings">@lang('strings.profile_settings')</a></li>
                             </ul>
                             <ul>
                                 <section>@lang('strings.contents_management')</section>
-                                <li><a href="/managements/informations">@lang('strings.informations_management')</a> &gt; <a href="/managements/informations/create">@lang('strings.add')</a></li>
+                                <li><a href="/managements/informations">@lang('strings.informations_management')</a></li>
                                 <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
                                 <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
                             </ul>

@@ -4,14 +4,17 @@
 <div class="contents mypage">
     <div class="subject"><i class="fas fa-seedling"></i> @lang('strings.mypage')</div>
 
-    <div class="title">アカウント設定</div>
-    <div class="input-label">@lang('strings.email')</div>
-    {{Form::input('text', 'email', $user['email'], ['disabled'])}} <span><a href="/mapage/emailchange">変更する</a></span>
+    @include('mypage.formset.account_settings', [
+        'email' => $user['email'],
+        'attributes' => ['disabled'],
+        'change_link' => true,
+    ])
 
-    <div class="input-label">パスワード最終更新日</div>
-    {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled'])}} <span><a href="/mapage/passwordchange">変更する</a></span>
+    <div class="title">@lang('strings.security')</div>
+    <div class="input-label">@lang('strings.password') @lang('strings.updated_at')</div>
+    {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled'])}} <span><a href="/mapage/passwordchange">@lang('strings.change')</a></span>
 
-    <div class="title">基本情報</div>
+    <div class="title">@lang('strings.basic_settings')</div>
     <div class="input-label">@lang('strings.name')</div>
     {{Form::input('text', 'name', $user['name'], ['disabled'])}}
 
