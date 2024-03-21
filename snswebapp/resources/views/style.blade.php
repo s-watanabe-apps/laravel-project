@@ -763,6 +763,9 @@ table th {
 table.profiles th {
     background: {{$settings['background_color']}} !important;
 }
+table td {
+    background: {{$settings['background_color']}} !important;
+}
 .user-menus, .admin-menus, .feature-tags {
     background-color: {{$settings['box_color']}} !important;
 }

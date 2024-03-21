@@ -14,8 +14,29 @@
     @csrf
 
     <div class="title">@lang('strings.fix_items')</div>
-    <div class="contents-box" style="margin-bottom: 0px;">
-        aaaaa
+    <div class="formset-box" style="margin-bottom: 0px;">
+        <table>
+            <tr>
+                <th>項目名</th>
+                <th>有効/無効</th>
+                <th>ユーザー編集</th>
+            </tr>
+            <tr>
+                <td>@lang('strings.email')</td>
+                <td>{{Form::checkbox('is_email_enable')}}</td>
+                <td>{{Form::checkbox('is_email_editable')}}</td>
+            </tr>
+            <tr>
+                <td>@lang('strings.name')</td>
+                <td>{{Form::checkbox('is_name_enable')}}</td>
+                <td>{{Form::checkbox('is_name_editable')}}</td>
+            </tr>
+            <tr>
+                <td>@lang('strings.birth_date')</td>
+                <td>{{Form::checkbox('is_birthdate_enable')}}</td>
+                <td>{{Form::checkbox('is_birthdate_editable')}}</td>
+            </tr>
+        </table>
     </div>
 
     <div class="title">@lang('strings.customize_items')</div>

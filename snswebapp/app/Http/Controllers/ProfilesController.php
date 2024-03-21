@@ -121,7 +121,7 @@ class ProfilesController extends Controller
      */
     public function edit(Request $request)
     {
-        $profiles = $this->usersService->get(user()->id);
+        $profiles = $this->usersService->getUser(user()->id);
 
         $user_profiles = $this->profilesService->getUserProfiles(user()->id);
 
