@@ -41,4 +41,19 @@ class MypageController extends Controller
             'user'
         ));
     }
+
+    /**
+     * パスワード変更画面.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function password(Request $request)
+    {
+        $user = $this->usersService->getUser(user()->id);
+
+        return view('mypage.password', compact(
+            'user'
+        ));
+    }
 }

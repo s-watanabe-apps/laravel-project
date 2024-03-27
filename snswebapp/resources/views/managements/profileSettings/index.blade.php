@@ -15,11 +15,11 @@
 
     <div class="title">@lang('strings.fix_items')</div>
     <div class="formset-box" style="margin-bottom: 0px;">
-        <table>
+        <table style="table-layout: fixed;">
             <tr>
-                <th>項目名</th>
-                <th>有効/無効</th>
-                <th>ユーザー編集</th>
+                <th>@lang('strings.input_type_column_name')</th>
+                <th>@lang('strings.display_flag')</th>
+                <th>@lang('strings.user_editable')</th>
             </tr>
             <tr>
                 <td>@lang('strings.email')</td>

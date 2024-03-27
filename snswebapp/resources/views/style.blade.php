@@ -596,8 +596,9 @@ span.disable {
 }
 
 /** Mypage */
-.mypage input[type = "text"] {
-    width: 40%;
+.mypage input[type = "text"],
+.mypage input[type = "password"] {
+    width: auto;
 }
 
 @media only screen and (max-width:991px) {
@@ -737,7 +738,11 @@ span.disable {
         border: 5px solid transparent;
         border-left: 8px solid #9a9a9a;
     }
-
+    /** Mypage */
+    .mypage input[type = "text"],
+    .mypage input[type = "password"] {
+        width: 95%;
+    }
 }
 
 /** Theme */

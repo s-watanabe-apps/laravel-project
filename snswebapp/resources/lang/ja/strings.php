@@ -101,6 +101,10 @@ return [
     'account_settings' => 'アカウント設定',
     'fix_items' => '固定項目',
     'customize_items' => 'カスタマイズ項目',
+    'user_editable' => 'ユーザー編集',
+    'password_change' => 'パスワード変更',
+    'current_password' => '現在のパスワード',
+    'new_password' => '新しいパスワード',
 
     // Information Categories
     'information_categories' => [

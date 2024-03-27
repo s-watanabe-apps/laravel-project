@@ -30,6 +30,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
         // マイページ
         Route::get('/mypage', 'MypageController@index');
+        Route::get('/mypage/password', 'MypageController@password');
 
         // 記事
         Route::get('/articles', 'ArticlesController@index');

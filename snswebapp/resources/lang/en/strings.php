@@ -102,6 +102,10 @@ return [
     'account_settings' => 'Account settings',
     'fix_items' => 'Fixed items',
     'customize_items' => 'Customized items',
+    'user_editable' => 'Editable',
+    'password_change' => 'Change password',
+    'current_password' => 'Current password',
+    'new_password' => 'New password',
 
     // Information Marks
     'information_categories' => [
