@@ -26,6 +26,12 @@ class CreateSettingsTable extends Migration
             $table->boolean('anonymous_permission')->default(0);
             $table->integer('theme_id')->default(1);
             $table->integer('login_image_id')->default(1);
+            $table->tinyInteger('is_display_email')->default(1);
+            $table->tinyInteger('is_editable_email')->default(1);
+            $table->tinyInteger('is_display_name')->default(1);
+            $table->tinyInteger('is_editable_name')->default(1);
+            $table->tinyInteger('is_display_birthdate')->default(1);
+            $table->tinyInteger('is_editable_birthdate')->default(0);
         });
     }
 

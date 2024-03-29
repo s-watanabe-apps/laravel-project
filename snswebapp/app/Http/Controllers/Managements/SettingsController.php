@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class SettingsController extends ManagementsController
 {
-    // Instance variables.
+    // サービス変数.
     private $profilesService;
     private $headerImagesService;
     private $loginImagesService;
     private $themesService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\SettingsService
      * @param App\Services\HeaderImagesService

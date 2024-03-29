@@ -28,9 +28,15 @@ class ManagementsProfilesRequest extends AppFormRequest
     public function rules()
     {
         return [
+            'is_display_email' => 'in:on',
+            'is_editable_email' => 'in:on',
+            'is_display_name' => 'in:on',
+            'is_editable_name' => 'in:on',
+            'is_display_birthdate' => 'in:on',
+            'is_editable_birthdate' => 'in:on',
             'types' => [
                 'array',
-                Rule::in(array_keys(ProfileInputType::get_types())),
+                Rule::in(array_keys(ProfileInputType::getTypes())),
             ],
             'names' => 'array',
             'names.*' => 'required|max:255',

@@ -23,18 +23,18 @@
             </tr>
             <tr>
                 <td>@lang('strings.email')</td>
-                <td>{{Form::checkbox('is_email_enable')}}</td>
-                <td>{{Form::checkbox('is_email_editable')}}</td>
+                <td>{{Form::checkbox('is_display_email', null, $settings['is_display_email'])}}</td>
+                <td>{{Form::checkbox('is_editable_email', null, $settings['is_editable_email'])}}</td>
             </tr>
             <tr>
                 <td>@lang('strings.name')</td>
-                <td>{{Form::checkbox('is_name_enable')}}</td>
-                <td>{{Form::checkbox('is_name_editable')}}</td>
+                <td>{{Form::checkbox('is_display_name', null, $settings['is_display_name'])}}</td>
+                <td>{{Form::checkbox('is_editable_name', null, $settings['is_editable_name'])}}</td>
             </tr>
             <tr>
                 <td>@lang('strings.birth_date')</td>
-                <td>{{Form::checkbox('is_birthdate_enable')}}</td>
-                <td>{{Form::checkbox('is_birthdate_editable')}}</td>
+                <td>{{Form::checkbox('is_display_birthdate', null, $settings['is_display_birthdate'])}}</td>
+                <td>{{Form::checkbox('is_editable_birthdate', null, $settings['is_editable_birthdate'])}}</td>
             </tr>
         </table>
     </div>

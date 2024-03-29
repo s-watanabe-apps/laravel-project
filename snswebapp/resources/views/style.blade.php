@@ -332,9 +332,9 @@ input#prev, input#next {
     position: relative;
     top: 3px;
 }
-#calendar table td:hover {
+td.calendar_td:hover {
     cursor: pointer;
-    background: #bee9f7;
+    background: #bee9f7 !important;
 } 
 
 /* Weather */

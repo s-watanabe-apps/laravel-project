@@ -29,6 +29,8 @@
 
             <div class="input-label">@lang('strings.group')</div>
             {{Form::input('text', 'group_name', $user['group_name'], ['disabled'])}}
+
+            <div class="grid-contents"><a href="/mypage/profiles">@lang('strings.change')</a></div>
         </div>
     </div>
 </div>

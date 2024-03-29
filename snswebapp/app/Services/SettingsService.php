@@ -38,7 +38,7 @@ class SettingsService extends Service
     }
 
     /**
-     * Save settings.
+     * サイト設定保存.
      * 
      * @param array $params
      * @return App\Models\Settings
@@ -53,7 +53,29 @@ class SettingsService extends Service
     }
 
     /**
-     * Get settings from Cache or Database.
+     * プロフィール固定項目設定保存.
+     * 
+     * @param array $params
+     * @return App\Models\Settings
+     */
+    public function saveProfileFixedItems($params)
+    {
+        $settings = Settings::where('id', 1)->update([
+            'is_display_email' => isset($params['is_display_email']) ? 1 : 0,
+            'is_editable_email' => isset($params['is_editable_email']) ? 1 : 0,
+            'is_display_name' => isset($params['is_display_name']) ? 1 : 0,
+            'is_editable_name' => isset($params['is_editable_name']) ? 1 : 0,
+            'is_display_birthdate' => isset($params['is_display_birthdate']) ? 1 : 0,
+            'is_editable_birthdate' => isset($params['is_editable_birthdate']) ? 1 : 0,
+        ]);
+
+        cache()->forget(parent::CACHE_KEY_SETTINGS);
+
+        return $settings;
+    }
+
+    /**
+     * サイト設定取得.
      * 
      * @return App\Models\Settings
      */
