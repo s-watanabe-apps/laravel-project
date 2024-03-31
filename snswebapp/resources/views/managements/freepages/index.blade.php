@@ -3,7 +3,7 @@
 
 <div class="contents">
     <div class="subject"><i class="fas fa-fw fa-edit"></i> @lang('strings.freepage_management')</div>
-    <div class="contents-header"><a href="/managements/informations/create">@lang('strings.create_new')</a></div>
+    <div class="contents-header"><a href="/managements/freepages/create">@lang('strings.create_new')</a></div>
 
     {{Form::open([
         'name' => 'form',

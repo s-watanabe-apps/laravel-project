@@ -17,10 +17,12 @@
                     <th>@lang('strings.name')&nbsp;:</th>
                     <td>{{$profiles['name']}}</td>
                 </tr>
+                @if ($settings['is_display_email'])
                 <tr>
                     <th>@lang('strings.email')&nbsp;:</th>
                     <td>{{$profiles['email']}}</td>
                 </tr>
+                @endif
                 <tr>
                     <th>@lang('strings.role')&nbsp;:</th>
                     <td>{{__('strings.roles')[$profiles['role_name']]}}</td>
@@ -29,10 +31,12 @@
                     <th>@lang('strings.group')&nbsp;:</th>
                     <td>{{$profiles['group_name'] ?? __('strings.none')}}</td>
                 </tr>
+                @if ($settings['is_display_birthdate'])
                 <tr>
                     <th>@lang('strings.birth_date')&nbsp;:</th>
                     <td>{{str_date_format($profiles['birthdate'])}}</td>
                 </tr>
+                @endif
                 @foreach ($user_profiles as $value)
                     @if ($value['type'] != \App\Libs\ProfileInputType::DESCRIPTION)
                     <tr>

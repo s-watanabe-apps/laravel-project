@@ -62,7 +62,7 @@ class FreepagesController extends ManagementsController
     }
 
     /**
-     * Get free page.
+     * フリーページ確認画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -71,11 +71,11 @@ class FreepagesController extends ManagementsController
     {
         $freePages = $this->freePagesService->get($request->id);
 
-        return view('managements.freepages.edit', compact('freePages'));
+        return view('managements.freepages.view', compact('freePages'));
     }
 
     /**
-     * Get create free page form.
+     * フリーページ新規作成画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View

@@ -99,7 +99,7 @@ class FreePagesService extends Service
      * 
      * @return array
      */
-    public function get_by_id($id)
+    public function get($id)
     {
         return $this->base()
             ->where(['free_pages.id' => $id])
