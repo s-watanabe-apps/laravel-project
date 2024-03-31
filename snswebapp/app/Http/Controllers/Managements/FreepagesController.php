@@ -88,20 +88,17 @@ class FreepagesController extends ManagementsController
     }
 
     /**
-     * Confirmation of input contents.
+     * フリーページ新規作成確認画面.
      * 
      * @param App\Http\Requests\ManagementsFreepagesRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ManagementsFreepagesRequest $request)
+    public function createConfirm(ManagementsFreepagesRequest $request)
     {
-        $freePages = (new FreePages())->bind($request->validated());
+        dump($request->validated());
+        exit;
 
-        $method = $request->method();
-
-        $tabIndex = $request->isPost() ? 1 : 2;
-
-        return view('managements.freepages.confirm', compact('freePages', 'method', 'tabIndex'));
+        return view('managements.freepages.confirm', compact('freePages'));
     }
 
     /**

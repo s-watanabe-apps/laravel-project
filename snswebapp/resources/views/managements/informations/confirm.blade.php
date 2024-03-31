@@ -27,7 +27,7 @@
             {{Form::hidden('id', $informations->id)}}
         @endif
 
-        @include('managements.informations.formset.viewControl', compact('informations', 'informationMark'))
+        @include('managements.informations.formset.viewForm', compact('informations', 'informationMark'))
 
         <a href="javascript:informations.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
             <i class="fas fa-check fa-sm"></i> @lang('strings.save')

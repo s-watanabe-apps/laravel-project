@@ -15,7 +15,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('managements.informations.formset.editor', [])
+    @include('managements.informations.formset.editForm', [])
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.confirm')"></input>

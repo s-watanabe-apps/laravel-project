@@ -16,7 +16,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('managements.informations.formset.viewer', compact('values'))
+    @include('managements.informations.formset.viewForm', compact('values'))
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.save')"></input>

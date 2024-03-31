@@ -7,7 +7,7 @@
         <span>&gt; {{$values['title']}}</span>
     </div>
 
-    @include('managements.informations.formset.viewer', compact('values'))
+    @include('managements.informations.formset.viewForm', compact('values'))
 
     <div class="flex-contents">
         <a href="/managements/informations/edit/{{$values['id']}}">

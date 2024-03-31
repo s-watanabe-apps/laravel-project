@@ -19,7 +19,7 @@
         ])}}
         @csrf
 
-        @include('articles.formset.editControl', compact('articles'))
+        @include('articles.formset.editForm', compact('articles'))
 
         {{Form::hidden('id', $articles->id)}}
         {{Form::close()}}

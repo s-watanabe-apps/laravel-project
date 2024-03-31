@@ -27,7 +27,7 @@
         {{Form::hidden('id', $freePages->id)}}
         
         <!-- Edit Control -->
-        @include('managements.freepages.formset.editControl', compact('freePages'))
+        @include('managements.freepages.formset.editForm', compact('freePages'))
 
         <a href="javascript:informations.submit()" class="btn btn-success shadow-sm btn-edit-cancel-save">
             <i class="fas fa-check fa-sm"></i> @lang('strings.do_confirm')

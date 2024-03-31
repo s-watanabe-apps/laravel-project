@@ -16,7 +16,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('managements.informations.formset.editor', [])
+    @include('managements.informations.formset.editForm', [])
 
     {{Form::hidden('id', $values['id'])}}
 

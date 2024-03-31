@@ -12,7 +12,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('articles.formset.viewControl', compact('validated', 'labels'))
+    @include('articles.formset.viewForm', compact('validated', 'labels'))
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.registration')"></input>

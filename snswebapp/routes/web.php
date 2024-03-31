@@ -125,7 +125,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');
             Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
             Route::get('freepages/create', 'Managements\FreepagesController@create');
-            Route::post('freepages/confirm', 'Managements\FreepagesController@confirm');
+            Route::post('freepages/confirm', 'Managements\FreepagesController@createConfirm');
             Route::post('freepages/register', 'Managements\FreepagesController@register');
             Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
             Route::put('freepages/register', 'Managements\FreepagesController@register');

@@ -8,7 +8,7 @@
         <span>&gt; @lang('strings.delete_confirm')</span>
     </div>
 
-    @include('managements.informations.formset.viewer', compact('values'))
+    @include('managements.informations.formset.viewForm', compact('values'))
 
     <div class="alert-box">
         @lang('strings.alert_messages.delete_confirm')

@@ -12,7 +12,7 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('articles.formset.editor')
+    @include('articles.formset.editForm')
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.confirm')"></input>
