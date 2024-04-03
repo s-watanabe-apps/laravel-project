@@ -59,6 +59,10 @@
     <div class="flex-contents" style="width: 100%";>
         <a href="/profiles/edit"><input type="button" value="@lang('strings.edit')" /></a>
     </div>
+    @else
+    <div class="flex-contents" style="width: 100%";>
+        <a href="/messages/send/{{$profiles['id']}}"><input type="button" class="send" value="@lang('strings.send_message')" /></a>
+    </div>
     @endif
 
     <div class="grid-contents">

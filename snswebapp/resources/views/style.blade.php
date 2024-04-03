@@ -51,7 +51,7 @@ select {
 img {
     border-radius: 5px;
 }
-input.search {
+input.search, input.send {
     background: #0000cd;
     font-weight: bold;
     color: #dddddd;
@@ -164,11 +164,14 @@ header .sm {
     display: flex;
 }
 .contents {
-
+    
 }
 .grid-contents {
     display: flex;
     padding: 10px 0 5px 0;
+}
+.tb-margin {
+    margin: 10px 0 10px 0;
 }
 .vertical-contents {
     display: grid;

@@ -20,7 +20,7 @@
             <div class="input-label">@lang('strings.confirm')</div>
             {{Form::input('password', 'new_password_confirm', '', [])}}
 
-            <div class="flex-contents">
+            <div class="flex-contents tb-margin">
                 <input type="submit" class="post" value="@lang('strings.save')"></input>
                 <a href="javascript:window.history.back();">
                     <input type="button" class="cancel" value="@lang('strings.cancel')"></input>
