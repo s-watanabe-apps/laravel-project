@@ -67,7 +67,8 @@ class UsersController extends ManagementsController
 
         $validated = $validator->validated();
 
-        list ($users, $headers) = $this->usersService->getUsersForManagements($validated['keyword'], $validated['group_code'], $validated['sort']);
+        list ($users, $headers) = $this->usersService->getUsersForManagements(
+            $validated['keyword'], $validated['group_code'], $validated['sort']);
         $users = $this->pager($users, 10, $validated['page'], '/managements/users/');
 
         $groups = $this->groupsService->all();
@@ -92,14 +93,16 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * Confirmation of input contents.
+     * ユーザー追加確認画面.
      * 
      * @param App\Http\Requests\ManagementsUsersRequest
      * @return \Illuminate\View\View
      */
     public function confirm(ManagementsUsersRequest $request)
     {
-        return view('managements.users.viewer', compact('request'));
+        $validated = $request->validated();
+
+        return view('managements.users.createConfirm', compact('validated'));
     }
 
     /**

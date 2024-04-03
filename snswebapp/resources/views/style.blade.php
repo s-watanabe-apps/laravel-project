@@ -491,6 +491,16 @@ table.profiles input, table.profiles select, table.profiles textarea {
     background: #ed9dad;
 }
 
+.info-box {
+    color: #444 !important;
+    font-weight: bold;
+    width: auto;
+    margin: 10px 0 10px 0;
+    padding: 15px;
+    border: 2px solid #0d0 !important;
+    background: #9dedad;
+}
+
 .input-label{
     position: relative;
     padding: 8px 0 3px 16px;

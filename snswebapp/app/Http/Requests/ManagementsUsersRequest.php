@@ -22,7 +22,7 @@ class ManagementsUsersRequest extends AppFormRequest
     {
         return [
             'email' => 'required|email|max:255|unique:users,email',
-            'name' => 'required|max:255',
+            'name' => 'max:255',
         ];
     }
 
