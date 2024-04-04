@@ -23,6 +23,8 @@
                 'attributes' => ['disabled'],
                 'change_link' => false,
             ])
+            {{Form::hidden('email', $validated['email'])}}
+            
             <div class="flex-contents tb-margin">
                 <div class="info-box">
                     @lang('strings.alert_messages.invitation_confirm')
