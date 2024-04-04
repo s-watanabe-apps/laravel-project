@@ -14,7 +14,6 @@
         'files' => false,
         'enctype' => 'multipart/form-data'
     ])}}
-    @csrf
 
     <div class="grid-contents" style="padding: 0px;">
         <div class="vertical-contents w-50">

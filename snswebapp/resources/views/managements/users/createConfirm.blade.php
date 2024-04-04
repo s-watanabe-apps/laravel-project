@@ -15,28 +15,23 @@
         'files' => false,
         'enctype' => 'multipart/form-data'
     ])}}
-    @csrf
 
     <div class="grid-contents" style="padding: 0px;">
         <div class="vertical-contents w-50">
-
             @include('mypage.formset.account_settings', [
                 'email' => $validated['email'],
                 'attributes' => ['disabled'],
                 'change_link' => false,
             ])
-
             <div class="flex-contents tb-margin">
                 <div class="info-box">
                     @lang('strings.alert_messages.invitation_confirm')
                 </div>
-
-                <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+                <input type="submit" class="post" value="@lang('strings.send')"></input>
                 <a href="javascript:window.history.back();">
                     <input type="button" class="cancel" value="@lang('strings.return')"></input>
                 </a>
             </div>
-
         </div>
     </div>
 

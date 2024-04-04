@@ -106,13 +106,16 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * Register input information.
+     * ユーザー情報保存処理.
      * 
      * @param App\Http\Requests\ManagementsUsersRequest
      * @return Illuminate\View\View
      */
-    public function register(ManagementsUsersRequest $request)
+    public function save(ManagementsUsersRequest $request)
     {
+        dump($request->isPost());
+        exit;
+
         \DB::transaction(function() use ($request) {
             $users = $this->usersService->save([
                 'role_id' => Roles::MEMBER,
