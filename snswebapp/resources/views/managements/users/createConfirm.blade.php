@@ -10,7 +10,7 @@
 
     {{Form::open([
         'name' => 'form',
-        'url' => '/managements/users/save',
+        'url' => '/managements/users/sendmail',
         'method' => 'post',
         'files' => false,
         'enctype' => 'multipart/form-data'

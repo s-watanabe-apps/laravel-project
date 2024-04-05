@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Managements;
 
-use App\Models\Roles;
 use App\Services\MailService;
 use App\Services\UsersService;
 use App\Services\GroupsService;
@@ -106,6 +105,25 @@ class UsersController extends ManagementsController
     }
 
     /**
+     * 招待メール送信.
+     * 
+     * @param App\Http\Requests\ManagementsUsersRequest
+     * @return Illuminate\View\View
+     */
+    public function sendmail(ManagementsUsersRequest $request)
+    {
+        $validated = $request->validated();
+
+        \DB::transaction(function() use ($validated) {
+            $users = $this->usersService->save($validated);
+
+            //$this->mailService->sendInvitationMail($users);
+        });
+
+        exit;
+    }
+
+    /**
      * ユーザー情報保存処理.
      * 
      * @param App\Http\Requests\ManagementsUsersRequest
@@ -123,7 +141,7 @@ class UsersController extends ManagementsController
                 'name' => $request->name,
             ]);
 
-            $this->mailService->sendInvitationMail($users);
+            //$this->mailService->sendInvitationMail($users);
         });
 
         exit;

@@ -246,17 +246,18 @@ class UsersService extends Service
     }
 
     /**
-     * Save users.
+     * ユーザー情報保存.
      * 
      * @param array
      * @param int
      * @return App\Models\Users
      */
-/*
     public function save($values, $id = null)
     {
         if ($id == null) {
-            $users = (new Users())->bind($values);
+            $users = new Users();
+            $users->email = $values['email'];
+            $users->role_id = Roles::MEMBER;
             $users->save();
             return $users;
         } else {
@@ -264,5 +265,4 @@ class UsersService extends Service
             return $this->get($id);
         }
     }
-*/
 }

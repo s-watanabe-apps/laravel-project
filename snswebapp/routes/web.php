@@ -97,7 +97,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
             Route::get('users/create', 'Managements\UsersController@create');
             Route::post('users/confirm', 'Managements\UsersController@confirm');
-            Route::post('users/save', 'Managements\UsersController@save');
+            Route::post('users/sendmail', 'Managements\UsersController@sendmail');
 
             // グループ管理
             Route::get('groups', 'Managements\GroupsController@index')->name('managementsGroups');
