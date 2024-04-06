@@ -121,7 +121,11 @@ class InformationsService extends Service
         // ヘッダー生成
         $headers = array_map(function($key, $value) use($query_string, $sortkey) {
                 return [
-                    'name' => $value['header_name'] . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'name' => $value['header_name'] . (
+                        $sortkey == $key ?
+                        parent::SORTED_ASC :
+                        ($sortkey == -$key ? parent::SORTED_DESC : '')
+                    ),
                     'link' => "/managements/informations?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
                 ];
             },

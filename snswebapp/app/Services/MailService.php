@@ -7,6 +7,13 @@ use App\Services\SettingsService;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * メール送信サービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class MailService extends Service
 {
     /**
@@ -29,19 +36,20 @@ class MailService extends Service
      */
     public function sendInvitationMail($users)
     {
-        $settings = (new SettingsService())->get();
+        $settings = settings();
 
         $expireInHours = env('PASSWORD_RESET_EXPIRE_IN_HOURW', 24);
-        $token = (new PasswordResets())->issue($users, 60 * $expireInHours);
+        $token = (new PasswordResetsService())->issue($users, 60 * $expireInHours);
         $encryptToken = Crypt::encryptString($users->email . ',' . $token);
 
         $data = [
             'name' => $users->name,
+            'email' => $users->email,
             'token' => $encryptToken,
             'expire_in' => $expireInHours . __('strings.expire_in_hours'),
         ];
 
-        $subject = sprintf("[%s] %s", $settings->site_name, __('strings.invitation'));
+        $subject = sprintf("[%s] %s", $settings['site_name'], __('strings.invitation'));
         $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
 
         $this->sendMail($users->email, new ContactMail($subject, $template, $data));

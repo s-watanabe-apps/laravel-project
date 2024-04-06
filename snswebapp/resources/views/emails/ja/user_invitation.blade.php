@@ -1,6 +1,6 @@
-{{$name}}さん<br>
+{{$name ?? $email}}さん<br>
 <br>
-{{$settings->site_name}} への招待状です。<br>
+{{$settings['site_name']}} への招待状です。<br>
 以下のリンクをクリックし、ユーザー登録を完了してください。<br>
 <br>
 <a href="{{env('APP_URL')}}/hogehoge?token={{$token}}">{{env('APP_URL')}}/hogehoge?token={{$token}}</a><br>

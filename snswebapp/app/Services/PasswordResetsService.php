@@ -36,7 +36,7 @@ class PasswordResetsService extends Service
             ->where('email', $user->email)
             ->delete();
 
-        $expireInMinutes = 30;
+        //$expireInMinutes = 30;
         $token = Str::random(32);
 
         (new PasswordResets())->forceFill([

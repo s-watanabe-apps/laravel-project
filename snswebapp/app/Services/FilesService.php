@@ -101,7 +101,11 @@ class FilesService extends Service
         // ヘッダー生成
         $headers = array_map(function($key, $value) use($query_string, $sortkey) {
                 return [
-                    'name' => $value . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'name' => $value . (
+                        $sortkey == $key ?
+                        parent::SORTED_ASC :
+                        ($sortkey == -$key ? parent::SORTED_DESC : '')
+                    ),
                     'link' => "/managements/uploadfiles?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
                 ];
             },

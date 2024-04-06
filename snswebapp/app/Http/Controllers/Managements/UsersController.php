@@ -105,7 +105,7 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * 招待メール送信.
+     * ユーザー登録＋招待メール送信.
      * 
      * @param App\Http\Requests\ManagementsUsersRequest
      * @return Illuminate\View\View
@@ -117,14 +117,14 @@ class UsersController extends ManagementsController
         \DB::transaction(function() use ($validated) {
             $users = $this->usersService->save($validated);
 
-            //$this->mailService->sendInvitationMail($users);
+            $this->mailService->sendInvitationMail($users);
         });
 
-        exit;
+        return redirect()->route('managementsUsers');
     }
 
     /**
-     * ユーザー情報保存処理.
+     * ユーザー更新.
      * 
      * @param App\Http\Requests\ManagementsUsersRequest
      * @return Illuminate\View\View
@@ -141,7 +141,7 @@ class UsersController extends ManagementsController
                 'name' => $request->name,
             ]);
 
-            //$this->mailService->sendInvitationMail($users);
+            $this->mailService->sendInvitationMail($users);
         });
 
         exit;

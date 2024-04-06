@@ -23,6 +23,9 @@ class Service
     const CACHE_KEY_ARTICLE_MONTHS_BY_USER_ID = 'article-months-user-%d';
     const CACHE_KEY_WEATHERS = 'wethers-%s-%s';
     
+    const SORTED_ASC = '▲';
+    const SORTED_DESC = '▼';
+
     /**
      * Cache remember.
      * 

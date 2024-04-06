@@ -51,13 +51,13 @@
                     {{$value['id']}}
                 </td>
                 <td style="text-align: left; padding: 0 5px 0 5px;">
+                    <a href="/managements/users/{{$value['id']}}">{{$value['email']}}</a>
+                </td>
+                <td style="text-align: left; padding: 0 5px 0 5px;">
                     <a href="/managements/users/{{$value['id']}}">{{$value['name']}}</a>
                 </td>
                 <td>
                     {{$value['group_name'] ?? __('strings.none')}}
-                </td>
-                <td>
-                    {{str_date_format($value['created_at'])}}
                 </td>
                 <td>
                     {{str_date_format($value['last_activity'])}}

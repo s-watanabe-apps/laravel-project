@@ -121,16 +121,16 @@ class UsersService extends Service
                 'header_name' => __('strings.id')
             ],
             2 => [
+                'sortkey' => 'users.email',
+                'header_name' => __('strings.email'),
+            ],
+            3 => [
                 'sortkey' => 'users.name',
                 'header_name' => __('strings.name'),
             ],
-            3 => [
+            4 => [
                 'sortkey' => 'users.group_code',
                 'header_name' => __('strings.group'),
-            ],
-            4 => [
-                'sortkey' => 'users.created_at',
-                'header_name' => __('strings.created_at'),
             ],
             5 => [
                 'sortkey' => 'sessions.last_activity',
@@ -151,7 +151,10 @@ class UsersService extends Service
 
         if (!is_null($keyword)) {
             $like_keyword = '%' . addcslashes($keyword, '%_\\') . '%';
-            $query->where('users.name', 'like', $like_keyword);
+            $query->where(function($sub) use($like_keyword) {
+                $sub->where('users.email', 'like', $like_keyword)
+                    ->orWhere('users.name', 'like', $like_keyword);
+            });
         }
 
         if (!is_null($group_code) && $group_code != '0') {
@@ -174,7 +177,11 @@ class UsersService extends Service
         // ヘッダー生成
         $headers = array_map(function($key, $value) use($query_string, $sortkey) {
                 return [
-                    'name' => $value['header_name'] . ($sortkey == $key ? '▲' : ($sortkey == -$key ? '▼' : '')),
+                    'name' => $value['header_name'] . (
+                        $sortkey == $key ?
+                        parent::SORTED_ASC :
+                        ($sortkey == -$key ? parent::SORTED_DESC : '')
+                    ),
                     'link' => "/managements/users?{$query_string}&sort=" . ($sortkey == $key ? -$sortkey : $key),
                 ];
             },
