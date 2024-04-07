@@ -84,11 +84,10 @@
     {{Form::close()}}
 </div>
 
-<!-- Toast -->
 @if (Session::get('result') == 1)
 <script>
 window.onload = function() {
-    alert('更新しました。');
+    alert("@lang('strings.alert_messages.saved_settings')");
 }
 </script>
 @endif

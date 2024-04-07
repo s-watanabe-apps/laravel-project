@@ -58,15 +58,19 @@ class SettingsService extends Service
      * @param array $params
      * @return App\Models\Settings
      */
-    public function saveProfileFixedItems($params)
+    public function saveProfileFixedSettings($params)
     {
         $settings = Settings::where('id', 1)->update([
-            'is_display_email' => isset($params['is_display_email']) ? 1 : 0,
-            'is_editable_email' => isset($params['is_editable_email']) ? 1 : 0,
-            'is_display_name' => isset($params['is_display_name']) ? 1 : 0,
-            'is_editable_name' => isset($params['is_editable_name']) ? 1 : 0,
-            'is_display_birthdate' => isset($params['is_display_birthdate']) ? 1 : 0,
-            'is_editable_birthdate' => isset($params['is_editable_birthdate']) ? 1 : 0,
+            'profile_fixed_settings' => bindec(
+                (isset($params['is_display_email']) ? '1' : '0') .
+                (isset($params['is_editable_email']) ? '1' : '0') .
+                (isset($params['is_display_name']) ? '1' : '0') .
+                (isset($params['is_editable_name']) ? '1' : '0') .
+                (isset($params['is_display_birthdate']) ? '1' : '0') .
+                (isset($params['is_editable_birthdate']) ? '1' : '0') .
+                (isset($params['is_display_group']) ? '1' : '0') .
+                (isset($params['is_editable_group']) ? '1' : '0')
+            )
         ]);
 
         cache()->forget(parent::CACHE_KEY_SETTINGS);
@@ -83,6 +87,15 @@ class SettingsService extends Service
     {
         $data = $this->remember(parent::CACHE_KEY_SETTINGS, function() {
             $data = $this->base()->first();
+            $profileFixedSettings = str_split(sprintf("%02d", decbin($data->profile_fixed_settings)));
+            $data->is_display_email = $profileFixedSettings[0];
+            $data->is_editable_email = $profileFixedSettings[1];
+            $data->is_display_name = $profileFixedSettings[2];
+            $data->is_editable_name = $profileFixedSettings[3];
+            $data->is_display_birthdate = $profileFixedSettings[4];
+            $data->is_editable_birthdate = $profileFixedSettings[5];
+            $data->is_display_group = $profileFixedSettings[6];
+            $data->is_editable_group = $profileFixedSettings[7];
             return json_encode($data);
         });
 

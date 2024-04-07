@@ -34,6 +34,8 @@ class ManagementsProfilesRequest extends AppFormRequest
             'is_editable_name' => 'in:on',
             'is_display_birthdate' => 'in:on',
             'is_editable_birthdate' => 'in:on',
+            'is_display_group' => 'in:on',
+            'is_editable_group' => 'in:on',
             'types' => [
                 'array',
                 Rule::in(array_keys(ProfileInputType::getTypes())),

@@ -88,7 +88,11 @@ class UsersController extends ManagementsController
      */
     public function create(Request $request)
     {
-        return view('managements.users.create');
+        $groups = $this->groupsService->all();
+
+        return view('managements.users.create', compact(
+            'groups'
+        ));
     }
 
     /**

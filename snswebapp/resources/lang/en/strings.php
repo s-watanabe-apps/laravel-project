@@ -175,6 +175,7 @@ return [
     'alert_messages' => [
         'delete_confirm' => 'This operation cannot be undone. Do you really want to delete this?',
         'invitation_confirm' => 'Are you sure you want to send an invitation email to this address?',
+        'saved_settings' => 'Saved the settings.',
     ],
     
     // Roles

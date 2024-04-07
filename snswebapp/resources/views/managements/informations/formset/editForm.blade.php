@@ -52,5 +52,5 @@ window.addEventListener("load", function() {
     });
 });
 
-$.datetimepicker.setLocale('ja');
+$.datetimepicker.setLocale('{{\App::getLocale()}}');
 </script>

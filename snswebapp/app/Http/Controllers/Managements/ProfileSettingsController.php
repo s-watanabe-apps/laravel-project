@@ -59,11 +59,12 @@ class ProfileSettingsController extends ManagementsController
         $validated = $request->validated();
 
         \DB::transaction(function() use ($validated) {
-            $this->settingsService->saveProfileFixedItems($validated);
+            $this->settingsService->saveProfileFixedSettings($validated);
         });
 
-        echo "<pre>";
-        var_dump($request->validated());
-        exit;
+        //var_dump($request->validated());
+        //exit;
+
+        return redirect()->route('managementsProfileSettings')->with('result', 1);
     }
 }

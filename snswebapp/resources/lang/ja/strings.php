@@ -174,6 +174,7 @@ return [
     'alert_messages' => [
         'delete_confirm' => 'この操作は取り消すことができません。本当に削除しますか？',
         'invitation_confirm' => 'この宛先に招待メールを送信してよいですか？',
+        'saved_settings' => '設定を保存しました。',
     ],
 
     // Roles

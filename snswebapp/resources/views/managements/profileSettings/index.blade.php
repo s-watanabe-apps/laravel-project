@@ -36,6 +36,11 @@
                 <td>{{Form::checkbox('is_display_birthdate', null, $settings['is_display_birthdate'])}}</td>
                 <td>{{Form::checkbox('is_editable_birthdate', null, $settings['is_editable_birthdate'])}}</td>
             </tr>
+            <tr>
+                <td>@lang('strings.group')</td>
+                <td>{{Form::checkbox('is_display_group', null, $settings['is_display_group'])}}</td>
+                <td>{{Form::checkbox('is_editable_group', null, $settings['is_editable_group'])}}</td>
+            </tr>
         </table>
     </div>
 
@@ -65,15 +70,6 @@
     </a>
 </div>
 
-<!-- Toast -->
-@if (Session::get('result') == 1)
-<script>
-window.onload = function() {
-    alert('更新しました。');
-}
-</script>
-@endif
-
 <script>
 $(document).on('click', 'button#btn-add', function(){
     $("div#items").append($("#formset").children().clone(true));
@@ -93,5 +89,13 @@ $(document).on('change', 'select#type', function(){
     }
 });
 </script>
+
+@if (Session::get('result') == 1)
+<script>
+window.onload = function() {
+    alert("@lang('strings.alert_messages.saved_settings')");
+}
+</script>
+@endif
 
 @endsection

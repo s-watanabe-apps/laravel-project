@@ -24,6 +24,13 @@
                 'change_link' => false,
             ])
 
+            @include('mypage.formset.basic_settings', [
+                'user' => [],
+                'attributes' => [],
+                'change_link' => false,
+                'groups' => $groups,
+            ])
+
             <div class="flex-contents tb-margin">
                 <input type="submit" class="post" value="@lang('strings.confirm')"></input>
                 <a href="/managements/users">
