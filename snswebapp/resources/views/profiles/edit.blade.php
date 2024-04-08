@@ -32,7 +32,7 @@
         </div>
 
         <div class="w-75">
-            <table class="profiles">
+            <table class="info">
                 <tr>
                     <th>@lang('strings.name')&nbsp;:</th>
                     <td>

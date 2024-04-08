@@ -16,34 +16,42 @@ use App\Libs\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * 記事コントローラ.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class ArticlesController extends Controller
 {
-    // Instance variables.
+    // サービス変数.
+    private $articlesService;
     private $articleCommentsService;
     private $articleLabelsService;
-    private $articlesService;
     private $labelsService;
     private $usersService;
 
     /**
      * コンストラクタ.
      *
+     * @param App\Services\ArticlesService
      * @param App\Services\ArticleCommentsService
      * @param App\Services\ArticleLabelsService
-     * @param App\Services\ArticlesService
+     * @param App\Services\LabelsService
      * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
+        ArticlesService $articlesService,
         ArticleCommentsService $articleCommentsService,
         ArticleLabelsService $articleLabelsService,
-        ArticlesService $articlesService,
         LabelsService $labelsService,
         UsersService $usersService
     ) {
+        $this->articlesService = $articlesService;
         $this->articleCommentsService = $articleCommentsService;
         $this->articleLabelsService = $articleLabelsService;
-        $this->articlesService = $articlesService;
         $this->labelsService = $labelsService;
         $this->usersService = $usersService;
     }
@@ -100,7 +108,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * 記事取得.
+     * 記事確認画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View

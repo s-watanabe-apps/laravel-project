@@ -105,7 +105,7 @@ class ProfilesController extends Controller
 
         $user_profiles = $this->profilesService->getUserProfiles($request->id);
 
-        return view('profiles.viewer', compact(
+        return view('profiles.view', compact(
             'profiles',
             'user_profiles',
             'articles',
@@ -127,7 +127,7 @@ class ProfilesController extends Controller
 
         $choices = $this->profilesService->getProfileChoicesHash();
 
-        return view('profiles.editor', compact(
+        return view('profiles.edit', compact(
             'profiles',
             'user_profiles',
             'choices'

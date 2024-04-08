@@ -395,13 +395,13 @@ table td {
 }
 
 /* Profiles Table */
-table.profiles {
+table.info {
     width: 100%;
     border: 0px;
     border-spacing: 0;
     border-collapse: collapse;
 }
-table.profiles th {
+table.info th {
     width: 10%;
     font-weight: bold;
     border: 0px;
@@ -411,11 +411,11 @@ table.profiles th {
     font-size: 14px;
     white-space: nowrap;
 }
-table.profiles td {
+table.info td {
     border: 0px;
     text-align: left;
 }
-table.profiles input, table.profiles select, table.profiles textarea {
+table.info input, table.info select, table.info textarea {
     margin: 1px;
     width: auto;
 }
@@ -736,16 +736,16 @@ span.disable {
     .flex-contents > .search-submit {
         width: 100%;
     }
-    table.profiles th, table.profiles td{
+    table.info th, table.info td{
       display: block;
     }
-    table.profiles th{
+    table.info th{
         position: relative;
         padding: 5px 0 3px 16px;
         font-weight: bold;
         font-size: 14px;
     }
-    table.profiles th::before{
+    table.info th::before{
         content: "";
         position: absolute;
         top: 50%;
@@ -784,7 +784,7 @@ table th:not(.xdsoft_calendar > table th) {
 table td:not(.xdsoft_calendar > table td) {
     background: {{$settings['background_color']}} !important;
 }
-table.profiles th {
+table.info th {
     background: {{$settings['background_color']}} !important;
 }
 .user-menus, .admin-menus, .feature-tags {
