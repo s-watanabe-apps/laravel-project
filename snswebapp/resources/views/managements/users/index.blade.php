@@ -72,9 +72,10 @@
             </tr>
             @endforeach
         </table>
+
+        {!!$users->links('vendor.pagination.semantic-ui')!!}
     </div>
 
-    {!!$users->links('vendor.pagination.semantic-ui')!!}
 </div>
 
 @endsection

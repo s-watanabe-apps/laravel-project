@@ -78,9 +78,10 @@
             </tr>
             @endforeach
         </table>
+
+        {!!$files->links('vendor.pagination.semantic-ui')!!}
     </div>
 
-    {!!$files->links('vendor.pagination.semantic-ui')!!}
 </div>
 
 @endsection

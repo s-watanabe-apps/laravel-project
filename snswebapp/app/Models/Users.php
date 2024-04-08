@@ -51,7 +51,7 @@ class Users extends Authenticatable
         ];
     }
 
-    public function is_admin()
+    public function isAdmin()
     {
         return $this->role_id == Roles::ADMIN;
     }

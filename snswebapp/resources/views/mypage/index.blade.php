@@ -9,20 +9,21 @@
             @include('mypage.formset.account_settings', [
                 'email' => $user['email'],
                 'attributes' => ['disabled'],
-                'change_link' => true,
+                'change_link' => '/mypage/account',
             ])
-
-            <div class="title">@lang('strings.security')</div>
-            <div class="input-label">@lang('strings.password') @lang('strings.updated_at')</div>
-            {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled'])}}
-            <div class="grid-contents"><a href="/mypage/password">@lang('strings.change')</a></div>
 
             @include('mypage.formset.basic_settings', [
                 'user' => $user,
                 'attributes' => ['disabled'],
-                'change_link' => true,
+                'change_link' => '/mypage/basic',
             ])
 
+        </div>
+        <div class="vertical-contents w-50">
+            <div class="title">@lang('strings.security')</div>
+            <div class="input-label">@lang('strings.password') @lang('strings.updated_at')</div>
+            {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled'])}}
+            <div class="grid-contents"><a href="/mypage/password">@lang('strings.change')</a></div>
         </div>
     </div>
 </div>

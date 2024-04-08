@@ -70,10 +70,8 @@
             </tr>
             @endforeach
         </table>
+        {!!$freePages->links('vendor.pagination.semantic-ui')!!}
     </div>
-
-    
-    {!!$freePages->links('vendor.pagination.semantic-ui')!!}
 </div>
 
 @endsection

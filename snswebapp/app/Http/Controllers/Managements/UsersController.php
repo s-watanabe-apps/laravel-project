@@ -105,7 +105,9 @@ class UsersController extends ManagementsController
     {
         $validated = $request->validated();
 
-        return view('managements.users.createConfirm', compact('validated'));
+        return view('managements.users.createConfirm', compact(
+            'validated'
+        ));
     }
 
     /**
@@ -128,27 +130,18 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * ユーザー更新.
+     * ユーザー取得.
      * 
-     * @param App\Http\Requests\ManagementsUsersRequest
+     * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
-    public function save(ManagementsUsersRequest $request)
+    public function get(Request $request)
     {
-        dump($request->isPost());
-        exit;
+        $user = $this->usersService->getUser($request->id);
 
-        \DB::transaction(function() use ($request) {
-            $users = $this->usersService->save([
-                'role_id' => Roles::MEMBER,
-                'email' => $request->email,
-                'name' => $request->name,
-            ]);
-
-            $this->mailService->sendInvitationMail($users);
-        });
-
-        exit;
+        return view('managements.users.view', compact(
+            'user'
+        ));
     }
 
 }

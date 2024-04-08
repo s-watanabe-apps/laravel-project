@@ -176,6 +176,7 @@ header .sm {
 .vertical-contents {
     display: grid;
     padding: 5px 0 5px 0;
+    height: 0;
 }
 .contents-header {
     font-size: 14px;
@@ -599,12 +600,12 @@ span.enable {
     border-radius: 10px;
 }
 span.disable {
-    background: #ee1111;
+    background: #979797;
     color: #efefef;
     font-weight: bold;
     font-size: 14px;
     padding: 0 4px 0 4px;
-    border-bottom: 2px solid #990000;
+    border-bottom: 2px solid #565656;
     border-radius: 10px;
 }
 
@@ -706,6 +707,9 @@ span.disable {
     .grid-contents {
         display: grid;
     }
+    .grid-contents > div {
+        display: table;
+    }
     .w-25 {
         width: auto;
         text-align: center;
@@ -732,7 +736,6 @@ span.disable {
     .flex-contents > .search-submit {
         width: 100%;
     }
-
     table.profiles th, table.profiles td{
       display: block;
     }
@@ -772,16 +775,16 @@ header {
     border-left:1px solid {{$settings['border_color']}} !important;
     border-right:1px solid {{$settings['border_color']}} !important;
 }
-div, table, th, td, ul {
+div, table, td, ul, th:not(.xdsoft_calendar > table) {
     border-color: {{$settings['border_color']}} !important;
 }
-table th {
-    background: {{$settings['th_color']}} !important;
+table th:not(.xdsoft_calendar > table th) {
+    background: {{$settings['th_color']}};
 }
-table.profiles th {
+table td:not(.xdsoft_calendar > table td) {
     background: {{$settings['background_color']}} !important;
 }
-table td {
+table.profiles th {
     background: {{$settings['background_color']}} !important;
 }
 .user-menus, .admin-menus, .feature-tags {

@@ -15,7 +15,7 @@
             <table class="profiles">
                 <tr>
                     <th>@lang('strings.name')&nbsp;:</th>
-                    <td>{{$profiles['name']}}</td>
+                    <td><ruby>{{$profiles['name']}}</ruby></td>
                 </tr>
                 @if ($settings['is_display_email'])
                 <tr>

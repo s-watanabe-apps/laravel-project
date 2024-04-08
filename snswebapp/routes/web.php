@@ -95,6 +95,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // ユーザー管理
             Route::get('users', 'Managements\UsersController@index')->name('managementsUsers');
+            Route::get('users/{id}', 'Managements\UsersController@get')->where('id', '[0-9]+');
             Route::get('users/create', 'Managements\UsersController@create');
             Route::post('users/confirm', 'Managements\UsersController@confirm');
             Route::post('users/sendmail', 'Managements\UsersController@sendmail');
