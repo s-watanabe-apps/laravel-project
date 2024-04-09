@@ -105,6 +105,7 @@ return [
     'password_change' => 'パスワード変更',
     'current_password' => '現在のパスワード',
     'new_password' => '新しいパスワード',
+    'author' => '著者',
 
     // Information Categories
     'information_categories' => [

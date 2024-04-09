@@ -118,7 +118,7 @@ class ArticlesController extends Controller
         $articles = $this->articlesService->get($request->id);
 
         $comments = $this->articleCommentsService->getByArticleId($articles['id']);
-dump($comments);
+
         $labels = $this->articleLabelsService->getByArticleId($request->id);
 
         return view('articles.view', compact(

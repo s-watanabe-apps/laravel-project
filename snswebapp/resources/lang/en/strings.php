@@ -106,6 +106,7 @@ return [
     'password_change' => 'Change password',
     'current_password' => 'Current password',
     'new_password' => 'New password',
+    'author' => 'Author',
 
     // Information Marks
     'information_categories' => [
