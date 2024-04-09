@@ -34,7 +34,8 @@ class ArticleCommentsService extends Service
         return $this->base()
             ->where('article_comments.article_id', $id)
             ->orderByRaw('article_comments.created_at asc')
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     /**

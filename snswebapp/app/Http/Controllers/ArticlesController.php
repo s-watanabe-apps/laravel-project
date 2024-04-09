@@ -117,19 +117,19 @@ class ArticlesController extends Controller
     {
         $articles = $this->articlesService->get($request->id);
 
-        $articleComments = $this->articleCommentsService->getByArticleId($articles['id']);
-
+        $comments = $this->articleCommentsService->getByArticleId($articles['id']);
+dump($comments);
         $labels = $this->articleLabelsService->getByArticleId($request->id);
 
         return view('articles.view', compact(
             'articles',
-            'articleComments',
+            'comments',
             'labels'
         ));
     }
 
     /**
-     * 記事作成.
+     * 記事作成画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -140,7 +140,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Edit an article.
+     * 記事修正画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -168,7 +168,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Posting an article.
+     * 記事保存処理.
      * 
      * @param App\Http\Requests\ArticlesRequest
      * @return void
@@ -187,7 +187,7 @@ class ArticlesController extends Controller
     }
 
     /**
-     * Post picture comment.
+     * コメント投稿.
      * 
      * @param App\Http\Requests\CommentRequest
      */

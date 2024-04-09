@@ -218,7 +218,7 @@ header .sm {
 }
 
 span.tag {
-    border:2px solid;
+    border:2px solid #dedede;
     border-radius: 15px;
     padding-left: 5px;
     padding-right: 5px;
@@ -226,7 +226,7 @@ span.tag {
     margin-right: 2px;
     font-size: 14px;
     font-weight: bold;
-    color: #565656;
+    color: #898989;
     white-space: nowrap;
 }
 .pagination {
@@ -255,8 +255,14 @@ span.tag {
 .feature-tags {
     line-height: 30px;
     text-align: center;
-    border: 1px solid #bbb;
+    border: 1px solid #bbbbbb;
     padding: 5px 3px 5px 3px;
+}
+.article-tags {
+    line-height: 30px;
+    text-align: left;
+    border: 1px solid #bbbbbb;
+    padding: 5px 6px 5px 6px;
 }
 span.ad {
     background: #dedede;
@@ -541,7 +547,9 @@ table.info input, table.info select, table.info textarea {
 }
 .articles-body {
     padding: 10px 4px 10px 4px;
-    border-bottom: 1px dotted #acacac;
+    border-bottom: 2px dotted #acacac;
+    padding-top: 0px;
+    margin-bottom: 10px;
 }
 
 /* User Menus */
@@ -607,6 +615,18 @@ span.disable {
     padding: 0 4px 0 4px;
     border-bottom: 2px solid #565656;
     border-radius: 10px;
+}
+
+.comment {
+    margin: 0 0 6px 0;
+    padding: 0 0 4px 0;
+    border-bottom: 1px solid #baba99;
+}
+textarea[name="comment"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    resize:vertical;
 }
 
 /** Mypage */
@@ -788,7 +808,7 @@ table.info th {
     background: {{$settings['background_color']}} !important;
 }
 .user-menus, .admin-menus, .feature-tags {
-    background-color: {{$settings['box_color']}} !important;
+    background-color: {{$settings['box_color']}}88 !important;
 }
 .contents-box {
     background-color: {{$settings['th_color']}} !important;

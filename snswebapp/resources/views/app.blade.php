@@ -178,7 +178,7 @@ function initExpand() {
                     <div class="title">@lang('strings.feature_tags')</div>
                     <div class="feature-tags">
                         @foreach($feature_tags as $tag)
-                        <a href="/{{$lang}}/?tag={{$tag['value']}}"><span class="tag" style="border-color: {{$tag['frame_color']}}; background: {{$tag['body_color']}}">{{$tag['value']}}</span></a>
+                        <a href="/{{$lang}}/?tag={{$tag['value']}}"><span class="tag">{{$tag['value']}}</span></a>
                         @endforeach
                     </div>
                 </div>
