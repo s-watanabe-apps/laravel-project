@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Rules\OrRules;
+
 class ManagementsUsersRequest extends AppFormRequest
 {
     /**
@@ -22,7 +24,10 @@ class ManagementsUsersRequest extends AppFormRequest
     {
         return [
             'email' => 'required|email|max:255|unique:users,email',
-            'name' => 'max:255',
+            'name' => 'nullable|max:255',
+            'birthdate' => 'nullable|date_format:Y/m/d',
+            'role_id' => 'integer|in:2,3',
+            'group_code' => [new OrRules(['in:0', 'exists:groups,code'])],
         ];
     }
 
@@ -36,6 +41,9 @@ class ManagementsUsersRequest extends AppFormRequest
         return [
             'email' => __('strings.email'),
             'name' => __('strings.name'),
+            'birthdate' => __('strings.birthdate'),
+            'role_id' => __('strings.role'),
+            'group_code' => __('strings.group'),
         ];
     }
 }

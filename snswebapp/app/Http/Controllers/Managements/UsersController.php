@@ -104,7 +104,8 @@ class UsersController extends ManagementsController
     public function confirm(ManagementsUsersRequest $request)
     {
         $validated = $request->validated();
-
+dump($validated);
+exit;
         return view('managements.users.createConfirm', compact(
             'validated'
         ));

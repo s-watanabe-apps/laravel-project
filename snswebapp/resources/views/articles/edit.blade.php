@@ -15,7 +15,8 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('articles.formset.editForm')
+    {{Form::hidden('id', $articles['id'])}}
+    @include('articles.formset.editForm', compact('articles', 'labels'))
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.confirm')"></input>

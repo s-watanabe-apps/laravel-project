@@ -28,8 +28,8 @@
             <div class="title">@lang('strings.label')</div>
             <div class="tb-margin">
                 <div class="article-tags">
-                    @foreach($labels as $tag)
-                    <a href="/{{$lang}}/?tag={{$tag['value']}}"><span class="tag" style="border-color: {{$tag['frame_color']}}; background: {{$tag['body_color']}}">{{$tag['value']}}</span></a>
+                    @foreach($labels as $label)
+                    <a href="/{{$lang}}/?tag={{$label['value']}}"><span class="tag">{{$label['value']}}</span></a>
                     @endforeach
                 </div>
             </div>

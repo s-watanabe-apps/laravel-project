@@ -18,6 +18,10 @@
     {{Form::hidden('labels', $validated['labels'])}}
 
     <div class="input-label">@lang('strings.display_flag')</div>
-    <div>{{\App\Libs\Status::get_status_name($validated['status'])}}</div>
+    @if ($validated['status'] == \App\Libs\Status::ENABLED)
+    <label><span class="enable">@lang('strings.enable')</span></label>
+    @else
+    <label><span class="disable">@lang('strings.disable')</span></label>
+    @endif
     {{Form::hidden('status', $validated['status'])}}
 </td>

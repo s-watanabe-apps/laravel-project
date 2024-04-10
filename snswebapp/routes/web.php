@@ -40,9 +40,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('/articles/write', 'ArticlesController@write');
             Route::get('/articles/edit/{id}', 'ArticlesController@edit');
             Route::post('/articles/confirm', 'ArticlesController@createConfirm');
-            Route::put('/articles/confirm', 'ArticlesController@confirm');
-            Route::post('/articles/register', 'ArticlesController@register');
-            Route::put('/articles/register', 'ArticlesController@register');
+            Route::put('/articles/confirm', 'ArticlesController@editConfirm');
+            Route::post('/articles/save', 'ArticlesController@save');
+            Route::put('/articles/save', 'ArticlesController@save');
             Route::post('/articles/comment', 'ArticlesController@comment');
         });
 

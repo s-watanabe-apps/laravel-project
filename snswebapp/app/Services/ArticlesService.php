@@ -8,6 +8,13 @@ use App\Models\Articles;
 use App\Models\Images;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * 記事サービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class ArticlesService extends Service
 {
     /**
@@ -28,7 +35,7 @@ class ArticlesService extends Service
     }
 
     /**
-     * Get articles by id.
+     * 記事取得.
      * 
      * @param int $id
      * @param int $userId
@@ -63,7 +70,7 @@ class ArticlesService extends Service
     }
 
     /**
-     * Get articles by user id.
+     * 記事取得(ユーザーID指定).
      * 
      * @param int $userId
      * @param int $labelId = null
@@ -198,35 +205,44 @@ class ArticlesService extends Service
     }
 
     /**
-     * Register or Update the entered article.
+     * 記事情報新規作成.
      * 
-     * @param App\Http\Requests\ArticlesRequest $request
+     * @param array $values
      * @return App\Models\Articles
      */
-    public function save(array $values) {
-        if (isset($values['id'])) {
-            // Update
-            $articles = $this->get($values['id']);
-            throw_if($articles->user_id != user()->id, ForbiddenException::class);
+    public function insertArticles(array $values)
+    {
+        $id = Articles::insertGetId([
+            'user_id' => user()->id,
+            'type' => Articles::TYPE_MEMBER_ARTICLE,
+            'title' => $values['title'],
+            'body' => $values['body'],
+            'status' => $values['status'],
+            'created_at' => carbon(),
+        ]);
 
-            $articles->title = $values['title'];
-            $articles->body = $values['body'];
-            $articles->status = $values['status'];
-            $articles->type = Articles::TYPE_MEMBER_ARTICLE;
-            $articles->created_at = carbon();
-        } else {
-            // Insert
-            $articles = new Articles();
+        return $id;
+    }
 
-            $values['user_id'] = user()->id;
-            $values['type'] = Articles::TYPE_MEMBER_ARTICLE;
-            $values['status'] = $values['status'];
+    /**
+     * 記事情報更新.
+     * 
+     * @param array $values
+     * @return App\Models\Articles
+     */
+    public function updateArticles(array $values) {
+        $articles = $this->get($values['id']);
+        throw_if($articles['user_id'] != user()->id, ForbiddenException::class);
 
-            $articles->fill($values);
-        }
+        $result = Articles::where('articles.id', $values['id'])
+            ->update([
+                'title' => $values['title'],
+                'body' => $values['body'],
+                'status' => $values['status'],
+                'updated_at' => carbon(),
+            ]);
 
-        $articles->save();
-        return $articles;
+        return $result;
     }
 
     /**

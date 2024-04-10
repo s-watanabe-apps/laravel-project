@@ -2,18 +2,24 @@
 @section('content')
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-edit"></i> @lang('strings.write_articles') &gt; @lang('strings.confirm')</div>
+    <div class="subject">
+        <span><a href="/articles/{{$validated['id']}}"><i class="fas fa-blog"></i> {{$validated['title']}}</a></span>
+        <span>&gt; @lang('strings.edit')</span>
+        <span>&gt; @lang('strings.confirm')</span>
+    </div>
 
     {{Form::open([
         'name' => 'article',
         'url' => '/articles/save',
-        'method' => 'post',
+        'method' => 'put',
         'files' => true,
         'enctype' => 'multipart/form-data'
     ])}}
 
-    {{Form::hidden('id', $articles['id'])}}
-    @include('articles.formset.viewForm', compact('validated', 'labels'))
+    {{Form::hidden('id', $validated['id'])}}
+    @include('articles.formset.viewForm', compact(
+        'validated', 'labels'
+    ))
 
     <div class="flex-contents">
         <input type="submit" class="post" value="@lang('strings.registration')"></input>

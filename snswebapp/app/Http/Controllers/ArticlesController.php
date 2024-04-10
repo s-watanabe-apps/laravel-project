@@ -149,11 +149,18 @@ class ArticlesController extends Controller
     {
         $articles = $this->articlesService->get($request->id);
 
-        return view('articles.edit', compact('articles'));
+        throw_if(!user()->isAdmin() || user()->id != $articles['user_id'], ForbiddenException::class);
+
+        $labels = $this->articleLabelsService->getByArticleId($request->id);
+
+        return view('articles.edit', compact(
+            'articles',
+            'labels'
+        ));
     }
 
     /**
-     * 入力内容確認.
+     * 新規作成入力内容確認.
      * 
      * @param App\Http\Requests\ArticlesRequest
      * @return Illuminate\View\View
@@ -164,7 +171,31 @@ class ArticlesController extends Controller
 
         $labels = $this->labelsService->str_to_labels($validated['labels'] ?? '');
 
-        return view('articles.createConfirm', compact('validated', 'labels'));
+        return view('articles.createConfirm', compact(
+            'validated',
+            'labels'
+        ));
+    }
+
+    /**
+     * 修正入力内容確認.
+     * 
+     * @param App\Http\Requests\ArticlesRequest
+     * @return Illuminate\View\View
+     */
+    public function editConfirm(ArticlesRequest $request)
+    {
+        $validated = $request->validated();
+
+        $articles = $this->articlesService->get($request->id);
+        throw_if(!user()->isAdmin() || user()->id != $articles['user_id'], ForbiddenException::class);
+
+        $labels = $this->labelsService->str_to_labels($validated['labels'] ?? '');
+
+        return view('articles.editConfirm', compact(
+            'validated',
+            'labels'
+        ));
     }
 
     /**
@@ -173,17 +204,26 @@ class ArticlesController extends Controller
      * @param App\Http\Requests\ArticlesRequest
      * @return void
      */
-    public function register(ArticlesRequest $request)
+    public function save(ArticlesRequest $request)
     {
-        \DB::transaction(function() use ($request) {
-            $values = $request->validated();
-            unset($values['labels']);
-            $this->articlesService->save($values);
+        $id = null;
+
+        \DB::transaction(function() use ($request, &$id) {
+            $validated = $request->validated();
+
+            if ($request->isPost()) {
+                //unset($values['labels']);
+                $id = $this->articlesService->insertArticles($validated);
+            } else if ($request->isPut()) {
+                $id = $this->articlesService->updateArticles($validated);
+            } else {
+
+            }
 
             //$this->articleLabelsService->save($request);
         });
 
-        return redirect()->route('articles.user', ['id' => user()->id]);
+        return redirect()->route('articles.get', ['id' => $id]);
     }
 
     /**

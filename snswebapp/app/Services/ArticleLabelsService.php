@@ -4,6 +4,13 @@ namespace App\Services;
 use App\Models\ArticleLabels;
 use App\Models\Labels;
 
+/**
+ * 記事ラベルサービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class ArticleLabelsService extends Service
 {
     /**
@@ -21,16 +28,16 @@ class ArticleLabelsService extends Service
     }
 
     /**
-     * Get article labels by article id.
+     * ラベル配列取得(記事ID指定).
      * 
      * @param int $articleId
-     * @return array<App\Models\ArticleLabels>
+     * @return array
      */
     public function getByArticleId(int $articleId)
     {
         $key = sprintf(parent::CACHE_KEY_ARTICLE_LABELS_BY_ARTICLE_ID, $articleId);
 
-        $cache = $this->remember($key, function() use($articleId) {
+        $data = $this->remember($key, function() use($articleId) {
             $data = $this->base()
                 ->where('article_labels.article_id', $articleId)
                 ->get();
@@ -38,9 +45,7 @@ class ArticleLabelsService extends Service
             return json_encode($data);
         });
 
-        return array_map(function($value) {
-            return (new ArticleLabels())->bind($value);
-        }, $cache);
+        return $data;
     }
 
     /**

@@ -5,6 +5,7 @@
 @else
 {{Form::input('text', 'name', $user['name'] ?? '', ['disabled'])}}
 @endif
+<div class="text-danger">{{$errors->first('name')}}</div>
 
 <div class="input-label">@lang('strings.birth_date')</div>
 @if ($is_edit ?? false)
@@ -12,16 +13,18 @@
 @else
 {{Form::input('text', 'birthdate', $user['birthdate'] ?? '', ['disabled'])}}
 @endif
+<div class="text-danger">{{$errors->first('birthdate')}}</div>
 
 <div class="input-label">@lang('strings.role')</div>
 @if ($is_edit ?? false)
 <select name="role_id">
-    <option value="member">@lang('strings.roles.member')</option>
-    <option value="admin">@lang('strings.roles.admin')</option>
+    <option value="2">@lang('strings.roles.member')</option>
+    <option value="3">@lang('strings.roles.admin')</option>
 </select>
 @else
 {{Form::input('text', 'role', '', ['disabled'])}}
 @endif
+<div class="text-danger">{{$errors->first('role_id')}}</div>
 
 <div class="input-label">@lang('strings.group')</div>
 @if ($is_edit ?? false)
@@ -34,6 +37,7 @@
 @else
 {{Form::input('text', 'group_name', $user['group_name'] ?? '', ['disabled'])}}
 @endif
+<div class="text-danger">{{$errors->first('group_code')}}</div>
 
 @if ($change_link)
 <div class="grid-contents"><a href="{{$change_link}}">@lang('strings.change')</a></div>
