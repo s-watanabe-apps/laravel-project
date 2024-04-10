@@ -107,14 +107,14 @@ return [
     'new_password' => '新しいパスワード',
     'author' => '著者',
 
-    // Information Categories
+    // お知らせ種別
     'information_categories' => [
         'fa-info-circle' => '情報',
         'fa-bolt' => '注意',
         'fa-flag' => 'チェック',
     ],
 
-    // Side menus
+    // サイドメニュー
     'write_articles' => '記事を書く',
     'pictures' => 'アルバム',
     'members' => 'メンバーリスト',
@@ -130,7 +130,7 @@ return [
     'freepage_management' => 'フリーページ管理',
     'navigation_management' => 'ナビゲーション管理',
 
-    // Messages
+    // メッセージ
     'message' => 'メッセージ',
     'message_center' => '新着メッセージ',
     'readmore' => 'もっと見る',
@@ -145,13 +145,13 @@ return [
     'reply' => '返信',
     'send_message' => 'メッセージを送る',
 
-    // Favorites
+    // お気に入り
     'favorites' => 'お気に入り',
     'add_favorites' => 'お気に入りに追加しました。',
     'remove_favorites' => 'お気に入りから削除しました。',
     'someones_profile' => '%sのプロフィール',
 
-    // Operation messages.
+    // 操作結果メッセージ
     'operation_messages' => [
         'profile_update' => 'プロフィールを更新しました。',
         'add_favorites' => 'お気に入りに追加しました。',
@@ -159,9 +159,10 @@ return [
         'saved_site_settings' => 'サイト設定を保存しました。',
         'saved_profile_settings' => 'プロフィール設定項目を保存しました。',
         'saved_navigation_menus' => 'ナビゲーションメニューを保存しました。',
+        'basic_omission' => '基本設定の情報は省略できます。',
     ],
 
-    // Error messages.
+    // エラーメッセージ
     'errors' => [
         'fatal' => '予期せぬエラーが発生しました。はじめからやり直してください。',
         'not_found' => 'ページが見つかりません。はじめからやり直してください。',
@@ -172,13 +173,14 @@ return [
         'upload_file_minetypes' => '扱えるファイルタイプは %s です。',
     ],
 
+    // 警告メッセージ
     'alert_messages' => [
         'delete_confirm' => 'この操作は取り消すことができません。本当に削除しますか？',
         'invitation_confirm' => 'この宛先に招待メールを送信してよいですか？',
         'saved_settings' => '設定を保存しました。',
     ],
 
-    // Roles
+    // ロール
     'role' => 'ロール',
     'roles' => [
         'system' => 'システム管理者',
@@ -186,7 +188,7 @@ return [
         'member' => 'メンバー',
     ],
 
-    // Input types
+    // 入力タイプ
     'input_type' => '入力タイプ',
     'input_type_description_link' => '入力タイプについて',
     'input_types' => [
@@ -197,38 +199,7 @@ return [
     ],
     'input_type_column_name' => '項目名',
 
-    // DataTables (ja only)
-    'datatables' => [
-        "sEmptyTable" => "テーブルにデータがありません",
-        "sInfo" => " _TOTAL_ 件中 _START_ から _END_ まで表示",
-        "sInfoEmpty" => " 0 件中 0 から 0 まで表示",
-        "sInfoFiltered" => "（全 _MAX_ 件より抽出）",
-        "sInfoThousands" => ",",
-        "sLengthMenu" => "_MENU_ 件表示",
-        "sLoadingRecords" => "読み込み中...",
-        "sProcessing" => "処理中...",
-        "sSearch" => "検索:",
-        "sZeroRecords" => "一致するレコードがありません",
-        "oPaginate" => [
-            "sFirst" => "先頭",
-            "sLast" => "最終",
-            "sNext" => "次",
-            "sPrevious" => "前"
-        ],
-        "oAria" => [
-            "sSortAscending" => ": 列を昇順に並べ替えるにはアクティブにする",
-            "sSortDescending" => ": 列を降順に並べ替えるにはアクティブにする"
-        ]
-    ],
-
-    // FullCalendar
-    'fullcalendar' => [
-        'today' => '今月',
-        'month' => '月',
-        'list' => 'リスト',    
-    ],
-
-    // Managements Settings
+    // 管理者向け
     'basic_settings' => '基本設定',
     'site_name' => 'サイト名',
     'site_description' => 'サイト説明',

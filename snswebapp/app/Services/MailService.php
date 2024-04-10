@@ -40,11 +40,11 @@ class MailService extends Service
 
         $expireInHours = env('PASSWORD_RESET_EXPIRE_IN_HOURW', 24);
         $token = (new PasswordResetsService())->issue($users, 60 * $expireInHours);
-        $encryptToken = Crypt::encryptString($users->email . ',' . $token);
+        $encryptToken = Crypt::encryptString($users['email'] . ',' . $token);
 
         $data = [
-            'name' => $users->name,
-            'email' => $users->email,
+            'name' => $users['name'],
+            'email' => $users['email'],
             'token' => $encryptToken,
             'expire_in' => $expireInHours . __('strings.expire_in_hours'),
         ];
@@ -52,6 +52,6 @@ class MailService extends Service
         $subject = sprintf("[%s] %s", $settings['site_name'], __('strings.invitation'));
         $template = implode('.', ['emails', \App::getLocale(), 'user_invitation']);
 
-        $this->sendMail($users->email, new ContactMail($subject, $template, $data));
+        $this->sendMail($users['email'], new ContactMail($subject, $template, $data));
     }
 }

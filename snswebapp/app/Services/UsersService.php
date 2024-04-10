@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Http\Exceptions\NotFoundException;
 use App\Models\Users;
 use App\Models\Roles;
+use App\Libs\Status;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -253,14 +254,15 @@ class UsersService extends Service
     }
 
     /**
-     * ユーザー情報保存.
+     * ユーザー情報作成.
      * 
      * @param array
      * @param int
      * @return App\Models\Users
      */
-    public function save($values, $id = null)
+    public function insertUsers($values, $id = null)
     {
+/*
         if ($id == null) {
             $users = new Users();
             $users->email = $values['email'];
@@ -271,5 +273,17 @@ class UsersService extends Service
             Users::where('id', $id)->update($values);
             return $this->get($id);
         }
+*/
+        $id = Users::insertGetId([
+            'email' => $values['email'],
+            'name' => $values['name'],
+            'role_id' => $values['role_id'],
+            'birthdate' => $values['birthdate'],
+            'group_code' => $values['group_code'] != 0 ? $values['group_code'] : null,
+            'status' => Status::ENABLED,
+            'created_at' => carbon(),
+        ]);
+
+        return $id;
     }
 }

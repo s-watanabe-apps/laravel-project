@@ -31,7 +31,12 @@
                 'groups' => $groups,
             ])
             
+
             <div class="flex-contents tb-margin">
+                <div class="info-box">
+                    @lang('strings.operation_messages.basic_omission')
+                </div>
+
                 <input type="submit" class="post" value="@lang('strings.confirm')"></input>
                 <a href="/managements/users">
                     <input type="button" class="cancel" value="@lang('strings.cancel')"></input>

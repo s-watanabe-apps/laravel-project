@@ -43,8 +43,8 @@
                         <small>2024-04-04</small>
                         <a href="/profiles/{{$comment['user_id']}}">{{$comment['user_name']}}</a>
                         @if (user()->isAdmin() || user()->id == $comment['user_id'])
-                        <a style="color: #090;" href="/articles/comment/edit/{{$comment['id']}}"><i class="fas fa-edit"></i></a>
-                        <a style="color: #d00;" href="/articles/comment/delete/{{$comment['id']}}"><i class="fas fa-trash"></i></a>
+                        <a class="comment-edit" href="/articles/comment/edit/{{$comment['id']}}"><i class="fas fa-edit"></i></a>
+                        <a class="comment-delete" href="/articles/comment/delete/{{$comment['id']}}"><i class="fas fa-trash"></i></a>
                         @endif
                     </div>
                 </div>

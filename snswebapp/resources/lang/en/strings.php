@@ -160,9 +160,10 @@ return [
         'saved_site_settings' => 'Saved the site settings.',
         'saved_profile_settings' => 'Saved the profile items.',
         'saved_profile_settings' => 'Saved the navigation menus.',
+        'basic_omission' => 'Basic configuration information can be omitted.',
     ],
     
-    // Errors
+    // Error messages
     'errors' => [
         'fatal' => 'An unexpected error has occurred. Please start over.',
         'not_found' => 'Page Not Found. Please try again from the beginning.',
@@ -173,6 +174,7 @@ return [
         'upload_file_minetypes' => 'File types that can be handled are %s.',
     ],
 
+    // Alert messages
     'alert_messages' => [
         'delete_confirm' => 'This operation cannot be undone. Do you really want to delete this?',
         'invitation_confirm' => 'Are you sure you want to send an invitation email to this address?',
@@ -197,13 +199,6 @@ return [
         'select' => 'Multiple selection',
     ],
     'input_type_column_name' => 'Item name',
-
-    // FullCalendar
-    'fullcalendar' => [
-        'today' => 'Today',
-        'month' => 'Month',
-        'list' => 'List',    
-    ],
 
     // Managements Settings
     'basic_settings' => 'Basic configuration',

@@ -71,6 +71,12 @@ input.delete {
     font-weight: bold;
     color: #dddddd;
 }
+a.comment-edit {
+    color: #2e8b57;
+}
+a.comment-delete {
+    color: #DC143C;
+}
 label.file {
     font-size: 14px;
     background: #0000cd;
@@ -497,12 +503,20 @@ table.info input, table.info select, table.info textarea {
     border: 2px solid #d00 !important;
     background: #ed9dad;
 }
-
 .info-box {
     color: #444 !important;
     font-weight: bold;
-    width: auto;
-    margin: 10px 0 10px 0;
+    width: 100%;
+    margin: 10px 0 20px 0;
+    padding: 15px;
+    border: 2px solid #00bfff !important;
+    background: #add8e6;
+}
+.post-box {
+    color: #444 !important;
+    font-weight: bold;
+    width: 100%;
+    margin: 10px 0 20px 0;
     padding: 15px;
     border: 2px solid #0d0 !important;
     background: #9dedad;

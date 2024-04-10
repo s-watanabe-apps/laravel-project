@@ -30,17 +30,17 @@ class PasswordResetsService extends Service
      * @param int $expireInMinutes
      * @return string
      */
-    public function issue($user, $expireInMinutes)
+    public function issue($users, $expireInMinutes)
     {
         PasswordResets::query()
-            ->where('email', $user->email)
+            ->where('email', $users['email'])
             ->delete();
 
         //$expireInMinutes = 30;
         $token = Str::random(32);
 
         (new PasswordResets())->forceFill([
-            'email' => $user->email,
+            'email' => $users['email'],
             'token' => $token,
             'expire_in' => carbon()->addMinutes($expireInMinutes),
             'created_at' => carbon(),

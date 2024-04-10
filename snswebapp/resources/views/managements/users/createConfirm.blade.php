@@ -20,13 +20,22 @@
         <div class="vertical-contents w-50">
             @include('mypage.formset.account_settings', [
                 'email' => $validated['email'],
-                'attributes' => ['disabled'],
                 'change_link' => false,
             ])
             {{Form::hidden('email', $validated['email'])}}
             
+            @include('mypage.formset.basic_settings', [
+                'user' => $validated,
+                'is_edit' => false,
+                'change_link' => false,
+            ])
+            {{Form::hidden('name', $validated['name'])}}
+            {{Form::hidden('birthdate', $validated['birthdate'])}}
+            {{Form::hidden('role_id', $validated['role_id'])}}
+            {{Form::hidden('group_code', $validated['group_code'])}}
+            
             <div class="flex-contents tb-margin">
-                <div class="info-box">
+                <div class="post-box">
                     @lang('strings.alert_messages.invitation_confirm')
                 </div>
                 <input type="submit" class="post" value="@lang('strings.send')"></input>
