@@ -25,6 +25,8 @@ class Controller extends BaseController
             if (preg_match('/Request$/', get_class($request))) {
                 \Log::info(sprintf("user_id=%s, %s", user()->id ?? '', $request->url()));
             }
+
+            header('X-FRAME-OPTIONS: SAMEORIGIN');
     
             return parent::callAction($method, $parameters);
 

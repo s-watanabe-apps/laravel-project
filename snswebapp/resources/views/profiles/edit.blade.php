@@ -19,9 +19,9 @@
     <div class="grid-contents">
         <div class="w-25">
             <div style="position: relative;">
-                <img id="preview" class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+                <img id="preview" class="profile-image tb-margin" src="/show/image?file={{$profiles['image_file']}}" />
                 {{Form::hidden('image_file_clear', 0)}}
-                <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
+                <button id="btn-delete" type="button" style="position: absolute; top: 20px; right:10px; height: auto;">
                     <span aria-hidden="true"><b>&times;</b></span>
                 </button>
             </div>

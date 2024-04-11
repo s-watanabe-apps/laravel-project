@@ -1,4 +1,8 @@
 <div class="title">@lang('strings.basic_settings')</div>
+
+<!--
+名前
+-->
 <div class="input-label">@lang('strings.name')</div>
 @if ($is_edit ?? false)
 {{Form::input('text', 'name', $user['name'] ?? '')}}
@@ -7,6 +11,9 @@
 @endif
 <div class="text-danger">{{$errors->first('name')}}</div>
 
+<!--
+生年月日
+-->
 <div class="input-label">@lang('strings.birth_date')</div>
 @if ($is_edit ?? false)
 {{Form::input('text', 'birthdate', $user['birthdate'] ?? '', ['id' => 'birthdate'])}}
@@ -15,17 +22,23 @@
 @endif
 <div class="text-danger">{{$errors->first('birthdate')}}</div>
 
+<!--
+ロール
+-->
 <div class="input-label">@lang('strings.role')</div>
 @if ($is_edit ?? false)
 <select name="role_id">
-    <option value="2">@lang('strings.roles.member')</option>
-    <option value="3">@lang('strings.roles.admin')</option>
+    <option value="{{App\Models\Roles::MEMBER}}">@lang('strings.roles.member')</option>
+    <option value="{{App\Models\Roles::ADMIN}}">@lang('strings.roles.admin')</option>
 </select>
 @else
-{{Form::input('text', 'role', '', ['disabled'])}}
+{{Form::input('text', 'role', $user['role'] ?? '', ['disabled'])}}
 @endif
 <div class="text-danger">{{$errors->first('role_id')}}</div>
 
+<!--
+グループ
+-->
 <div class="input-label">@lang('strings.group')</div>
 @if ($is_edit ?? false)
 <select name="group_code">

@@ -186,7 +186,7 @@ header .sm {
 }
 .contents-header {
     font-size: 14px;
-    padding: 6px 6px 0 6px;
+    padding: 9px 6px 0 6px;
 }
 .contents .flex-contents {
     padding: 10px 0 10px 0;
@@ -448,6 +448,19 @@ table.info input, table.info select, table.info textarea {
 .flex-contents > .view-item > a {
     margin: 10px;
 }
+.flex-contents > .image-item {
+    text-align: center;
+    display: grid;
+    width: 25%;
+    font-size: 14px;
+}
+.flex-contents > .image-item > a {
+    margin: 10px;
+}
+.flex-contents > .image-item img {
+    height: 7rem;
+}
+
 .flex-contents > .upload-item {
     text-align: center;
     width: 80%;
@@ -684,7 +697,7 @@ textarea[name="comment"] {
         display: grid;
     }
     .pc {
-        display: none;
+        display: none !important;
     }
     #hamburger {
         background-color: transparent;
@@ -763,6 +776,9 @@ textarea[name="comment"] {
     }
     .flex-contents > .view-item {
         width: 33%;
+    }
+    .flex-contents > .image-item {
+        width: 50%;
     }
     .flex-contents > .search-item {
         width: 100%;

@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Managements;
 use App\Services\MailService;
 use App\Services\UsersService;
 use App\Services\GroupsService;
-use App\Http\Requests\ManagementsUsersRequest;
+use App\Models\Roles;
 use App\Mail\ContactMail;
+use App\Http\Requests\ManagementsUsersRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -81,7 +82,7 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * ユーザー作成フォーム.
+     * ユーザー作成画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -104,9 +105,14 @@ class UsersController extends ManagementsController
     public function confirm(ManagementsUsersRequest $request)
     {
         $validated = $request->validated();
+        
+        $groups = $validated['group_code'] != '0' ? $this->groupsService->getGroupByCode($validated['group_code']) : null;
+        $validated['group_name'] = $groups['name'] ?? '';
+        $validated['role'] = Roles::getRoleNames()[$validated['role_id']];
 
         return view('managements.users.createConfirm', compact(
-            'validated'
+            'validated',
+            'groups'
         ));
     }
 
@@ -121,7 +127,7 @@ class UsersController extends ManagementsController
         $validated = $request->validated();
 
         \DB::transaction(function() use ($validated) {
-            $id = $this->usersService->insertUsers($validated);
+            $id = $this->usersService->insertUser($validated);
 
             $users = $this->usersService->getUser($id);
 
@@ -132,7 +138,7 @@ class UsersController extends ManagementsController
     }
 
     /**
-     * ユーザー取得.
+     * ユーザー情報確認画面.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View

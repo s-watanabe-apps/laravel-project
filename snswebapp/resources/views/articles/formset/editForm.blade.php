@@ -8,7 +8,7 @@
     <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
 
     <div class="input-label">@lang('strings.label')</div>
-    {{Form::input('text', 'labels', $labels
+    {{Form::input('text', 'labels', $labels ?? []
         ? implode(array_column($labels, 'value'), ' ')
         : ''
         , [])}}

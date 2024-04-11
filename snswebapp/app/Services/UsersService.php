@@ -53,7 +53,9 @@ class UsersService extends Service
                 ->where('users.id', $id)
                 ->orderBy('sessions.last_activity', 'desc')
                 ->first();
-            
+
+            $data->role = Roles::getRoleNames()[$data->role_id];
+
             if (!$data) {
                 throw new NotFoundException();
             }
@@ -260,30 +262,43 @@ class UsersService extends Service
      * @param int
      * @return App\Models\Users
      */
-    public function insertUsers($values, $id = null)
+    public function insertUser($values)
     {
-/*
-        if ($id == null) {
-            $users = new Users();
-            $users->email = $values['email'];
-            $users->role_id = Roles::MEMBER;
-            $users->save();
-            return $users;
-        } else {
-            Users::where('id', $id)->update($values);
-            return $this->get($id);
+        if (!user()->isAdmin()) {
+            abort(403);
         }
-*/
+
         $id = Users::insertGetId([
             'email' => $values['email'],
             'name' => $values['name'],
             'role_id' => $values['role_id'],
             'birthdate' => $values['birthdate'],
-            'group_code' => $values['group_code'] != 0 ? $values['group_code'] : null,
+            'group_code' => $values['group_code'] != '0' ? $values['group_code'] : null,
             'status' => Status::ENABLED,
             'created_at' => carbon(),
         ]);
 
         return $id;
     }
+
+    /**
+     * ユーザー情報更新.
+     * 
+     * @param array $values
+     * @param array $id
+     * @return int
+     */
+    public function updateUserEmail($id, $email)
+    {
+        if (!user()->isAdmin()) {
+            abort(403);
+        }
+
+        Users::where('id', $id)->update([
+            'email' => $email,
+        ]);
+
+        return $id;
+    }
+
 }

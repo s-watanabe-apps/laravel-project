@@ -5,6 +5,13 @@ use App\Models\Pictures;
 use App\Models\Images;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * 写真サービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class PicturesService extends Service
 {
     /**
@@ -23,12 +30,11 @@ class PicturesService extends Service
     }
 
     /**
-     * Get pictures.
+     * 写真一覧取得.
      * 
      * @param string keyword
      * @param int user_id
-     * 
-     * @return Illuminate\Pagination\LengthAwarePaginator
+     * @return array
      */
     public function getPictures(string $keyword = null, int $user_id = null)
     {
@@ -45,7 +51,8 @@ class PicturesService extends Service
 
         return $query
             ->orderBy('pictures.created_at', 'desc')
-            ->paginate(Pictures::PAGENATE);
+            ->get()
+            ->toArray();
     }
 
     /**

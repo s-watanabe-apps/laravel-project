@@ -107,6 +107,7 @@ return [
     'current_password' => 'Current password',
     'new_password' => 'New password',
     'author' => 'Author',
+    'upload_picture' => 'Upload image',
 
     // Information Marks
     'information_categories' => [
@@ -117,7 +118,7 @@ return [
     
     // Side menus
     'write_articles' => 'Write articles',
-    'pictures' => 'Pictures',
+    'album' => 'Album',
     'members' => 'Member list',
     'member_search' => 'Member search',
     'community_search' => 'Community search',
@@ -187,6 +188,7 @@ return [
         'system' => 'System Administrator',
         'admin' => 'Administrator',
         'member' => 'Member',
+        'anonymous' => 'Anonymous',
     ],
 
     // Input types

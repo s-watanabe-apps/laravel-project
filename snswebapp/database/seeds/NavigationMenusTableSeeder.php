@@ -20,8 +20,8 @@ class NavigationMenusTableSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'name' => __('strings.pictures'),
-                'link' => '/pictures',
+                'name' => __('strings.album'),
+                'link' => '/album',
                 'order' => 2,
             ],
             [

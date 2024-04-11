@@ -6,19 +6,20 @@
 
     <div class="articles-body">{!!$articles['body']!!}</div>
 
+    @if (user()->isAdmin() || user()->id == $articles['user_id'])
+    <div class="flex-contents">
+        <a href="/articles/edit/{{$articles['id']}}">
+            <input type="button" class="post" value="@lang('strings.edit')"></input>
+        </a>
+        <a href="/articles/delete/{{$articles['id']}}">
+            <input type="button" class="delete" value="@lang('strings.delete')"></input>
+        </a>
+    </div>
+    @endif
+
+
     <div class="grid-contents" style="padding: 0px;">
         <div class="vertical-contents w-50">
-            @if (user()->isAdmin() || user()->id == $articles['user_id'])
-            <div class="flex-contents">
-                <a href="/articles/edit/{{$articles['id']}}">
-                    <input type="button" class="post" value="@lang('strings.edit')"></input>
-                </a>
-                <a href="/articles/delete/{{$articles['id']}}">
-                    <input type="button" class="delete" value="@lang('strings.delete')"></input>
-                </a>
-            </div>
-            @endif
-
             <div class="title">@lang('strings.author')</div>
             <span>
                 <small>{{str_date_format($articles['created_at'])}}</small>

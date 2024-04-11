@@ -55,13 +55,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         });
 
         // アルバム
-        Route::get('/pictures', 'PicturesController@index')->name('pictures.index');
-        Route::get('/pictures/{id}', 'PicturesController@get')->where('id', '[0-9]+')->name('pictures.get');
+        Route::get('/album', 'PicturesController@index')->name('pictures.index');
+        Route::get('/album/{id}', 'PicturesController@get')->where('id', '[0-9]+')->name('pictures.get');
         Route::group(['middleware' => ['authcheck.writepermission']], function () {
-            Route::get('/pictures/upload', 'PicturesController@upload');
-            Route::post('/pictures/post', 'PicturesController@post');
-            Route::post('/pictures/comment', 'PicturesController@comment');
-            Route::get('/pictures/{id}/comment/{comment_id}', 'PicturesController@editComment')
+            Route::get('/album/upload', 'PicturesController@upload');
+            Route::post('/album/post', 'PicturesController@post');
+            Route::post('/album/comment', 'PicturesController@comment');
+            Route::get('/album/{id}/comment/{comment_id}', 'PicturesController@editComment')
                 ->where('id', '[0-9]+')
                 ->where('comment_id', '[0-9]+');
         });

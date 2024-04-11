@@ -4,6 +4,13 @@ namespace App\Services;
 use App\Models\Groups;
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * グループサービスクラス.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class GroupsService extends Service
 {
     /**
@@ -20,14 +27,28 @@ class GroupsService extends Service
     }
 
     /**
-     * Get all groups.
+     * グループ全件取得.
      * 
-     * @return array<App\Models\Groups>
+     * @return array
      */
     public function all()
     {
         return $this->base()
             ->get()
+            ->toArray();
+    }
+
+    /**
+     * グループ取得.
+     * 
+     * @param string $code
+     * @return array
+     */
+    public function getGroupByCode($code)
+    {
+        return $this->base()
+            ->where('code', $code)
+            ->first()
             ->toArray();
     }
 }

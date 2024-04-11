@@ -18,12 +18,13 @@
                 'change_link' => '/mypage/basic',
             ])
 
-        </div>
-        <div class="vertical-contents w-50">
             <div class="title">@lang('strings.security')</div>
             <div class="input-label">@lang('strings.password') @lang('strings.updated_at')</div>
             {{Form::input('text', 'password_updated_at', str_date_format($user['password_updated_at']), ['disabled'])}}
             <div class="grid-contents"><a href="/mypage/password">@lang('strings.change')</a></div>
+
+        </div>
+        <div class="vertical-contents w-50">
         </div>
     </div>
 </div>

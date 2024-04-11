@@ -8,7 +8,7 @@
     </div>
     <div class="grid-contents">
         <div class="w-25">
-            <img class="profile-image" src="/show/image?file={{$profiles['image_file']}}" />
+            <img class="profile-image tb-margin" src="/show/image?file={{$profiles['image_file']}}" />
         </div>
 
         <div class="w-75">

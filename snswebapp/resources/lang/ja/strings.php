@@ -41,7 +41,7 @@ return [
     'article_body' =>'投稿本文',
     'latest_articles' => '最近の記事',
     'popular_articles' => '人気の記事',
-    'pictures' => 'アルバム',
+    'album' => 'アルバム',
     'show_more' => 'もっと見る',
     'user_name' => 'ユーザー名',
     'password' => 'パスワード',
@@ -106,6 +106,7 @@ return [
     'current_password' => '現在のパスワード',
     'new_password' => '新しいパスワード',
     'author' => '著者',
+    'upload_picture' => 'イメージアップロード',
 
     // お知らせ種別
     'information_categories' => [
@@ -186,6 +187,7 @@ return [
         'system' => 'システム管理者',
         'admin' => '管理者',
         'member' => 'メンバー',
+        'anonymous' => '匿名',
     ],
 
     // 入力タイプ

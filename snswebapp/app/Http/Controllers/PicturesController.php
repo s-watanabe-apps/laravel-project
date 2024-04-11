@@ -10,20 +10,28 @@ use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * アルバムコントローラ.
+ * 
+ * @author s-watanabe-apps
+ * @since 2024-01-01
+ * @version 1.0.0
+ */
 class PicturesController extends Controller
 {
-    // Instance variables.
+    // サービス変数.
     private $picturesService;
     private $pictureCommentsService;
     private $favoritesService;
     private $usersService;
 
     /**
-     * Create a new controller instance.
+     * コンストラクタ.
      *
      * @param App\Services\PicturesService
      * @param App\Services\PictureCommentsService
      * @param App\Services\FavoritesService
+     * @param App\Services\UsersService
      * @return void
      */
     public function __construct(
@@ -40,7 +48,7 @@ class PicturesController extends Controller
 
 
     /**
-     * Get pictures images.
+     * 写真一覧.
      * 
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
@@ -49,10 +57,12 @@ class PicturesController extends Controller
     {
         $validator = Validator::make([
             'keyword' => $request->keyword,
-            'user_id' => $request->user_id
+            'user_id' => $request->user_id,
+            'page' => $request->page,
         ], [
             'keyword' => 'string|nullable',
             'user_id' => 'integer|nullable|min:0',
+            'page' => 'integer|nullable',
         ]);
         if ($validator->fails()) {
             abort(422);
@@ -60,13 +70,13 @@ class PicturesController extends Controller
 
         $validated = $validator->validated();
 
-        $images = $this->picturesService->getPictures($validated['keyword'], $validated['user_id']);
+        $pictures = $this->picturesService->getPictures($validated['keyword'], $validated['user_id']);
+        $pictures = $this->pager($pictures, 12, $validated['page'], '/album/');
 
-        $users = $this->usersService->getEnabledUsers(null, null, false);
+        //$users = $this->usersService->getEnabledUsers(null, null, false);
 
         return view('pictures.index', compact(
-            'images',
-            'users',
+            'pictures',
             'validated'
         ));
     }

@@ -21,17 +21,17 @@ class Roles extends Model
     const ANONYMOUS = 4;
 
     /**
-     * Get favorite names.
+     * ロール名配列取得.
      * 
-     * @return [string][string]
+     * @return array
      */
-    public static function getFavoriteNames()
+    public static function getRoleNames()
     {
         return [
-            self::SYSTEM => __('strings.profile'),
-            self::ADMIN => __('strings.pictures'),
-            self::MEMBER => __('strings.pictures'),
-            self::ANONYMOUS => __('strings.pictures'),
+            self::SYSTEM => __('strings.roles.system'),
+            self::ADMIN => __('strings.roles.admin'),
+            self::MEMBER => __('strings.roles.member'),
+            self::ANONYMOUS => __('strings.roles.anonymous'),
         ];
     }
 }
