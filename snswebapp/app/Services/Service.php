@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Closure;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Exceptions\ForbiddenException;
 use App\Models\Roles;
 
 class Service
@@ -46,25 +47,6 @@ class Service
     }
 
     /**
-     * Check access rights to data.
-     * 
-     * @param stdClass $std
-     * @return boolean
-     */
-    protected function checkAccessRight($std)
-    {
-        if (user()->role_id == Roles::ADMIN || user()->role_id == Roles::SYSTEM) {
-            return true;
-        }
-
-        if ($std->status != \Status::ENABLED) {
-            return $std->user_id == user()->id;
-        }
-
-        return true;
-    }
-
-     /**
      * Cache purge.
      * 
      * @param string $key
@@ -72,5 +54,37 @@ class Service
     protected function cacheForget($key)
     {
         Cache::forget($key);
+    }
+
+    /**
+     * アクセス可否チェック.
+     * 
+     * @param int $sourceUserId
+     * @return boolean
+     */
+    protected function checkAccessRight($sourceUserId)
+    {
+        
+
+        return false;
+    }
+
+    /**
+     * 更新可否チェック.
+     * 
+     * @param int $sourceUserId
+     * @return void
+     */
+    protected function checkUpdateRight($sourceUserId)
+    {
+        if (user()->role_id == Roles::ADMIN || user()->role_id == Roles::SYSTEM) {
+            return;
+        }
+
+        if ($sourceUserId == user()->id) {
+            return;
+        }
+
+        throw new ForbiddenException();
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Exceptions\BusinessException;
 use App\Http\Exceptions\ForbiddenException;
 use App\Http\Requests\ArticlesRequest;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\DeleteByIdRequest;
 use App\Libs\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -224,6 +225,41 @@ class ArticlesController extends Controller
         });
 
         return redirect()->route('articles.get', ['id' => $id]);
+    }
+
+    /**
+     * 記事削除確認画面.
+     * 
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function deleteConfirm(Request $request)
+    {
+        $articles = $this->articlesService->get($request->id);
+
+        return view('articles.deleteConfirm', compact(
+            'articles'
+        ));
+    }
+
+    /**
+     * 記事削除処理.
+     * 
+     * @param App\Http\Requests\DeleteByIdRequest
+     * @return Illuminate\View\View
+     */
+    public function delete(DeleteByIdRequest $request)
+    {
+        $validated = $request->validated();
+
+        \DB::transaction(function() use ($validated) {
+            $this->articlesService->deleteArticles($validated['id']);
+
+            //$this->articleLabelsService->save($request);
+        });
+
+        exit;
+        //return redirect()->route('articles.user', ['id' => user()->id]);
     }
 
     /**

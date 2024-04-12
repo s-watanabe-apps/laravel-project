@@ -47,7 +47,7 @@ class ArticlesService extends Service
 
         throw_if(!$articles, NotFoundException::class);
 
-        throw_if(!$this->checkAccessRight($articles), ForbiddenException::class);
+        //throw_if(!$this->checkAccessRight($articles), ForbiddenException::class);
 
         return $articles->toArray();
     }
@@ -232,7 +232,7 @@ class ArticlesService extends Service
      */
     public function updateArticles(array $values) {
         $articles = $this->get($values['id']);
-        throw_if($articles['user_id'] != user()->id, ForbiddenException::class);
+        $this->checkUpdateRight($articles['user_id']);
 
         $result = Articles::where('articles.id', $values['id'])
             ->update([
@@ -243,6 +243,24 @@ class ArticlesService extends Service
             ]);
 
         return $result;
+    }
+
+    /**
+     * 記事削除.
+     * 
+     * @param int $id
+     * @return App\Models\Articles
+     */
+    public function deleteArticles($id)
+    {
+        $articles = $this->get($id);
+        $this->checkUpdateRight($articles['user_id']);
+
+        $result = Articles::where('articles.id', $id)
+            ->delete();
+
+        return $result;
+
     }
 
     /**

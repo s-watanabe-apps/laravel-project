@@ -43,6 +43,8 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::put('/articles/confirm', 'ArticlesController@editConfirm');
             Route::post('/articles/save', 'ArticlesController@save');
             Route::put('/articles/save', 'ArticlesController@save');
+            Route::get('/articles/delete/{id}', 'ArticlesController@deleteConfirm')->where('id', '[0-9]+');
+            Route::delete('/articles/delete', 'ArticlesController@delete');
             Route::post('/articles/comment', 'ArticlesController@comment');
         });
 
