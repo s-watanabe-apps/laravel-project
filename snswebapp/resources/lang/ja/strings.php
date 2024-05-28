@@ -226,4 +226,7 @@ return [
     'upload_files' => 'ファイルアップロード',
     'header_images' => 'ヘッダー画像',
     'login_images' => 'ログイン画像',
+    'title_settings' => 'タイトル設定',
+    'title_informations' => '管理者からのお知らせ',
+    'title_latest_articles' => '最近の記事',
 ];

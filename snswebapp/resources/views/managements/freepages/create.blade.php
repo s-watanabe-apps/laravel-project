@@ -3,8 +3,9 @@
 
 <div class="contents">
     <div class="subject">
-        <a href="/managements/freepages/"><i class="fas fa-fw fa-edit"></i> @lang('strings.freepage_management')</a>
-        &gt; @lang('strings.add')</div>
+        <span><a href="/managements/freepages/"><i class="fas fa-fw fa-edit"></i> @lang('strings.freepage_management')</a>
+        <span>&gt; @lang('strings.add')</span>
+    </div>
 
     {{Form::open([
         'name' => 'freepages',
@@ -13,18 +14,23 @@
     ])}}
     @csrf
 
-    <!-- Edit Control -->
-    @include('managements.freepages.formset.editForm', [
-        'values' => [
-            'code' => $code,
-        ],
-    ])
+    <div class="vertical-contents">
+        <!-- Edit Control -->
+        @include('managements.freepages.formset.editForm', [
+            'values' => [
+                'code' => $code,
+            ],
+        ])
 
-    <div class="flex-contents">
-        <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+        <div class="flex-contents">
+            <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+        </div>
     </div>
+
     {{Form::close()}}
 
 </div>
+
+@include('shared.ckeditor', ['name' => 'body'])
 
 @endsection

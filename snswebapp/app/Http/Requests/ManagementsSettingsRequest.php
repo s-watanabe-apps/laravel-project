@@ -33,6 +33,8 @@ class ManagementsSettingsRequest extends AppFormRequest
             'theme_id' => 'required|exists:themes,id',
             //'header_image_id' => 'required|exists:header_images,id',
             //'login_image_id' => 'required|exists:login_images,id',
+            'title_informations' => 'required|max:255',
+            'title_latest_articles' => 'required|max:255',
         ];
 
         if ($this->basic_auth == '0') {
@@ -55,6 +57,8 @@ class ManagementsSettingsRequest extends AppFormRequest
             'site_description' => __('strings.site_description'),
             'basic_auth' => __('strings.basic_auth'),
             'anonymous_permission' => __('strings.anonymous_user'),
+            'title_informations' => __('strings.title_informations'),
+            'title_latest_articles' => __('strings.title_latest_articles'),
         ];
     }
 }

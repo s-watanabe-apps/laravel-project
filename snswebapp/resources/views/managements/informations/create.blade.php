@@ -15,10 +15,12 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    @include('managements.informations.formset.editForm', [])
+    <div class="vertical-contents">
+        @include('managements.informations.formset.editForm', [])
 
-    <div class="flex-contents">
-        <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+        <div class="flex-contents">
+            <input type="submit" class="post" value="@lang('strings.confirm')"></input>
+        </div>
     </div>
 
     {{Form::close()}}

@@ -17,7 +17,9 @@ class SettingsTableSeeder extends Seeder
             'basic_auth' => true,
             'basic_user' => 'user',
             'basic_password' => 'password',
+            'title_informations' => __('strings.title_informations'),
+            'title_latest_articles' => __('strings.title_latest_articles'),
         ];
-        Settings::query()->create($settings);
+        Settings::query()->insert($settings);
     }
 }

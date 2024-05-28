@@ -25,6 +25,22 @@
                 ])}}
                 <div class="text-danger">{{$errors->first('site_description') ?? ''}}</div>
             </div>
+
+            <div>
+                <div class="title">@lang('strings.title_settings')</div>
+                <div class="input-label">@lang('strings.title_informations')</div>
+                {{Form::input('text', 'title_informations', old('title_informations') ?? $settings['title_informations'], [
+                    'style' => 'width: 100%;',
+                ])}}
+                <div class="text-danger">{{$errors->first('title_informations') ?? ''}}</div>
+
+                <div class="input-label">@lang('strings.title_latest_articles')</div>
+                {{Form::input('text', 'title_latest_articles', old('title_latest_articles') ?? $settings['title_latest_articles'], [
+                    'style' => 'width: 100%;',
+                ])}}
+                <div class="text-danger">{{$errors->first('title_latest_articles') ?? ''}}</div>
+            </div>
+
             <div>
                 <div class="title">@lang('strings.anonymous_user')</div>
                 <div>

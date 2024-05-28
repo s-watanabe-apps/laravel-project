@@ -170,7 +170,6 @@ header .sm {
     display: flex;
 }
 .contents {
-    
 }
 .grid-contents {
     display: flex;
@@ -537,7 +536,7 @@ table.info input, table.info select, table.info textarea {
 
 .input-label{
     position: relative;
-    padding: 8px 0 3px 16px;
+    padding: 4px 0 3px 16px;
     font-weight: bold;
     font-size: 14px;
     margin-top: 3px;

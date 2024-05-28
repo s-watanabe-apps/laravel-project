@@ -30,6 +30,8 @@ class SettingsService extends Service
                 //'header_images.title_color',
                 'settings.login_image_id',
                 \DB::raw('login_images.file_name as login_file_name'),
+                'settings.title_informations',
+                'settings.title_latest_articles',
             ])
             ->where('settings.id', 1)
             ->leftJoin('themes', 'settings.theme_id', '=', 'themes.id')

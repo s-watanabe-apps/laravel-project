@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->integer('status');
             $table->string('title');
             $table->mediumtext('body');
+            $table->string('link')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index(['user_id']);

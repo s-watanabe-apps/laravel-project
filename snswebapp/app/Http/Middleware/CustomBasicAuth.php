@@ -22,7 +22,7 @@ class CustomBasicAuth
         $user = $request->getUser();
         $password = $request->getPassword();
         if (
-            $user == $request->settings->basic_user && $password == $request->settings->basic_password
+            $user == $request->settings['basic_user'] && $password == $request->settings['basic_password']
         ) {
             return $next($request);
         }

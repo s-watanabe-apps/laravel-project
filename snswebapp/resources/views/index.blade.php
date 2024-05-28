@@ -1,7 +1,8 @@
 @extends('app')
 @section('content')
 
-<div class="subject">管理者からのお知らせ</div>
+@if (count($informations) > 0)
+<div class="subject">{{$settings['title_informations']}}</div>
 @foreach($informations as $info)
 <div class="container">
     <div class="title"><i class="fas {{$info['style']}} text-primary-50"></i> {{$info['title']}}</div>
@@ -13,8 +14,9 @@
     </div>
 </div>
 @endforeach
+@endif
 
-<div class="subject">@lang('strings.latest_articles')</div>
+<div class="subject">{{$settings['title_latest_articles']}}</div>
 @foreach($articles as $article)
 <div class="container">
     <div class="title"><a href="/articles/{{$article['id']}}">{{$article['title']}}</a></div>

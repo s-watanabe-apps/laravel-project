@@ -27,6 +27,8 @@ class CreateSettingsTable extends Migration
             $table->integer('theme_id')->default(1);
             $table->integer('login_image_id')->default(1);
             $table->integer('profile_fixed_settings')->default(255);
+            $table->string('title_informations');
+            $table->string('title_latest_articles');
         });
     }
 
