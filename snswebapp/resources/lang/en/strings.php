@@ -228,7 +228,7 @@ return [
     'header_images' => 'Header images',
     'login_images' => 'Login images',
     'title_settings' => 'Title settings',
-    'title_informations' => 'Announcement from administrator.',
-    'title_latest_articles' => 'Latest articles.',
+    'title_informations' => 'Notices.',
+    'title_latest_articles' => 'Recent article list.',
 
 ];
