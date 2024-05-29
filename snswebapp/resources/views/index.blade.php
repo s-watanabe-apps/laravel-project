@@ -35,6 +35,9 @@
         @endif
         <div class="description">{!!$article['body_text']!!}</div>
     </div>
+    @if (!is_null($article['link']))
+    <a href="{{$article['link']}}">{{$article['link']}}</a>
+    @endif
     <div class="footer">
         <div class="tags">
             @foreach($article['tags'] as $tag)

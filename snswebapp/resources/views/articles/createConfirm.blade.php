@@ -12,7 +12,6 @@
         'enctype' => 'multipart/form-data'
     ])}}
 
-    {{Form::hidden('id', $articles['id'])}}
     @include('articles.formset.viewForm', compact('validated', 'labels'))
 
     <div class="flex-contents">

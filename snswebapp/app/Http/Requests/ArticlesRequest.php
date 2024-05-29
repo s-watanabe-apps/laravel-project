@@ -26,6 +26,7 @@ class ArticlesRequest extends AppFormRequest
             'body' => 'nullable|string',
             'status' => 'in:0,1',
             'labels' => 'nullable|string',
+            'link' => 'nullable|url',
         ];
     }
 
@@ -41,6 +42,7 @@ class ArticlesRequest extends AppFormRequest
             'body' => __('strings.article_body'),
             'status' => __('strings.display_flag'),
             'labels' => __('strings.labels'),
+            'link' => __('strings.link'),
         ];
     }
 }

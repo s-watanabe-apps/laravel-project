@@ -17,6 +17,10 @@
     </nobr>
     {{Form::hidden('labels', $validated['labels'])}}
 
+    <div class="input-label">@lang('strings.link')</div>
+    <div>{{$validated['link']}}</div>
+    {{Form::hidden('link', $validated['link'])}}
+
     <div class="input-label">@lang('strings.display_flag')</div>
     @if ($validated['status'] == \App\Libs\Status::ENABLED)
     <label><span class="enable">@lang('strings.enable')</span></label>

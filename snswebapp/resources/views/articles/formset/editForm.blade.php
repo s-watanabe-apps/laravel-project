@@ -13,6 +13,10 @@
     , [])}}
 <div class="text-danger">{{$errors->first('labels') ?? ''}}</div>
 
+<div class="input-label">@lang('strings.link')</div>
+{{Form::input('text', 'link', $articles['link'] ?? '')}}
+<div class="text-danger">{{$errors->first('link') ?? ''}}</div>
+
 <div class="input-label">@lang('strings.display_flag')</div>
 <div style="display: flex;">
     <label>{{Form::radio('status', '1', ($articles['status'] ?? true) == 1, []) }}&nbsp;<span class="enable">@lang('strings.enable')</span></label>

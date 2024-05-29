@@ -46,7 +46,6 @@ class ArticlesService extends Service
         $articles = $this->base()->where('articles.id', $id)->first();
 
         throw_if(!$articles, NotFoundException::class);
-
         //throw_if(!$this->checkAccessRight($articles), ForbiddenException::class);
 
         return $articles->toArray();
@@ -217,6 +216,7 @@ class ArticlesService extends Service
             'type' => Articles::TYPE_MEMBER_ARTICLE,
             'title' => $values['title'],
             'body' => $values['body'],
+            'link' => $values['link'],
             'status' => $values['status'],
             'created_at' => carbon(),
         ]);

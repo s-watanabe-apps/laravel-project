@@ -50,7 +50,7 @@ class SettingsController extends ManagementsController
         $loginImages = $this->loginImagesService->get();
 
         $themes = $this->themesService->all();
-        
+
         return view('managements.settings.index', compact(
             'headerImages',
             'loginImages',
