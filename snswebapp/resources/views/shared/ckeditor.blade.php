@@ -1,4 +1,4 @@
-<script src="https://cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 <script>
 editor = CKEDITOR.replace('editor', {
     contentsCss: '/css/editor.css',

@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4",
         "barryvdh/laravel-debugbar": "^3.5",
+        "ckeditor/ckeditor": "4.15.1",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.3",
         "laravel/framework": "^8.0",

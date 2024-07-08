@@ -7,7 +7,7 @@ use App\Models\Roles;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
-use Illuminate\Support\Facades\Auth as Authenticate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -29,22 +29,16 @@ class AuthCheckReadPermissionMiddleware
      */
     public function handle($request, Closure $next)
     {
-        dump($request->cookie('api_token'));
-        $apiToken = Crypt::decrypt($request->cookie('api_token'), true);
-        dump($apiToken);
-        dump(Authenticate::check());
+        //dump($request->cookie());
+        //$apiToken = Crypt::decrypt($request->cookie('api_token'), true);
 
-        $client = new Client(['base_uri' => env('APP_URL')]);
-        $response = $client->request('GET', '/api/user', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $request->cookie('api_token'),
-                'Accept' => 'application/json',
-            ],
-        ]);
-        dump($response);
-        exit;
+        if (!Auth::check()) {
+            $apiToken = Crypt::decrypt($request->cookie('api_token'), true);
+            if (!is_null($apiToken)) {
+                // リフレッシュ
+                
+            }
 
-        if (!Authenticate::check()) {
             if (!$request->settings['anonymous_permission']) {
                 return redirect('/login')->with('redirect', $request->url());
             }
@@ -53,3 +47,5 @@ class AuthCheckReadPermissionMiddleware
         return $next($request);
     }
 }
+
+// AWS S3へファイルアップロード
