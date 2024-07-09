@@ -6,39 +6,33 @@ use Illuminate\Notifications\Notifiable;
 
 class Images extends Model
 {
-    // Table name.
-    public $table = 'images';
-
-    // Primary key.
+    protected $table = 'images';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 
-    // Model constants, image types.
-    const TYPE_PROFILE_IMAGE = 1;
-    const TYPE_ARTICLE_IMAGE = 2;
-    const TYPE_PICTURE_IMAGE = 3;
-
-    // Model constants, mine types.
-    const MIME_TYPE_PNG = 'image/png';
-    const MIME_TYPE_JPG = 'image/jpeg';
-    const MIME_TYPE_GIF = 'image/gif';
-
-    // Multiple assignable attributes.
     protected $fillable = [
         'type',
         'target_id',
         'name',
     ];
 
-    // Image tag pattern.
+    // イメージタイプ定数.
+    const TYPE_PROFILE_IMAGE = 1;
+    const TYPE_ARTICLE_IMAGE = 2;
+    const TYPE_PICTURE_IMAGE = 3;
+
+    // マインタイプ定数.
+    const MIME_TYPE_PNG = 'image/png';
+    const MIME_TYPE_JPG = 'image/jpeg';
+    const MIME_TYPE_GIF = 'image/gif';
+
+    // イメージタグ正規表現.
     const PATTERN_IMG = '/<img.*?src\s*=\s*[\"|\'](.*?)[\"|\'].*?>/i';
 
     /**
-     * Get image types.
-     * 
-     * @return [image_type(int) => image_type_name(string)]
+     * イメージタイプ取得.
+     *
+     * @return array
      */
     public static function getTypes()
     {
@@ -50,9 +44,9 @@ class Images extends Model
     }
 
     /**
-     * Get extensions.
-     * 
-     * @return [mime_type(string) => extensions(string)]
+     * 拡張子取得.
+     *
+     * @return array
      */
     public static function getExtensions()
     {

@@ -7,12 +7,7 @@ class PictureComments extends Model
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'picture_comments';
-
-    // Primary key.
+    protected $table = 'picture_comments';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 }

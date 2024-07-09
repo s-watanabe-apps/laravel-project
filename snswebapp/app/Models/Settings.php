@@ -3,16 +3,11 @@ namespace App\Models;
 
 class Settings extends Model
 {
-    // Table name.
-    public $table = 'settings';
-
-    // Primary key.
+    protected $table = 'settings';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 
-    // Attribute default values.
+    // 属性情報初期値
     protected $attributes = [
         'user_create_any' => 0,
         'user_create_member' => 0,
@@ -21,7 +16,7 @@ class Settings extends Model
     ];
 
     /**
-     * Create a new model instance.
+     * コンストラクタ.
      *
      * @param boolean
      * @return void

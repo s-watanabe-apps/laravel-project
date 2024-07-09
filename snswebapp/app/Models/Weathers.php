@@ -5,12 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Weathers extends Model
 {
-    // Table name.
-    public $table = 'weathers';
-
-    // Primary key.
+    protected $table = 'weathers';
     protected $primaryKey = ['city_id', 'time'];
-
-    // Timestamps.
     public $timestamps = true;
 }

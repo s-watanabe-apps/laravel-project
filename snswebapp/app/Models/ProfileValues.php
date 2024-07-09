@@ -3,22 +3,15 @@ namespace App\Models;
 
 class ProfileValues extends Model
 {
-    // Table name.
-    public $table = 'profile_values';
-
-    // Primary key.
+    protected $table = 'profile_values';
     protected $primaryKey = ['user_id', 'profile_id'];
-
     protected $fillable = ['user_id', 'profile_id'];
-    
     public $incrementing = false;
-    
-    // Timestamps.
     public $timestamps = false;
 
     /**
      * プロフィールカスタム設定項目取得.
-     * 
+     *
      * @var int $user_id
      * @return array
      */
@@ -35,7 +28,7 @@ class ProfileValues extends Model
 
     /**
      * プロフィールカスタム設定項目保存.
-     * 
+     *
      * @var int $user_id
      * @var array $values
      * @return void

@@ -3,18 +3,13 @@ namespace App\Models;
 
 class VisitedUsers extends Model
 {
-    // Table name.
-    public $table = 'visited_users';
-
-    // Primary key.
+    protected $table = 'visited_users';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 
     /**
      * Visit.
-     * 
+     *
      * @var int users.id
      * @var int users.id
      * @return boolean
@@ -42,7 +37,7 @@ class VisitedUsers extends Model
 
     /**
      * Get visited users.
-     * 
+     *
      * @var int users.id
      * @return array
      */

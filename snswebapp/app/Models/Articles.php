@@ -7,23 +7,10 @@ class Articles extends Model
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'articles';
-
-    // Primary key.
+    protected $table = 'articles';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 
-    // Model constant, article types.
-    const TYPE_MEMBER_ARTICLE = 1;
-
-    // Model constant, article acquisition limits.
-    const USER_ARTICLES_ON_PAGE = 8;
-    const HEADLINE_LIMIT = 5;
-
-    // Multiple assignable attributes.
     protected $fillable = [
         'user_id',
         'type',
@@ -31,4 +18,11 @@ class Articles extends Model
         'title',
         'body',
     ];
+
+    // 記事タイプ定数.
+    const TYPE_MEMBER_ARTICLE = 1;
+
+    // ページング定数.
+    const USER_ARTICLES_ON_PAGE = 8;
+    const HEADLINE_LIMIT = 5;
 }

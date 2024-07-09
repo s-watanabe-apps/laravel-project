@@ -5,12 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InformationCategories extends Model
 {
-    // Table name.
-    public $table = 'information_categories';
-
-    // Primary key.
+    protected $table = 'information_categories';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 }

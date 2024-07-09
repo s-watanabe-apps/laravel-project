@@ -5,24 +5,20 @@ use Illuminate\Notifications\Notifiable;
 
 class Roles extends Model
 {
-    // Table name.
-    public $table = 'roles';
-
-    // Primary key.
+    protected $table = 'roles';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 
-    // Model constant, roles.
+    // ロールID定数.
     const SYSTEM = 1;
     const ADMIN = 2;
     const MEMBER = 3;
     const ANONYMOUS = 4;
+    const API = 5;
 
     /**
      * ロール名配列取得.
-     * 
+     *
      * @return array
      */
     public static function getRoleNames()

@@ -11,8 +11,8 @@ class Model extends Eloquent\Model
     }
 
     /**
-     * Bind an array to a Instance variables.
-     * 
+     * 属性値セット.
+     *
      * @param array
      * @return App\Models\Model
      */

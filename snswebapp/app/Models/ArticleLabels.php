@@ -3,12 +3,7 @@ namespace App\Models;
 
 class ArticleLabels extends Model
 {
-    // Table name.
-    public $table = 'article_labels';
-
-    // Primary key.
+    protected $table = 'article_labels';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 }

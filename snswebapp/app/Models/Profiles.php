@@ -3,12 +3,7 @@ namespace App\Models;
 
 class Profiles extends Model
 {
-    // Table name.
-    public $table = 'profiles';
-
-    // Primary key.
+    protected $table = 'profiles';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 }

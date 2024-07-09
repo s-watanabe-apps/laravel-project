@@ -3,20 +3,17 @@ namespace App\Models;
 
 class Favorites extends Model
 {
-    // Table name.
-    public $table = 'favorites';
-
-    // Timestamps.
+    protected $table = 'favorites';
     public $timestamps = true;
 
-    // Model constant, favorite codes.
+    // お気に入りコード定数.
     const FAVORITE_CODE_PROFILES = 'profiles';
     const FAVORITE_CODE_PICTURES = 'pictures';
 
     /**
-     * Get favorite names.
-     * 
-     * @return [string][string]
+     * お気に入りコード取得.
+     *
+     * @return array
      */
     public static function getFavoriteNames()
     {

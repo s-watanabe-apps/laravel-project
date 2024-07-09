@@ -3,12 +3,7 @@ namespace App\Models;
 
 class HeaderImages extends Model
 {
-    // Table name.
-    public $table = 'header_images';
-
-    // Primary key.
+    protected $table = 'header_images';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = false;
 }

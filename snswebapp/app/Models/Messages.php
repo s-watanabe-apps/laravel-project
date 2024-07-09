@@ -7,12 +7,7 @@ class Messages extends Model
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'messages';
-
-    // Primary key.
+    protected $table = 'messages';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 }

@@ -7,20 +7,10 @@ class Informations extends Model
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'informations';
-
-    // Primary key.
+    protected $table = 'informations';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 
-    /**
-     * Multiple assignable attributes.
-     *
-     * @var array
-     */
     protected $fillable = [
         'category_id',
         'title',

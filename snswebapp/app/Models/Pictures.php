@@ -7,17 +7,10 @@ class Pictures extends Model
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'pictures';
-
-    // Primary key.
+    protected $table = 'pictures';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 
-    // Model constant, page limit.
+    // ページング定数
     const PAGENATE = 12;
-
-    // SHOW TABLE STATUS LIKE 'pictures';
 }

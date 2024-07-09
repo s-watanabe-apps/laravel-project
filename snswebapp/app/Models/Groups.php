@@ -5,12 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Groups extends Model
 {
-    // Table name.
-    public $table = 'groups';
-
-    // Primary key.
+    protected $table = 'groups';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 }

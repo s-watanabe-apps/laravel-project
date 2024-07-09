@@ -6,13 +6,8 @@ use Illuminate\Support\Str;
 
 class PasswordResets extends Model
 {
-    // Table name.
-    public $table = 'password_resets';
-
-    // Primary key.
+    protected $table = 'password_resets';
     protected $primaryKey = 'email';
-
     public $timestamps = false;
-
     public $incrementing = false;
 }

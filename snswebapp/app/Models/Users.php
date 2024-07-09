@@ -8,21 +8,16 @@ class Users extends Authenticatable
 {
     use SoftDeletes;
 
-    // Table name.
-    public $table = 'users';
-
-    // Primary key.
+    protected $table = 'users';
     protected $primaryKey = 'id';
-
-    // Timestamps.
     public $timestamps = true;
 
-    // Model constant, page limit.
+    // ページング定数
     const PAGENATE = 12;
 
     /**
-     * Bind an array to a Instance variables.
-     * 
+     * 属性情報セット.
+     *
      * @param array
      * @return App\Models\Model
      */
@@ -36,21 +31,26 @@ class Users extends Authenticatable
     }
 
     /**
-     * Anonymous user attributes.
-     * 
-     * return stdClass
+     * 匿名ユーザー属性情報.
+     *
+     * @return App\Models\Users
      */
     public static function anonymous()
     {
-        return (object) [
+        return (new Users())->bind([
             'id' => 0,
             'role_id' => Roles::ANONYMOUS,
             'email' => null,
             'name' => __('strings.anonymous_user_name'),
             'image_file' => null,
-        ];
+        ]);
     }
 
+    /**
+     * 管理者チェック.
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
         return $this->role_id == Roles::ADMIN;
