@@ -15,8 +15,10 @@ class CreateLabelsTable extends Migration
     {
         Schema::create('labels', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('key', 128);
             $table->string('value');
-            $table->index('value');
+            $table->integer('weight')->default(5);
+            $table->index('key');
         });
     }
 

@@ -15,7 +15,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * インデックスコントローラ.
- * 
+ *
  * @author s-watanabe-apps
  * @since 2024-01-01
  * @version 1.0.0
@@ -46,7 +46,7 @@ class IndexController extends Controller
 
     /**
      * トップページ.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -80,9 +80,7 @@ class IndexController extends Controller
         $calendar = $this->calendarService->getWeeklyCalendarEvents();
 
         $articles = $this->articlesService->getLatestArticles(carbon($validated['date']));
-        //$articles[0]['image_url'] = 'http://snswebapp.jp:8000/show/image?file=profiles%2Fno_image.png';
         $articles = $this->pager($articles, 10, $validated['page'], '/');
-
 
         $feature_tags = [];
 

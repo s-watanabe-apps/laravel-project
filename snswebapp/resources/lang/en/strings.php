@@ -115,7 +115,7 @@ return [
         'fa-bolt' => 'Caution',
         'fa-flag' => 'Check',
     ],
-    
+
     // Side menus
     'write_articles' => 'Write articles',
     'album' => 'Album',
@@ -163,7 +163,7 @@ return [
         'saved_profile_settings' => 'Saved the navigation menus.',
         'basic_omission' => 'Basic configuration information can be omitted.',
     ],
-    
+
     // Error messages
     'errors' => [
         'fatal' => 'An unexpected error has occurred. Please start over.',
@@ -181,7 +181,7 @@ return [
         'invitation_confirm' => 'Are you sure you want to send an invitation email to this address?',
         'saved_settings' => 'Saved the settings.',
     ],
-    
+
     // Roles
     'role' => 'Role',
     'roles' => [
@@ -189,6 +189,7 @@ return [
         'admin' => 'Administrator',
         'member' => 'Member',
         'anonymous' => 'Anonymous',
+        'api' => 'API',
     ],
 
     // Input types

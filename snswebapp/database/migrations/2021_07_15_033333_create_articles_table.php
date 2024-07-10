@@ -16,6 +16,8 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
+            $table->char('lang', 2)->default(app()->getLocale());
+            $table->string('key', 256)->nullable();
             $table->integer('type');
             $table->integer('status');
             $table->string('title');
@@ -23,6 +25,7 @@ class CreateArticlesTable extends Migration
             $table->string('link')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->index(['lang', 'key']);
             $table->index(['user_id']);
             $table->index(['created_at']);
         });

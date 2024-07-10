@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * 記事サービスクラス.
- * 
+ *
  * @author s-watanabe-apps
  * @since 2024-01-01
  * @version 1.0.0
@@ -19,7 +19,7 @@ class ArticlesService extends Service
 {
     /**
      * 基本クエリ.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base()
@@ -36,7 +36,7 @@ class ArticlesService extends Service
 
     /**
      * 記事取得.
-     * 
+     *
      * @param int $id
      * @param int $userId
      * @return App\Models\Articles
@@ -53,7 +53,7 @@ class ArticlesService extends Service
 
     /**
      * Get articles by ids.
-     * 
+     *
      * @param array $ids
      * @return App\Models\Articles
      */
@@ -70,7 +70,7 @@ class ArticlesService extends Service
 
     /**
      * 記事取得(ユーザーID指定).
-     * 
+     *
      * @param int $userId
      * @param int $labelId = null
      * @return Illuminate\Pagination\LengthAwarePaginator
@@ -79,18 +79,18 @@ class ArticlesService extends Service
     {
         $builder = $this->base()
             ->where('articles.user_id', $userId);
-        
+
         if ($labelId > 0) {
             $builder->join('article_labels', function($join) use($labelId) {
                 $join->on('article_labels.article_id', '=', 'articles.id')
                     ->where('article_labels.label_id', $labelId);
             });
         }
-        
+
         if ($userId != user()->id) {
             $builder->where('articles.status', \Status::ENABLED);
         }
-        
+
         $articles = $builder->orderBy('articles.created_at', 'desc')->paginate(Articles::USER_ARTICLES_ON_PAGE);
 
         foreach ($articles as &$article) {
@@ -106,10 +106,23 @@ class ArticlesService extends Service
     }
 
     /**
+     * 記事取得(キー指定).
+     *
+     * @param string $key
+     * @return App\Models\Articles
+     */
+    public function getByKey($key)
+    {
+        return $this->base()
+            ->where('articles.key', $key)
+            ->first();
+    }
+
+    /**
      * ヘッドライン取得.
-     * 
+     *
      * @param Carbon $date
-     * 
+     *
      * @return array<App\Models\Articles>
      */
     public function getLatestArticles($date = null)
@@ -134,14 +147,15 @@ class ArticlesService extends Service
             return json_encode($data);
         });
 
-        $data = array_map(function($value) {
-            $value['body_text'] = mb_substr(strip_tags($value['body'], '<br>'), 0, 120) . '...';
+        $articleLabelsService = new ArticleLabelsService();
+        $data = array_map(function($value) use($articleLabelsService) {
+            $value['body_text'] = mb_substr(strip_tags($value['body'], '<br>'), 0, 180) . '...';
             preg_match(Images::PATTERN_IMG, $value['body'], $matches);
             if (count($matches) > 1) {
-                $value['image'] = $matches[1];
+                $value['image_url'] = $matches[1];
             }
 
-            $value['tags'] = [];
+            $value['tags'] = $articleLabelsService->getByArticleId($value['id']);
 
             return $value;
         }, $cache);
@@ -151,7 +165,7 @@ class ArticlesService extends Service
 
     /**
      * ユーザーの記事一覧取得.
-     * 
+     *
      * @param int $user_id
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array
@@ -177,7 +191,7 @@ class ArticlesService extends Service
 
     /**
      * Get favorite article headlines by user id for Cache or Database.
-     * 
+     *
      * @param int $userId
      * @param int $limit = Articles::HEADLINE_LIMIT
      * @return array<App\Models\Articles>
@@ -192,7 +206,7 @@ class ArticlesService extends Service
             $ids = (new ArticleCommentsService())->getFavoriteArticleIds($userId, $limit);
 
             $data = $this->getByIds(array_column($ids->toArray(), 'article_id'));
-    
+
             return json_encode($data);
         });
 
@@ -205,14 +219,22 @@ class ArticlesService extends Service
 
     /**
      * 記事情報新規作成.
-     * 
+     *
      * @param array $values
      * @return App\Models\Articles
      */
     public function insertArticles(array $values)
     {
+        if (php_sapi_name() == 'cli') {
+            // コンソールからの実行時のみuser_idの設定を許可
+            $userId = $values['user_id'] ?? null;
+        } else {
+            $userId = user()->id;
+        }
+
         $id = Articles::insertGetId([
-            'user_id' => user()->id,
+            'user_id' => $userId,
+            'key' => $values['key'] ?? null,
             'type' => Articles::TYPE_MEMBER_ARTICLE,
             'title' => $values['title'],
             'body' => $values['body'],
@@ -226,7 +248,7 @@ class ArticlesService extends Service
 
     /**
      * 記事情報更新.
-     * 
+     *
      * @param array $values
      * @return App\Models\Articles
      */
@@ -247,7 +269,7 @@ class ArticlesService extends Service
 
     /**
      * 記事削除.
-     * 
+     *
      * @param int $id
      * @return App\Models\Articles
      */
@@ -265,7 +287,7 @@ class ArticlesService extends Service
 
     /**
      * Get archive months by user id.
-     * 
+     *
      * @param int $userId
      * @return array
      */

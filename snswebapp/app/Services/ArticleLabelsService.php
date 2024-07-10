@@ -6,7 +6,7 @@ use App\Models\Labels;
 
 /**
  * 記事ラベルサービスクラス.
- * 
+ *
  * @author s-watanabe-apps
  * @since 2024-01-01
  * @version 1.0.0
@@ -15,7 +15,7 @@ class ArticleLabelsService extends Service
 {
     /**
      * 基本クエリ.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base()
@@ -29,7 +29,7 @@ class ArticleLabelsService extends Service
 
     /**
      * ラベル配列取得(記事ID指定).
-     * 
+     *
      * @param int $articleId
      * @return array
      */
@@ -40,7 +40,8 @@ class ArticleLabelsService extends Service
         $data = $this->remember($key, function() use($articleId) {
             $data = $this->base()
                 ->where('article_labels.article_id', $articleId)
-                ->get();
+                ->get()
+                ->toArray();
 
             return json_encode($data);
         });
@@ -50,7 +51,7 @@ class ArticleLabelsService extends Service
 
     /**
      * Get article labels by article id.
-     * 
+     *
      * @param int $userId
      * @return array<App\Models\Labels>
      */
@@ -82,10 +83,10 @@ class ArticleLabelsService extends Service
 
     /**
      * 人気タグ取得.
-     * 
+     *
      * @param string $lang 言語
      * @param string $today 現在日
-     * 
+     *
      * @return array
      */
     public function getFeatureTags($date)
@@ -123,4 +124,16 @@ class ArticleLabelsService extends Service
 
         return $cache;
     }
+
+    public function insertArticleLabels(array $values)
+    {
+        $id = ArticleLabels::insertGetId([
+            'article_id' => $values['article_id'],
+            'label_id' => $values['label_id'],
+            'created_at' => carbon(),
+        ]);
+
+        return $id;
+    }
+
 }

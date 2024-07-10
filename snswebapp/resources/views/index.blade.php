@@ -38,10 +38,10 @@
     @if (!is_null($article['link']))
     <a href="{{$article['link']}}">{{$article['link']}}</a>
     @endif
-    <div class="footer">
+    <div class="footer" style="margin-top: 5px;">
         <div class="tags">
             @foreach($article['tags'] as $tag)
-            <a href="/{{$lang}}/?tag={{$tag['name']}}"><span class="tag" style="border-color: {{$tag['frame_color']}}; background: {{$tag['body_color']}}">{{$tag['name']}}</span></a>
+            <a href="/articles/?tag={{$tag['value']}}"><span class="tag" style="border-color: {{$tag['frame_color'] ?? ''}}; background: {{$tag['body_color'] ?? ''}}">{{$tag['value']}}</span></a>
             @endforeach
         </div>
         <div class="source"><small>{{str_datetime_format($article['created_at'])}}</small> <a href="/profiles/{{$article['user_id']}}">{{$article['name']}}</a></div>

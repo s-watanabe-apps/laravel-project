@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * ユーザーサービスクラス.
- * 
+ *
  * @author s-watanabe-apps
  * @since 2024-01-01
  * @version 1.0.0
@@ -19,7 +19,7 @@ class UsersService extends Service
 {
     /**
      * 基本クエリ.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base()
@@ -38,7 +38,7 @@ class UsersService extends Service
 
     /**
      * ユーザー情報取得.
-     * 
+     *
      * @var int id
      * @return array
      */
@@ -68,7 +68,7 @@ class UsersService extends Service
 
     /**
      * ユーザー情報取得(by Eメール).
-     * 
+     *
      * @param string email
      * @return App\Models\Users
      */
@@ -80,17 +80,30 @@ class UsersService extends Service
     }
 
     /**
+     * ユーザー情報取得(by URL).
+     *
+     * @param string url
+     * @return App\Models\Users
+     */
+    public function getUserByUrl($url)
+    {
+        return $this->base()
+            ->where('url', $url)
+            ->first();
+    }
+
+    /**
      * ユーザー一覧取得.
-     * 
+     *
      * @param string $keyword
      * @param int $group_code
-     * 
+     *
      * @return array
      */
     public function getEnabledUsers(string $keyword = null, string $group_code = null)
     {
         $query = $this->base()->where('users.status', \Status::ENABLED);
-        
+
         if (!is_null($keyword)) {
             $keyword = '%' . addcslashes($keyword, '%_\\') . '%';
             $query->where('users.name', 'like', $keyword);
@@ -99,7 +112,7 @@ class UsersService extends Service
         if (!is_null($group_code) && $group_code != '0') {
             $query->where('users.group_code', $group_code);
         }
-            
+
         $result = $query->get();
 
         return $result->toArray();
@@ -107,7 +120,7 @@ class UsersService extends Service
 
     /**
      * ユーザー一覧取得(管理用).
-     * 
+     *
      * @param string $keyword
      * @param int $group_code
      * @param int $sortkey
@@ -144,7 +157,7 @@ class UsersService extends Service
                 'header_name' => __('strings.status'),
             ],
         ];
-    
+
         $sessions = \DB::raw('select user_id, max(last_activity) as last_activity from sessions group by user_id');
 
         $query = $this->base()
@@ -197,7 +210,7 @@ class UsersService extends Service
 
     /**
      * Get birthday users for Cache or Database.
-     * 
+     *
      * @var Carbon[] birthdays
      * @return array[App\Models\Users]
      */
@@ -213,7 +226,7 @@ class UsersService extends Service
 
         $cache = $this->remember($key, function() use($birthdays) {
             $builder = $this->base();
-        
+
             $dateStrings = [];
             foreach ($birthdays as $birthday) {
                 $builder->orWhere(function($query) use($birthday) {
@@ -221,7 +234,7 @@ class UsersService extends Service
                           ->where(\DB::raw('date_format(birthdate, "%d")'), $birthday->format('d'));
                 });
             }
-    
+
             $data = $builder->orderBy('id')->get();
             return json_encode($data);
         }, (60 * 60 * 24));
@@ -233,7 +246,7 @@ class UsersService extends Service
 
     /**
      * APIトークン更新.
-     * 
+     *
      * @var int id
      * @var string apiToken
      * @return bool
@@ -257,19 +270,23 @@ class UsersService extends Service
 
     /**
      * ユーザー情報作成.
-     * 
+     *
      * @param array
      * @param int
      * @return App\Models\Users
      */
     public function insertUser($values)
     {
-        if (!user()->isAdmin()) {
-            abort(403);
+        if (php_sapi_name() != 'cli') {
+            // WEBからの実行の場合は権限をチェック
+            if (!user()->isAdmin()) {
+                abort(403);
+            }
         }
 
         $id = Users::insertGetId([
             'email' => $values['email'],
+            'url' => $values['url'] ?? null,
             'name' => $values['name'],
             'role_id' => $values['role_id'],
             'birthdate' => $values['birthdate'],
@@ -283,7 +300,7 @@ class UsersService extends Service
 
     /**
      * ユーザー情報更新.
-     * 
+     *
      * @param array $values
      * @param array $id
      * @return int

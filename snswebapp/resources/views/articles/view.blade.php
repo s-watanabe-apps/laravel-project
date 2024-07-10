@@ -4,7 +4,10 @@
 <div class="contents">
     <div class="subject"><i class="fas fa-blog"></i> {{$articles['title']}}</div>
 
-    <div class="articles-body">{!!$articles['body']!!}</div>
+    <div class="articles-body">
+        {!!$articles['body']!!}
+        <a href="{{$articles['link']}}">{{$articles['link']}}</a>
+    </div>
 
     @if (user()->isAdmin() || user()->id == $articles['user_id'])
     <div class="flex-contents">
@@ -17,13 +20,16 @@
     </div>
     @endif
 
-
     <div class="grid-contents" style="padding: 0px;">
         <div class="vertical-contents w-50">
             <div class="title">@lang('strings.author')</div>
             <span>
-                <small>{{str_date_format($articles['created_at'])}}</small>
                 <a href="/profiles/{{$articles['user_id']}}">{{$articles['name']}}</a>
+            </span>
+
+            <div class="title">@lang('strings.updated_at')</div>
+            <span>
+                <p>{{$articles['updated_at'] != null ? str_datetime_format($articles['updated_at']) : str_datetime_format($articles['created_at'])}}</p>
             </span>
 
             <div class="title">@lang('strings.label')</div>
@@ -67,7 +73,5 @@
             {{Form::close()}}
         </div>
     </div>
-
 </div>
-
 @endsection

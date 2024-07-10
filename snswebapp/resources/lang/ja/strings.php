@@ -105,7 +105,7 @@ return [
     'password_change' => 'パスワード変更',
     'current_password' => '現在のパスワード',
     'new_password' => '新しいパスワード',
-    'author' => '著者',
+    'author' => '情報提供元',
     'upload_picture' => 'イメージアップロード',
 
     // お知らせ種別
@@ -188,6 +188,7 @@ return [
         'admin' => '管理者',
         'member' => 'メンバー',
         'anonymous' => '匿名',
+        'api' => 'API',
     ],
 
     // 入力タイプ
