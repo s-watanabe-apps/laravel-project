@@ -11,7 +11,7 @@ class GetWeathers extends Command
      *
      * @var string
      */
-    protected $signature = 'command:get-weathers';
+    protected $signature = 'command:get-weathers {--args=} {--re-run}';
 
     /**
      * The console command description.
@@ -37,6 +37,24 @@ class GetWeathers extends Command
      */
     public function handle()
     {
+        $this->info(__CLASS__ . " - start.");
+        $this->main();
+        $this->info(__CLASS__ . " - end.");
+
         return 0;
+    }
+
+    private function main()
+    {
+        $class = "App\\Console\\Commands\\SubModules\\OpenWeathermap";
+        $parts = explode('\\', get_parent_class($class));
+        if (end($parts) != 'SubModule') {
+            $this->warn("Execution class is invalid. [{$class}]");
+            return;
+        }
+
+        $weathers = $class::get($this);
+        dump($this->option('args'));
+        dump(get_parent_class($class));
     }
 }

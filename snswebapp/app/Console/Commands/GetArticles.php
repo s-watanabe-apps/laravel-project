@@ -23,7 +23,7 @@ class GetArticles extends Command
      *
      * @var string
      */
-    protected $signature = 'command:get-articles';
+    protected $signature = 'command:get-articles {--args=} {--re-run}';
 
     /**
      * The console command description.
@@ -68,9 +68,9 @@ __JSON__;
      */
     public function handle()
     {
-        $this->info(get_class($this) . " - start.");
+        $this->info(__CLASS__ . " - start.");
         $this->main();
-        $this->info(get_class($this) . " - end.");
+        $this->info(__CLASS__ . " - end.");
 
         return 0;
     }
@@ -84,6 +84,12 @@ __JSON__;
 
         foreach ($apis as $api) {
             $class = "App\\Console\\Commands\\SubModules\\{$api['module']}";
+            $parts = explode('\\', get_parent_class($class));
+            if (end($parts) != 'SubModule') {
+                $this->warn("Execution class is invalid. [{$class}]");
+                continue;
+            }
+
             $articles = $class::get($this);
 
             foreach ($articles as $article) {
