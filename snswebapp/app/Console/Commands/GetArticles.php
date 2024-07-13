@@ -122,9 +122,25 @@ __JSON__;
                         'link' => $article['link'],
                         'status' => Status::ENABLED,
                     ]);
-                    $this->info("Create articles. ({$article['title']})");
+                    $this->info("Insert articles. ({$article['title']})");
                     //$this->info("[{$article['key']}]");
                     //$this->info(strlen($article['key']));
+                } else {
+                    $doUpdate = false;
+                    $values = [];
+
+                    foreach ($article as $key => $value) {
+                        if ($key != 'user' && $value != $row->getAttributes()[$key]) {
+                            $values[$key] = $value;
+                            $doUpdate = true;
+                        }
+                    }
+
+                    if ($doUpdate) {
+                        $values['id'] = $row->getAttributes()['id'];
+                        $this->articlesService->updateArticles($values);
+                        $this->info("Update articles. ({$values['id']})");
+                    }
                 }
 
                 // ラベル情報の登録
@@ -137,7 +153,7 @@ __JSON__;
                                 'article_id' => $articleId,
                                 'label_id' => $label['id'],
                             ]);
-                            $this->info("Create article_labels. ({$label['value']})");
+                            $this->info("Insert article_labels. ({$label['value']})");
                         }
                     }
                 }

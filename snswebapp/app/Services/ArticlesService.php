@@ -253,16 +253,17 @@ class ArticlesService extends Service
      * @return App\Models\Articles
      */
     public function updateArticles(array $values) {
-        $articles = $this->get($values['id']);
-        $this->checkUpdateRight($articles['user_id']);
 
-        $result = Articles::where('articles.id', $values['id'])
-            ->update([
-                'title' => $values['title'],
-                'body' => $values['body'],
-                'status' => $values['status'],
-                'updated_at' => carbon(),
-            ]);
+        //$articles = $this->get($values['id']);
+        if (php_sapi_name() != 'cli') {
+            $this->checkUpdateRight($articles['user_id']);
+        }
+
+        $id = $values['id'];
+        unset($values['id']);
+
+        $result = Articles::where('id', $id)
+            ->update($values);
 
         return $result;
     }

@@ -27,7 +27,7 @@ if (!function_exists('carbon')) {
 if (!function_exists('user')) {
     /**
      * Global authenticating user or anonymous user.
-     * 
+     *
      * @return App\Models\Users
      */
     function user()
@@ -39,7 +39,7 @@ if (!function_exists('user')) {
 if (!function_exists('settings')) {
     /**
      * Global function that returns settings.
-     * 
+     *
      * @return App\Models\Settings
      */
     function settings()
@@ -59,7 +59,7 @@ if (!function_exists('str_date_format')) {
             if (is_null($date)) {
                 return '-';
             }
-            
+
             $time = strtotime($date);
             if (!$time) {
                 return '-';
@@ -84,7 +84,7 @@ if (!function_exists('str_datetime_format')) {
             if (is_null($date)) {
                 return $replace;
             }
-            
+
             $time = strtotime($date);
             if (!$time) {
                 return $replace;
@@ -94,6 +94,31 @@ if (!function_exists('str_datetime_format')) {
             return date('Y/m/d H:i', $time);
         } else {
             return date('m/d/Y h:i A', $time);
+        }
+    }
+}
+
+if (!function_exists('str_datetime_format_sec')) {
+    /**
+     */
+    function str_datetime_format_sec($date, $replace = '-')
+    {
+        if (is_numeric($date)) {
+            $time = $date;
+        } else {
+            if (is_null($date)) {
+                return $replace;
+            }
+
+            $time = strtotime($date);
+            if (!$time) {
+                return $replace;
+            }
+        }
+        if (\App::getLocale() == 'ja') {
+            return date('Y/m/d H:i:s', $time);
+        } else {
+            return date('m/d/Y h:i:s A', $time);
         }
     }
 }

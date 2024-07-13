@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Services\WeathersService;
 use Illuminate\Console\Command;
 
 class GetWeathers extends Command
 {
+    private $weathersService;
+
     /**
      * The name and signature of the console command.
      *
@@ -25,9 +28,12 @@ class GetWeathers extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        WeathersService $weathersService
+    )
     {
         parent::__construct();
+        $this->weathersService = $weathersService;
     }
 
     /**
@@ -54,7 +60,27 @@ class GetWeathers extends Command
         }
 
         $weathers = $class::get($this);
-        dump($this->option('args'));
-        dump(get_parent_class($class));
+        foreach ($weathers['list'] as $weather) {
+            $weather['city_id'] = $weathers['city']['id'];
+            $row = $this->weathersService->getWeathersByCityIdAndTime($weather['city_id'], $weather['time']);
+            if ($row == null) {
+                $this->weathersService->insertWeathers($weather);
+                $this->info("Insert weathers. ({$weather['city_id']}, {$weather['time']})");
+            } else {
+                $doUpdate = false;
+                $values = [];
+                foreach ($weather as $key => $value) {
+                    if ($key != 'time' && $value != $row->getAttributes()[$key]) {
+                        $values[$key] = $value;
+                        $doUpdate = true;
+                    }
+                }
+
+                if ($doUpdate) {
+                    $this->weathersService->updateWeathers($weather['city_id'], $weather['time'], $values);
+                    $this->info("Update weathers. ({$weather['city_id']}, {$weather['time']})");
+                }
+            }
+        }
     }
 }
