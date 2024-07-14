@@ -66,7 +66,7 @@ function initExpand() {
         @include('header', compact('lang'))
         <div class="grid">
             <div class="side">
-                <div class="container">
+                <div class="container pc">
                     <div class="{{$user_menus_status}}">
                         <div class="title">
                             <div id="trigger-1" class="trigger" data-name="user-menus">会員メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
@@ -88,7 +88,7 @@ function initExpand() {
                     </div>
                 </div>
                 @if (user()->role_id == \App\Models\Roles::ADMIN || user()->role_id == \App\Models\Roles::SYSTEM)
-                <div class="container">
+                <div class="container pc">
                     <div class="{{$admin_menus_status}}">
                         <div class="title">
                             <div id="trigger-2" class="trigger" data-name="admin-menus">管理者メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>

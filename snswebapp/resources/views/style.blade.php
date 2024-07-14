@@ -350,7 +350,7 @@ input#prev, input#next {
 td.calendar_td:hover {
     cursor: pointer;
     background: #bee9f7 !important;
-} 
+}
 
 /* Weather */
 table.weather {
@@ -743,11 +743,28 @@ textarea[name="comment"] {
         width: 100%;
         background-color: rgba(34, 49, 52, 0.9);
     }
+    nav ul{
+        display: inline-block;
+        width: 100%;
+        list-style: none outside;
+        padding: 0;
+        margin: 0;
+    }
+    nav li{
+        padding: 0;
+        margin: 0;
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+    }
+    nav li:nth-child(odd) {
+        border-right: 1px solid #ddd;
+    }
     header ul {
         flex-direction: column;
     }
     header a {
-        text-align: center; 
+        text-align: center;
         border-top: solid 0.5px rgba(255, 255, 255, 0.6);
     }
     .grid-contents {

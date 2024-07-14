@@ -16,6 +16,9 @@
                 <li><a href="{{$nav['link']}}">{{$nav['name']}}</a></li>
                 @endforeach
             </ul>
+            <div>
+                会員メニュー
+            </div>
         </nav>
         <nav class="pc">
             <ul>
