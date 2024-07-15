@@ -108,6 +108,8 @@ return [
     'new_password' => 'New password',
     'author' => 'Author',
     'upload_picture' => 'Upload image',
+    'member_menus' => 'Member menus',
+    'admin_menus' => 'Administrator menus',
 
     // Information Marks
     'information_categories' => [
@@ -131,6 +133,7 @@ return [
     'group_management' => 'Group management',
     'freepage_management' => 'Free page management',
     'navigation_management' => 'Navigation management',
+    'ads_management' => 'Advertising management',
 
     // Messages
     'message' => 'Message',
@@ -231,5 +234,4 @@ return [
     'title_settings' => 'Title settings',
     'title_informations' => 'Notices.',
     'title_latest_articles' => 'Recent article list.',
-
 ];

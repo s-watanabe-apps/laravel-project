@@ -69,7 +69,7 @@ function initExpand() {
                 <div class="container pc">
                     <div class="{{$user_menus_status}}">
                         <div class="title">
-                            <div id="trigger-1" class="trigger" data-name="user-menus">会員メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
+                            <div id="trigger-1" class="trigger" data-name="user-menus">@lang('strings.member_menus')&nbsp;<img src="/img/arrow-down.png"></img></div>
                         </div>
                         <div class="target user-menus">
                             @if (auth()->check())
@@ -91,7 +91,7 @@ function initExpand() {
                 <div class="container pc">
                     <div class="{{$admin_menus_status}}">
                         <div class="title">
-                            <div id="trigger-2" class="trigger" data-name="admin-menus">管理者メニュー&nbsp;<img src="/img/arrow-down.png"></img></div>
+                            <div id="trigger-2" class="trigger" data-name="admin-menus">@lang('strings.admin_menus')&nbsp;<img src="/img/arrow-down.png"></img></div>
                         </div>
                         <div class="target admin-menus">
                             <ul>
@@ -110,6 +110,7 @@ function initExpand() {
                                 <li><a href="/managements/informations">@lang('strings.informations_management')</a></li>
                                 <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
                                 <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
+                                <li><a href="/managements/ads">@lang('strings.ads_management')</a></li>
                             </ul>
                         </div>
                     </div>

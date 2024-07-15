@@ -107,6 +107,8 @@ return [
     'new_password' => '新しいパスワード',
     'author' => '情報提供元',
     'upload_picture' => 'イメージアップロード',
+    'member_menus' => '会員メニュー',
+    'admin_menus' => '管理者メニュー',
 
     // お知らせ種別
     'information_categories' => [
@@ -130,6 +132,7 @@ return [
     'group_management' => 'グループ管理',
     'freepage_management' => 'フリーページ管理',
     'navigation_management' => 'ナビゲーション管理',
+    'ads_management' => '広告管理',
 
     // メッセージ
     'message' => 'メッセージ',

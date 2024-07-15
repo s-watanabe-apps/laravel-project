@@ -136,6 +136,10 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             // ファイルアップロード
             Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');
             Route::post('uploadfiles', 'Managements\UploadfilesController@uploadFile');
+
+            // 広告管理
+            Route::get('ads', 'Managements\AdsController@index')->name('managementsAds');
+            Route::post('ads', 'Managements\AdsController@save');
         });
     });
 });

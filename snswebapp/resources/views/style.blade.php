@@ -760,6 +760,16 @@ textarea[name="comment"] {
     nav li:nth-child(odd) {
         border-right: 1px solid #ddd;
     }
+    .nav-title {
+        color: #cccccc;
+        font-weight: bold;
+        padding: 10px 0 10px 0;
+        border: 0;
+    }
+    header {
+        top: -1px;
+        left: -1px;
+    }
     header ul {
         flex-direction: column;
     }
@@ -840,6 +850,9 @@ header {
     background: {{$settings['header_color']}} !important;
     border-left:1px solid {{$settings['border_color']}} !important;
     border-right:1px solid {{$settings['border_color']}} !important;
+}
+.nav-title {
+    background: {{$settings['header_color']}} !important;
 }
 div, table, td, ul, th:not(.xdsoft_calendar > table) {
     border-color: {{$settings['border_color']}} !important;
