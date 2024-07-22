@@ -181,7 +181,6 @@ header .sm {
 .vertical-contents {
     display: grid;
     padding: 5px 0 5px 0;
-    height: 0;
 }
 .contents-header {
     font-size: 14px;
@@ -532,6 +531,13 @@ table.info input, table.info select, table.info textarea {
     padding: 15px;
     border: 2px solid #0d0 !important;
     background: #9dedad;
+}
+.normal-box {
+    width: auto;
+    margin: 0;
+    padding: 0 15px 15px 15px;
+    border: 2px solid #ddd;
+    background: #fefeee;
 }
 
 .input-label{

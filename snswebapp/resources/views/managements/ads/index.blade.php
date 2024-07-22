@@ -1,10 +1,6 @@
 @extends('app')
 @section('content')
 
-<div id="formset" hidden>
-    @include('managements.ads.formset', [])
-</div>
-
 <div class="contents">
     <div class="subject">
         <span><i class="fas fa-fw fa-tools"></i> @lang('strings.ads_management')</span>
@@ -13,11 +9,41 @@
     {{Form::open(['name' => 'form', 'url' => '/managements/ads/register', 'method' => 'post', 'files' => true])}}
     @csrf
 
-    <div id="items">
+
+    <div class="title">1つめの広告</div>
+    <div class="normal-box" style="position: relative;">
+        <div class="vertical-contents">
+            <div class="input-label">@lang('strings.title')</div>
+            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
+            <div class="input-label">@lang('strings.body')</div>
+            <textarea id="editor1" name="body1">{{$ads['body'] ?? ''}}</textarea>
+        </div>
+        <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
+            <span aria-hidden="true"><b>&times;</b></span>
+        </button>
+    </div>
+
+    <div class="title">2つめの広告</div>
+    <div class="normal-box">
+        <div class="vertical-contents">
+            <div class="input-label">@lang('strings.title')</div>
+            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
+            <div class="input-label">@lang('strings.body')</div>
+            <textarea id="editor2" name="body2">{{$ads['body'] ?? ''}}</textarea>
+        </div>
+    </div>
+
+    <div class="title">3つめの広告</div>
+    <div class="normal-box">
+        <div class="vertical-contents">
+            <div class="input-label">@lang('strings.title')</div>
+            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
+            <div class="input-label">@lang('strings.body')</div>
+            <textarea id="editor3" name="body3">{{$ads['body'] ?? ''}}</textarea>
+        </div>
     </div>
 
     {{Form::close()}}
-    <button id="btn-add" type="button" style="margin-left: 10px;">@lang('strings.add')</button>
 </div>
 
 @if ($errors->any())
@@ -36,29 +62,6 @@
     </a>
 </div>
 
-<script>
-$(document).on('click', 'button#btn-add', function(){
-    $("div#items").append($("#formset").children().clone(true));
-});
-
-$(document).on('click', 'button#btn-delete', function(){
-    var index = $("button#btn-delete").index(this);
-    $('div#formset-contents').eq(index).remove();
-});
-
-$(document).on('change', 'select#type', function(){
-    var index = $("select#type").index(this);
-    if ($(this).val() == {{App\Libs\ProfileInputType::CHOICE}}) {
-        console.log(index);
-        $('div#select_list_name').eq(index).css('display', 'inline');
-        $('div#select_list_value').eq(index).css('display', 'inline');
-    } else {
-        $('div#select_list_name').eq(index).css('display', 'none');
-        $('div#select_list_value').eq(index).css('display', 'none');
-    }
-});
-</script>
-
 @if (Session::get('result') == 1)
 <script>
 window.onload = function() {
@@ -67,6 +70,8 @@ window.onload = function() {
 </script>
 @endif
 
-@include('shared.ckeditor', ['name' => 'body'])
+@include('shared.ckeditor', ['id' => 'editor1', 'name' => 'body1', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'editor2', 'name' => 'body2', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'editor3', 'name' => 'body3', 'height' => 150])
 
 @endsection

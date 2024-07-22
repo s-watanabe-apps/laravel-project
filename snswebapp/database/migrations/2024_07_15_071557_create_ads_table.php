@@ -20,6 +20,7 @@ class CreateAdsTable extends Migration
             $table->mediumtext('body');
             $table->timestamp('start_time');
             $table->timestamp('end_time')->nullable();
+            $table->integer('status');
             $table->timestamps();
             $table->primary(['id', 'type']);
         });

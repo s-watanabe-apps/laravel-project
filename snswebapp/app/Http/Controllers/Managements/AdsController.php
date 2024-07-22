@@ -17,6 +17,8 @@ use Illuminate\Support\Str;
  */
 class AdsController extends ManagementsController
 {
+    //AdsService $adsService;
+
     /**
      * コンストラクタ.
      *
@@ -26,6 +28,7 @@ class AdsController extends ManagementsController
     public function __construct(
         AdsService $adsService
     ) {
+        $this->adsService = $adsService;
     }
 
     /**
