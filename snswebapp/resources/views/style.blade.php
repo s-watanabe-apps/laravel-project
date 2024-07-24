@@ -534,7 +534,7 @@ table.info input, table.info select, table.info textarea {
 }
 .normal-box {
     width: auto;
-    margin: 0;
+    margin: 10px 0 10px 0;
     padding: 0 15px 15px 15px;
     border: 2px solid #ddd;
     background: #fefeee;
@@ -665,6 +665,36 @@ textarea[name="comment"] {
 .mypage input[type = "text"],
 .mypage input[type = "password"] {
     width: auto;
+}
+
+/** Tab */
+.tab-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.tab-label {
+    color: white;
+    width: 33%;
+    background: LightGray;
+    margin: 10px 0 10px 0;
+    padding: 5px 0 5px 0;
+    order: -1;
+    text-align: center;
+}
+.tab-content {
+    width: 100%;
+    display: none;
+}
+.tab-switch:checked+.tab-label {
+    background: DeepSkyBlue;
+}
+.tab-switch:checked+.tab-label+.tab-content {
+     display: block;
+}
+.tab-switch {
+    display: none;
 }
 
 @media only screen and (max-width:991px) {

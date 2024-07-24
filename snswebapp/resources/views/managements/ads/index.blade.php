@@ -6,44 +6,34 @@
         <span><i class="fas fa-fw fa-tools"></i> @lang('strings.ads_management')</span>
     </div>
 
-    {{Form::open(['name' => 'form', 'url' => '/managements/ads/register', 'method' => 'post', 'files' => true])}}
-    @csrf
-
-
-    <div class="title">1つめの広告</div>
-    <div class="normal-box" style="position: relative;">
-        <div class="vertical-contents">
-            <div class="input-label">@lang('strings.title')</div>
-            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
-            <div class="input-label">@lang('strings.body')</div>
-            <textarea id="editor1" name="body1">{{$ads['body'] ?? ''}}</textarea>
+    <div class="tab-wrap">
+        <input id="tab1" type="radio" name="tab" class="tab-switch" checked="checked" />
+        <label class="tab-label" for="tab1">サイドメニュー</label>
+        <div class="tab-content">
+            {{Form::open(['name' => 'form', 'url' => '/managements/ads/register', 'method' => 'post', 'files' => true])}}
+            @csrf
+            <p>サイドメニューに表示する広告を3つまで設定できます。</p>
+            @include('managements.ads.formset', ['id' => 'editor1'])
+            @include('managements.ads.formset', ['id' => 'editor2'])
+            @include('managements.ads.formset', ['id' => 'editor3'])
+            <div class="flex-contents">
+                <a href="javascript:form.submit()">
+                    <input type="submit" class="post" value="@lang('strings.save')"></input>
+                </a>
+            </div>
+            {{Form::close()}}
         </div>
-        <button id="btn-delete" type="button" style="position: absolute; top: 10px; right:10px; height: auto;">
-            <span aria-hidden="true"><b>&times;</b></span>
-        </button>
-    </div>
-
-    <div class="title">2つめの広告</div>
-    <div class="normal-box">
-        <div class="vertical-contents">
-            <div class="input-label">@lang('strings.title')</div>
-            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
-            <div class="input-label">@lang('strings.body')</div>
-            <textarea id="editor2" name="body2">{{$ads['body'] ?? ''}}</textarea>
+        <input id="tab2" type="radio" name="tab" class="tab-switch" />
+        <label class="tab-label" for="tab2">リスト</label>
+        <div class="tab-content">
+            コンテンツ 2
         </div>
-    </div>
-
-    <div class="title">3つめの広告</div>
-    <div class="normal-box">
-        <div class="vertical-contents">
-            <div class="input-label">@lang('strings.title')</div>
-            {{Form::input('text', 'title', $ads['title'] ?? '', [])}}
-            <div class="input-label">@lang('strings.body')</div>
-            <textarea id="editor3" name="body3">{{$ads['body'] ?? ''}}</textarea>
+        <input id="tab3" type="radio" name="tab" class="tab-switch" />
+        <label class="tab-label" for="tab3">フッター</label>
+        <div class="tab-content">
+            コンテンツ 3
         </div>
     </div>
-
-    {{Form::close()}}
 </div>
 
 @if ($errors->any())
@@ -56,12 +46,6 @@
 </div>
 @endif
 
-<div class="flex-contents">
-    <a href="javascript:form.submit()">
-        <input type="submit" class="post" value="@lang('strings.save')"></input>
-    </a>
-</div>
-
 @if (Session::get('result') == 1)
 <script>
 window.onload = function() {
@@ -70,8 +54,8 @@ window.onload = function() {
 </script>
 @endif
 
-@include('shared.ckeditor', ['id' => 'editor1', 'name' => 'body1', 'height' => 150])
-@include('shared.ckeditor', ['id' => 'editor2', 'name' => 'body2', 'height' => 150])
-@include('shared.ckeditor', ['id' => 'editor3', 'name' => 'body3', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'editor1', 'name' => 'body[]', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'editor2', 'name' => 'body[]', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'editor3', 'name' => 'body[]', 'height' => 150])
 
 @endsection
