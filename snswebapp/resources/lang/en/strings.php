@@ -110,6 +110,7 @@ return [
     'upload_picture' => 'Upload image',
     'member_menus' => 'Member menus',
     'admin_menus' => 'Administrator menus',
+    'contact_admin' => '管理者へお問い合わせ',
 
     // Information Marks
     'information_categories' => [
@@ -134,6 +135,9 @@ return [
     'freepage_management' => 'Free page management',
     'navigation_management' => 'Navigation management',
     'ads_management' => 'Advertising management',
+    'inquiry_management' => 'Inquiry management',
+    'inquiry_type' => 'Inquiry type',
+    'inquiry_list' => 'List of inquiries',
 
     // Messages
     'message' => 'Message',

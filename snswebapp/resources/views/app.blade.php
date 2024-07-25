@@ -77,10 +77,12 @@ function initExpand() {
                                 <li><a href="/mypage">@lang('strings.mypage')</a>
                                 <li><a href="/profiles/{{user()->id}}">@lang('strings.profile')</a>
                                 <li><a href="/massages/inbox">@lang('strings.message')</a>
+                                <li><a href="/inquiry">@lang('strings.contact_admin')</a>
                                 <li><a href="/logout">@lang('auth.logout')</a>
                             </ul>
                             @else
                             <ul>
+                                <li><a href="/inquiry">@lang('strings.contact_admin')</a>
                                 <li><a href="/login">@lang('auth.login')</a>
                             </ul>
                             @endif
@@ -111,6 +113,11 @@ function initExpand() {
                                 <li><a href="/managements/freepages">@lang('strings.freepage_management')</a></li>
                                 <li><a href="/managements/uploadfiles">@lang('strings.upload_files')</a></li>
                                 <li><a href="/managements/ads">@lang('strings.ads_management')</a></li>
+                            </ul>
+                            <ul>
+                                <section>@lang('strings.inquiry_management')</section>
+                                <li><a href="/managements/inquirytypes">@lang('strings.inquiry_type')</a></li>
+                                <li><a href="/managements/inquiries">@lang('strings.inquiry_list')</a></li>
                             </ul>
                         </div>
                     </div>

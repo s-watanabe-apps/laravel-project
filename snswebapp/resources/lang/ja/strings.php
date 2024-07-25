@@ -109,6 +109,7 @@ return [
     'upload_picture' => 'イメージアップロード',
     'member_menus' => '会員メニュー',
     'admin_menus' => '管理者メニュー',
+    'contact_admin' => '管理者へお問い合わせ',
 
     // お知らせ種別
     'information_categories' => [
@@ -133,6 +134,9 @@ return [
     'freepage_management' => 'フリーページ管理',
     'navigation_management' => 'ナビゲーション管理',
     'ads_management' => '広告管理',
+    'inquiry_management' => 'お問い合わせ管理',
+    'inquiry_type' => 'お問い合わせ種別',
+    'inquiry_list' => 'お問い合わせ一覧',
 
     // メッセージ
     'message' => 'メッセージ',
