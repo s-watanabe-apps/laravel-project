@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfileChoicesTableSeeder::class);
         $this->call(MessagesTableSeeder::class);
         $this->call(ThemesTableSeeder::class);
+        $this->call(InquiryTypesTableSeeder::class);
 
         if (config('app.debug')) {
             $this->call(UsersTableSeeder::class);

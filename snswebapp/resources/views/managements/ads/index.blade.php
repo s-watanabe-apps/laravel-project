@@ -3,7 +3,7 @@
 
 <div class="contents">
     <div class="subject">
-        <span><i class="fas fa-fw fa-tools"></i> @lang('strings.ads_management')</span>
+        <span><i class="fas fa-fw fa-audio-description"></i> @lang('strings.ads_management')</span>
     </div>
 
     <div class="tab-wrap">

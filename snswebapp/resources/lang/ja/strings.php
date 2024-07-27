@@ -110,6 +110,7 @@ return [
     'member_menus' => '会員メニュー',
     'admin_menus' => '管理者メニュー',
     'contact_admin' => '管理者へお問い合わせ',
+    'inquiry_body' => 'お問い合わせ内容',
 
     // お知らせ種別
     'information_categories' => [
@@ -208,6 +209,14 @@ return [
         'select' => '複数選択',
     ],
     'input_type_column_name' => '項目名',
+
+    // 問い合わせ種別
+    'inquiry_types' => [
+        '会員登録について',
+        'サイトについて',
+        '退会について',
+        'その他',
+    ],
 
     // 管理者向け
     'basic_settings' => '基本設定',

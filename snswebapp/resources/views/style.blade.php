@@ -558,7 +558,8 @@ table.info input, table.info select, table.info textarea {
 }
 .text-preview {
     padding: 4px;
-    border: 1px dotted #9a9a9a;
+    border: 2px dotted #898989;
+    min-height: 400px;
 }
 .text-danger {
     color: #ff0000;

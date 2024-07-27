@@ -21,6 +21,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
     Route::get('/password/reset', 'Auth\PasswordController@reset');
     Route::post('/password/reset', 'Auth\PasswordController@resetPassword');
 
+    // 会員登録
     Route::get('/register', 'AppRegisterController@index');
     Route::post('/register', 'AppRegisterController@index');
 
@@ -88,6 +89,9 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // ファイル
         Route::get('/files/{fileName}', 'FilesController@get')->where('fileName', \App\Services\FilesService::getRegex());
 
+        // お問い合わせ
+        Route::get('/inquiry', 'InquiryController@index');
+        Route::post('/inquiry/confirm', 'InquiryController@confirm');
 
         // 管理者メニュー
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {

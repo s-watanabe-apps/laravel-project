@@ -110,7 +110,8 @@ return [
     'upload_picture' => 'Upload image',
     'member_menus' => 'Member menus',
     'admin_menus' => 'Administrator menus',
-    'contact_admin' => '管理者へお問い合わせ',
+    'contact_admin' => 'Contact administrator',
+    'inquiry_body' => 'Content of inquiry',
 
     // Information Marks
     'information_categories' => [
@@ -209,6 +210,14 @@ return [
         'select' => 'Multiple selection',
     ],
     'input_type_column_name' => 'Item name',
+
+    // Inquiry types
+    'inquiry_types' => [
+        'About membership registration',
+        'About the site',
+        'About withdrawal',
+        'Others',
+    ],
 
     // Managements Settings
     'basic_settings' => 'Basic configuration',
