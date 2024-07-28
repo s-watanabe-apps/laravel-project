@@ -9,6 +9,11 @@
         'url' => '/inquiry/send',
         'method' => 'post',
     ])}}
+    @csrf
+
+    @foreach($validated as $key => $value)
+    {{Form::hidden($key, $value)}}
+    @endforeach
 
     <div class="vertical-contents">
         <div class="input-label">@lang('strings.inquiry_type')</div>
@@ -22,7 +27,7 @@
         @endif
 
         <div class="input-label">@lang('strings.inquiry_body')</div>
-        <div class="text-preview">{{$validated['body']}}</div>
+        <div class="text-preview">{{$validated['text']}}</div>
 
         <div class="flex-contents">
             <input type="submit" class="post" value="@lang('strings.send')"></input>

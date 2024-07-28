@@ -25,4 +25,25 @@ class InquiriesService extends Service
                 'inquiries.*',
             ])->orderBy('id');
     }
+
+    /**
+     * お問い合わせ新規作成.
+     *
+     * @param array $values
+     * @return int
+     */
+    public function insertInquiries(array $values)
+    {
+        if (auth()->check()) {
+            $values['user_id'] = user()->id;
+        }
+
+        $values['status'] = \Status::ENABLED;
+        $values['created_at'] = carbon();
+
+        $id = Inquiries::insertGetId($values);
+
+        return $id;
+    }
+
 }

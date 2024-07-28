@@ -557,6 +557,7 @@ table.info input, table.info select, table.info textarea {
     border-left: 8px solid #9a9a9a;
 }
 .text-preview {
+    background: #efffef;
     padding: 4px;
     border: 2px dotted #898989;
     min-height: 400px;

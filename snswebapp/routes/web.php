@@ -92,6 +92,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         // お問い合わせ
         Route::get('/inquiry', 'InquiryController@index');
         Route::post('/inquiry/confirm', 'InquiryController@confirm');
+        Route::post('/inquiry/send', 'InquiryController@send');
 
         // 管理者メニュー
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {

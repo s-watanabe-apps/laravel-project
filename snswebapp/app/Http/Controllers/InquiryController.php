@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\InquiryTypesService;
+use App\Services\InquiriesService;
 use App\Http\Requests\InquiryRequest;
 use Illuminate\Http\Request;
 
@@ -10,17 +11,21 @@ class InquiryController extends Controller
 {
     // サービス変数.
     private $inquiryTypesService;
+    private $inquiriesService;
 
     /**
      * コンストラクタ.
      *
      * @param App\Services\InquiryTypesService
+     * @param App\Services\InquiriesService;
      * @return void
      */
     public function __construct(
-        InquiryTypesService $inquiryTypesService
+        InquiryTypesService $inquiryTypesService,
+        InquiriesService $inquiriesService
     ) {
         $this->inquiryTypesService = $inquiryTypesService;
+        $this->inquiriesService = $inquiriesService;
     }
 
     /**
@@ -49,6 +54,21 @@ class InquiryController extends Controller
         $validated = $request->validated();
 
         return view('inquiry.confirm', compact('types', 'validated'));
+    }
+
+    /**
+     * お問い合わせ入力内容登録.
+     *
+     * @param App\Http\Requests\InquiryRequest
+     * @return Illuminate\View\View
+     */
+    public function send(InquiryRequest $request)
+    {
+
+        $this->inquiriesService->insertInquiries($request->validated());
+        exit;
+
+        return view('inquiry.send', compact('validated'));
     }
 
 }

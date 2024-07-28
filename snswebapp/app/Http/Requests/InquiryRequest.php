@@ -21,8 +21,8 @@ class InquiryRequest extends AppFormRequest
     public function rules()
     {
         $rules = [
-            'type' => 'required|exists:information_categories,id',
-            'body' => 'required|string',
+            'type' => 'required|exists:inquiry_types,id',
+            'text' => 'required|string',
         ];
 
         if (!auth()->check()) {
@@ -42,7 +42,7 @@ class InquiryRequest extends AppFormRequest
     {
         return [
             'type' => __('strings.inquiry_type'),
-            'body' => __('strings.inquiry_body'),
+            'text' => __('strings.inquiry_body'),
             'name' => __('strings.name'),
             'email' => __('strings.email'),
         ];

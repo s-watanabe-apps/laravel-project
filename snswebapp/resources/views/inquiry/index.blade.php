@@ -29,8 +29,8 @@
         @endif
 
         <div class="input-label">@lang('strings.inquiry_body')</div>
-        <textarea name="body" style="resize: vertical; padding: 5px;" rows="30"></textarea>
-        <div class="text-danger">{{$errors->first('body') ?? ''}}</div>
+        <textarea name="text" style="resize: vertical; padding: 5px;" rows="30"></textarea>
+        <div class="text-danger">{{$errors->first('text') ?? ''}}</div>
 
         <div class="flex-contents">
             <input type="submit" class="post" value="@lang('strings.confirm')"></input>
