@@ -2,7 +2,10 @@
 @section('content')
 
 <div class="contents">
-    <div class="subject"><i class="fas fa-fw fa-paper-plane"></i> @lang('strings.contact_admin')</div>
+    <div class="subject">
+        <span><a href="/inquiry"><i class="fas fa-fw fa-paper-plane"></i> @lang('strings.contact_admin')</a></span>
+        <span>&gt; @lang('strings.confirm')</span>
+    </div>
 
     {{Form::open([
         'name' => 'inquiry',

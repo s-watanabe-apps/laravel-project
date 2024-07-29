@@ -170,6 +170,7 @@ return [
         'saved_profile_settings' => 'Saved the profile items.',
         'saved_profile_settings' => 'Saved the navigation menus.',
         'basic_omission' => 'Basic configuration information can be omitted.',
+        'inquiry_message' => 'Thank you for your inquiry. The administrator will usually respond within a week, so please be patient.',
     ],
 
     // Error messages

@@ -521,7 +521,7 @@ table.info input, table.info select, table.info textarea {
     margin: 10px 0 20px 0;
     padding: 15px;
     border: 2px solid #00bfff !important;
-    background: #add8e6;
+    background: #cddbee;
 }
 .post-box {
     color: #444 !important;

@@ -26,8 +26,26 @@ class InquiryTypesService extends Service
             ])->orderBy('id');
     }
 
+    /**
+     * お知らせ種別取得.
+     *
+     * @return array
+     */
     public function getInquiryTypes()
     {
         return $this->base()->get()->toArray();
+    }
+
+    public function save($params)
+    {
+        $this->base()->delete();
+
+        $types = array_map(function($id, $name){
+            return ['id' => $id, 'name' => $name];
+        }, $params['ids'], $params['names']);
+
+        foreach ($types as $type) {
+            InquiryTypes::insert($type);
+        }
     }
 }

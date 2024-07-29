@@ -93,6 +93,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
         Route::get('/inquiry', 'InquiryController@index');
         Route::post('/inquiry/confirm', 'InquiryController@confirm');
         Route::post('/inquiry/send', 'InquiryController@send');
+        Route::get('/inquiry/complete', 'InquiryController@complete')->name('inquiryComplete');
 
         // 管理者メニュー
         Route::group(['prefix' => 'managements', 'name' => 'managements.', 'middleware' => ['admincheck']], function () {
@@ -145,6 +146,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             // 広告管理
             Route::get('ads', 'Managements\AdsController@index')->name('managementsAds');
             Route::post('ads', 'Managements\AdsController@save');
+
+            // お問い合わせ種別管理
+            Route::get('inquiry/types', 'Managements\InquiryTypesController@index')->name('managementsInquiryTypes');
+            Route::post('inquiry/types/save', 'Managements\InquiryTypesController@save');
+
+            // お問い合わせ管理
+            Route::get('inquiries', 'Managements\InquiriesController@index');
         });
     });
 });

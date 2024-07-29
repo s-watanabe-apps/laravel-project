@@ -66,9 +66,19 @@ class InquiryController extends Controller
     {
 
         $this->inquiriesService->insertInquiries($request->validated());
-        exit;
 
-        return view('inquiry.send', compact('validated'));
+        return redirect()->route('inquiryComplete');
+    }
+
+    /**
+     * お問い合わせ登録完了画面.
+     *
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function complete(Request $request)
+    {
+        return view('inquiry.complete');
     }
 
 }

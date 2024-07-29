@@ -116,7 +116,7 @@ function initExpand() {
                             </ul>
                             <ul>
                                 <section>@lang('strings.inquiry_management')</section>
-                                <li><a href="/managements/inquirytypes">@lang('strings.inquiry_type')</a></li>
+                                <li><a href="/managements/inquiry/types">@lang('strings.inquiry_type')</a></li>
                                 <li><a href="/managements/inquiries">@lang('strings.inquiry_list')</a></li>
                             </ul>
                         </div>
