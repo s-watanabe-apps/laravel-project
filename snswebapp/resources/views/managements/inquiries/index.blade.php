@@ -38,19 +38,39 @@
     {{Form::close()}}
 
     <div class="vertical-contents">
-        <table class="user-managements">
+        <table class="table-managements">
             <tr>
-                @foreach ($headers as $value)
-                <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>
-                @endforeach
+                @for ($i = 0; $i < (count($headers) - 1); $i++)
+                <th><a href="{{$headers[$i]['link']}}">{{$headers[$i]['name']}}</a></th>
+                @endfor
+            </tr>
+            <tr>
+                <th class="left" colspan="5"><a href="{{$headers[array_key_last($headers)]['link']}}">{{$headers[array_key_last($headers)]['name']}}</a></th>
             </tr>
             @foreach ($inquiries as $value)
             <tr>
                 <td>{{$value['id']}}</td>
-                <td style="text-align: left; padding: 0 5px 0 5px;">{{$value['type_name']}}</td>
-                <td style="text-align: left; padding: 0 5px 0 5px;">{{$value['name']}}</td>
-                <td>{{$value['text']}}</td>
+                <td class="left">{{$value['type_name']}}</td>
+                <td class="left">
+                    @if (is_null($value['user_id']))
+                    <span><b>[@lang('strings.non_member')]</b> {{$value['user_name']}}</span>
+                    @else
+                    <a href="/managements/users/{{$value['user_id']}}">{{$value['user_name']}}</a>
+                    @endif
+                </td>
                 <td>{{str_date_format($value['created_at'])}}</td>
+                <td>
+                    @if ($value['status'] == \Status::ENABLED)
+                    <span class="disable">@lang('strings.not_answered')</span>
+                    @else
+                    <span class="enable">@lang('strings.answered')</span>
+                    @endif
+                </td>
+            </tr>
+            <tr class="under">
+                <td class="left" colspan="5">
+                    <a href="/managements/inquiries/{{$value['id']}}">{{truncate($value['text'], 60, "...")}}</a>
+                </td>
             </tr>
             @endforeach
         </table>

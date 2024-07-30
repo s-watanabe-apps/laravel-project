@@ -122,3 +122,16 @@ if (!function_exists('str_datetime_format_sec')) {
         }
     }
 }
+
+if (!function_exists('truncate')) {
+    /**
+     */
+    function truncate($value, $length, $replace = '...')
+    {
+        if (strlen($value) < $length) {
+            return $value;
+        } else {
+            return mb_substr($value, 0, $length) . $replace;
+        }
+    }
+}

@@ -39,7 +39,7 @@
     {{Form::close()}}
 
     <div class="vertical-contents">
-        <table class="user-managements">
+        <table class="table-managements">
             <tr>
                 @foreach ($headers as $value)
                 <th><a href="{{$value['link']}}">{{$value['name']}}</a></th>

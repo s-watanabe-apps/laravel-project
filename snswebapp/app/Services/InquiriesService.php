@@ -24,8 +24,8 @@ class InquiriesService extends Service
             ->select([
                 'inquiries.*',
                 \DB::raw('inquiry_types.name as type_name'),
-                'users.name',
-                \DB::raw('reply_user.name as reply_user_name'),
+                \DB::raw('ifnull(inquiries.name, users.name) as user_name'),
+                \DB::raw('reply_user.name'),
             ])->join('inquiry_types', 'inquiries.type', 'inquiry_types.id')
             ->leftJoin('users', function ($join) {
                 $join->on('users.id', '=', 'inquiries.user_id')
@@ -53,16 +53,20 @@ class InquiriesService extends Service
                 'header_name' => __('strings.inquiry_type'),
             ],
             3 => [
-                'sortkey' => 'users.name',
+                'sortkey' => 'user_name',
                 'header_name' => __('strings.name'),
             ],
             4 => [
-                'sortkey' => 'inquiries.text',
-                'header_name' => __('strings.inquiry_body'),
-            ],
-            5 => [
                 'sortkey' => 'inquiries.created_at',
                 'header_name' => __('strings.created_at'),
+            ],
+            5 => [
+                'sortkey' => 'inquiries.status',
+                'header_name' => __('strings.status'),
+            ],
+            6 => [
+                'sortkey' => 'inquiries.text',
+                'header_name' => __('strings.inquiry_body'),
             ],
         ];
 

@@ -248,4 +248,7 @@ return [
     'title_settings' => 'Title settings',
     'title_informations' => 'Notices.',
     'title_latest_articles' => 'Recent article list.',
+    'non_member' => 'Non-Member',
+    'answered' => 'Answered',
+    'not_answered' => 'Not answered',
 ];

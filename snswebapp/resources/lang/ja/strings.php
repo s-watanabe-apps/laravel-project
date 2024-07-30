@@ -247,4 +247,7 @@ return [
     'title_settings' => 'タイトル設定',
     'title_informations' => 'お知らせ',
     'title_latest_articles' => '直近の記事リスト',
+    'non_member' => '非会員',
+    'answered' => '回答済み',
+    'not_answered' => '未回答',
 ];

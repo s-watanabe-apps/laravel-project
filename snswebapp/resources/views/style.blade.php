@@ -627,8 +627,21 @@ table.info input, table.info select, table.info textarea {
 }
 
 /* User Managements */
-table.user-managements {
+table.table-managements {
     font-size: 14px;
+}
+
+table.table-managements th {
+    border: 1px solid #000000;
+}
+
+table.table-managements .left {
+    text-align: left;
+    padding: 0 5px 0 5px;
+}
+
+table.table-managements tr.under {
+    border-bottom: 2px dotted #cccccc;
 }
 
 /* Enable, Disable */
