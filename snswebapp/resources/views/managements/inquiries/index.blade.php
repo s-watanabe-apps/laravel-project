@@ -53,23 +53,26 @@
                 <td class="left">{{$value['type_name']}}</td>
                 <td class="left">
                     @if (is_null($value['user_id']))
-                    <span><b>[@lang('strings.non_member')]</b> {{$value['user_name']}}</span>
+                    <div><span class="sq-gray">@lang('strings.non_member')</span> {{$value['user_name']}}</div>
                     @else
                     <a href="/managements/users/{{$value['user_id']}}">{{$value['user_name']}}</a>
                     @endif
                 </td>
                 <td>{{str_date_format($value['created_at'])}}</td>
                 <td>
-                    @if ($value['status'] == \Status::ENABLED)
-                    <span class="disable">@lang('strings.not_answered')</span>
-                    @else
-                    <span class="enable">@lang('strings.answered')</span>
+                    @if ($value['status'] == \App\Models\Inquiries::STATUS_NOT_ANSWERED)
+                    <span class="sq-gray">@lang('strings.not_answered')</span>
+                    @elseif ($value['status'] == \App\Models\Inquiries::STATUS_ANSWERED)
+                    <span class="sq-green">@lang('strings.answered')</span>
+                    @elseif ($value['status'] == \App\Models\Inquiries::STATUS_CLOSE)
+                    <span class="sq-gray">@lang('strings.closed')</span>
                     @endif
                 </td>
             </tr>
             <tr class="under">
-                <td class="left" colspan="5">
+                <td class="left" colspan="5" style="width: 100%; position: relative;">
                     <a href="/managements/inquiries/{{$value['id']}}">{{truncate($value['text'], 60, "...")}}</a>
+                    <span style="position: absolute; right: 10px;"><a href="/managements/inquiries/{{$value['id']}}"><i class="fa-solid fa-arrow-right"></i></a></span>
                 </td>
             </tr>
             @endforeach

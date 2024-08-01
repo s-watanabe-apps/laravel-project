@@ -559,7 +559,7 @@ table.info input, table.info select, table.info textarea {
 .text-preview {
     background: #efffef;
     padding: 4px;
-    border: 2px dotted #898989;
+    border: 1px solid #cdcdcd;
     min-height: 400px;
 }
 .text-danger {
@@ -632,7 +632,6 @@ table.table-managements {
 }
 
 table.table-managements th {
-    border: 1px solid #000000;
 }
 
 table.table-managements .left {
@@ -644,24 +643,45 @@ table.table-managements tr.under {
     border-bottom: 2px dotted #cccccc;
 }
 
-/* Enable, Disable */
+/* ステータスラベル */
 span.enable {
     background: #228B22;
     color: #efefef;
     font-weight: bold;
-    font-size: 14px;
-    padding: 0 4px 0 4px;
+    font-size: 12px;
+    padding: 1px 5px 1px 5px;
     border-bottom: 2px solid #116911;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 span.disable {
     background: #979797;
     color: #efefef;
     font-weight: bold;
-    font-size: 14px;
-    padding: 0 4px 0 4px;
+    font-size: 12px;
+    padding: 1px 5px 1px 5px;
     border-bottom: 2px solid #565656;
-    border-radius: 10px;
+    border-radius: 6px;
+}
+
+/* 四角いラベル */
+span.sq-green {
+    background: #228B22;
+    color: #efefef;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 1px 5px 1px 5px;
+    border: 1px solid #116911;
+    border-radius: 4px;
+}
+
+span.sq-gray {
+    background: #ababab;
+    color: #efefef;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 1px 5px 1px 5px;
+    border: 1px solid #565656;
+    border-radius: 4px;
 }
 
 .comment {
@@ -833,6 +853,10 @@ textarea[name="comment"] {
     }
     .grid-contents > div {
         display: table;
+    }
+    .w-20 {
+        width: auto;
+        text-align: center;
     }
     .w-25 {
         width: auto;

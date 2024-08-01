@@ -30,7 +30,7 @@
         @endif
 
         <div class="input-label">@lang('strings.inquiry_body')</div>
-        <div class="text-preview">{{$validated['text']}}</div>
+        <pre class="text-preview">{{$validated['text']}}</pre>
 
         <div class="flex-contents">
             <input type="submit" class="post" value="@lang('strings.send')"></input>

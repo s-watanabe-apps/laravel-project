@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Managements;
 
+use App\Models\Inquiries;
 use App\Services\InquiriesService;
 use App\Services\InquiryTypesService;
 use Illuminate\Http\Request;
@@ -58,5 +59,22 @@ class InquiriesController extends ManagementsController
         $types = $this->inquiryTypesService->getInquiryTypes();
 
         return view('managements.inquiries.index', compact('inquiries', 'types', 'validated', 'headers'));
+    }
+
+    /**
+     * お問い合わせ詳細画面.
+     *
+     * @param Illuminate\Http\Request
+     * @return Illuminate\View\View
+     */
+    public function get(Request $request)
+    {
+        $inquiry = $this->inquiriesService->getInquiry($request->id);
+
+        $replys = $this->inquiriesService->getInquiryReplys($request->id);
+
+        $statuses = Inquiries::getInquiryStatuses();
+
+        return view('managements.inquiries.view', compact('inquiry', 'replys', 'statuses'));
     }
 }

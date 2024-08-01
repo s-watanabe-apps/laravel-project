@@ -112,6 +112,7 @@ return [
     'admin_menus' => 'Administrator menus',
     'contact_admin' => 'Contact administrator',
     'inquiry_body' => 'Content of inquiry',
+    'detail' => 'Detail',
 
     // Information Marks
     'information_categories' => [
@@ -251,4 +252,5 @@ return [
     'non_member' => 'Non-Member',
     'answered' => 'Answered',
     'not_answered' => 'Not answered',
+    'closed' => 'Closed',
 ];

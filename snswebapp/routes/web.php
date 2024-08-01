@@ -153,6 +153,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // お問い合わせ管理
             Route::get('inquiries', 'Managements\InquiriesController@index');
+            Route::get('inquiries/{id}', 'Managements\InquiriesController@get')->where('id', '[0-9]+');
         });
     });
 });

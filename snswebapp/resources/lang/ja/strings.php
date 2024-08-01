@@ -111,6 +111,7 @@ return [
     'admin_menus' => '管理者メニュー',
     'contact_admin' => '管理者へお問い合わせ',
     'inquiry_body' => 'お問い合わせ内容',
+    'detail' => '詳細',
 
     // お知らせ種別
     'information_categories' => [
@@ -248,6 +249,7 @@ return [
     'title_informations' => 'お知らせ',
     'title_latest_articles' => '直近の記事リスト',
     'non_member' => '非会員',
-    'answered' => '回答済み',
+    'answered' => '回答済',
     'not_answered' => '未回答',
+    'closed' => '終了',
 ];

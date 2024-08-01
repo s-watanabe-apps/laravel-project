@@ -38,6 +38,11 @@ class InquiriesService extends Service
 
     /**
      * お知らせ一覧取得.
+     *
+     * @param string $keyword
+     * @param int $type
+     * @param int $sortkey
+     * @return array
      */
     public function getInquiries($keyword = null, $type = null, $sortkey = null)
     {
@@ -116,6 +121,26 @@ class InquiriesService extends Service
         return [$result->toArray(), $headers];
     }
 
+    /**
+     * お問い合わせ取得.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function getInquiry(int $id)
+    {
+        return $this->base()
+            ->where('inquiries.id', $id)
+            ->first()->toArray();
+    }
+
+    public function getInquiryReplys(int $replyInquiryId)
+    {
+        return $this->base()
+            ->where('reply_inquiry_id', $replyInquiryId)
+            ->orderBy('created_at', 'asc')
+            ->get()->toArray();
+    }
 
     /**
      * お問い合わせ新規作成.
@@ -129,7 +154,7 @@ class InquiriesService extends Service
             $values['user_id'] = user()->id;
         }
 
-        $values['status'] = \Status::ENABLED;
+        $values['status'] = Inquiries::STATUS_NOT_ANSWERED;
         $values['created_at'] = carbon();
 
         $id = Inquiries::insertGetId($values);
