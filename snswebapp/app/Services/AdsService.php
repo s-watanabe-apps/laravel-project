@@ -25,4 +25,9 @@ class AdsService extends Service
                 'ads.*',
             ])->orderBy('id');
     }
+
+    public function getAdsAll()
+    {
+        return $this->base()->get()->toArray();
+    }
 }

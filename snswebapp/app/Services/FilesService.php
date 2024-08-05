@@ -3,19 +3,22 @@ namespace App\Services;
 
 /**
  * ファイルサービスクラス.
- * 
- * 
+ *
+ *
  */
 class FilesService extends Service
 {
     static $extensions = [
-        'txt', 'pdf', 'zip',
+        'txt', 'pdf', 'zip', 'png', 'gif', 'jpg',
     ];
 
     static $mineTypes = [
         'txt' => 'text/plain',
         'pdf' => 'application/pdf',
         'zip' => 'application/zip',
+        'png' => 'image/png',
+        'gif' => 'image/gif',
+        'jpg' => 'image/jpeg',
     ];
 
     public static function getRegex()
@@ -31,11 +34,11 @@ class FilesService extends Service
 
     /**
      * アップロードファイル全件取得.
-     * 
+     *
      * @param string $keyword
      * @param int $ext
      * @param int $sortkey
-     * 
+     *
      * @return array
      */
     public function getFiles($keyword, $ext, $sortkey)

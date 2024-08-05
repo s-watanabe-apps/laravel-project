@@ -13,9 +13,9 @@
             {{Form::open(['name' => 'form', 'url' => '/managements/ads/register', 'method' => 'post', 'files' => true])}}
             @csrf
             <p>サイドメニューに表示する広告を3つまで設定できます。</p>
-            @include('managements.ads.formset', ['id' => 'editor1'])
-            @include('managements.ads.formset', ['id' => 'editor2'])
-            @include('managements.ads.formset', ['id' => 'editor3'])
+            @for($i = 1; $i <= 3; $i++)
+                @include('managements.ads.formset', ['id' => $i, 'class' => 'side'])
+            @endfor
             <div class="flex-contents">
                 <a href="javascript:form.submit()">
                     <input type="submit" class="post" value="@lang('strings.save')"></input>
@@ -54,8 +54,8 @@ window.onload = function() {
 </script>
 @endif
 
-@include('shared.ckeditor', ['id' => 'editor1', 'name' => 'body[]', 'height' => 150])
-@include('shared.ckeditor', ['id' => 'editor2', 'name' => 'body[]', 'height' => 150])
-@include('shared.ckeditor', ['id' => 'editor3', 'name' => 'body[]', 'height' => 150])
+@include('shared.ckeditor', ['id' => 'side1', 'name' => 'side_body[]', 'height' => 180])
+@include('shared.ckeditor', ['id' => 'side2', 'name' => 'side_body[]', 'height' => 180])
+@include('shared.ckeditor', ['id' => 'side3', 'name' => 'side_body[]', 'height' => 180])
 
 @endsection
