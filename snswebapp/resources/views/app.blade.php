@@ -58,11 +58,31 @@ function initExpand() {
         toggleExpand(this);
     });
 }
+
+// トップへ戻るアクション
+jQuery(function() {
+    var pagetop = $('#pagetop');
+    pagetop.hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {  //100pxスクロールしたら表示
+            pagetop.fadeIn();
+        } else {
+            pagetop.fadeOut();
+        }
+    });
+    pagetop.click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500); //0.5秒かけてトップへ移動
+        return false;
+    });
+});
 --></script>
 
     @include('style')
     </head>
     <body>
+        <div id="pagetop"><a href="#top"><i class="fas fa-angle-double-up"></i></a></div>
         @include('header', compact('lang'))
         <div class="grid">
             <div class="side">

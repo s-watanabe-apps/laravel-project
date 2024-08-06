@@ -145,7 +145,7 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
 
             // 広告管理
             Route::get('ads', 'Managements\AdsController@index')->name('managementsAds');
-            Route::post('ads', 'Managements\AdsController@save');
+            Route::post('ads/side/save', 'Managements\AdsController@save');
 
             // お問い合わせ種別管理
             Route::get('inquiry/types', 'Managements\InquiryTypesController@index')->name('managementsInquiryTypes');

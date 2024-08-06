@@ -696,13 +696,13 @@ textarea[name="comment"] {
     resize:vertical;
 }
 
-/** Mypage */
+/** マイページ */
 .mypage input[type = "text"],
 .mypage input[type = "password"] {
     width: auto;
 }
 
-/** Tab */
+/** タブコントロール */
 .tab-wrap {
     display: flex;
     flex-wrap: wrap;
@@ -730,6 +730,37 @@ textarea[name="comment"] {
 }
 .tab-switch {
     display: none;
+}
+
+/** トップへ戻る */
+#pagetop {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    margin: 0;
+
+}
+#pagetop a{
+    position: relative;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    justify-content: center;
+    transition: opacity .6s ease;
+    color: #FFF;
+    align-items: center;
+    text-decoration: none;
+    font-size: 40px;
+    border-radius:100%;
+}
+#pagetop a:hover {
+    opacity: .3;
+}
+@media screen and (max-width:767px) {
+    #pagetop a {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 @media only screen and (max-width:991px) {
@@ -926,7 +957,7 @@ header {
     border-left:1px solid {{$settings['border_color']}} !important;
     border-right:1px solid {{$settings['border_color']}} !important;
 }
-.nav-title {
+.nav-title, #pagetop a {
     background: {{$settings['header_color']}} !important;
 }
 div, table, td, ul, th:not(.xdsoft_calendar > table) {

@@ -112,6 +112,8 @@ return [
     'contact_admin' => '管理者へお問い合わせ',
     'inquiry_body' => 'お問い合わせ内容',
     'detail' => '詳細',
+    'sidemenu' => 'サイドメニュー',
+    'footer' => 'フッター',
 
     // お知らせ種別
     'information_categories' => [

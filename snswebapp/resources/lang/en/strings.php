@@ -113,6 +113,8 @@ return [
     'contact_admin' => 'Contact administrator',
     'inquiry_body' => 'Content of inquiry',
     'detail' => 'Detail',
+    'sidemenu' => 'Side menu',
+    'footer' => 'Footer',
 
     // Information Marks
     'information_categories' => [

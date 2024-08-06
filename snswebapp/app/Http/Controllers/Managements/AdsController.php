@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers\Managements;
 
-//use App\Models\FreePages;
 use App\Services\AdsService;
-//use App\Http\Requests\UploadFileRequest;
+use App\Http\Requests\ManagementsAdsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -48,10 +47,12 @@ class AdsController extends ManagementsController
     /**
      * 広告保存.
      *
-     * @param App\Http\Requests\UploadFileRequest
+     * @param App\Http\Requests\ManagementsAdsRequest
      */
-    public function save(Request $request)
+    public function save(ManagementsAdsRequest $request)
     {
+        dump($request->validated());
+        exit;
         return redirect()->route('managementsAds');
     }
 }
