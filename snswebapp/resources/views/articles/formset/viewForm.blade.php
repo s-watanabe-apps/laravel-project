@@ -4,8 +4,8 @@
     {{Form::hidden('title', $validated['title'])}}
 
     <div class="input-label">@lang('strings.body')</div>
-    <div class="text-preview">{!!$validated['body'] ?? '<br>'!!}</div>
-    {{Form::hidden('body', $validated['body'] ?? '')}}
+    <div class="text-preview">{!! \HtmlString::escapeScript($validated['body']) ?? '<br>'!!}</div>
+    {{Form::hidden('body', \HtmlString::escapeScript($validated['body'] ?? ''))}}
 
     <div class="input-label">@lang('strings.label')</div>
     <nobr>

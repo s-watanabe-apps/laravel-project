@@ -5,7 +5,7 @@
     <div class="subject"><i class="fas fa-blog"></i> {{$articles['title']}}</div>
 
     <div class="articles-body">
-        {!!$articles['body']!!}
+        {!! \HtmlString::escapeScript($articles['body']) !!}
         <a href="{{$articles['link']}}">{{$articles['link']}}</a>
     </div>
 

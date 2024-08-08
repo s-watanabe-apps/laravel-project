@@ -29,6 +29,8 @@ class ManagementsAdsRequest extends AppFormRequest
             'type' => ['required', Rule::in(array_keys(Ads::getTypes()))],
             'title' => 'array',
             'title.*' => 'required|max:3',
+            'body' => 'array',
+            'body.*' => 'required|max:3',
         ];
     }
 
@@ -42,6 +44,8 @@ class ManagementsAdsRequest extends AppFormRequest
         return [
             'title' => __('strings.title'),
             'title.*' => __('strings.title'),
+            'body' => __('strings.body'),
+            'body.*' => __('strings.body'),
         ];
     }
 
