@@ -2,12 +2,12 @@
 namespace App\Libs;
 
 /**
- * HTMLクラス.
+ * ユーザー入力HTMLクラス.
  */
-class Html
+class UserHtml
 {
     // ユーザー入力のHTMLを処理する正規表現
-    const PATTERN = '|<\s*script[^>]*>(.*?)<\/\s*script\s*>|is';
+    const PATTERN = '|<[\s\.\/]*script[\s\.\/]*>|is';
 
     /**
      * ユーザー入力のHTMLにスクリプトが含まれるかチェックする.
@@ -19,7 +19,7 @@ class Html
     {
         preg_match_all(self::PATTERN, $value, $matches, PREG_PATTERN_ORDER);
 
-        return $matches[0] > 0;
+        return count($matches[0]) > 0;
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Ads;
+use App\Rules\CheckScript;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;

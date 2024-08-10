@@ -227,7 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DateFormat' => App\Libs\DateFormat::class,
         'Status' => App\Libs\Status::class,
-        'HtmlString' => App\Libs\Html::class,
+        'UserHtml' => App\Libs\UserHtml::class,
 
     ],
 

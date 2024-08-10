@@ -149,5 +149,7 @@ return [
     'attributes' => [],
 
     'invalid_input' => 'Input value is invalid.',
-    'too_long_input' => 'input value is too long.'
+    'too_long_input' => 'input value is too long.',
+
+    'script_detected' => 'An invalid script was detected.',
 ];

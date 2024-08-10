@@ -39,7 +39,6 @@ class AdsController extends ManagementsController
     public function index(Request $request)
     {
         $adsAll = $this->adsService->getAdsAll();
-        dump($adsAll);
 
         return view('managements.ads.index', compact('adsAll'));
     }

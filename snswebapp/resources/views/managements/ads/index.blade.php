@@ -10,7 +10,7 @@
         <input id="tab1" type="radio" name="tab" class="tab-switch" checked="checked" />
         <label class="tab-label" for="tab1">@lang('strings.sidemenu')</label>
         <div class="tab-content">
-            {{Form::open(['name' => 'sideAdsForm', 'url' => '/managements/ads/side/save', 'method' => 'post', 'files' => true])}}
+            {{Form::open(['name' => 'sideAdsForm', 'url' => '/managements/ads/save', 'method' => 'post', 'files' => true])}}
             @csrf
             {{Form::hidden('type', \App\Models\Ads::TYPE_SIDE)}}
             <p>サイドメニューに表示する広告を3つまで設定できます。</p>
@@ -18,7 +18,7 @@
                 @include('managements.ads.formset', ['id' => $i, 'class' => 'side'])
             @endfor
             <div class="flex-contents">
-                <a href="javascript:sideAdsForm.submit()">
+                <a href="javascript:submit()">
                     <input type="submit" class="post" value="@lang('strings.save')"></input>
                 </a>
             </div>
@@ -37,11 +37,12 @@
     </div>
 </div>
 
+
 @if ($errors->any())
 <div class="text-danger">
     <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{$error}}</li>
+        @foreach ($errors->all() as $key => $value)
+            <li>{{$key}} - {{$value}}</li>
         @endforeach
     </ul>
 </div>

@@ -120,4 +120,6 @@ return [
 
     'invalid_input' => '入力値が不正です。',
     'too_long_input' => '入力値が長すぎます。',
+
+    'script_detected' => '不正なスクリプトを検出しました。',
 ];

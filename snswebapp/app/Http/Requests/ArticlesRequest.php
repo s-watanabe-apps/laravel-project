@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Rules\CheckScript;
+
 class ArticlesRequest extends AppFormRequest
 {
     /**
@@ -23,7 +25,7 @@ class ArticlesRequest extends AppFormRequest
         return [
             'id' => 'nullable|numeric',
             'title' => 'required|max:255',
-            'body' => 'nullable|string',
+            'body' => ['nullable', 'string', new CheckScript()],
             'status' => 'in:0,1',
             'labels' => 'nullable|string',
             'link' => 'nullable|url',
@@ -32,7 +34,7 @@ class ArticlesRequest extends AppFormRequest
 
     /**
      * Column names.
-     * 
+     *
      * @return array
      */
     public function attributes()
