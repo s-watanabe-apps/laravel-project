@@ -1,6 +1,9 @@
 <?php
 namespace App\Libs;
 
+/**
+ * プロフィール入力タイプクラス.
+ */
 class ProfileInputType
 {
     // 定数
@@ -11,7 +14,7 @@ class ProfileInputType
 
     /**
      * 入力タイプ取得.
-     * 
+     *
      * @return array
      */
     public static function getTypes()

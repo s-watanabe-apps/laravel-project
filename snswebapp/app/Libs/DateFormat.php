@@ -1,12 +1,15 @@
 <?php
 namespace App\Libs;
 
+/**
+ * 日付フォーマットクラス.
+ */
 class DateFormat
 {
     /**
-     * Date format corresponding to the locale.
-     * 
-     * @return array
+     * 日付(年月日)フォーマット取得.
+     *
+     * @return string
      */
     public static function getDateFormat()
     {
@@ -18,9 +21,9 @@ class DateFormat
     }
 
     /**
-     * DateTime format corresponding to the locale.
-     * 
-     * @return array
+     * 日時フォーマット取得(AM/PM表記).
+     *
+     * @return string
      */
     public static function getDateTimeFormat()
     {
@@ -32,8 +35,8 @@ class DateFormat
     }
 
     /**
-     * DateTime full format corresponding to the locale.
-     * 
+     * 日時フォーマット取得.
+     *
      * @return array
      */
     public static function getDateTimeFullFormat()
@@ -46,8 +49,8 @@ class DateFormat
     }
 
     /**
-     * Date(short) format corresponding to the locale.
-     * 
+     * 日付(月日)フォーマット取得.
+     *
      * @return array
      */
     public static function getDateFormatShort()
