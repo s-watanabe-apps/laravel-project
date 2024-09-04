@@ -1,9 +1,12 @@
 <div class="normal-box">
     <div class="vertical-contents">
         <div class="input-label">@lang('strings.title')</div>
-        {{Form::input('text', "title[]", $ads['title'] ?? '', ['placeholder' => "省略可能"])}}
+        {{Form::input('text', "title[]", $ads['title'] ?? '')}}
+        <div class="text-danger">{{$errors->first('title.' . ($id - 1))}}</div>
+
         <div class="input-label">@lang('strings.body')</div>
         <textarea id="{{$class}}{{$id}}" name="body[]">{{$ads['body'] ?? ''}}</textarea>
+        <div class="text-danger">{{$errors->first('body.' . ($id - 1))}}</div>
 
         <div class="input-label">@lang('strings.start_time')</div>
         {{Form::text(
@@ -21,8 +24,16 @@
 
         <div class="input-label">@lang('strings.status')</div>
         <div class="radio">
-            <label>{{Form::radio("status[]", '1', ($values['status'] ?? 0) == 1, []) }} <span class="enable">@lang('strings.enable')</span></label>
-            <label>{{Form::radio("status[]", '0', ($values['status'] ?? 0) == 0, []) }} <span class="disable">@lang('strings.disable')</span></label>
+            <label>{{Form::radio(
+                "status." . ($id - 1)
+                , '1'
+                , ($values['status'] ?? 0) == 1, [])
+            }} <span class="enable">@lang('strings.enable')</span></label>
+            <label>{{Form::radio(
+                "status." . ($id - 1),
+                '0',
+                ($values['status'] ?? 0) == 0, [])
+            }}<span class="disable">@lang('strings.disable')</span></label>
         </div>
 
         <script>

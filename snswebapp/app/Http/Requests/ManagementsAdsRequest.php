@@ -28,10 +28,12 @@ class ManagementsAdsRequest extends AppFormRequest
     {
         return [
             'type' => ['required', Rule::in(array_keys(Ads::getTypes()))],
-            'title' => 'array',
-            'title.*' => 'required|max:3',
-            'body' => 'array',
-            'body.*' => 'required|max:3',
+            'title.0' => 'string|nullable',
+            'body.0' => ['required_with:title.0', 'max:5000', new CheckScript()],
+            'title.1' => 'string|nullable',
+            'body.1' => ['required_with:title.1', 'max:5000', new CheckScript()],
+            'title.2' => 'string|nullable',
+            'body.2' => ['required_with:title.2', 'max:5000', new CheckScript()],
         ];
     }
 
@@ -43,10 +45,12 @@ class ManagementsAdsRequest extends AppFormRequest
     public function attributes()
     {
         return [
-            'title' => __('strings.title'),
-            'title.*' => __('strings.title'),
-            'body' => __('strings.body'),
-            'body.*' => __('strings.body'),
+            'title.0' => __('strings.title'),
+            'body.0' => __('strings.body'),
+            'title.1' => __('strings.title'),
+            'body.1' => __('strings.body'),
+            'title.2' => __('strings.title'),
+            'body.2' => __('strings.body'),
         ];
     }
 
