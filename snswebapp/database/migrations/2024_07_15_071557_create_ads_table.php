@@ -16,11 +16,10 @@ class CreateAdsTable extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->integer('id');
             $table->integer('type');
-            $table->string('title', 30)->nullable();
+            $table->string('title', 30);
             $table->mediumtext('body');
-            $table->timestamp('start_time');
+            $table->timestamp('start_time')->nullable();
             $table->timestamp('end_time')->nullable();
-            $table->integer('status');
             $table->timestamps();
             $table->primary(['id', 'type']);
         });

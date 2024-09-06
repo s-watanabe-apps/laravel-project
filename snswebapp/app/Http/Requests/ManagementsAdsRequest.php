@@ -28,12 +28,16 @@ class ManagementsAdsRequest extends AppFormRequest
     {
         return [
             'type' => ['required', Rule::in(array_keys(Ads::getTypes()))],
-            'title.0' => 'string|nullable',
+            'title.0' => 'string|nullable|max:30',
             'body.0' => ['required_with:title.0', 'max:5000', new CheckScript()],
-            'title.1' => 'string|nullable',
+            'title.1' => 'string|nullable|max:30',
             'body.1' => ['required_with:title.1', 'max:5000', new CheckScript()],
-            'title.2' => 'string|nullable',
+            'title.2' => 'string|nullable|max:30',
             'body.2' => ['required_with:title.2', 'max:5000', new CheckScript()],
+            'start_time' => 'array',
+            'start_time.*' => 'nullable|date_format:Y/m/d H:i',
+            'end_time' => 'array',
+            'end_time.*' => 'nullable|date_format:Y/m/d H:i',
         ];
     }
 

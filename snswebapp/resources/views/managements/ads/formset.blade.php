@@ -22,20 +22,6 @@
             ['id' => "{$class}_end_time{$id}", 'style' => 'width: 170px;']
         )}}
 
-        <div class="input-label">@lang('strings.status')</div>
-        <div class="radio">
-            <label>{{Form::radio(
-                "status." . ($id - 1)
-                , '1'
-                , ($values['status'] ?? 0) == 1, [])
-            }} <span class="enable">@lang('strings.enable')</span></label>
-            <label>{{Form::radio(
-                "status." . ($id - 1),
-                '0',
-                ($values['status'] ?? 0) == 0, [])
-            }}<span class="disable">@lang('strings.disable')</span></label>
-        </div>
-
         <script>
         window.addEventListener("load", function() {
             $('#{{$class}}_start_time{{$id}}').datetimepicker({

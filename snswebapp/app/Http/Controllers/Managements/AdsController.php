@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
  */
 class AdsController extends ManagementsController
 {
-    //AdsService $adsService;
+    private $adsService;
 
     /**
      * コンストラクタ.
