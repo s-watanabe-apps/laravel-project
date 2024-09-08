@@ -39,7 +39,7 @@ class AdsController extends ManagementsController
     public function index(Request $request)
     {
         $adsAll = $this->adsService->getAdsAll();
-
+dump($adsAll);
         return view('managements.ads.index', compact('adsAll'));
     }
 
@@ -50,8 +50,17 @@ class AdsController extends ManagementsController
      */
     public function save(ManagementsAdsRequest $request)
     {
-        dump($request->validated());
+        /*
+        $params = $request->validated();
+        dump($params);
+        dump(array_combine(['title', 'body'], [$params['title'], $params['body']]));
         exit;
+        */
+
+        \DB::transaction(function() use ($request) {
+            $this->adsService->save($request);
+        });
+
         return redirect()->route('managementsAds');
     }
 }

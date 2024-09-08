@@ -5,6 +5,7 @@ use App\Models\Settings;
 use App\Services\MessagesService;
 use App\Services\WeathersService;
 use App\Services\ArticleLabelsService;
+use App\Services\AdsService;
 use Closure;
 use Illuminate\Auth\AuthManager;
 use Illuminate\View\Factory;
@@ -41,7 +42,7 @@ class BeforeActionMiddleware
         $user_menus_status = $user_menus_matchs[1] ?? 'show';
         preg_match('/admin-menus=(show|hide)/', $cookie, $admin_menus_matchs);
         $admin_menus_status = $admin_menus_matchs[1] ?? 'show';
-        
+
         // 地域情報取得
         $cities = [
             ['id' => 1, 'name' => '東京', 'code' => 'Tokyo'],
@@ -77,6 +78,9 @@ class BeforeActionMiddleware
             return $label;
         }, (new ArticleLabelsService())->getFeatureTags($date));
 
+        // 広告取得
+        $ads = (new AdsService())->getAds();
+
         $this->viewFactory->share(compact(
             'lang',
             'user_menus_status',
@@ -85,7 +89,8 @@ class BeforeActionMiddleware
             'cities',
             'weathers',
             'receive_messages',
-            'feature_tags'
+            'feature_tags',
+            'ads'
         ));
 
         $request->cookie('user-menus', $user_menus_status);

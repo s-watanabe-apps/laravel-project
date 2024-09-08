@@ -23,13 +23,14 @@ class Service
     const CACHE_KEY_ARTICLE_LABELS_BY_USER_ID = 'article-labels-user-%d';
     const CACHE_KEY_ARTICLE_MONTHS_BY_USER_ID = 'article-months-user-%d';
     const CACHE_KEY_WEATHERS = 'wethers-%s-%s';
-    
+    const CACHE_KEY_ADS = 'ads';
+
     const SORTED_ASC = '▲';
     const SORTED_DESC = '▼';
 
     /**
      * Cache remember.
-     * 
+     *
      * @param string $key
      * @param Closure $function
      * @param int $ttl
@@ -48,7 +49,7 @@ class Service
 
     /**
      * Cache purge.
-     * 
+     *
      * @param string $key
      */
     protected function cacheForget($key)
@@ -58,20 +59,20 @@ class Service
 
     /**
      * アクセス可否チェック.
-     * 
+     *
      * @param int $sourceUserId
      * @return boolean
      */
     protected function checkAccessRight($sourceUserId)
     {
-        
+
 
         return false;
     }
 
     /**
      * 更新可否チェック.
-     * 
+     *
      * @param int $sourceUserId
      * @return void
      */

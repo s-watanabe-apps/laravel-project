@@ -210,12 +210,14 @@ jQuery(function() {
                         @endforeach
                     </div>
                 </div>
+                @foreach($ads[\App\Models\Ads::TYPE_SIDE] as $ad)
                 <div class="container">
-                    <div class="title"><span class="ad">AD</span>SNS WebApp</div>
+                    <div class="title"><span class="ad">AD</span>{{$ad['title']}}</div>
                     <div class="ad-sns-webapp">
-                        @lang('strings.ad_sns_webapp')<a href="#"><b>@lang('strings.click_here')</b></a>
+                        {!!$ad['body']!!}
                     </div>
                 </div>
+                @endforeach
             </div>
             <div class="main">
                 @yield('content')
