@@ -26,19 +26,26 @@ class ManagementsAdsRequest extends AppFormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'type' => ['required', Rule::in(array_keys(Ads::getTypes()))],
-            'title.0' => 'string|nullable|max:30',
-            'body.0' => ['required_with:title.0', 'max:5000', new CheckScript()],
-            'title.1' => 'string|nullable|max:30',
-            'body.1' => ['required_with:title.1', 'max:5000', new CheckScript()],
-            'title.2' => 'string|nullable|max:30',
-            'body.2' => ['required_with:title.2', 'max:5000', new CheckScript()],
+            //'title.0' => 'string|nullable|max:30',
+            //'body.0' => ['required_with:title.0', 'max:5000', new CheckScript()],
+            //'title.1' => 'string|nullable|max:30',
+            //'body.1' => ['required_with:title.1', 'max:5000', new CheckScript()],
+            //'title.2' => 'string|nullable|max:30',
+            //'body.2' => ['required_with:title.2', 'max:5000', new CheckScript()],
             'start_time' => 'array',
             'start_time.*' => 'nullable|date_format:Y/m/d H:i',
             'end_time' => 'array',
             'end_time.*' => 'nullable|date_format:Y/m/d H:i',
         ];
+
+        for ($i = 0; $i < max([Ads::LIMIT_SIDE, Ads::LIMIT_LIST, Ads::LIMIT_FOOTER]); $i++) {
+            $rules['title.' . $i] = 'string|nullable|max:30';
+            $rules['body.' . $i] = ['required_with:title.' . $i, 'max:5000', new CheckScript()];
+        }
+
+        return $rules;
     }
 
     /**

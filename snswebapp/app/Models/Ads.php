@@ -14,6 +14,11 @@ class Ads extends Model
     const TYPE_LIST = 2;
     const TYPE_FOOTER = 3;
 
+    // 広告数
+    const LIMIT_SIDE = 3;
+    const LIMIT_LIST = 3;
+    const LIMIT_FOOTER = 3;
+
     /**
      * 広告タイプ配列取得.
      *

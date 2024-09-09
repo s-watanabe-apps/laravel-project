@@ -1,11 +1,11 @@
 <div class="normal-box">
     <div class="vertical-contents">
         <div class="input-label">@lang('strings.title')</div>
-        {{Form::input('text', "title[]", $ads['title'] ?? '')}}
+        {{Form::input('text', "title[]", $values['title'] ?? '')}}
         <div class="text-danger">{{$errors->first('title.' . ($id - 1))}}</div>
 
         <div class="input-label">@lang('strings.body')</div>
-        <textarea id="{{$class}}{{$id}}" name="body[]">{{$ads['body'] ?? ''}}</textarea>
+        <textarea id="{{$class}}{{$id}}" name="body[]">{{$values['body'] ?? ''}}</textarea>
         <div class="text-danger">{{$errors->first('body.' . ($id - 1))}}</div>
 
         <div class="input-label">@lang('strings.start_time')</div>

@@ -14,8 +14,13 @@
             @csrf
             {{Form::hidden('type', \App\Models\Ads::TYPE_SIDE)}}
             <p>サイドメニューに表示する広告を3つまで設定できます。</p>
-            @for($i = 1; $i <= 3; $i++)
-                @include('managements.ads.formset', ['id' => $i, 'class' => 'side', 'errors' => $errors])
+            @for($id = 1; $id <= \App\Models\Ads::LIMIT_SIDE; $id++)
+                @include('managements.ads.formset', [
+                    'id' => $id,
+                    'values' => $adsAll[\App\Models\Ads::TYPE_SIDE][$id - 1] ?? [],
+                    'class' => 'side',
+                    'errors' => $errors
+                ])
             @endfor
             <div class="flex-contents">
                 <a href="javascript:submit()">
