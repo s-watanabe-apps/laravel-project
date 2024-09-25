@@ -32,7 +32,7 @@ class InformationsController extends ManagementsController
 
     /**
      * お知らせ一覧取得.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -72,7 +72,7 @@ class InformationsController extends ManagementsController
 
     /**
      * お知らせ取得.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -87,7 +87,7 @@ class InformationsController extends ManagementsController
 
     /**
      * お知らせ削除確認.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -102,7 +102,7 @@ class InformationsController extends ManagementsController
 
     /**
      * お知らせ新規作成.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -116,12 +116,12 @@ class InformationsController extends ManagementsController
     }
 
     /**
-     * 入力内容確認.
-     * 
+     * 新規作成入力内容確認.
+     *
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return Illuminate\View\View
      */
-    public function confirm(ManagementsInformationsRequest $request)
+    public function createConfirm(ManagementsInformationsRequest $request)
     {
         $values = $request->validated();
 
@@ -129,24 +129,36 @@ class InformationsController extends ManagementsController
 
         $values['style'] = $category['style'];
 
-        if ($request->isPost()) {
-            return view('managements.informations.createConfirm', compact(
-                'values',
-                'category'
-            ));
-        } else if ($request->isPut()) {
-            return view('managements.informations.editConfirm', compact(
-                'values',
-                'category'
-            ));
-        } else {
-            abort(405);
-        }
+        return view('managements.informations.createConfirm', compact(
+            'values',
+            'category'
+        ));
+    }
+
+
+    /**
+     * 更新入力内容確認.
+     *
+     * @param App\Http\Requests\ManagementsInformationsRequest
+     * @return Illuminate\View\View
+     */
+    public function editConfirm(ManagementsInformationsRequest $request)
+    {
+        $values = $request->validated();
+
+        $category = $this->informationCategoriesService->getById($request->category_id);
+
+        $values['style'] = $category['style'];
+
+        return view('managements.informations.editConfirm', compact(
+            'values',
+            'category'
+        ));
     }
 
     /**
      * お知らせ編集.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -162,17 +174,35 @@ class InformationsController extends ManagementsController
         ));
     }
 
-
     /**
-     * 入力内容保存.
-     * 
+     * お知らせ作成処理.
+     *
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */
-    public function save(ManagementsInformationsRequest $request)
+    public function post(ManagementsInformationsRequest $request)
     {
-        \DB::transaction(function() use($request) {
-            $this->informationsService->save($request);
+        $validated = $request->validated();
+
+        \DB::transaction(function() use($validated) {
+            $this->informationsService->insertInformations($validated);
+        });
+
+        return redirect()->route('managementsInformations');
+    }
+
+    /**
+     * お知らせ更新処理.
+     *
+     * @param App\Http\Requests\ManagementsInformationsRequest
+     * @return void
+     */
+    public function put(ManagementsInformationsRequest $request)
+    {
+        $validated = $request->validated();
+
+        \DB::transaction(function() use($validated) {
+            $this->informationsService->updateInformations($validated);
         });
 
         return redirect()->route('managementsInformations');

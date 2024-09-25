@@ -283,7 +283,6 @@ class ArticlesService extends Service
             ->delete();
 
         return $result;
-
     }
 
     /**

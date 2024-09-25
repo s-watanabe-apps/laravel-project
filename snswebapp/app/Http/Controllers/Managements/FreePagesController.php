@@ -3,12 +3,12 @@ namespace App\Http\Controllers\Managements;
 
 use App\Models\FreePages;
 use App\Services\FreePagesService;
-use App\Http\Requests\ManagementsFreepagesRequest;
+use App\Http\Requests\ManagementsFreePagesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class FreepagesController extends ManagementsController
+class FreePagesController extends ManagementsController
 {
     // Instance variables.
     private $freePagesService;
@@ -26,7 +26,7 @@ class FreepagesController extends ManagementsController
 
     /**
      * フリーページリスト.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -63,7 +63,7 @@ class FreepagesController extends ManagementsController
 
     /**
      * フリーページ確認画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -76,7 +76,7 @@ class FreepagesController extends ManagementsController
 
     /**
      * フリーページ新規作成画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -89,7 +89,7 @@ class FreepagesController extends ManagementsController
 
     /**
      * フリーページ新規作成確認画面.
-     * 
+     *
      * @param App\Http\Requests\ManagementsFreepagesRequest
      * @return Illuminate\View\View
      */
@@ -103,7 +103,7 @@ class FreepagesController extends ManagementsController
 
     /**
      * Register input information.
-     * 
+     *
      * @param App\Http\Requests\ManagementsInformationsRequest
      * @return void
      */

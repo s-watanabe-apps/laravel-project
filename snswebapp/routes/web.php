@@ -42,8 +42,8 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('/articles/edit/{id}', 'ArticlesController@edit');
             Route::post('/articles/confirm', 'ArticlesController@createConfirm');
             Route::put('/articles/confirm', 'ArticlesController@editConfirm');
-            Route::post('/articles/save', 'ArticlesController@save');
-            Route::put('/articles/save', 'ArticlesController@save');
+            Route::post('/articles/save', 'ArticlesController@post');
+            Route::put('/articles/save', 'ArticlesController@put');
             Route::get('/articles/delete/{id}', 'ArticlesController@deleteConfirm')->where('id', '[0-9]+');
             Route::delete('/articles/delete', 'ArticlesController@delete');
             Route::post('/articles/comment', 'ArticlesController@comment');
@@ -119,11 +119,11 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::get('informations', 'Managements\InformationsController@index')->name('managementsInformations');
             Route::get('informations/{id}', 'Managements\InformationsController@get')->where('id', '[0-9]+');
             Route::get('informations/create', 'Managements\InformationsController@create');
-            Route::post('informations/confirm', 'Managements\InformationsController@confirm');
-            Route::post('informations/save', 'Managements\InformationsController@save');
+            Route::post('informations/confirm', 'Managements\InformationsController@createConfirm');
+            Route::post('informations/save', 'Managements\InformationsController@post');
             Route::get('informations/edit/{id}', 'Managements\InformationsController@edit')->where('id', '[0-9]+');
-            Route::put('informations/confirm', 'Managements\InformationsController@confirm');
-            Route::put('informations/save', 'Managements\InformationsController@save');
+            Route::put('informations/confirm', 'Managements\InformationsController@editConfirm');
+            Route::put('informations/save', 'Managements\InformationsController@put');
             Route::get('informations/delete/{id}', 'Managements\InformationsController@delete')->where('id', '[0-9]+');
 
             // プロフィール項目管理
@@ -131,13 +131,13 @@ Route::group(['middleware' => ['settings', 'auth.basic']], function() {
             Route::post('profile/settings', 'Managements\ProfileSettingsController@save');
 
             // フリーページ管理
-            Route::get('freepages', 'Managements\FreepagesController@index')->name('managementsFreepages');
-            Route::get('freepages/{id}', 'Managements\FreepagesController@get')->where('id', '[0-9]+');
-            Route::get('freepages/create', 'Managements\FreepagesController@create');
-            Route::post('freepages/confirm', 'Managements\FreepagesController@createConfirm');
-            Route::post('freepages/register', 'Managements\FreepagesController@register');
-            Route::put('freepages/confirm', 'Managements\FreepagesController@confirm');
-            Route::put('freepages/register', 'Managements\FreepagesController@register');
+            Route::get('freepages', 'Managements\FreePagesController@index')->name('managementsFreepages');
+            Route::get('freepages/{id}', 'Managements\FreePagesController@get')->where('id', '[0-9]+');
+            Route::get('freepages/create', 'Managements\FreePagesController@create');
+            Route::post('freepages/confirm', 'Managements\FreePagesController@createConfirm');
+            Route::post('freepages/save', 'Managements\FreePagesController@post');
+            Route::put('freepages/confirm', 'Managements\FreePagesController@editConfirm');
+            Route::put('freepages/save', 'Managements\FreePagesController@put');
 
             // ファイルアップロード
             Route::get('uploadfiles', 'Managements\UploadfilesController@index')->name('managementsUploadfiles');

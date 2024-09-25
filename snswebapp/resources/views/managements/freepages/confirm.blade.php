@@ -18,7 +18,7 @@
     <div class="col-lg-10 px-0 px-lg-2">
         {{Form::open([
             'name' => 'freepages',
-            'url' => '/managements/freepages/register',
+            'url' => '/managements/freepages/save',
             'method' => $method,
         ])}}
         @csrf

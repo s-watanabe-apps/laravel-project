@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Validator;
 
 /**
  * 記事コントローラ.
- * 
+ *
  * @author s-watanabe-apps
  * @since 2024-01-01
  * @version 1.0.0
@@ -59,7 +59,7 @@ class ArticlesController extends Controller
 
     /**
      * 自分の記事一覧取得.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -70,7 +70,7 @@ class ArticlesController extends Controller
 
     /**
      * ユーザーの記事一覧取得.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -110,7 +110,7 @@ class ArticlesController extends Controller
 
     /**
      * 記事確認画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -131,7 +131,7 @@ class ArticlesController extends Controller
 
     /**
      * 記事作成画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -142,7 +142,7 @@ class ArticlesController extends Controller
 
     /**
      * 記事修正画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -162,7 +162,7 @@ class ArticlesController extends Controller
 
     /**
      * 新規作成入力内容確認.
-     * 
+     *
      * @param App\Http\Requests\ArticlesRequest
      * @return Illuminate\View\View
      */
@@ -180,7 +180,7 @@ class ArticlesController extends Controller
 
     /**
      * 修正入力内容確認.
-     * 
+     *
      * @param App\Http\Requests\ArticlesRequest
      * @return Illuminate\View\View
      */
@@ -200,26 +200,40 @@ class ArticlesController extends Controller
     }
 
     /**
-     * 記事保存処理.
-     * 
+     * 記事投稿処理.
+     *
      * @param App\Http\Requests\ArticlesRequest
      * @return void
      */
-    public function save(ArticlesRequest $request)
+    public function post(ArticlesRequest $request)
     {
         $id = null;
 
         \DB::transaction(function() use ($request, &$id) {
             $validated = $request->validated();
 
-            if ($request->isPost()) {
-                //unset($values['labels']);
-                $id = $this->articlesService->insertArticles($validated);
-            } else if ($request->isPut()) {
-                $id = $this->articlesService->updateArticles($validated);
-            } else {
+            $id = $this->articlesService->insertArticles($validated);
 
-            }
+            //$this->articleLabelsService->save($request);
+        });
+
+        return redirect()->route('articles.get', ['id' => $id]);
+    }
+
+    /**
+     * 記事更新処理.
+     *
+     * @param App\Http\Requests\ArticlesRequest
+     * @return void
+     */
+    public function put(ArticlesRequest $request)
+    {
+        $id = null;
+
+        \DB::transaction(function() use ($request, &$id) {
+            $validated = $request->validated();
+
+            $id = $this->articlesService->updateArticles($validated);
 
             //$this->articleLabelsService->save($request);
         });
@@ -229,7 +243,7 @@ class ArticlesController extends Controller
 
     /**
      * 記事削除確認画面.
-     * 
+     *
      * @param Illuminate\Http\Request
      * @return Illuminate\View\View
      */
@@ -244,7 +258,7 @@ class ArticlesController extends Controller
 
     /**
      * 記事削除処理.
-     * 
+     *
      * @param App\Http\Requests\DeleteByIdRequest
      * @return Illuminate\View\View
      */
@@ -264,13 +278,13 @@ class ArticlesController extends Controller
 
     /**
      * コメント投稿.
-     * 
+     *
      * @param App\Http\Requests\CommentRequest
      */
     public function comment(CommentRequest $request)
     {
         $params = $request->validated();
-        
+
         \DB::transaction(function() use ($params) {
             $this->articleCommentsService->save(user()->id, $params);
         });

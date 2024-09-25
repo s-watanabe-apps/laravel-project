@@ -10,7 +10,7 @@ class FreePagesService extends Service
 {
     /**
      * 基本クエリ.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base() {
@@ -22,11 +22,11 @@ class FreePagesService extends Service
 
     /**
      * フリーページ全件取得.
-     * 
+     *
      * @param string $keyword
      * @param int $status
      * @param int $sortkey
-     * 
+     *
      * @return array
      */
     public function getFreepages($keyword, $status, $sortkey)
@@ -71,7 +71,7 @@ class FreePagesService extends Service
         $sortkey_name = $freepage_management_headers[abs($sortkey)]['sortkey'];
         $sortkey_order = $sortkey > 0 ? 'asc' : 'desc';
         $query->orderBy($sortkey_name, $sortkey_order);
-        
+
         $result = $query->get();
 
         // ヘッダー用のパラメータ
@@ -100,7 +100,7 @@ class FreePagesService extends Service
 
     /**
      * フリーページ取得.
-     * 
+     *
      * @return array
      */
     public function get($id)
@@ -112,34 +112,46 @@ class FreePagesService extends Service
     }
 
     /**
-     * 入力内容保存.
-     * 
-     * @param App\Requests\ManagementsFreepagesRequest $request
-     * @return App\Models\FreePages
+     * フリーページ新規作成処理.
+     *
+     * @param array $values
+     * @return array
      */
-    public function save(ManagementsFreepagesRequest $request)
+    public function insertFreePages(array $values)
     {
-        if ($request->isPost()) {
-            // Insert
-            $freePages = new FreePages();
-            $freePages->fill($request->validated());
-        } else {
-            // Update
-            $freePages = $this->get($request->id);
-            throw_if(!$freePages, NotFoundException::class);
+        $id = FreePages::insertGetId([
+            'title' => $values['title'],
+            'code' => $values['code'],
+            'body' => $values['body'],
+            'created_at' => carbon(),
+        ]);
 
-            foreach ($request->validated() as $key => $value) {
-                $freePages->$key = $value;
-            }
-        }
+        $this->cacheForget(Service::CACHE_KEY_INFORMATIONS);
 
-        $freePages->save();
-        return $freePages;
+        return $this->get($id);
+    }
+
+    /**
+     * フリーページ更新処理.
+     *
+     * @param array $values
+     * @return array
+     */
+    public function updateInformations(array $values)
+    {
+        $id = $values['id'];
+        unset($values['id']);
+
+        $values['updated_at'] = carbon();
+
+        $result = FreePages::where('id', $id)->update($values);
+
+        return $this->get($id);
     }
 
     /**
      * Get free page by code.
-     * 
+     *
      * @param string $code
      * @return App\Models\FreePages
      */

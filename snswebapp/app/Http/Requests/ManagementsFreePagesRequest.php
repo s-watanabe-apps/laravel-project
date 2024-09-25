@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests;
 
-class ManagementsFreepagesRequest extends AppFormRequest
+class ManagementsFreePagesRequest extends AppFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,7 @@ class ManagementsFreepagesRequest extends AppFormRequest
 
     /**
      * Column names.
-     * 
+     *
      * @return array
      */
     public function attributes()

@@ -11,7 +11,7 @@ class InformationsService extends Service
 {
     /**
      * 基本クエリ.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     private function base() {
@@ -24,7 +24,7 @@ class InformationsService extends Service
 
     /**
      * お知らせ取得.
-     * 
+     *
      * @return array
      */
     public function getById($id)
@@ -37,7 +37,7 @@ class InformationsService extends Service
 
     /**
      * 有効なお知らせ一覧取得.
-     * 
+     *
      * @return array
      */
     public function getEnabledInformations() {
@@ -60,11 +60,11 @@ class InformationsService extends Service
 
     /**
      * お知らせ検索.
-     * 
+     *
      * @param string $keyword
      * @param int $category_id
      * @param int $sortkey
-     * 
+     *
      * @return array
      */
     public function getInformations(string $keyword = null, string $category_id = null, $sortkey = null)
@@ -109,7 +109,7 @@ class InformationsService extends Service
         $sortkey_name = $information_management_headers[abs($sortkey)]['sortkey'];
         $sortkey_order = $sortkey > 0 ? 'asc' : 'desc';
         $query->orderBy($sortkey_name, $sortkey_order);
-        
+
         $result = $query->get();
 
         // ヘッダー用のパラメータ
@@ -137,42 +137,49 @@ class InformationsService extends Service
     }
 
     /**
-     * 入力内容保存.
-     * 
-     * @var App\Requests\ManagementsInformationsRequest
-     * @return App\Models\Informations
+     * お知らせ新規作成.
+     *
+     * @param array $values
+     * @return App\Models\Articles
      */
-    public function save($request)
+    public function insertInformations(array $values)
     {
-        if ($request->isPost()) {
-            // Insert
-            $informations = new Informations();
-            $values = $request->validated();
-            $informations->fill($values)->save();
-        } else if ($request->isPut()){
-            // Update
-            $informations = Informations::where('id', $request['id'])->first();
-            throw_if(!$informations, NotFoundException::class);
-
-            $values = $request->validated();
-            foreach ($values as $key => $value) {
-                $informations->$key = $value;
-            }
-            $informations->updated_at = carbon();
-        } else {
-            abort(405);
-        }
-
-        $informations->save();
+        $id = Informations::insertGetId([
+            'title' => $values['title'],
+            'body' => $values['body'],
+            'start_time' => $values['start_time'],
+            'end_time' => $values['end_time'],
+            'status' => $values['status'],
+            'category_id' => $values['category_id'],
+            'created_at' => carbon(),
+        ]);
 
         $this->cacheForget(Service::CACHE_KEY_INFORMATIONS);
 
-        return $informations;
+        return $id;
+    }
+
+    /**
+     * お知らせ更新.
+     *
+     * @param array $values
+     * @return App\Models\Informations
+     */
+    public function updateInformations(array $values)
+    {
+        $id = $values['id'];
+        unset($values['id']);
+
+        $result = Informations::where('id', $id)->update($values);
+
+        $this->cacheForget(Service::CACHE_KEY_INFORMATIONS);
+
+        return $result;
     }
 
     /**
      * Get information mark.
-     * 
+     *
      * @param int $id
      * @return int
      */
